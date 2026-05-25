@@ -1,55 +1,10 @@
-# Mascot Spark V7 — Stitched Halo Bloom
+# Mascot Spark V20 — Final Cleanup Build
 
-This is a complete rewrite of the Mascot Spark PWA.
+Mascot Spark is a beginner-friendly Procreate mascot drawing PWA. It generates small character lessons for food mascots, object characters, icon mascots, blobs, cute creatures, logo marks, and more.
 
-## What was added
+This final cleanup build keeps all files in the repository root for easy GitHub Pages deployment.
 
-### 01. Better drawing instruction
-
-- More “draw this first, then this” panels
-- More beginner step order
-- More traceable blueprint variations
-- Clearer body-first, face-map, icon-grid, worksheet, and shadow-map modes
-
-### 02. More mascot subject categories
-
-Includes blob, food, object, icon, letter, number, mask, plant, flower, star/moon, potion, bug, cloud/weather, gem/charm, stationery, candy, toy, sticker, badge/emblem, creative tool, book/notebook, ghost, tiny creature, household object, and drink mascots.
-
-### 03. More duo emotions
-
-Includes grumpy-cute, spooky-sweet, sad-hopeful, haunted-happy, brave-scared, jealous-cute, chaotic-soft, lonely-sparkly, bashful-proud, gloomy-sweet, feral-cute, melty-happy, and soft-suspicious.
-
-### 04. More tiny twists
-
-Includes sparkle, hat, patch, charm tag, freckles, bow, halo, fang, glow mark, ribbon tail, stitches, leaf, star cheek, button cheek, teardrop, bandage, crown, cape, wings, antennae, question mark charm, moon mark, heart patch, glasses, scarf, paint drip, shine spot, holographic thread stitch, raindrop bead, and sprout tuft.
-
-### 07. More specific color profiles
-
-Palette profiles include 5, 6, and 7 color selections. They are meant to be copied into Procreate as color references.
-
-### Optional flavor does not change subject
-
-The optional flavor controls only affect mood/style. The selected Subject Category remains the base character.
-
-### More AI help categories
-
-Includes simplify, explain, variation, step-by-step, mistakes, Procreate layers, clearer blueprint, gentle critique, creative but easy, practice drill, draw-along script, fix awkward proportions, expression coach, silhouette coach, color coach, and worksheet mode.
-
-### More lesson size categories
-
-Includes micro, tiny, normal, slow, study, icon sheet, polish, one-shape-only drill, expression sheet, silhouette drill, accessory control drill, color pass practice, and daily mascot quest.
-
-### Better UI
-
-- Tab organization
-- Surprise Me button
-- Better iPad portrait layout
-- Better iPad landscape layout
-- Stitched Halo Bloom 3-mode theme system
-
-## Files
-
-All files are in the root:
+## Root files
 
 ```txt
 index.html
@@ -61,225 +16,114 @@ icon.svg
 README.md
 ```
 
-## Service worker cache
-
-This build uses:
+## Current cache
 
 ```js
-const CACHE_NAME = "mascot-spark-v7";
+const CACHE_NAME = "mascot-spark-v20";
 ```
 
-If GitHub Pages shows an old version, confirm `service-worker.js` uploaded correctly and clear site data or reinstall the PWA.
+## Major features included
 
-## GitHub Pages
+- 3-mode UI theme system
+- Simple / Advanced view toggle
+- Focus Mode
+- Today’s Practice card
+- Guided Next Step mode
+- Traceable blueprint system
+- Blueprint Studio
+- Blueprint SVG export
+- Blueprint PNG export
+- Palette swatches and palette role guidance
+- Smart Surprise types
+- Subject packs
+- Skill Focus system
+- Practice Intelligence cards
+- Mascot Anatomy
+- Version 2 challenge engine
+- Fix My Mascot coach
+- Subject-specific mini-rules
+- AI Coach workspace with OpenRouter support
+- Offline fallback coaching
+- Guided session timer
+- Before / After redraw tracker
+- Saved Mascot Stash
+- Stash JSON export
+- Text worksheet export
+- HTML worksheet export
+- Version/cache tools
+- Accessibility and touch polish
 
-Upload all root files to your repository root. Then enable GitHub Pages from the main branch root folder.
+## How to use
 
-## OpenRouter
+1. Open the app.
+2. Choose a subject, emotion, lesson size, and skill focus.
+3. Press **New lesson** or **Surprise me**.
+4. Use **Guided step mode** to draw one step at a time.
+5. Open **Blueprint Studio** if you want a large tracing guide.
+6. Export the blueprint as SVG or PNG if you want to import it into Procreate.
+7. Draw Version 1.
+8. Use **Version 2 Challenge** or **Fix My Mascot** to improve.
+9. Save the lesson to **Stash**.
 
-OpenRouter is optional. The offline lesson generator works without it.
+## GitHub Pages deployment
 
-Use:
+1. Unzip this package.
+2. Upload every file directly into the root of your GitHub repository.
+3. Do not place icons in a separate folder.
+4. Enable GitHub Pages from the repository root.
+5. Wait a few minutes for deployment.
+6. Open your GitHub Pages link.
+
+## If GitHub Pages shows an old version
+
+Use the app’s **Version tools**:
+
+- Clear browser cache storage
+- Reload app
+
+If it still shows the old version:
+
+1. Delete the installed PWA from your home screen.
+2. Clear website data for the GitHub Pages site.
+3. Reopen the page.
+4. Reinstall the PWA.
+
+## OpenRouter AI
+
+OpenRouter is optional.
+
+The app works without an API key using offline fallback coaching. If you add an OpenRouter key, Coach tools can produce deeper custom guidance.
+
+Use the model field however you prefer. It defaults to:
 
 ```txt
 openrouter/free
 ```
 
-Do not hard-code your API key into the file.
+Do not hard-code your API key into the source before uploading publicly.
 
+## Final QA checklist
 
-## V8 teaching update
+Before treating this as final:
 
-This build improves the actual drawing-teacher behavior.
+- New lesson works.
+- Surprise Me works.
+- Simple / Advanced toggle works.
+- Focus Mode works.
+- Palette swatches display.
+- Guided Step mode advances.
+- Blueprint Studio opens and closes.
+- Blueprint SVG export works.
+- Blueprint PNG export works.
+- Text worksheet export works.
+- HTML worksheet export works.
+- Stash save/edit/delete works.
+- Version tools open and close.
+- Dark/neutral/light theme works.
+- iPad portrait layout looks usable.
+- iPad landscape layout looks usable.
+- Service worker cache is `mascot-spark-v20`.
 
-Added:
+## Notes
 
-- Stronger “Draw this first, then this” cards
-- Procreate layer guidance inside each draw-first card
-- Traceable step blueprint panels:
-  - Body only
-  - Guide lines
-  - Face placement
-  - Tiny limbs
-  - Twist + polish
-- Better step-by-step lesson phases
-- Each phase now tells:
-  - what to draw
-  - which Procreate layer to use
-  - what the canvas should look like
-  - what mistake to avoid
-  - what to check before moving on
-- Copy lesson text button
-- Service worker cache updated to:
-
-```js
-const CACHE_NAME = "mascot-spark-v8";
-```
-
-
-## V9 expansion update
-
-This version expands:
-
-- More mascot subjects
-- More duo emotions
-- More tiny twists
-- Stronger optional flavor lock
-
-Optional flavor is now explicitly treated as style/mood only. It cannot replace the selected subject category.
-
-Examples:
-
-```txt
-Subject: Fruit mascot
-Optional flavor: with holographic thread accents
-Result: still a fruit mascot, just with holographic thread styling.
-```
-
-```txt
-Subject: Robot mascot
-Optional flavor: with sleepy bedtime softness
-Result: still a robot mascot, just softer and sleepier.
-```
-
-
-## V10 UI + blueprint update
-
-This version adds:
-
-- Surprise Me button improvements
-- Palette swatch preview with visual color dots
-- Better tab organization
-- More organized UI
-- More unique blueprint variants, including:
-  - plush body
-  - fruit body
-  - potion bottle
-  - cloud puff
-  - robot grid
-  - ghost drape
-  - gem facet
-  - letter build
-  - number build
-  - badge emblem
-  - weather symbol
-- Better iPad portrait mode layout
-- Better iPad landscape mode layout
-
-
-## V11 guided UI update
-
-Added:
-
-- Next Step guided mode
-- Previous / Next / Show All Steps controls
-- Stronger section hierarchy
-- More distinct button hierarchy:
-  - main generate action
-  - playful Surprise Me action
-  - AI coach action
-  - quieter utility actions
-- Tiny icons added to tabs
-- Friendlier tab names:
-  - Start
-  - Personality
-  - Palette
-  - Trace Guide
-  - Coach
-
-
-## V12 palette preview fix
-
-This version fixes palette previews so the colors are visibly shown.
-
-Added:
-
-- Larger visible palette dots
-- Full palette color strip
-- Selected palette note
-- Palette swatches inside the generated lesson output
-- Palette cards can be tapped/clicked to select that palette
-- No copy buttons added
-
-Service worker cache:
-
-```js
-const CACHE_NAME = "mascot-spark-v12";
-```
-
-
-## V13 AI coach workspace
-
-Added a more spacious dedicated Coach tab.
-
-New Coach tools:
-
-- General Lesson Help
-- Subject-Specific Drawing Logic
-- Emotion Coach
-- Palette Coach
-
-All AI help output now appears in the Coach tab instead of being scattered elsewhere.
-
-Also added:
-- current coach context pills
-- larger output card
-- offline fallback guidance if no API key is entered
-- service worker cache:
-
-```js
-const CACHE_NAME = "mascot-spark-v13";
-```
-
-
-## V14 compact tools update
-
-Added:
-
-- Simple / Advanced view toggle
-- Better palette usage roles:
-  - Body
-  - Accent
-  - Soft fill
-  - Shadow
-  - Highlight
-- Local worksheet export as a `.txt` file
-- More compact layout behavior
-- Reduced AI output height so it does not take over the page
-- Sticky compact action bar
-
-Service worker cache:
-
-```js
-const CACHE_NAME = "mascot-spark-v14";
-```
-
-
-## V15 accurate blueprints update
-
-Added stronger blueprint accuracy with more subject-specific guide logic.
-
-New blueprint improvements:
-
-- Auto Subject Guide
-- Shell curve guide
-- Aquatic fin guide
-- Device screen guide
-- Clothing fold guide
-- Music stem guide
-- Magic object guide
-- Celestial orbit guide
-- Package fold guide
-- Furniture build guide
-- Garden pot guide
-- Creature horn guide
-- Logo axis guide
-
-Also improved:
-- traceable step mini-blueprints now use subject-specific guide shapes
-- Auto Subject Guide is the default blueprint mode
-- service worker cache:
-
-```js
-const CACHE_NAME = "mascot-spark-v15";
-```
+All data is stored locally in the browser using localStorage. Saved lessons and settings do not sync across devices unless you export/import them manually.

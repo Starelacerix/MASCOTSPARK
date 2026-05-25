@@ -1207,6 +1207,651 @@
       backdrop-filter: blur(14px);
     }
 
+
+    .practice-intel-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+      margin: 10px 0 16px;
+    }
+
+    .intel-card {
+      background:
+        linear-gradient(180deg, color-mix(in srgb, var(--color-surface) 92%, white 5%), var(--color-surface-2));
+      border: 1px solid color-mix(in srgb, var(--color-border) 80%, transparent);
+      border-radius: 18px;
+      padding: 12px;
+      line-height: 1.42;
+      box-shadow: 0 6px 18px color-mix(in srgb, #000 5%, transparent);
+    }
+
+    .intel-card strong {
+      display: block;
+      color: var(--color-muted);
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      margin-bottom: 6px;
+    }
+
+    .intel-card ul {
+      margin: 0;
+      padding-left: 18px;
+    }
+
+    .intel-card li + li {
+      margin-top: 4px;
+    }
+
+    .fix-mascot-card {
+      display: grid;
+      gap: 9px;
+    }
+
+    .compact-coach-button {
+      min-height: 76px;
+    }
+
+    body.focus-mode .hero,
+    body.focus-mode .shell,
+    body.focus-mode .path-grid,
+    body.focus-mode .trace-panel-grid,
+    body.focus-mode #checks,
+    body.focus-mode #avoid,
+    body.focus-mode .coach,
+    body.focus-mode .fun-grid,
+    body.focus-mode .info-grid,
+    body.focus-mode .practice-intel-grid,
+    body.focus-mode .actions .utility-action,
+    body.focus-mode .actions .coach-action {
+      display: none !important;
+    }
+
+    body.focus-mode .app {
+      max-width: 1180px;
+    }
+
+    body.focus-mode .actions {
+      position: sticky;
+      top: 0;
+      display: flex;
+      justify-content: center;
+      background: color-mix(in srgb, var(--color-background) 88%, transparent);
+      backdrop-filter: blur(16px);
+    }
+
+    body.focus-mode .main {
+      grid-template-columns: minmax(0, 1fr) minmax(380px, .9fr);
+    }
+
+    body.focus-mode .lesson-head {
+      padding: 14px 16px;
+    }
+
+    body.focus-mode .lesson-body {
+      padding: 14px;
+    }
+
+    body.focus-mode #phases {
+      display: none !important;
+    }
+
+    body.focus-mode .blueprint {
+      position: sticky;
+      top: 74px;
+    }
+
+    body.focus-mode .guided-card {
+      margin-bottom: 0;
+    }
+
+
+    .stash-toolbar {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, auto));
+      gap: 10px;
+      align-items: center;
+      margin-bottom: 14px;
+    }
+
+    .stash-toolbar select {
+      min-width: 170px;
+    }
+
+    .stash-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 12px;
+    }
+
+    .stash-card {
+      border: 1px solid var(--color-border);
+      border-radius: 20px;
+      padding: 14px;
+      background:
+        linear-gradient(180deg, color-mix(in srgb, var(--color-surface) 94%, white 5%), var(--color-surface-2));
+      box-shadow: 0 8px 22px color-mix(in srgb, #000 6%, transparent);
+      display: grid;
+      gap: 9px;
+    }
+
+    .stash-card h4 {
+      margin: 0;
+      color: var(--color-text);
+      font-size: 17px;
+      line-height: 1.2;
+    }
+
+    .stash-meta {
+      color: var(--color-muted);
+      font-size: 13px;
+      line-height: 1.38;
+      font-weight: 750;
+    }
+
+    .stash-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+    }
+
+    .stash-actions button {
+      min-height: 34px;
+      padding: 7px 10px;
+      font-size: 12px;
+    }
+
+    .stash-note {
+      width: 100%;
+      min-height: 64px;
+      font-size: 13px;
+    }
+
+    .modal-shell {
+      position: fixed;
+      inset: 0;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 18px;
+      background: rgba(20, 15, 24, .58);
+      backdrop-filter: blur(12px);
+      z-index: 999;
+    }
+
+    .modal-shell.open {
+      display: flex;
+    }
+
+    .modal-card {
+      width: min(1100px, 100%);
+      max-height: 92vh;
+      overflow: auto;
+      border-radius: 28px;
+      border: 1px solid color-mix(in srgb, var(--color-border) 85%, white 8%);
+      background:
+        radial-gradient(circle at top left, color-mix(in srgb, var(--color-primary) 12%, transparent), transparent 18rem),
+        linear-gradient(180deg, var(--color-surface), var(--color-surface-2));
+      box-shadow: 0 30px 90px rgba(0,0,0,.35);
+      padding: 18px;
+    }
+
+    .modal-head {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 14px;
+    }
+
+    .modal-head h2 {
+      margin: 0;
+    }
+
+    .blueprint-studio-controls {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 12px;
+    }
+
+    .blueprint-studio-controls button {
+      min-height: 38px;
+      padding: 8px 12px;
+    }
+
+    .blueprint-studio-view {
+      border-radius: 24px;
+      background:
+        linear-gradient(rgba(255,255,255,.045) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.045) 1px, transparent 1px),
+        color-mix(in srgb, #173b63 78%, var(--color-surface-2));
+      background-size: 22px 22px;
+      padding: 12px;
+    }
+
+    .blueprint-studio-view svg {
+      min-height: 64vh;
+      border-radius: 18px;
+    }
+
+    .version-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    .version-info-card {
+      border: 1px solid var(--color-border);
+      background: var(--color-surface-2);
+      border-radius: 18px;
+      padding: 14px;
+      display: grid;
+      gap: 6px;
+    }
+
+    .version-info-card strong {
+      color: var(--color-muted);
+      text-transform: uppercase;
+      font-size: 12px;
+      letter-spacing: .08em;
+    }
+
+
+    .amplifier-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 8px;
+      margin: 10px 0 16px;
+    }
+
+    .amplifier-grid button {
+      min-height: 42px;
+      border-radius: 16px;
+      font-size: 13px;
+      padding: 9px 10px;
+    }
+
+    .timer-card,
+    .redraw-tracker {
+      display: grid;
+      gap: 10px;
+      border: 1px solid var(--color-border);
+      border-radius: 20px;
+      background:
+        linear-gradient(180deg, color-mix(in srgb, var(--color-surface) 94%, white 5%), var(--color-surface-2));
+      padding: 14px;
+      margin-bottom: 16px;
+      box-shadow: 0 8px 22px color-mix(in srgb, #000 5%, transparent);
+    }
+
+    .timer-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .timer-actions button,
+    .redraw-tracker button {
+      min-height: 38px;
+      padding: 8px 12px;
+    }
+
+    .timer-display {
+      font-size: clamp(32px, 7vw, 58px);
+      font-weight: 950;
+      letter-spacing: -.06em;
+      color: var(--color-text);
+      text-align: center;
+      border-radius: 18px;
+      padding: 12px;
+      background: color-mix(in srgb, var(--color-primary) 12%, var(--color-surface));
+      border: 1px solid color-mix(in srgb, var(--color-primary) 36%, var(--color-border));
+    }
+
+    .redraw-tracker textarea {
+      min-height: 82px;
+    }
+
+    body.focus-mode .amplifier-grid,
+    body.focus-mode .redraw-tracker,
+    body.focus-mode .practice-intel-grid,
+    body.focus-mode #practiceMemoryCard {
+      display: none !important;
+    }
+
+
+    :root {
+      --touch-target: 48px;
+      --focus-ring: 0 0 0 4px color-mix(in srgb, var(--color-accent) 35%, transparent);
+    }
+
+    .today-card {
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(260px, .9fr) auto;
+      gap: 14px;
+      align-items: center;
+      margin: 0 0 14px;
+      padding: 16px;
+      border-radius: var(--radius-lg);
+      border: 1px solid color-mix(in srgb, var(--color-border) 82%, white 8%);
+      background:
+        radial-gradient(circle at top left, color-mix(in srgb, var(--color-primary) 14%, transparent), transparent 16rem),
+        linear-gradient(135deg, color-mix(in srgb, var(--color-surface) 94%, white 6%), var(--color-surface-2));
+      box-shadow: var(--shadow-card);
+    }
+
+    .today-kicker {
+      display: inline-flex;
+      width: max-content;
+      border-radius: 999px;
+      padding: 6px 10px;
+      background: color-mix(in srgb, var(--color-primary) 16%, var(--color-surface));
+      border: 1px solid color-mix(in srgb, var(--color-border) 75%, transparent);
+      color: var(--color-muted);
+      font-size: 12px;
+      font-weight: 950;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      margin-bottom: 8px;
+    }
+
+    .today-card h2 {
+      margin: 0;
+      font-size: clamp(22px, 3vw, 36px);
+      line-height: 1;
+      letter-spacing: -.05em;
+    }
+
+    .today-card p {
+      margin: 8px 0 0;
+      color: var(--color-muted);
+      line-height: 1.4;
+      font-weight: 700;
+    }
+
+    .today-details {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .today-details span {
+      border-radius: 999px;
+      padding: 8px 11px;
+      border: 1px solid color-mix(in srgb, var(--color-border) 78%, transparent);
+      background: color-mix(in srgb, var(--color-surface-2) 88%, white 5%);
+      color: var(--color-text);
+      font-size: 13px;
+      font-weight: 850;
+    }
+
+    .today-actions {
+      display: grid;
+      gap: 8px;
+      min-width: 150px;
+    }
+
+    button,
+    select,
+    input,
+    textarea {
+      min-height: var(--touch-target);
+    }
+
+    button {
+      touch-action: manipulation;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    button:focus-visible,
+    select:focus-visible,
+    input:focus-visible,
+    textarea:focus-visible,
+    .palette-card:focus-visible,
+    .stash-card:focus-within {
+      outline: none;
+      box-shadow: var(--focus-ring), var(--shadow-soft);
+      border-color: color-mix(in srgb, var(--color-accent) 58%, var(--color-border));
+    }
+
+    .tab-btn {
+      min-height: 52px;
+    }
+
+    .actions button {
+      min-height: 48px;
+    }
+
+    .blueprint-studio-controls button,
+    .stash-actions button,
+    .timer-actions button,
+    .redraw-tracker button,
+    .amplifier-grid button {
+      min-height: 44px;
+    }
+
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+
+    .skip-link {
+      position: absolute;
+      top: -60px;
+      left: 12px;
+      z-index: 1000;
+      background: var(--color-text);
+      color: var(--color-background);
+      padding: 10px 14px;
+      border-radius: 999px;
+      font-weight: 900;
+      transition: top .2s ease;
+    }
+
+    .skip-link:focus {
+      top: 12px;
+      outline: none;
+      box-shadow: var(--focus-ring);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        animation-duration: .001ms !important;
+        animation-iteration-count: 1 !important;
+        scroll-behavior: auto !important;
+        transition-duration: .001ms !important;
+      }
+    }
+
+
+    html {
+      overflow-x: hidden;
+    }
+
+    body {
+      overflow-x: hidden;
+    }
+
+    img,
+    svg,
+    canvas {
+      max-width: 100%;
+    }
+
+    button:disabled,
+    select:disabled,
+    input:disabled,
+    textarea:disabled {
+      opacity: .55;
+      cursor: not-allowed;
+    }
+
+    .final-footer {
+      display: flex;
+      justify-content: center;
+      margin: 18px 0 6px;
+      color: var(--color-muted);
+      font-size: 12px;
+      font-weight: 800;
+      text-align: center;
+    }
+
+    .final-footer span {
+      border: 1px solid color-mix(in srgb, var(--color-border) 70%, transparent);
+      background: color-mix(in srgb, var(--color-surface-2) 80%, transparent);
+      padding: 8px 12px;
+      border-radius: 999px;
+    }
+
+    .tab-panel[hidden] {
+      display: none !important;
+    }
+
+    .modal-shell:not(.open) {
+      pointer-events: none;
+    }
+
+    @media print {
+      .hero,
+      .today-card,
+      .shell,
+      .actions,
+      .final-footer,
+      .modal-shell,
+      .coach,
+      .stash-toolbar {
+        display: none !important;
+      }
+
+      body {
+        background: white !important;
+        color: #111 !important;
+        padding: 0 !important;
+      }
+
+      .main {
+        display: block !important;
+      }
+
+      .card,
+      .blueprint {
+        box-shadow: none !important;
+        break-inside: avoid;
+        page-break-inside: avoid;
+      }
+
+      .lesson-body {
+        padding: 12px !important;
+      }
+    }
+
+
+    @media (max-width: 699px) {
+      .today-card {
+        grid-template-columns: 1fr;
+      }
+
+      .today-actions {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .today-actions .main-action {
+        grid-column: 1 / -1;
+      }
+    }
+
+    @media (min-width: 700px) and (max-width: 1180px) and (orientation: portrait) {
+      .today-card {
+        grid-template-columns: 1fr;
+      }
+
+      .today-actions {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    @media (min-width: 900px) and (max-width: 1180px) and (orientation: landscape) {
+      .today-card {
+        grid-template-columns: minmax(0, 1fr) minmax(280px, .85fr) auto;
+      }
+    }
+
+
+    @media (max-width: 699px) {
+      .amplifier-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media (min-width: 700px) and (max-width: 1180px) and (orientation: portrait) {
+      .amplifier-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+
+    @media (max-width: 699px) {
+      .stash-toolbar,
+      .version-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .modal-shell {
+        padding: 8px;
+      }
+
+      .modal-card {
+        max-height: 96vh;
+        border-radius: 22px;
+      }
+
+      .blueprint-studio-view svg {
+        min-height: 50vh;
+      }
+    }
+
+
+    @media (max-width: 699px) {
+      .practice-intel-grid {
+        grid-template-columns: 1fr;
+      }
+
+      body.focus-mode .main {
+        grid-template-columns: 1fr;
+      }
+
+      body.focus-mode .blueprint {
+        position: relative;
+        top: auto;
+      }
+    }
+
+    @media (min-width: 700px) and (max-width: 1180px) and (orientation: portrait) {
+      .practice-intel-grid {
+        grid-template-columns: 1fr;
+      }
+
+      body.focus-mode .main {
+        grid-template-columns: 1fr;
+      }
+
+      body.focus-mode .blueprint {
+        position: relative;
+        top: auto;
+      }
+    }
+
+
     @media (max-width: 699px) {
       .hero-tools {
         justify-content: stretch;
@@ -1364,6 +2009,7 @@
 </head>
 
 <body>
+  <a class="skip-link" href="#lessonOutput">Skip to lesson</a>
   <main class="app">
     <section class="hero">
       <div class="hero-content">
@@ -1382,7 +2028,28 @@
         <div class="hero-tools">
           <button onclick="toggleTheme()" id="themeBtn">Theme: Light</button>
           <button onclick="toggleViewMode()" id="viewModeBtn">Simple mode</button>
+          <button onclick="toggleFocusMode()" id="focusModeBtn">Focus mode</button>
         </div>
+      </div>
+    </section>
+
+    <section class="today-card" aria-labelledby="todayPracticeTitle">
+      <div class="today-main">
+        <span class="today-kicker">Today’s Practice</span>
+        <h2 id="todayPracticeTitle">Start with one clear mascot step.</h2>
+        <p id="todayPracticeGoal">Generate a lesson to get your practice focus.</p>
+      </div>
+
+      <div class="today-details" aria-label="Current practice summary">
+        <span id="todaySubject">Subject: —</span>
+        <span id="todaySkill">Skill: —</span>
+        <span id="todayNext">Next: Start Step 1</span>
+      </div>
+
+      <div class="today-actions">
+        <button class="primary main-action" onclick="newLesson()">New lesson</button>
+        <button class="playful-action" onclick="surpriseMe()">Surprise me</button>
+        <button class="utility-action" onclick="toggleFocusMode()">Focus mode</button>
       </div>
     </section>
 
@@ -1398,6 +2065,11 @@
       <div id="tab-lesson" class="tab-panel active">
         <p class="tab-hint">Pick what you want to draw and how long you want to practice.</p>
         <section class="controls">
+          <div class="panel">
+            <label for="subjectPack">Subject pack</label>
+            <select id="subjectPack"></select>
+            <p class="small">Optional shortcut for themed subject families.</p>
+          </div>
           <div class="panel">
             <label for="lessonType">Subject category</label>
             <select id="lessonType"></select>
@@ -1417,6 +2089,21 @@
               <option value="cozyPlus">Cozy+: a bit more advanced</option>
               <option value="remix">Remix: playful but simple</option>
             </select>
+          </div>
+          <div class="panel">
+            <label for="skillFocus">Skill focus</label>
+            <select id="skillFocus"></select>
+            <p class="small">This turns each lesson into targeted practice, not just a prompt.</p>
+          </div>
+          <div class="panel">
+            <label for="surpriseType">Surprise type</label>
+            <select id="surpriseType"></select>
+            <p class="small">Controls what the Surprise Me button favors.</p>
+          </div>
+          <div class="panel">
+            <label for="sessionTimer">Session timer</label>
+            <select id="sessionTimer"></select>
+            <p class="small">Optional drawing-session pacing.</p>
           </div>
         </section>
       </div>
@@ -1538,6 +2225,11 @@
                 <span class="coach-tool-title">Palette Coach</span>
                 <span class="coach-tool-copy">How to use the selected palette without muddying the drawing.</span>
               </button>
+
+              <button class="coach-tool-btn" onclick="fixMyMascot()">
+                <span class="coach-tool-title">Fix My Mascot</span>
+                <span class="coach-tool-copy">Troubleshoot after drawing: face, limbs, colors, readability.</span>
+              </button>
             </div>
 
             <div class="coach-context-card">
@@ -1545,7 +2237,27 @@
               <div id="coachContext" class="coach-context-list"></div>
             </div>
 
-            <div id="status" class="status"></div>
+            <div class="coach-context-card fix-mascot-card">
+              <strong>Fix My Mascot</strong>
+              <label for="fixProblem">What feels wrong?</label>
+              <select id="fixProblem">
+                <option value="faceWeird">Face looks weird</option>
+                <option value="boringBody">Body feels boring</option>
+                <option value="awkwardLimbs">Limbs look awkward</option>
+                <option value="subjectLost">Subject is not readable</option>
+                <option value="emotionUnclear">Expression is unclear</option>
+                <option value="muddyColors">Colors feel muddy</option>
+                <option value="tooManyDetails">Too many details</option>
+                <option value="notCute">Not cute enough</option>
+                <option value="notIconReadable">Not readable as an icon</option>
+              </select>
+              <button class="coach-tool-btn compact-coach-button" onclick="fixMyMascot()">
+                <span class="coach-tool-title">Generate Fix Plan</span>
+                <span class="coach-tool-copy">Get one simple improvement path.</span>
+              </button>
+            </div>
+
+            <div id="status" class="status" aria-live="polite"></div>
           </div>
 
           <div class="ai-output-wrap">
@@ -1561,6 +2273,26 @@
           </div>
         </section>
       </div>
+
+      <div id="tab-stash" class="tab-panel">
+        <p class="tab-hint">Save lessons here so Mascot Spark becomes a practice journal, not just a generator.</p>
+
+        <section class="stash-toolbar">
+          <button class="primary" onclick="saveCurrentLessonToStash()">Save current lesson</button>
+          <button class="utility-action" onclick="exportStashJson()">Export stash JSON</button>
+          <button class="utility-action" onclick="clearStash()">Clear stash</button>
+          <select id="stashFilter" onchange="renderStash()">
+            <option value="all">Show all</option>
+            <option value="not-drawn">Not drawn</option>
+            <option value="drawn">Drawn</option>
+            <option value="redrawn">Redrawn</option>
+            <option value="favorite">Favorites</option>
+          </select>
+        </section>
+
+        <div id="stashGrid" class="stash-grid"></div>
+      </div>
+
     </section>
 
     <div class="actions">
@@ -1570,13 +2302,17 @@
       <button class="ai-btn coach-action" data-advanced-only="true" onclick="aiLesson()" id="aiBtn">AI help this lesson</button>
       <button class="utility-action" data-advanced-only="true" onclick="saveSettings()">Save AI key</button>
       <button class="utility-action" onclick="resetChecks()">Reset checks</button>
-      <button class="utility-action" onclick="exportWorksheet()">Export worksheet</button>
+      <button class="utility-action" onclick="exportWorksheet()">Export text worksheet</button>
+      <button class="utility-action" onclick="exportHtmlWorksheet()">Export HTML worksheet</button>
+      <button class="utility-action" onclick="openBlueprintStudio()">Blueprint Studio</button>
+      <button class="utility-action" onclick="downloadCurrentBlueprintPng()">Export PNG</button>
+      <button class="utility-action" onclick="showVersionTools()">Version tools</button>
       <button class="utility-action" onclick="window.print()">Print / save</button>
       <button class="utility-action" onclick="installApp()" id="installBtn" style="display:none;">Install app</button>
     </div>
 
     <section class="main">
-      <article class="card">
+      <article class="card" id="lessonOutput" tabindex="-1">
         <div class="lesson-head">
           <h2 id="title">Mascot Lesson</h2>
           <div id="meta" class="meta">Subject · emotion · lesson</div>
@@ -1603,6 +2339,61 @@
               <div id="paletteRoleGuide" class="palette-role-grid"></div>
             </div>
           </div>
+
+          <h3>Practice intelligence</h3>
+          <div class="practice-intel-grid">
+            <div class="intel-card">
+              <strong>Skill focus</strong>
+              <div id="skillFocusCard"></div>
+            </div>
+            <div class="intel-card">
+              <strong>Mascot anatomy</strong>
+              <div id="anatomyCard"></div>
+            </div>
+            <div class="intel-card">
+              <strong>Subject mini-rules</strong>
+              <div id="subjectRulesCard"></div>
+            </div>
+            <div class="intel-card">
+              <strong>Version 2 challenge</strong>
+              <div id="version2Card"></div>
+            </div>
+          </div>
+
+          <h3>Creative amplifiers</h3>
+          <div class="amplifier-grid">
+            <button onclick="makeItMore('cuter')">Make it cuter</button>
+            <button onclick="makeItMore('spookier')">Make it spookier</button>
+            <button onclick="makeItMore('simpler')">Make it simpler</button>
+            <button onclick="makeItMore('icon')">Make it icon-readable</button>
+            <button onclick="makeItMore('plush')">Make it more plush</button>
+            <button onclick="makeItMore('chaos')">Make it chaotic-cute</button>
+          </div>
+
+          <h3>Session timer</h3>
+          <div class="timer-card">
+            <div>
+              <strong id="timerLabel">No timer selected</strong>
+              <p id="timerPlan" class="small">Choose a timer to get a session pacing plan.</p>
+            </div>
+            <div class="timer-actions">
+              <button onclick="startSessionTimer()">Start</button>
+              <button onclick="pauseSessionTimer()">Pause</button>
+              <button onclick="resetSessionTimer()">Reset</button>
+            </div>
+            <div class="timer-display" id="timerDisplay">--:--</div>
+          </div>
+
+          <h3>Before / after redraw tracker</h3>
+          <div class="redraw-tracker">
+            <button onclick="markRedrawStage('v1')">I drew Version 1</button>
+            <button onclick="markRedrawStage('v2')">I drew Version 2</button>
+            <textarea id="redrawReflection" placeholder="What improved? What still feels off?"></textarea>
+            <button class="primary" onclick="saveRedrawReflection()">Save redraw note</button>
+          </div>
+
+          <h3>Practice memory</h3>
+          <div id="practiceMemoryCard" class="compact-help">Practice suggestions will appear here after you generate lessons.</div>
 
           <h3>Today's drawing path</h3>
           <div class="path-grid">
@@ -1672,6 +2463,65 @@
         </section>
       </aside>
     </section>
+  
+    <section id="blueprintStudio" class="modal-shell" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="blueprintStudioTitle">
+      <div class="modal-card blueprint-studio-card">
+        <div class="modal-head">
+          <div>
+            <h2 id="blueprintStudioTitle">Blueprint Studio</h2>
+            <p class="small">Open the trace guide larger, switch layers, and export the current blueprint SVG.</p>
+          </div>
+          <button class="utility-action" onclick="closeBlueprintStudio()">Close</button>
+        </div>
+
+        <div class="blueprint-studio-controls">
+          <button onclick="setBlueprintStudioStage('body')">Body only</button>
+          <button onclick="setBlueprintStudioStage('guide')">Guide</button>
+          <button onclick="setBlueprintStudioStage('face')">Face</button>
+          <button onclick="setBlueprintStudioStage('limbs')">Limbs</button>
+          <button onclick="setBlueprintStudioStage('final')">Final</button>
+          <button class="primary" onclick="downloadBlueprintSvg()">Export SVG</button>
+          <button class="primary" onclick="downloadBlueprintPng()">Export PNG</button>
+        </div>
+
+        <div class="blueprint-studio-view">
+          <svg id="blueprintStudioSvg" viewBox="0 0 520 560" aria-label="Large blueprint studio view"></svg>
+        </div>
+      </div>
+    </section>
+
+    <section id="versionTools" class="modal-shell" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="versionToolsTitle">
+      <div class="modal-card version-card">
+        <div class="modal-head">
+          <div>
+            <h2 id="versionToolsTitle">App Version Tools</h2>
+            <p class="small">Use these before testing on GitHub Pages if the browser gets stubborn.</p>
+          </div>
+          <button class="utility-action" onclick="closeVersionTools()">Close</button>
+        </div>
+
+        <div class="version-grid">
+          <div class="version-info-card">
+            <strong>App version</strong>
+            <span>V17 — Stash + Blueprint Studio</span>
+          </div>
+          <div class="version-info-card">
+            <strong>Cache version</strong>
+            <span>mascot-spark-v17</span>
+          </div>
+          <button onclick="clearLocalAppData()">Reset local app data</button>
+          <button onclick="clearServiceWorkerCaches()">Clear browser cache storage</button>
+          <button onclick="location.reload()">Reload app</button>
+          <button onclick="exportStashJson()">Export stash backup</button>
+        </div>
+
+        <p class="compact-help">Reset local app data removes saved settings and stash from this browser. Export your stash first if needed.</p>
+      </div>
+    </section>
+
+      <footer class="final-footer" aria-label="App version">
+      <span id="finalBuildBadge">Mascot Spark V20 · Final Cleanup Build · Cache mascot-spark-v20</span>
+    </footer>
   </main>
 
   <script>
@@ -2056,7 +2906,11 @@
     }
 
     function bootSelects() {
+      populateSelect("subjectPack", subjectPacks, "all");
       populateSelect("lessonType", subjectData, "blob");
+      populateSelect("skillFocus", skillFocuses, "auto");
+      populateSelect("surpriseType", surpriseTypes, "softBeginner");
+      populateSelect("sessionTimer", sessionTimers, "none");
       populateSelect("emotion", emotions, "grumpy");
       populateSelect("level", lessonSizes, "normal");
       populateSelect("funTwist", twists, "sparkle");
@@ -2112,10 +2966,7 @@
     }
 
     function surpriseMe() {
-      ["lessonType", "emotion", "level", "creativeMode", "funTwist", "ideaPreset", "paletteMood", "blueprintStyle", "drawOrderMode", "aiStyle"].forEach(randomSelect);
-      document.getElementById("customIdea").value = "";
-      newLesson();
-      status("Surprise lesson created. Subject, emotion, palette, blueprint, and lesson mode were randomized while optional flavor stayed mood-only.", "ok");
+      smartSurprise();
     }
 
     function makeBody(type) {
@@ -2537,6 +3388,18 @@
         "PALETTE",
         palette,
         "",
+        "PRACTICE INTELLIGENCE",
+        skill,
+        "",
+        "MASCOT ANATOMY",
+        anatomy,
+        "",
+        "SUBJECT MINI-RULES",
+        rules,
+        "",
+        "VERSION 2 CHALLENGE",
+        version2,
+        "",
         "DRAW THIS FIRST",
         drawFirst,
         "",
@@ -2548,6 +3411,9 @@
         "",
         "VERSION 2 CHALLENGE",
         remix,
+        "",
+        "REDRAW REFLECTION",
+        document.getElementById("redrawReflection")?.value || "",
         "",
         "REFLECTION",
         "What improved?",
@@ -2567,6 +3433,856 @@
       a.remove();
       URL.revokeObjectURL(url);
       status("Worksheet exported locally as a text file.", "ok");
+    }
+
+
+
+
+
+    function updateTodayPractice(data) {
+      const title = document.getElementById("todayPracticeTitle");
+      const goal = document.getElementById("todayPracticeGoal");
+      const subject = document.getElementById("todaySubject");
+      const skill = document.getElementById("todaySkill");
+      const next = document.getElementById("todayNext");
+
+      if (!data) return;
+      const skillLabel = skillFocusData?.[data.skillFocus]?.title || "Practice";
+      if (title) title.textContent = `${data.subjectName || "Mascot"} · ${skillLabel}`;
+      if (goal) goal.textContent = `Goal: ${data.goal || "Follow the guided step mode."}`;
+      if (subject) subject.textContent = `Subject: ${data.subjectName || "—"}`;
+      if (skill) skill.textContent = `Skill: ${skillLabel}`;
+      if (next) next.textContent = `Next: ${data.phases?.[0]?.[0] || "Start Step 1"}`;
+    }
+
+    function svgElementToString(svg) {
+      if (!svg) return "";
+      const clone = svg.cloneNode(true);
+      clone.setAttribute("xmlns", "http://www.w3.org/2000/svg");
+      clone.setAttribute("width", "1600");
+      clone.setAttribute("height", "1600");
+      return new XMLSerializer().serializeToString(clone);
+    }
+
+    function svgStringToPngBlob(svgString, width = 1600, height = 1600) {
+      return new Promise((resolve, reject) => {
+        const svgBlob = new Blob([svgString], { type: "image/svg+xml;charset=utf-8" });
+        const url = URL.createObjectURL(svgBlob);
+        const img = new Image();
+
+        img.onload = () => {
+          const canvas = document.createElement("canvas");
+          canvas.width = width;
+          canvas.height = height;
+          const ctx = canvas.getContext("2d");
+
+          ctx.fillStyle = "#173b63";
+          ctx.fillRect(0, 0, width, height);
+          ctx.drawImage(img, 0, 0, width, height);
+
+          URL.revokeObjectURL(url);
+          canvas.toBlob(blob => {
+            if (blob) resolve(blob);
+            else reject(new Error("Could not create PNG blob."));
+          }, "image/png");
+        };
+
+        img.onerror = () => {
+          URL.revokeObjectURL(url);
+          reject(new Error("Could not render SVG as PNG."));
+        };
+
+        img.src = url;
+      });
+    }
+
+    async function downloadSvgElementAsPng(svg, filename) {
+      try {
+        const svgString = svgElementToString(svg);
+        const blob = await svgStringToPngBlob(svgString, 1600, 1600);
+        downloadBlob(blob, filename);
+        status("Blueprint PNG exported.", "ok");
+      } catch (error) {
+        status(error.message || "PNG export failed.", "bad");
+      }
+    }
+
+    function downloadCurrentBlueprintPng() {
+      const svg = document.getElementById("blueprintSvg");
+      if (!svg) {
+        status("No blueprint found to export.", "bad");
+        return;
+      }
+      downloadSvgElementAsPng(svg, "mascot-spark-blueprint.png");
+    }
+
+    function downloadBlueprintPng() {
+      const svg = document.getElementById("blueprintStudioSvg");
+      if (!svg) {
+        status("Open Blueprint Studio first.", "bad");
+        return;
+      }
+      downloadSvgElementAsPng(svg, `mascot-spark-blueprint-${blueprintStudioStage || "final"}.png`);
+    }
+
+    function setModalOpen(id, open) {
+      const modal = document.getElementById(id);
+      if (!modal) return;
+      modal.classList.toggle("open", open);
+      modal.setAttribute("aria-hidden", open ? "false" : "true");
+    }
+
+    const subjectPacks = {
+      all: "All subjects",
+      snack: "Snack Pack",
+      object: "Object Pack",
+      magic: "Magic Pack",
+      softMonster: "Soft Monster Pack",
+      logo: "Logo Pack",
+      nature: "Nature Pack",
+      tech: "Tech Pack",
+      cozyHome: "Cozy Home Pack"
+    };
+
+    const subjectPackMap = {
+      all: [],
+      snack: ["food", "fruit", "vegetable", "dessert", "breakfast", "candy", "drink", "sauce"],
+      object: ["object", "stationery", "household", "package", "device", "book", "tool", "artSupply"],
+      magic: ["potion", "gem", "magicObject", "celestialObject", "star", "zodiac"],
+      softMonster: ["ghost", "creature", "tinyMonster", "plushKeychain", "toy"],
+      logo: ["icon", "sticker", "badge", "logoMark", "emoji", "abstractShape"],
+      nature: ["plant", "flower", "garden", "cloud", "weatherIcon", "bug", "shell", "aquatic"],
+      tech: ["robot", "device", "icon", "logoMark"],
+      cozyHome: ["household", "furniture", "book", "drink", "clothing", "accessory"]
+    };
+
+    const surpriseTypes = {
+      softBeginner: "Soft Beginner",
+      weirdCute: "Weird Cute",
+      spookySweet: "Spooky-Sweet",
+      iconReady: "Icon-Ready",
+      paletteFirst: "Palette-First",
+      blueprintFirst: "Blueprint-First",
+      skillDrill: "Skill Drill",
+      chaosButton: "Chaos Button"
+    };
+
+    const sessionTimers = {
+      none: "No timer",
+      five: "5 minute sketch",
+      ten: "10 minute lesson",
+      twenty: "20 minute session"
+    };
+
+    const timerPlans = {
+      none: "No timer selected. Follow the guided steps at your own pace.",
+      five: "5 min: 1m body, 1m face, 1m limbs/twist, 1m clean line, 1m color note.",
+      ten: "10 min: 2m body, 2m face, 2m limbs/twist, 2m clean line, 2m color pass.",
+      twenty: "20 min: 4m body tests, 4m face/expression, 4m limbs/twist, 4m clean line, 4m color/polish."
+    };
+
+    let timerRemaining = 0;
+    let timerInitial = 0;
+    let timerInterval = null;
+
+    function filterSubjectsByPack(packKey) {
+      const lessonSelect = document.getElementById("lessonType");
+      if (!lessonSelect) return;
+
+      const allowed = subjectPackMap[packKey] || [];
+      const current = lessonSelect.value;
+
+      lessonSelect.innerHTML = Object.entries(subjectData)
+        .filter(([key]) => allowed.length === 0 || allowed.includes(key))
+        .map(([value, label]) => `<option value="${value}">${label[0]}</option>`)
+        .join("");
+
+      if (current && Array.from(lessonSelect.options).some(o => o.value === current)) {
+        lessonSelect.value = current;
+      }
+    }
+
+    function randomFromOptions(id) {
+      const el = document.getElementById(id);
+      if (!el || !el.options.length) return null;
+      const index = Math.floor(Math.random() * el.options.length);
+      el.selectedIndex = index;
+      return el.value;
+    }
+
+    function chooseSubjectFromPack(pack) {
+      filterSubjectsByPack(pack);
+      return randomFromOptions("lessonType");
+    }
+
+    function smartSurprise() {
+      const type = document.getElementById("surpriseType")?.value || "softBeginner";
+
+      if (type === "softBeginner") {
+        chooseSubjectFromPack("snack");
+        setSelect("level", "tiny");
+        setSelect("creativeMode", "cozy");
+        setSelect("skillFocus", "shapeControl");
+        setSelect("blueprintStyle", "bodyFirst");
+        setSelect("funTwist", "sparkle");
+      } else if (type === "weirdCute") {
+        chooseSubjectFromPack("magic");
+        setSelect("creativeMode", "remix");
+        setSelect("skillFocus", "expressionDesign");
+        randomFromOptions("funTwist");
+        randomFromOptions("emotion");
+      } else if (type === "spookySweet") {
+        chooseSubjectFromPack("softMonster");
+        setSelect("emotion", "spooky");
+        setSelect("skillFocus", "expressionDesign");
+        setSelect("blueprintStyle", "ghostDrape");
+        setSelect("funTwist", "fang");
+      } else if (type === "iconReady") {
+        chooseSubjectFromPack("logo");
+        setSelect("skillFocus", "iconReadability");
+        setSelect("blueprintStyle", "iconGrid");
+        setSelect("level", "iconSheet");
+        setSelect("creativeMode", "cozy");
+      } else if (type === "paletteFirst") {
+        randomFromOptions("paletteMood");
+        chooseSubjectFromPack("all");
+        setSelect("skillFocus", "paletteControl");
+      } else if (type === "blueprintFirst") {
+        randomFromOptions("blueprintStyle");
+        chooseSubjectFromPack("all");
+        setSelect("skillFocus", "objectCharacter");
+      } else if (type === "skillDrill") {
+        randomFromOptions("skillFocus");
+        chooseSubjectFromPack("all");
+        setSelect("level", "study");
+      } else if (type === "chaosButton") {
+        chooseSubjectFromPack("all");
+        randomFromOptions("emotion");
+        randomFromOptions("funTwist");
+        randomFromOptions("paletteMood");
+        randomFromOptions("blueprintStyle");
+        setSelect("creativeMode", "remix");
+      }
+
+      randomFromOptions("ideaPreset");
+      document.getElementById("customIdea").value = "";
+      newLesson();
+      status(`Smart Surprise created: ${surpriseTypes[type]}.`, "ok");
+    }
+
+    function setSelect(id, value) {
+      const el = document.getElementById(id);
+      if (!el) return;
+      if (Array.from(el.options).some(o => o.value === value)) el.value = value;
+    }
+
+    function makeItMore(mode) {
+      if (mode === "cuter") {
+        setSelect("emotion", "delightedShy");
+        setSelect("funTwist", "blushStripe");
+        setSelect("blueprintStyle", "faceMap");
+      }
+      if (mode === "spookier") {
+        setSelect("emotion", "spooky");
+        setSelect("funTwist", "ghostWisp");
+        setSelect("blueprintStyle", "ghostDrape");
+      }
+      if (mode === "simpler") {
+        setSelect("level", "micro");
+        setSelect("creativeMode", "cozy");
+        setSelect("skillFocus", "shapeControl");
+        setSelect("blueprintStyle", "bodyFirst");
+        setSelect("funTwist", "none");
+      }
+      if (mode === "icon") {
+        setSelect("skillFocus", "iconReadability");
+        setSelect("blueprintStyle", "iconGrid");
+        setSelect("level", "iconSheet");
+      }
+      if (mode === "plush") {
+        setSelect("blueprintStyle", "plushBody");
+        setSelect("funTwist", "button");
+        setSelect("skillFocus", "shapeControl");
+      }
+      if (mode === "chaos") {
+        setSelect("creativeMode", "remix");
+        setSelect("emotion", "chaoticSoft");
+        setSelect("funTwist", "mismatchedButtons");
+      }
+
+      newLesson();
+      status(`Adjusted: ${mode.replace(/([A-Z])/g, " $1").toLowerCase()}.`, "ok");
+    }
+
+    function updateTimerDisplay() {
+      const box = document.getElementById("timerDisplay");
+      if (!box) return;
+      if (!timerInitial) {
+        box.textContent = "--:--";
+        return;
+      }
+      const min = Math.floor(timerRemaining / 60);
+      const sec = timerRemaining % 60;
+      box.textContent = `${String(min).padStart(2, "0")}:${String(sec).padStart(2, "0")}`;
+    }
+
+    function setupTimerFromSelect() {
+      const key = document.getElementById("sessionTimer")?.value || "none";
+      const label = document.getElementById("timerLabel");
+      const plan = document.getElementById("timerPlan");
+      const seconds = key === "five" ? 300 : key === "ten" ? 600 : key === "twenty" ? 1200 : 0;
+      timerInitial = seconds;
+      timerRemaining = seconds;
+      if (label) label.textContent = sessionTimers[key] || "No timer";
+      if (plan) plan.textContent = timerPlans[key] || timerPlans.none;
+      updateTimerDisplay();
+    }
+
+    function startSessionTimer() {
+      if (!timerInitial) setupTimerFromSelect();
+      if (!timerInitial) {
+        status("Choose a timer first.", "bad");
+        return;
+      }
+      clearInterval(timerInterval);
+      timerInterval = setInterval(() => {
+        timerRemaining = Math.max(0, timerRemaining - 1);
+        updateTimerDisplay();
+        if (timerRemaining <= 0) {
+          clearInterval(timerInterval);
+          status("Timer complete. Stop, review, or draw Version 2.", "ok");
+        }
+      }, 1000);
+      status("Timer started.", "ok");
+    }
+
+    function pauseSessionTimer() {
+      clearInterval(timerInterval);
+      status("Timer paused.", "ok");
+    }
+
+    function resetSessionTimer() {
+      clearInterval(timerInterval);
+      setupTimerFromSelect();
+      status("Timer reset.", "ok");
+    }
+
+    function markRedrawStage(stage) {
+      const key = "mascotSparkRedrawTracker";
+      const tracker = JSON.parse(localStorage.getItem(key) || "{}");
+      tracker[stage] = new Date().toLocaleString();
+      localStorage.setItem(key, JSON.stringify(tracker));
+      status(stage === "v1" ? "Version 1 marked as drawn." : "Version 2 marked as drawn.", "ok");
+    }
+
+    function saveRedrawReflection() {
+      const value = document.getElementById("redrawReflection")?.value.trim() || "";
+      const tracker = JSON.parse(localStorage.getItem("mascotSparkRedrawTracker") || "{}");
+      tracker.reflection = value;
+      tracker.updated = new Date().toLocaleString();
+      localStorage.setItem("mascotSparkRedrawTracker", JSON.stringify(tracker));
+      status("Redraw reflection saved locally.", "ok");
+    }
+
+    function updatePracticeMemory() {
+      const memory = JSON.parse(localStorage.getItem("mascotSparkPracticeMemory") || "[]");
+      const subject = document.getElementById("lessonType")?.value || "";
+      const skill = document.getElementById("skillFocus")?.value || "auto";
+      const emotion = document.getElementById("emotion")?.value || "";
+      memory.unshift({ subject, skill, emotion, date: Date.now() });
+      const trimmed = memory.slice(0, 8);
+      localStorage.setItem("mascotSparkPracticeMemory", JSON.stringify(trimmed));
+
+      const box = document.getElementById("practiceMemoryCard");
+      if (!box) return;
+
+      const skillCounts = trimmed.reduce((acc, item) => {
+        acc[item.skill] = (acc[item.skill] || 0) + 1;
+        return acc;
+      }, {});
+      const topSkill = Object.entries(skillCounts).sort((a, b) => b[1] - a[1])[0];
+      const suggestion = topSkill && topSkill[1] >= 2
+        ? `You practiced ${skillFocuses[topSkill[0]] || topSkill[0]} a few times. Try a different skill focus next for balance.`
+        : "Keep generating lessons. After a few, Mascot Spark will suggest what to practice next.";
+
+      box.textContent = suggestion;
+    }
+
+    const APP_VERSION = "V20";
+    const APP_CACHE_NAME = "mascot-spark-v20";
+
+    function escapeHtml(value) {
+      return String(value ?? "").replace(/[&<>"']/g, char => ({
+        "&": "&amp;",
+        "<": "&lt;",
+        ">": "&gt;",
+        '"': "&quot;",
+        "'": "&#039;"
+      }[char]));
+    }
+
+    function getCurrentLessonSnapshot() {
+      const c = typeof getCurrentCoachContext === "function" ? getCurrentCoachContext() : null;
+      return {
+        id: Date.now().toString(36),
+        title: document.getElementById("title")?.textContent || "Mascot Lesson",
+        meta: document.getElementById("meta")?.textContent || "",
+        goal: document.getElementById("goal")?.textContent || "",
+        subject: c?.subject?.[0] || "",
+        emotion: c?.emotion?.[0] || "",
+        twist: c?.twist?.[0] || "",
+        palette: c?.palette?.label || "Auto",
+        blueprint: c?.blueprint || "",
+        lesson: c?.lesson?.[0] || "",
+        skillFocus: document.getElementById("skillFocusCard")?.innerText || "",
+        anatomy: document.getElementById("anatomyCard")?.innerText || "",
+        rules: document.getElementById("subjectRulesCard")?.innerText || "",
+        version2: document.getElementById("version2Card")?.innerText || "",
+        date: new Date().toLocaleString(),
+        status: "not-drawn",
+        favorite: false,
+        note: ""
+      };
+    }
+
+    function getStash() {
+      try {
+        return JSON.parse(localStorage.getItem("mascotSparkStash") || "[]");
+      } catch {
+        return [];
+      }
+    }
+
+    function setStash(items) {
+      localStorage.setItem("mascotSparkStash", JSON.stringify(items));
+      renderStash();
+    }
+
+    function saveCurrentLessonToStash() {
+      const stash = getStash();
+      const item = getCurrentLessonSnapshot();
+      stash.unshift(item);
+      setStash(stash);
+      showTab("tab-stash");
+      status("Lesson saved to Stash.", "ok");
+    }
+
+    function updateStashItem(id, changes) {
+      const stash = getStash().map(item => item.id === id ? { ...item, ...changes } : item);
+      setStash(stash);
+    }
+
+    function deleteStashItem(id) {
+      const stash = getStash().filter(item => item.id !== id);
+      setStash(stash);
+    }
+
+    function renderStash() {
+      const grid = document.getElementById("stashGrid");
+      if (!grid) return;
+
+      const filter = document.getElementById("stashFilter")?.value || "all";
+      let stash = getStash();
+
+      if (filter === "favorite") stash = stash.filter(item => item.favorite);
+      else if (filter !== "all") stash = stash.filter(item => item.status === filter);
+
+      if (!stash.length) {
+        grid.innerHTML = `<div class="compact-help">No saved lessons here yet. Generate a mascot lesson, then tap “Save current lesson.”</div>`;
+        return;
+      }
+
+      grid.innerHTML = stash.map(item => `
+        <article class="stash-card">
+          <h4>${escapeHtml(item.title)}</h4>
+          <div class="stash-meta">
+            ${escapeHtml(item.subject)} · ${escapeHtml(item.emotion)} · ${escapeHtml(item.twist)}<br>
+            ${escapeHtml(item.palette)} · ${escapeHtml(item.blueprint)}<br>
+            ${escapeHtml(item.date)}
+          </div>
+
+          <select onchange="updateStashItem('${item.id}', { status: this.value })">
+            <option value="not-drawn" ${item.status === "not-drawn" ? "selected" : ""}>Not drawn</option>
+            <option value="drawn" ${item.status === "drawn" ? "selected" : ""}>Drawn</option>
+            <option value="redrawn" ${item.status === "redrawn" ? "selected" : ""}>Redrawn</option>
+          </select>
+
+          <textarea class="stash-note" placeholder="Reflection note..." oninput="updateStashItem('${item.id}', { note: this.value })">${escapeHtml(item.note || "")}</textarea>
+
+          <div class="stash-actions">
+            <button onclick="updateStashItem('${item.id}', { favorite: ${!item.favorite} })">${item.favorite ? "Unfavorite" : "Favorite"}</button>
+            <button onclick="downloadStashWorksheet('${item.id}')">Worksheet</button>
+            <button onclick="deleteStashItem('${item.id}')">Delete</button>
+          </div>
+        </article>
+      `).join("");
+    }
+
+    function clearStash() {
+      if (!confirm("Clear all saved Mascot Stash lessons in this browser?")) return;
+      setStash([]);
+      status("Stash cleared.", "ok");
+    }
+
+    function exportStashJson() {
+      const blob = new Blob([JSON.stringify(getStash(), null, 2)], { type: "application/json" });
+      downloadBlob(blob, "mascot-spark-stash.json");
+      status("Stash JSON exported.", "ok");
+    }
+
+    function downloadBlob(blob, filename) {
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = filename;
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      URL.revokeObjectURL(url);
+    }
+
+    function worksheetHtmlFromItem(item, includeCurrentBlueprint = false) {
+      const swatches = Array.from(document.querySelectorAll("#lessonPaletteSwatches .lesson-palette-swatch"))
+        .map(s => `<span class="swatch" style="${s.getAttribute("style") || ""}"></span>`)
+        .join("");
+      const currentBlueprint = includeCurrentBlueprint ? document.getElementById("blueprintSvg")?.outerHTML || "" : "";
+
+      return `<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>${escapeHtml(item.title)} — Mascot Spark Worksheet</title>
+<style>
+  body { font-family: system-ui, -apple-system, sans-serif; padding: 28px; line-height: 1.45; color: #2f2a30; background: #fff7fb; }
+  h1 { margin: 0 0 6px; font-size: 34px; }
+  .meta { color: #7D6D79; font-weight: 700; margin-bottom: 18px; }
+  section { border: 1px solid #D7C4F4; background: #FDEEF5; border-radius: 18px; padding: 16px; margin: 14px 0; }
+  h2 { margin: 0 0 8px; font-size: 15px; text-transform: uppercase; letter-spacing: .08em; color: #7D6D79; }
+  .swatches { display: flex; gap: 8px; flex-wrap: wrap; }
+  .swatch { width: 30px; height: 30px; border-radius: 50%; border: 2px solid white; box-shadow: 0 2px 8px rgba(0,0,0,.15); }
+  svg { width: 100%; max-height: 600px; background: #173b63; border-radius: 18px; }
+  pre { white-space: pre-wrap; font-family: inherit; margin: 0; }
+  .reflection { min-height: 120px; border: 1px dashed #BFAFD0; border-radius: 14px; background: white; }
+</style>
+</head>
+<body>
+<h1>${escapeHtml(item.title)}</h1>
+<div class="meta">${escapeHtml(item.meta)}<br>${escapeHtml(item.date || "")}</div>
+<section><h2>Goal</h2><p>${escapeHtml(item.goal)}</p></section>
+<section><h2>Practice Intelligence</h2><pre>${escapeHtml(item.skillFocus || "")}</pre></section>
+<section><h2>Mascot Anatomy</h2><pre>${escapeHtml(item.anatomy || "")}</pre></section>
+<section><h2>Subject Rules</h2><pre>${escapeHtml(item.rules || "")}</pre></section>
+<section><h2>Version 2 Challenge</h2><pre>${escapeHtml(item.version2 || "")}</pre></section>
+<section><h2>Palette</h2><p>${escapeHtml(item.palette)}</p><div class="swatches">${swatches}</div></section>
+${currentBlueprint ? `<section><h2>Blueprint</h2>${currentBlueprint}</section>` : ""}
+<section><h2>Reflection</h2><div class="reflection"></div></section>
+</body>
+</html>`;
+    }
+
+    function exportHtmlWorksheet() {
+      const item = getCurrentLessonSnapshot();
+      const htmlDoc = worksheetHtmlFromItem(item, true);
+      const safe = item.title.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "") || "mascot-spark";
+      downloadBlob(new Blob([htmlDoc], { type: "text/html;charset=utf-8" }), `${safe}-worksheet.html`);
+      status("HTML worksheet exported locally.", "ok");
+    }
+
+    function downloadStashWorksheet(id) {
+      const item = getStash().find(x => x.id === id);
+      if (!item) return;
+      const htmlDoc = worksheetHtmlFromItem(item, false);
+      const safe = item.title.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "") || "mascot-spark";
+      downloadBlob(new Blob([htmlDoc], { type: "text/html;charset=utf-8" }), `${safe}-worksheet.html`);
+    }
+
+    let blueprintStudioStage = "final";
+
+    function openBlueprintStudio() {
+      setModalOpen("blueprintStudio", true);
+      setBlueprintStudioStage(blueprintStudioStage || "final");
+    }
+
+    function closeBlueprintStudio() {
+      setModalOpen("blueprintStudio", false);
+    }
+
+    function extractSvgInner(svgString) {
+      const start = svgString.indexOf(">");
+      const end = svgString.lastIndexOf("</svg>");
+      if (start === -1 || end === -1) return "";
+      return svgString.slice(start + 1, end);
+    }
+
+    function setBlueprintStudioStage(stage) {
+      blueprintStudioStage = stage;
+      const svg = document.getElementById("blueprintStudioSvg");
+      if (!svg) return;
+      const type = document.getElementById("lessonType")?.value || "blob";
+      const emotion = document.getElementById("emotion")?.value || "happy";
+      const twist = document.getElementById("funTwist")?.value || "none";
+      if (stage === "final") {
+        svg.innerHTML = makeBlueprint(type, emotion, twist, document.getElementById("blueprintStyle")?.value || "autoSubject");
+      } else {
+        svg.innerHTML = extractSvgInner(miniBlueprintSvg(type, emotion, twist, stage));
+      }
+    }
+
+    function downloadBlueprintSvg() {
+      const svg = document.getElementById("blueprintStudioSvg");
+      if (!svg) return;
+      const doc = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 560">${svg.innerHTML}</svg>`;
+      downloadBlob(new Blob([doc], { type: "image/svg+xml;charset=utf-8" }), "mascot-spark-blueprint.svg");
+      status("Blueprint SVG exported.", "ok");
+    }
+
+    function showVersionTools() {
+      setModalOpen("versionTools", true);
+    }
+
+    function closeVersionTools() {
+      setModalOpen("versionTools", false);
+    }
+
+    function clearLocalAppData() {
+      if (!confirm("Reset all local Mascot Spark data in this browser? Export your stash first if needed.")) return;
+      localStorage.clear();
+      status("Local data cleared. Reloading...", "ok");
+      setTimeout(() => location.reload(), 500);
+    }
+
+    async function clearServiceWorkerCaches() {
+      if ("caches" in window) {
+        const keys = await caches.keys();
+        await Promise.all(keys.map(key => caches.delete(key)));
+      }
+      status("Browser cache storage cleared for this app. Reloading...", "ok");
+      setTimeout(() => location.reload(), 500);
+    }
+
+    const skillFocuses = {
+      auto: "Auto skill match",
+      shapeControl: "Shape Control",
+      facePlacement: "Face Placement",
+      expressionDesign: "Expression Design",
+      tinyLimbs: "Tiny Limbs",
+      objectCharacter: "Object-to-Character",
+      iconReadability: "Icon Readability",
+      paletteControl: "Palette Control",
+      polishPass: "Polish Pass",
+      redrawPractice: "Redraw Practice"
+    };
+
+    const skillFocusData = {
+      auto: {
+        title: "Auto skill match",
+        goal: "The app picks the most useful skill focus from your lesson choices.",
+        drills: ["Follow the generated step order.", "Keep the subject readable.", "Make one simple Version 2 change."]
+      },
+      shapeControl: {
+        title: "Shape Control",
+        goal: "Practice making the main body simple, readable, and friendly.",
+        drills: ["Draw the body 3 times.", "Pick the clearest silhouette.", "Do not add details until the body works."]
+      },
+      facePlacement: {
+        title: "Face Placement",
+        goal: "Practice placing eyes and mouth low enough to feel cute and readable.",
+        drills: ["Move the face lower.", "Try two eye spacings.", "Make the mouth smaller than you think."]
+      },
+      expressionDesign: {
+        title: "Expression Design",
+        goal: "Practice making the duo emotion readable with limited marks.",
+        drills: ["Use one eye cue.", "Use one mouth cue.", "Use one body or accessory cue only."]
+      },
+      tinyLimbs: {
+        title: "Tiny Limbs",
+        goal: "Practice adding limbs without making the mascot cluttered.",
+        drills: ["Use C-curves for arms.", "Use oval feet.", "Keep limbs smaller than the face area."]
+      },
+      objectCharacter: {
+        title: "Object-to-Character",
+        goal: "Keep the subject recognizable after adding personality.",
+        drills: ["Preserve one subject cue.", "Put the face after readability works.", "Remove details that hide the subject."]
+      },
+      iconReadability: {
+        title: "Icon Readability",
+        goal: "Make the mascot readable when small.",
+        drills: ["Zoom out.", "Remove tiny details.", "Keep the silhouette bold."]
+      },
+      paletteControl: {
+        title: "Palette Control",
+        goal: "Use color roles instead of using every color equally.",
+        drills: ["One body color.", "One accent color.", "One shadow and one highlight only."]
+      },
+      polishPass: {
+        title: "Polish Pass",
+        goal: "Practice cleaning without overworking.",
+        drills: ["Lower rough sketch opacity.", "Redraw slow clean lines.", "Stop after one shadow."]
+      },
+      redrawPractice: {
+        title: "Redraw Practice",
+        goal: "Improve by changing one thing in Version 2.",
+        drills: ["Duplicate the idea.", "Change only face, body, color, or limbs.", "Compare before judging."]
+      }
+    };
+
+    const fixProblemData = {
+      faceWeird: {
+        title: "Face looks weird",
+        fixFirst: "Move the face lower before changing the body.",
+        steps: ["Duplicate the sketch.", "Lower both eyes and mouth slightly.", "Make the mouth smaller.", "Remove one cheek/detail mark."],
+        avoid: "Do not redraw the whole mascot until face placement is tested."
+      },
+      boringBody: {
+        title: "Body feels boring",
+        fixFirst: "Change the silhouette, not the decoration.",
+        steps: ["Redraw the body with one softer bump.", "Flatten the bottom slightly.", "Tilt the top edge a little.", "Keep the face the same while testing."],
+        avoid: "Do not add accessories to hide a weak body shape."
+      },
+      awkwardLimbs: {
+        title: "Limbs look awkward",
+        fixFirst: "Make limbs smaller and simpler.",
+        steps: ["Replace arms with C-curves.", "Replace feet with tiny ovals.", "Move limbs lower on the body.", "Check that limbs do not cover the face."],
+        avoid: "Do not make limbs detailed hands or feet yet."
+      },
+      subjectLost: {
+        title: "Subject is not readable",
+        fixFirst: "Restore one obvious subject cue.",
+        steps: ["Name the subject cue: stem, handle, screen, wrapper, etc.", "Make that cue larger.", "Remove one unrelated accessory.", "Zoom out and check again."],
+        avoid: "Do not let optional flavor override the selected subject."
+      },
+      emotionUnclear: {
+        title: "Expression is unclear",
+        fixFirst: "Simplify the face into one clear expression formula.",
+        steps: ["Choose one eye cue.", "Choose one mouth cue.", "Add one tiny body cue.", "Remove extra emotional symbols."],
+        avoid: "Do not use every emotion cue at once."
+      },
+      muddyColors: {
+        title: "Colors feel muddy",
+        fixFirst: "Use fewer palette colors.",
+        steps: ["Pick one body color.", "Pick one accent color.", "Use one shadow color only.", "Use one tiny highlight."],
+        avoid: "Do not use all palette colors equally."
+      },
+      tooManyDetails: {
+        title: "Too many details",
+        fixFirst: "Remove before adding.",
+        steps: ["Circle the most important detail.", "Delete or ignore two smaller details.", "Keep face, subject cue, and one twist.", "Check silhouette again."],
+        avoid: "Do not solve clutter by adding more polish."
+      },
+      notCute: {
+        title: "Not cute enough",
+        fixFirst: "Round the body and lower the face.",
+        steps: ["Soften sharp corners.", "Lower the eyes.", "Make the mouth smaller.", "Add one blush or shine mark."],
+        avoid: "Do not make every feature bigger."
+      },
+      notIconReadable: {
+        title: "Not readable as an icon",
+        fixFirst: "Bold silhouette, fewer details.",
+        steps: ["Zoom out to thumbnail size.", "Remove tiny accessories.", "Thicken the outer shape.", "Keep only face plus one subject cue."],
+        avoid: "Do not keep details that disappear when small."
+      }
+    };
+
+    function toggleFocusMode() {
+      const active = !document.body.classList.contains("focus-mode");
+      document.body.classList.toggle("focus-mode", active);
+      localStorage.setItem("mascotSparkFocusMode", active ? "on" : "off");
+      const btn = document.getElementById("focusModeBtn");
+      if (btn) btn.textContent = active ? "Exit focus" : "Focus mode";
+      if (active) status("Focus Mode on: current step + blueprint only.", "ok");
+    }
+
+    function loadFocusMode() {
+      const active = localStorage.getItem("mascotSparkFocusMode") === "on";
+      document.body.classList.toggle("focus-mode", active);
+      const btn = document.getElementById("focusModeBtn");
+      if (btn) btn.textContent = active ? "Exit focus" : "Focus mode";
+    }
+
+    function pickAutoSkill(type, emotion, blueprintStyle) {
+      if (["icon", "badge", "sticker", "logoMark", "emoji"].includes(type)) return "iconReadability";
+      if (["object", "food", "fruit", "robot", "device", "potion", "book", "package", "drink"].includes(type)) return "objectCharacter";
+      if (["grumpy", "spooky", "sadHopeful", "hauntedHappy", "chaoticSoft", "gloomySweet", "softSuspicious"].includes(emotion)) return "expressionDesign";
+      if (blueprintStyle === "faceMap") return "facePlacement";
+      if (blueprintStyle === "limbMap") return "tinyLimbs";
+      return "shapeControl";
+    }
+
+    function getEffectiveSkillFocus(type, emotion, blueprintStyle) {
+      const selected = document.getElementById("skillFocus")?.value || "auto";
+      return selected === "auto" ? pickAutoSkill(type, emotion, blueprintStyle) : selected;
+    }
+
+    function getSubjectRules(type) {
+      const map = {
+        fruit: ["Start with a round or heart-like body.", "Readable cue: stem, leaf, shine, or seed.", "Avoid too many seeds."],
+        vegetable: ["Start with one simple vegetable silhouette.", "Readable cue: leaf top, root point, or cap.", "Avoid realistic texture overload."],
+        robot: ["Start with a rounded rectangle.", "Readable cue: antenna, screen, bolt, or panel.", "Avoid sharp mechanical clutter."],
+        device: ["Start with the outer device frame.", "Readable cue: screen area.", "Avoid placing details too close to edges."],
+        potion: ["Start with neck, then bottle body.", "Readable cue: cork, liquid line, label.", "Avoid a neck wider than the bottle."],
+        cloud: ["Start from overlapping puff circles.", "Readable cue: puffy top edge.", "Avoid flat cloud edges."],
+        ghost: ["Start with a dome top.", "Readable cue: wavy draped bottom.", "Avoid too many bottom scallops."],
+        gem: ["Start with a diamond body.", "Readable cue: 1–3 facet lines.", "Avoid too many inner lines."],
+        shell: ["Start with one curved shell wedge.", "Readable cue: layered ribs.", "Avoid random rib directions."],
+        aquatic: ["Start with long body flow.", "Readable cue: tail, fin, bubble, or droplet.", "Avoid fins before body."],
+        letter: ["Start with chunky letter strokes.", "Readable cue: letter silhouette.", "Avoid hiding the letter with face/details."],
+        number: ["Start with chunky number shape.", "Readable cue: number silhouette.", "Avoid decorating before the number reads."],
+        package: ["Start with box/fold logic.", "Readable cue: flap, tape, corner.", "Avoid losing the fold directions."],
+        furniture: ["Start with top/seat plane.", "Readable cue: legs or cushion.", "Avoid starting with legs first."],
+        garden: ["Start with pot/base.", "Readable cue: sprout, leaf, watering shape.", "Avoid leaves hiding the pot."]
+      };
+      return map[type] || ["Start with the biggest readable silhouette.", "Keep one clear subject cue.", "Avoid adding details before the subject reads."];
+    }
+
+    function renderPracticeIntelligence(data) {
+      const skill = skillFocusData[data.skillFocus] || skillFocusData.shapeControl;
+      const subjectRules = getSubjectRules(data.type);
+      const anatomy = [
+        `Base shape: ${data.subjectBase}`,
+        `Readability cue: keep one clear ${data.subjectName.toLowerCase()} detail.`,
+        `Expression source: ${data.emotionName} face formula.`,
+        `Twist: ${data.twistName}`,
+        `Danger zone: too many tiny details.`
+      ];
+      const version2 = getVersion2Challenge(data);
+
+      const skillBox = document.getElementById("skillFocusCard");
+      const anatomyBox = document.getElementById("anatomyCard");
+      const rulesBox = document.getElementById("subjectRulesCard");
+      const versionBox = document.getElementById("version2Card");
+
+      if (skillBox) skillBox.innerHTML = `<b>${skill.title}</b><br>${skill.goal}<ul>${skill.drills.map(x => `<li>${x}</li>`).join("")}</ul>`;
+      if (anatomyBox) anatomyBox.innerHTML = `<ul>${anatomy.map(x => `<li>${x}</li>`).join("")}</ul>`;
+      if (rulesBox) rulesBox.innerHTML = `<ul>${subjectRules.map(x => `<li>${x}</li>`).join("")}</ul>`;
+      if (versionBox) versionBox.innerHTML = `<b>${version2.title}</b><br>${version2.body}`;
+    }
+
+    function getVersion2Challenge(data) {
+      const skill = data.skillFocus;
+      if (skill === "facePlacement") return { title: "Face Fix Version", body: "Draw the same mascot again, but move the face lower and make the mouth smaller." };
+      if (skill === "shapeControl") return { title: "Silhouette Version", body: "Keep the face the same, but redraw the body shape three different ways." };
+      if (skill === "expressionDesign") return { title: "Expression Version", body: "Keep the same body, but make three different mouth options for the duo emotion." };
+      if (skill === "tinyLimbs") return { title: "Limb Version", body: "Keep the same body and face, but make the limbs 30% smaller." };
+      if (skill === "objectCharacter") return { title: "Readability Version", body: "Redraw the same mascot with one subject cue larger and one decoration removed." };
+      if (skill === "iconReadability") return { title: "Icon Version", body: "Redraw it as a tiny square icon and remove anything that disappears." };
+      if (skill === "paletteControl") return { title: "Color Version", body: "Use only body color, one accent, one shadow, and one highlight." };
+      return { title: "One-Change Version", body: "Draw the same mascot again, but change only one thing: face, body, color, or twist." };
+    }
+
+    function fixMyMascot() {
+      const key = document.getElementById("fixProblem")?.value || "faceWeird";
+      const fix = fixProblemData[key] || fixProblemData.faceWeird;
+      renderCoachOutput({
+        title: "Fix My Mascot",
+        summary: `${fix.title}: ${fix.fixFirst}`,
+        sections: [
+          { heading: "Try this", items: fix.steps },
+          { heading: "Avoid", items: [fix.avoid] },
+          { heading: "Version 2", items: ["Duplicate the sketch or redraw the same mascot. Change only this fix area first."] }
+        ],
+        note: "Do not solve every problem at once. One fix teaches more than five random changes."
+      });
+      status("Fix plan created.", "ok");
     }
 
     function getCurrentCoachContext() {
@@ -3018,6 +4734,7 @@
       const palette = palettes[document.getElementById("paletteMood").value] || { label: "Auto", colors: [] };
       const blueprintStyle = document.getElementById("blueprintStyle").value;
       const drawOrderMode = document.getElementById("drawOrderMode").value;
+      const skillFocus = getEffectiveSkillFocus(type, emotion, blueprintStyle);
 
       const subject = subjectData[type];
       const emo = emotions[emotion];
@@ -3160,6 +4877,13 @@
         phases.splice(1, 0, ["Use the axis", "Balance the symbol on a clear vertical and horizontal axis before adding expression.", "Do not tilt everything off-axis too early."]);
       }
 
+      const skillInfo = skillFocusData[skillFocus] || skillFocusData.shapeControl;
+      phases.splice(Math.min(2, phases.length), 0, [
+        `Skill focus: ${skillInfo.title}`,
+        `${skillInfo.goal} Practice drill: ${skillInfo.drills[0]}`,
+        "Do not treat this as just a prompt. Use the skill focus as the reason for the drawing."
+      ]);
+
       const flavorText = flavor ? ` Flavor: ${flavor}.` : "";
       const paletteText = palette && palette.label !== "Auto" ? ` Palette: ${palette.label}.` : "";
       const title = pick(subject[3]);
@@ -3170,6 +4894,11 @@
         emotion,
         twist,
         blueprintStyle,
+        skillFocus,
+        subjectName: subject[0],
+        subjectBase: subject[1],
+        emotionName: emo[0],
+        twistName: tw[0],
         meta: `${subject[0]} · ${emo[0]} · ${lesson[0]}`,
         goal: `Draw a ${emo[0].toLowerCase()} ${subject[0].toLowerCase()} using ${subject[1]}, ${emo[1]}, and ${emo[2]}. Add ${tw[1]}.${flavorText}${paletteText} Subject lock: stay with ${subject[0].toLowerCase()}; flavor only changes the vibe.`,
         shapeSpell: mode === "cozyPlus" ? "Use big-medium-small: one big body, one medium detail, two tiny expression marks." : mode === "remix" ? "Change one thing only. Keep the body shape stable." : "Big shape first. Face second. Decoration last.",
@@ -3248,13 +4977,33 @@
       });
     }
 
+
+    function closeOpenModalsOnEscape(event) {
+      if (event.key !== "Escape") return;
+      closeBlueprintStudio?.();
+      closeVersionTools?.();
+    }
+
+    function updateFinalBuildBadge() {
+      const badge = document.getElementById("finalBuildBadge");
+      if (badge) badge.textContent = `Mascot Spark ${APP_VERSION || "V20"} · Final Cleanup Build · Cache ${APP_CACHE_NAME || "mascot-spark-v20"}`;
+    }
+
+    document.addEventListener("keydown", closeOpenModalsOnEscape);
+
     document.addEventListener("DOMContentLoaded", () => {
       bootSelects();
       document.getElementById("paletteMood").addEventListener("change", () => { renderPalettePreview(); renderCoachContext(); });
+      document.getElementById("subjectPack")?.addEventListener("change", (event) => filterSubjectsByPack(event.target.value));
+      document.getElementById("sessionTimer")?.addEventListener("change", setupTimerFromSelect);
+      setupTimerFromSelect();
       renderCoachContext();
       loadViewMode();
+      loadFocusMode();
       loadTheme();
       loadSettings();
+      renderStash();
+      updateFinalBuildBadge();
       newLesson();
     });
   </script>

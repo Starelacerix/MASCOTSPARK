@@ -1,7 +1,7 @@
 {
-  "name": "Mascot Spark V15 \u2014 Accurate Blueprints",
+  "name": "Mascot Spark V20 \u2014 Final Cleanup",
   "short_name": "Mascot Spark",
-  "description": "Mascot Spark V15 adds more accurate subject-specific blueprint shapes, an Auto Subject Guide mode, and expanded blueprint families.",
+  "description": "Mascot Spark V20 final cleanup build with guided mascot drawing lessons, Blueprint Studio, Stash, PNG export, accessibility polish, and Procreate-friendly practice tools.",
   "start_url": "./index.html",
   "scope": "./",
   "display": "standalone",

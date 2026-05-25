@@ -1891,6 +1891,7 @@
     };
 
     const blueprintOptions = {
+      autoSubject: "Auto subject guide",
       classic: "Classic construction",
       bodyFirst: "Body-first tracing",
       faceMap: "Face placement map",
@@ -1913,7 +1914,19 @@
       letterBuild: "Letter build guide",
       numberBuild: "Number build guide",
       badgeEmblem: "Badge emblem guide",
-      weatherSymbol: "Weather symbol guide"
+      weatherSymbol: "Weather symbol guide",
+      shellSpiral: "Shell curve guide",
+      aquaticFin: "Aquatic fin guide",
+      deviceScreen: "Device screen guide",
+      clothingFold: "Clothing fold guide",
+      musicStem: "Music stem guide",
+      wandArc: "Magic object guide",
+      orbitRing: "Celestial orbit guide",
+      packageFold: "Package fold guide",
+      furnitureBuild: "Furniture build guide",
+      gardenPot: "Garden pot guide",
+      creatureHorn: "Creature horn guide",
+      logoAxis: "Logo axis guide"
     };
 
     const drawOrders = {
@@ -2050,7 +2063,7 @@
       populateSelect("ideaPreset", flavors, "");
       populateSelect("paletteMood", palettes, "gummyHalo");
       renderPalettePreview();
-      populateSelect("blueprintStyle", blueprintOptions, "classic");
+      populateSelect("blueprintStyle", blueprintOptions, "autoSubject");
       populateSelect("drawOrderMode", drawOrders, "simple");
       populateSelect("aiStyle", aiModes, "simplify");
     }
@@ -2154,11 +2167,159 @@
       return ['<circle class="solid" cx="225" cy="265" r="10"></circle><circle class="solid" cx="295" cy="265" r="10"></circle>', '<path class="feature" d="M245 306 Q260 318 275 306"></path>'];
     }
 
+
+    function getSubjectGuide(type) {
+      if (["fruit", "vegetable", "dessert", "breakfast"].includes(type)) {
+        return {
+          overlay: '<circle class="guide" cx="260" cy="265" r="118"></circle><path class="guide" d="M260 150 C245 125 255 110 280 100"></path>',
+          note: "Round body first, then one food-identifying cue."
+        };
+      }
+      if (["shell"].includes(type)) {
+        return {
+          overlay: '<path class="guide" d="M170 330 C210 190 300 160 365 220"></path><path class="guide" d="M190 340 C225 245 290 225 342 262"></path><path class="guide" d="M210 350 C240 285 286 278 325 305"></path>',
+          note: "Use layered shell arcs instead of one flat outline."
+        };
+      }
+      if (["aquatic"].includes(type)) {
+        return {
+          overlay: '<path class="guide" d="M165 292 C220 212 320 212 373 260"></path><path class="guide" d="M258 250 C275 205 320 198 350 215"></path><path class="guide" d="M270 315 C300 325 325 345 342 372"></path>',
+          note: "Fishy flow first, then a tail or fin cue."
+        };
+      }
+      if (["robot", "device"].includes(type)) {
+        return {
+          overlay: '<rect class="guide" x="172" y="152" width="176" height="228" rx="30"></rect><line class="guide" x1="260" y1="152" x2="260" y2="380"></line><line class="guide" x1="172" y1="230" x2="348" y2="230"></line>',
+          note: "Keep the frame clean and aligned before adding the face."
+        };
+      }
+      if (["clothing", "accessory"].includes(type)) {
+        return {
+          overlay: '<path class="guide" d="M190 165 C225 140 295 140 330 165"></path><path class="guide" d="M180 195 L340 195"></path><path class="guide" d="M210 330 C235 350 285 350 310 330"></path>',
+          note: "Build the wearable silhouette, then add the character face low."
+        };
+      }
+      if (["music"].includes(type)) {
+        return {
+          overlay: '<line class="guide" x1="292" y1="118" x2="292" y2="330"></line><ellipse class="guide" cx="250" cy="342" rx="42" ry="30"></ellipse>',
+          note: "Start with the note stem, then add the note body."
+        };
+      }
+      if (["magicObject"].includes(type)) {
+        return {
+          overlay: '<path class="guide" d="M180 390 L325 145"></path><circle class="guide" cx="180" cy="390" r="42"></circle><path class="guide" d="M325 145 C350 145 362 165 352 190"></path>',
+          note: "Use a simple wand or relic axis before adding charm details."
+        };
+      }
+      if (["celestialObject"].includes(type)) {
+        return {
+          overlay: '<circle class="guide" cx="260" cy="265" r="118"></circle><ellipse class="guide" cx="260" cy="265" rx="170" ry="56"></ellipse>',
+          note: "Large planet/moon body first, orbit cue second."
+        };
+      }
+      if (["package"].includes(type)) {
+        return {
+          overlay: '<path class="guide" d="M150 180 L260 120 L370 180 L260 240 Z"></path><line class="guide" x1="260" y1="240" x2="260" y2="420"></line>',
+          note: "Keep the box fold readable before the face and limbs."
+        };
+      }
+      if (["furniture"].includes(type)) {
+        return {
+          overlay: '<line class="guide" x1="175" y1="300" x2="345" y2="300"></line><line class="guide" x1="210" y1="300" x2="210" y2="402"></line><line class="guide" x1="310" y1="300" x2="310" y2="402"></line>',
+          note: "Use a seat/top line first, then place the legs."
+        };
+      }
+      if (["garden", "plant"].includes(type)) {
+        return {
+          overlay: '<rect class="guide" x="185" y="188" width="150" height="198" rx="10"></rect><path class="guide" d="M215 160 C235 120 275 120 260 180 M300 160 C320 130 340 150 318 182"></path>',
+          note: "Use pot/leaf landmarks so the plant read stays clear."
+        };
+      }
+      if (["creature", "tinyMonster"].includes(type)) {
+        return {
+          overlay: '<path class="guide" d="M208 160 L190 112 M312 160 L330 112"></path><ellipse class="guide" cx="260" cy="268" rx="126" ry="132"></ellipse>',
+          note: "Keep the body round and let the horns or tuft be only accents."
+        };
+      }
+      if (["logoMark", "abstractShape", "zodiac", "emoji"].includes(type)) {
+        return {
+          overlay: '<line class="guide" x1="260" y1="110" x2="260" y2="405"></line><line class="guide" x1="135" y1="265" x2="385" y2="265"></line>',
+          note: "Use a strong axis so the symbol still reads after adding personality."
+        };
+      }
+      if (["badge", "icon", "sticker"].includes(type)) {
+        return {
+          overlay: '<path class="guide" d="M260 115 L360 175 L360 325 L260 385 L160 325 L160 175 Z"></path>',
+          note: "Center the emblem and keep key details away from the edges."
+        };
+      }
+      if (["book"].includes(type)) {
+        return {
+          overlay: '<line class="guide" x1="260" y1="132" x2="260" y2="370"></line><line class="guide" x1="145" y1="185" x2="375" y2="185"></line>',
+          note: "Spine first, page shape second."
+        };
+      }
+      if (["ghost"].includes(type)) {
+        return {
+          overlay: '<line class="guide" x1="150" y1="210" x2="370" y2="210"></line><path class="guide" d="M150 390 L180 360 L215 390 L245 360 L285 390 L325 360 L370 390"></path>',
+          note: "Top dome first, wavy drape second."
+        };
+      }
+      if (["cloud", "weatherIcon"].includes(type)) {
+        return {
+          overlay: '<circle class="guide" cx="195" cy="250" r="55"></circle><circle class="guide" cx="260" cy="220" r="70"></circle><circle class="guide" cx="330" cy="250" r="55"></circle>',
+          note: "Build from puffs, not one flat cloud edge."
+        };
+      }
+      if (["potion"].includes(type)) {
+        return {
+          overlay: '<rect class="guide" x="218" y="100" width="84" height="70" rx="12"></rect><ellipse class="guide" cx="260" cy="285" rx="105" ry="135"></ellipse>',
+          note: "Bottle neck first, rounded body second."
+        };
+      }
+      if (["gem"].includes(type)) {
+        return {
+          overlay: '<path class="guide" d="M185 150 L260 235 L335 150 M130 235 L260 235 L390 235"></path>',
+          note: "Use only a few facet lines so the gem stays readable."
+        };
+      }
+      if (["letter"].includes(type)) {
+        return {
+          overlay: '<rect class="guide" x="165" y="120" width="190" height="285" rx="25"></rect>',
+          note: "Keep the letter readable before adding the face."
+        };
+      }
+      if (["number"].includes(type)) {
+        return {
+          overlay: '<rect class="guide" x="175" y="140" width="170" height="240" rx="25"></rect>',
+          note: "Keep the number readable before adding the face."
+        };
+      }
+      return {
+        overlay: '<ellipse class="guide" cx="260" cy="265" rx="145" ry="180"></ellipse>',
+        note: "Trace the big body shape first, then place the face low."
+      };
+    }
+
+    function getStageGuides(type, stage) {
+      const common = {
+        body: '',
+        guide: '<line class="guide" x1="260" y1="70" x2="260" y2="430"></line><line class="guide" x1="120" y1="270" x2="400" y2="270"></line>',
+        face: '<line class="guide" x1="260" y1="70" x2="260" y2="430"></line><line class="guide" x1="120" y1="270" x2="400" y2="270"></line>',
+        limbs: '<line class="guide" x1="260" y1="70" x2="260" y2="430"></line><line class="guide" x1="120" y1="270" x2="400" y2="270"></line>',
+        final: '<line class="guide" x1="260" y1="70" x2="260" y2="430"></line><line class="guide" x1="120" y1="270" x2="400" y2="270"></line>'
+      };
+      const subject = getSubjectGuide(type).overlay || '';
+      if (stage === "body") return '';
+      return common[stage] + subject;
+    }
+
     function makeBlueprint(type, emotion, twist, style) {
       const body = makeBody(type);
       const [eyes, mouth] = makeFace(emotion);
       const twistSvg = twists[twist] ? twists[twist][3] : "";
-      let overlay = "";
+      const subjectGuide = getSubjectGuide(type);
+      let overlay = style === "autoSubject" ? `${subjectGuide.overlay}<text class="label" x="35" y="535">Auto subject guide: ${subjectGuide.note}</text>` : "";
       if (style === "bodyFirst") overlay = '<text class="label" x="35" y="535">Body-first: trace only the outside shape before adding face.</text>';
       if (style === "faceMap") overlay = '<rect class="guide" x="185" y="235" width="150" height="105" rx="35"></rect><text class="label" x="35" y="535">Face map: keep eyes and mouth inside this soft box.</text>';
       if (style === "limbMap") overlay = '<circle class="guide" cx="145" cy="300" r="35"></circle><circle class="guide" cx="375" cy="300" r="35"></circle><circle class="guide" cx="215" cy="410" r="28"></circle><circle class="guide" cx="305" cy="410" r="28"></circle>';
@@ -2181,12 +2342,24 @@
       if (style === "numberBuild") overlay = '<rect class="guide" x="175" y="140" width="170" height="240" rx="25"></rect><text class="label" x="35" y="535">Number guide: keep the number readable before adding a face.</text>';
       if (style === "badgeEmblem") overlay = '<path class="guide" d="M260 115 L360 175 L360 325 L260 385 L160 325 L160 175 Z"></path><text class="label" x="35" y="535">Badge guide: strong centered emblem shape first.</text>';
       if (style === "weatherSymbol") overlay = '<circle class="guide" cx="260" cy="230" r="55"></circle><path class="guide" d="M245 290 L220 360 L275 325 L250 400"></path><text class="label" x="35" y="535">Weather guide: one symbol body + one forecast accent.</text>';
+      if (style === "shellSpiral") overlay = '<path class="guide" d="M170 330 C210 190 300 160 365 220"></path><path class="guide" d="M190 340 C225 245 290 225 342 262"></path><path class="guide" d="M210 350 C240 285 286 278 325 305"></path><text class="label" x="35" y="535">Shell guide: use layered shell arcs, not random rib lines.</text>';
+      if (style === "aquaticFin") overlay = '<path class="guide" d="M165 292 C220 212 320 212 373 260"></path><path class="guide" d="M258 250 C275 205 320 198 350 215"></path><path class="guide" d="M270 315 C300 325 325 345 342 372"></path><text class="label" x="35" y="535">Aquatic guide: long body flow first, fin accents second.</text>';
+      if (style === "deviceScreen") overlay = '<rect class="guide" x="182" y="160" width="156" height="205" rx="22"></rect><circle class="guide" cx="260" cy="180" r="4"></circle><text class="label" x="35" y="535">Device guide: frame first, screen inner area second.</text>';
+      if (style === "clothingFold") overlay = '<path class="guide" d="M190 165 C225 140 295 140 330 165"></path><line class="guide" x1="180" y1="195" x2="340" y2="195"></line><path class="guide" d="M210 330 C235 350 285 350 310 330"></path><text class="label" x="35" y="535">Clothing guide: neckline first, body fall second.</text>';
+      if (style === "musicStem") overlay = '<line class="guide" x1="292" y1="118" x2="292" y2="330"></line><ellipse class="guide" cx="250" cy="342" rx="42" ry="30"></ellipse><text class="label" x="35" y="535">Music guide: stem first, note head second.</text>';
+      if (style === "wandArc") overlay = '<path class="guide" d="M180 390 L325 145"></path><circle class="guide" cx="180" cy="390" r="42"></circle><path class="guide" d="M325 145 C350 145 362 165 352 190"></path><text class="label" x="35" y="535">Magic guide: use one main relic axis and one charm cue.</text>';
+      if (style === "orbitRing") overlay = '<circle class="guide" cx="260" cy="265" r="118"></circle><ellipse class="guide" cx="260" cy="265" rx="170" ry="56"></ellipse><text class="label" x="35" y="535">Orbit guide: sphere first, orbit ring second.</text>';
+      if (style === "packageFold") overlay = '<path class="guide" d="M150 180 L260 120 L370 180 L260 240 Z"></path><line class="guide" x1="260" y1="240" x2="260" y2="420"></line><text class="label" x="35" y="535">Package guide: top flap first, body folds second.</text>';
+      if (style === "furnitureBuild") overlay = '<line class="guide" x1="175" y1="300" x2="345" y2="300"></line><line class="guide" x1="210" y1="300" x2="210" y2="402"></line><line class="guide" x1="310" y1="300" x2="310" y2="402"></line><text class="label" x="35" y="535">Furniture guide: seat or top plane first, then support legs.</text>';
+      if (style === "gardenPot") overlay = '<rect class="guide" x="185" y="188" width="150" height="198" rx="10"></rect><path class="guide" d="M215 160 C235 120 275 120 260 180 M300 160 C320 130 340 150 318 182"></path><text class="label" x="35" y="535">Garden guide: container first, leaf or sprout cues second.</text>';
+      if (style === "creatureHorn") overlay = '<path class="guide" d="M208 160 L190 112 M312 160 L330 112"></path><ellipse class="guide" cx="260" cy="268" rx="126" ry="132"></ellipse><text class="label" x="35" y="535">Creature guide: round body first, horn/tuft accents second.</text>';
+      if (style === "logoAxis") overlay = '<line class="guide" x1="260" y1="110" x2="260" y2="405"></line><line class="guide" x1="135" y1="265" x2="385" y2="265"></line><text class="label" x="35" y="535">Logo axis: use strong vertical and horizontal balance lines.</text>';
 
       return `
         <text class="label" x="24" y="32">TRACE ORDER: 1 body → 2 guide → 3 eyes → 4 mouth → 5 limbs/twist</text>
         <line class="guide" x1="260" y1="82" x2="260" y2="440"></line>
         <line class="guide" x1="130" y1="275" x2="390" y2="275"></line>
-        <ellipse class="guide" cx="260" cy="265" rx="145" ry="180"></ellipse>
+        ${style === "autoSubject" ? '' : '<ellipse class="guide" cx="260" cy="265" rx="145" ry="180"></ellipse>'}
         ${body}
         <path class="feature" d="M155 300 Q112 305 105 342"></path>
         <path class="feature" d="M365 300 Q408 305 415 342"></path>
@@ -2208,11 +2381,7 @@
       const mouth = face[1];
       const twistSvg = twists[twist] ? twists[twist][3] : "";
 
-      const guides = `
-        <line class="guide" x1="260" y1="70" x2="260" y2="430"></line>
-        <line class="guide" x1="120" y1="270" x2="400" y2="270"></line>
-        <ellipse class="guide" cx="260" cy="265" rx="145" ry="175"></ellipse>
-      `;
+      const guides = getStageGuides(type, stage);
 
       const limbs = `
         <path class="feature" d="M155 300 Q112 305 105 342"></path>
@@ -2876,6 +3045,10 @@
         );
       }
 
+      if (blueprintStyle === "autoSubject") {
+        phases.unshift(["Use the subject guide", "Let the blueprint show the key construction logic for the selected mascot family before you add the face.", "Do not treat every subject like the same generic blob."]);
+      }
+
       if (blueprintStyle === "faceMap") {
         phases.splice(2, 0,
           ["Use the face map", "Place eyes on the lower face line, then put the mouth close underneath.", "A mascot often looks wrong because of face placement."],
@@ -2939,6 +3112,54 @@
         phases.push(["Use one forecast accent", "Add one rain, bolt, or sun accent only after the base symbol works.", "Do not stack too many weather icons together."]);
       }
 
+      if (blueprintStyle === "shellSpiral") {
+        phases.splice(1, 0, ["Use shell ribs", "Draw two or three shell arcs that follow the outer curve.", "Do not add too many rib lines."]);
+      }
+
+      if (blueprintStyle === "aquaticFin") {
+        phases.splice(1, 0, ["Use body flow first", "Draw the long body flow before placing fins and tail cues.", "Do not build the fins before the body."]);
+      }
+
+      if (blueprintStyle === "deviceScreen") {
+        phases.splice(1, 0, ["Frame then screen", "Keep the outer device frame readable and place the screen area inside it.", "Do not make the inner screen too close to the edge."]);
+      }
+
+      if (blueprintStyle === "clothingFold") {
+        phases.splice(1, 0, ["Neckline then fall", "Use the neckline or top seam first, then let the body drop down softly.", "Do not clutter the clothing with too many folds."]);
+      }
+
+      if (blueprintStyle === "musicStem") {
+        phases.splice(1, 0, ["Stem first", "Start with the note stem or musical axis, then add the note body.", "Do not decorate before the note reads clearly."]);
+      }
+
+      if (blueprintStyle === "wandArc") {
+        phases.splice(1, 0, ["Use the relic axis", "Build a clear wand or charm direction line before adding the magical tip.", "Do not add random sparkles too early."]);
+      }
+
+      if (blueprintStyle === "orbitRing") {
+        phases.splice(1, 0, ["Build the sphere first", "Draw the large celestial body before adding the orbit ring.", "Do not let the orbit ring overpower the body."]);
+      }
+
+      if (blueprintStyle === "packageFold") {
+        phases.splice(1, 0, ["Top flap first", "Use the top fold to anchor the box form, then build the body folds.", "Do not lose the fold logic."]);
+      }
+
+      if (blueprintStyle === "furnitureBuild") {
+        phases.splice(1, 0, ["Top plane first", "Draw the seat, cushion, or top plane before adding support legs.", "Do not start with the legs."]);
+      }
+
+      if (blueprintStyle === "gardenPot") {
+        phases.splice(1, 0, ["Container first", "Start with the pot or base shape, then add the leaves or sprout cues.", "Do not let the leaves hide the container read."]);
+      }
+
+      if (blueprintStyle === "creatureHorn") {
+        phases.splice(1, 0, ["Round body first", "Keep the main body plush and let the horn or tuft be only a small accent.", "Do not make the horns dominate the silhouette."]);
+      }
+
+      if (blueprintStyle === "logoAxis") {
+        phases.splice(1, 0, ["Use the axis", "Balance the symbol on a clear vertical and horizontal axis before adding expression.", "Do not tilt everything off-axis too early."]);
+      }
+
       const flavorText = flavor ? ` Flavor: ${flavor}.` : "";
       const paletteText = palette && palette.label !== "Auto" ? ` Palette: ${palette.label}.` : "";
       const title = pick(subject[3]);
@@ -2970,7 +3191,7 @@
         praise: pick(praises),
         remixOne: pick(remixIdeas),
         remixTwo: mode === "cozyPlus" ? "Make a sticker version with a thicker outline and fewer details." : "Draw the same mascot again with a different mouth, not a different body.",
-        traceNote: "<strong>Beginner use:</strong><br>Trace the big body shape first. Hide the guide when done. If the mascot still reads, the drawing worked. Some blueprint variants now match specific mascot families like plush, fruit, cloud, robot, ghost, gem, letter, badge, and weather."
+        traceNote: "<strong>Beginner use:</strong><br>Trace the big body shape first. Hide the guide when done. If the mascot still reads, the drawing worked. Some blueprint variants now match specific mascot families like plush, fruit, shell, aquatic, cloud, robot, device, ghost, gem, letter, package, furniture, garden, logo, badge, and weather."
       });
     }
 

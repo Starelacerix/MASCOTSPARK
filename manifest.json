@@ -1,7 +1,7 @@
 {
-  "name": "Mascot Spark V14 \u2014 Compact Tools",
+  "name": "Mascot Spark V15 \u2014 Accurate Blueprints",
   "short_name": "Mascot Spark",
-  "description": "Mascot Spark V14 adds Simple/Advanced mode, better palette usage roles, local worksheet export, and a more compact layout.",
+  "description": "Mascot Spark V15 adds more accurate subject-specific blueprint shapes, an Auto Subject Guide mode, and expanded blueprint families.",
   "start_url": "./index.html",
   "scope": "./",
   "display": "standalone",

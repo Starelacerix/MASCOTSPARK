@@ -253,3 +253,33 @@ Service worker cache:
 ```js
 const CACHE_NAME = "mascot-spark-v14";
 ```
+
+
+## V15 accurate blueprints update
+
+Added stronger blueprint accuracy with more subject-specific guide logic.
+
+New blueprint improvements:
+
+- Auto Subject Guide
+- Shell curve guide
+- Aquatic fin guide
+- Device screen guide
+- Clothing fold guide
+- Music stem guide
+- Magic object guide
+- Celestial orbit guide
+- Package fold guide
+- Furniture build guide
+- Garden pot guide
+- Creature horn guide
+- Logo axis guide
+
+Also improved:
+- traceable step mini-blueprints now use subject-specific guide shapes
+- Auto Subject Guide is the default blueprint mode
+- service worker cache:
+
+```js
+const CACHE_NAME = "mascot-spark-v15";
+```

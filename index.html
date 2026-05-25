@@ -1,0 +1,1603 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#ff9f7a" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+  <meta name="apple-mobile-web-app-title" content="Mascot Spark" />
+  <link rel="manifest" href="./manifest.json" />
+  <link rel="apple-touch-icon" href="./icon-192.png" />
+  <link rel="icon" type="image/png" sizes="192x192" href="./icon-192.png" />
+  <link rel="icon" type="image/png" sizes="512x512" href="./icon-512.png" />
+  <title>Mascot Spark PWA — Cozy Mascot Drawing Teacher</title>
+  <style>
+    :root {
+      --bg1: #fff8f3;
+      --bg2: #fff1ec;
+      --paper: rgba(255,255,255,.9);
+      --paper-solid: #fffdfb;
+      --ink: #241b18;
+      --muted: #7a625a;
+      --line: #ead8ce;
+      --soft: #fff1e8;
+      --primary: #ff9f7a;
+      --accent: #ffd97d;
+      --blueprint: #173b63;
+      --shadow: 0 18px 44px rgba(89, 55, 38, .12);
+      --good: #356b4c;
+      --bad: #9f2d2d;
+    }
+
+    html[data-theme="dark"] {
+      --bg1: #120f16;
+      --bg2: #241827;
+      --paper: rgba(31, 27, 38, .92);
+      --paper-solid: #211b29;
+      --ink: #fff7f0;
+      --muted: #cdb9ae;
+      --line: #4a3944;
+      --soft: #332536;
+      --primary: #ff9f7a;
+      --accent: #c084fc;
+      --blueprint: #111c33;
+      --shadow: 0 18px 44px rgba(0, 0, 0, .34);
+      --good: #96e6b3;
+      --bad: #ff9a9a;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: ui-rounded, "SF Pro Rounded", "Avenir Next", system-ui, -apple-system, sans-serif;
+      background:
+        radial-gradient(circle at 10% 5%, color-mix(in srgb, var(--accent) 28%, transparent), transparent 32rem),
+        radial-gradient(circle at 90% 12%, color-mix(in srgb, var(--primary) 18%, transparent), transparent 28rem),
+        linear-gradient(135deg, var(--bg1), var(--bg2));
+      color: var(--ink);
+      padding: 14px;
+    }
+
+    .app {
+      max-width: 1060px;
+      margin: 0 auto;
+    }
+
+    .hero, .panel, .lesson, .coach {
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: 26px;
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(14px);
+    }
+
+    .hero {
+      padding: 22px;
+      margin: 8px 0 14px;
+    }
+
+    .top-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      align-items: flex-start;
+    }
+
+    .badge {
+      display: inline-flex;
+      background: var(--soft);
+      border: 1px solid var(--line);
+      color: var(--muted);
+      border-radius: 999px;
+      padding: 8px 12px;
+      font-size: 13px;
+      font-weight: 850;
+      margin-bottom: 12px;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(34px, 6vw, 62px);
+      letter-spacing: -2px;
+      line-height: .92;
+    }
+
+    .subtitle {
+      color: var(--muted);
+      font-size: 17px;
+      line-height: 1.5;
+      max-width: 780px;
+      margin: 12px 0 0;
+    }
+
+    .controls {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+      margin: 14px 0;
+    }
+
+    .panel {
+      padding: 14px;
+    }
+
+    label {
+      display: block;
+      font-size: 12px;
+      font-weight: 900;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 7px;
+    }
+
+    select, input, textarea {
+      width: 100%;
+      font: inherit;
+      border: 1px solid var(--line);
+      background: var(--paper-solid);
+      color: var(--ink);
+      padding: 12px;
+      border-radius: 15px;
+      outline: none;
+    }
+
+    textarea {
+      min-height: 70px;
+      resize: vertical;
+      line-height: 1.45;
+    }
+
+    select:focus, input:focus, textarea:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 4px color-mix(in srgb, var(--primary) 24%, transparent);
+    }
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin: 14px 0;
+    }
+
+    button {
+      border: none;
+      border-radius: 999px;
+      padding: 13px 18px;
+      font: inherit;
+      font-weight: 900;
+      cursor: pointer;
+      transition: transform .15s ease, opacity .15s ease;
+    }
+
+    button:active { transform: translateY(1px) scale(.99); }
+    button:disabled { opacity: .55; cursor: not-allowed; }
+
+    .primary {
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+      color: #281811;
+      box-shadow: 0 12px 26px color-mix(in srgb, var(--primary) 30%, transparent);
+    }
+
+    .ai {
+      background: linear-gradient(135deg, #25223f, #8b5cf6);
+      color: white;
+      box-shadow: 0 12px 26px rgba(69, 47, 135, .25);
+    }
+
+    .ghost {
+      background: var(--paper-solid);
+      border: 1px solid var(--line);
+      color: var(--ink);
+    }
+
+    .main {
+      display: grid;
+      grid-template-columns: 1fr .92fr;
+      gap: 14px;
+      align-items: start;
+    }
+
+    .lesson {
+      overflow: hidden;
+    }
+
+    .lesson-head {
+      padding: 20px;
+      border-bottom: 1px solid var(--line);
+      background: color-mix(in srgb, var(--paper-solid) 80%, var(--soft));
+    }
+
+    h2 {
+      margin: 0;
+      font-size: clamp(30px, 4vw, 46px);
+      letter-spacing: -1px;
+      line-height: 1;
+    }
+
+    .lesson-meta {
+      margin-top: 8px;
+      color: var(--muted);
+      font-weight: 750;
+    }
+
+    .lesson-body {
+      padding: 20px;
+    }
+
+    .focus-box {
+      background: var(--soft);
+      border: 1px dashed color-mix(in srgb, var(--primary) 50%, var(--line));
+      border-radius: 20px;
+      padding: 16px;
+      font-size: 19px;
+      line-height: 1.45;
+      margin-bottom: 18px;
+    }
+
+    h3 {
+      margin: 0 0 10px;
+      font-size: 14px;
+      letter-spacing: .09em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .phase {
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      padding: 14px;
+      margin: 12px 0;
+      background: var(--paper-solid);
+    }
+
+    .phase-title {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 950;
+      margin-bottom: 8px;
+      font-size: 17px;
+    }
+
+    .num {
+      display: inline-grid;
+      place-items: center;
+      min-width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: var(--soft);
+      border: 1px solid var(--line);
+      color: var(--muted);
+    }
+
+    .phase p {
+      margin: 0;
+      line-height: 1.52;
+    }
+
+    .mistake {
+      color: var(--muted);
+      font-size: 14px;
+      margin-top: 8px;
+      line-height: 1.4;
+      border-left: 3px solid var(--primary);
+      padding-left: 10px;
+    }
+
+    .checklist {
+      display: grid;
+      gap: 8px;
+      margin: 12px 0;
+    }
+
+    .check {
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+      background: var(--paper-solid);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 10px 12px;
+      line-height: 1.4;
+    }
+
+    .check input {
+      width: 20px;
+      height: 20px;
+      flex: 0 0 auto;
+      margin-top: 1px;
+      accent-color: var(--primary);
+    }
+
+    .blueprint {
+      background:
+        linear-gradient(rgba(255,255,255,.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.05) 1px, transparent 1px),
+        radial-gradient(circle at 22% 18%, rgba(255,255,255,.12), transparent 18rem),
+        var(--blueprint);
+      background-size: 22px 22px, 22px 22px, auto, auto;
+      border-radius: 26px;
+      padding: 16px;
+      color: white;
+      box-shadow: var(--shadow);
+    }
+
+    .blueprint h3 { color: #d9f0ff; }
+
+    svg {
+      width: 100%;
+      height: auto;
+      display: block;
+      background: rgba(255,255,255,.045);
+      border: 1px solid rgba(255,255,255,.18);
+      border-radius: 22px;
+    }
+
+    .guide { stroke: rgba(255,255,255,.55); stroke-width: 2; stroke-dasharray: 7 8; fill: none; }
+    .shape { stroke: #fff; stroke-width: 5; fill: rgba(255,255,255,.055); stroke-linecap: round; stroke-linejoin: round; }
+    .feature { stroke: #fff; stroke-width: 5; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+    .solid { fill: #fff; stroke: none; }
+    .label { fill: rgba(255,255,255,.85); font-size: 13px; font-weight: 850; }
+
+    .mini-note {
+      margin-top: 12px;
+      background: rgba(255,255,255,.09);
+      border: 1px solid rgba(255,255,255,.16);
+      border-radius: 18px;
+      padding: 12px;
+      line-height: 1.45;
+      font-size: 14px;
+    }
+
+    .coach {
+      padding: 16px;
+      margin-top: 14px;
+    }
+
+    .coach-grid, .fun-strip {
+      display: grid;
+      gap: 10px;
+    }
+
+    .fun-strip {
+      grid-template-columns: 1fr 1fr;
+      margin-top: 14px;
+    }
+
+    .coach-card, .fun-card {
+      border: 1px solid var(--line);
+      background: var(--paper-solid);
+      border-radius: 18px;
+      padding: 12px;
+      line-height: 1.45;
+    }
+
+    .fun-card strong {
+      display: block;
+      color: var(--muted);
+      margin-bottom: 4px;
+    }
+
+    .spark {
+      display: inline-grid;
+      place-items: center;
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background: var(--soft);
+      border: 1px solid var(--line);
+      margin-right: 6px;
+    }
+
+    .small {
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.45;
+      margin: 8px 0 0;
+    }
+
+    .status {
+      display: none;
+      margin-top: 10px;
+      padding: 11px 13px;
+      border-radius: 16px;
+      background: var(--soft);
+      border: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.35;
+    }
+
+    .status.show { display: block; }
+    .status.bad { display: block; color: var(--bad); }
+    .status.ok { display: block; color: var(--good); }
+
+
+    .creative-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin: 14px 0;
+    }
+
+    .creative-card {
+      border: 1px solid var(--line);
+      background: var(--paper-solid);
+      border-radius: 20px;
+      padding: 13px;
+      line-height: 1.45;
+    }
+
+    .creative-card strong {
+      display: block;
+      color: var(--muted);
+      margin-bottom: 5px;
+    }
+
+    .meter {
+      height: 12px;
+      border-radius: 999px;
+      background: var(--soft);
+      border: 1px solid var(--line);
+      overflow: hidden;
+      margin: 8px 0 2px;
+    }
+
+    .meter-fill {
+      height: 100%;
+      width: 42%;
+      background: linear-gradient(90deg, var(--primary), var(--accent));
+      border-radius: inherit;
+    }
+
+
+    .path-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+      margin: 12px 0 18px;
+    }
+
+    .path-card {
+      border: 1px solid var(--line);
+      background: var(--paper-solid);
+      border-radius: 18px;
+      padding: 11px;
+      display: flex;
+      gap: 8px;
+      align-items: flex-start;
+      line-height: 1.35;
+    }
+
+    .path-card input {
+      width: 18px;
+      height: 18px;
+      flex: 0 0 auto;
+      accent-color: var(--primary);
+      margin-top: 2px;
+    }
+
+    .path-card strong {
+      color: var(--muted);
+    }
+
+    @media (max-width: 880px) {
+      body { padding: 10px; }
+      .controls { grid-template-columns: 1fr; }
+      .main { grid-template-columns: 1fr; }
+      .fun-strip, .creative-row, .path-grid { grid-template-columns: 1fr; }
+      .top-row { flex-direction: column; }
+    }
+
+    @media print {
+      body { background: white; padding: 0; }
+      .hero, .controls, .actions, .ai-settings { display: none; }
+      .main { grid-template-columns: 1fr 1fr; }
+      .lesson, .blueprint { box-shadow: none; break-inside: avoid; }
+    }
+  </style>
+</head>
+
+<body>
+  <main class="app">
+    <section class="hero">
+      <div class="top-row">
+        <div>
+          <div class="badge">Tiny mascot lessons · calm, cute, drawable</div>
+          <h1>Mascot Spark</h1>
+          <p class="subtitle">
+            A cozy Procreate drawing teacher. One mascot, one clear path: big shape → face → tiny limbs → clean line → color → tiny sparkle. Use Cozy+ for a small creative upgrade that stays beginner-safe.
+          </p>
+        </div>
+        <button class="ghost" onclick="toggleTheme()" id="themeBtn">Dark mode</button>
+      </div>
+    </section>
+
+    <section class="controls">
+      <div class="panel">
+        <label for="lessonType">Practice</label>
+        <select id="lessonType">
+          <option value="blob">Blob mascot</option>
+          <option value="food">Food mascot</option>
+          <option value="object">Object character</option>
+          <option value="icon">Icon mascot</option>
+          <option value="letter">Letter mascot</option>
+          <option value="mask">Mask mascot</option>
+          <option value="plant">Plant mascot</option>
+          <option value="star">Star / moon mascot</option>
+          <option value="potion">Potion bottle mascot</option>
+          <option value="bug">Tiny bug mascot</option>
+          <option value="cloud">Cloud / weather mascot</option>
+          <option value="gem">Gem / charm mascot</option>
+          <option value="stationery">Pencil / stationery mascot</option>
+        </select>
+      </div>
+
+      <div class="panel">
+        <label for="emotion">Emotion</label>
+        <select id="emotion">
+          <option value="shy">Shy</option>
+          <option value="happy">Happy</option>
+          <option value="sleepy">Sleepy</option>
+          <option value="grumpy">Grumpy-cute</option>
+          <option value="curious">Curious</option>
+          <option value="spooky">Spooky-sweet</option>
+          <option value="sassy">Sassy</option>
+          <option value="nervous">Nervous</option>
+          <option value="proud">Proud</option>
+          <option value="dreamy">Dreamy</option>
+          <option value="mischievous">Mischievous</option>
+          <option value="dramatic">Dramatic</option>
+          <option value="calm">Calm</option>
+          <option value="confused">Confused</option>
+        </select>
+      </div>
+
+      <div class="panel">
+        <label for="level">Lesson size</label>
+        <select id="level">
+          <option value="micro">Micro: 5 minute warm-up</option>
+          <option value="tiny">Tiny: 10 minute sketch</option>
+          <option value="normal" selected>Normal: beginner lesson</option>
+          <option value="slow">Slow: explain every move</option>
+          <option value="study">Study: repeat + improve</option>
+          <option value="iconSheet">Icon sheet: 4 tiny versions</option>
+          <option value="polish">Polish: clean final pass</option>
+        </select>
+      </div>
+
+      <div class="panel">
+        <label for="funTwist">Tiny twist</label>
+        <select id="funTwist">
+          <option value="none">No extra twist</option>
+          <option value="sparkle">One sparkle</option>
+          <option value="hat">Tiny hat</option>
+          <option value="patch">Cute patch</option>
+          <option value="charm">Mini charm tag</option>
+          <option value="freckle">Dot freckles</option>
+          <option value="bow">Tiny bow</option>
+          <option value="halo">Soft halo</option>
+          <option value="fang">Tiny fang</option>
+          <option value="glow">Glow mark</option>
+          <option value="ribbon">Little ribbon tail</option>
+          <option value="stitches">Simple stitches</option>
+          <option value="leaf">Tiny leaf</option>
+          <option value="starCheek">Star cheek</option>
+          <option value="button">Button cheek</option>
+          <option value="teardrop">Tiny teardrop</option>
+        </select>
+      </div>
+    </section>
+
+    <section class="controls">
+      <div class="panel">
+        <label for="creativeMode">Creative mode</label>
+        <select id="creativeMode">
+          <option value="cozy" selected>Cozy: easy</option>
+          <option value="cozyPlus">Cozy+: a bit more advanced</option>
+          <option value="remix">Remix: playful but simple</option>
+        </select>
+      </div>
+      <div class="panel">
+        <label>Mode meaning</label>
+        <p class="small">Cozy+ adds one design skill. Remix changes one thing only. Both stay simple.</p>
+      </div>
+      <div class="panel">
+        <label>Creative promise</label>
+        <p class="small">More personality, not more pressure.</p>
+      </div>
+      <div class="panel">
+        <label>Best beginner rule</label>
+        <p class="small">Big shape first. Decoration last.</p>
+      </div>
+    </section>
+
+    <section class="controls">
+      <div class="panel">
+        <label for="ideaPreset">Optional idea</label>
+        <select id="ideaPreset">
+          <option value="">No preset</option>
+          <option value="haunted strawberry">Haunted strawberry</option>
+          <option value="sleepy paint tube">Sleepy paint tube</option>
+          <option value="shy moon badge">Shy moon badge</option>
+          <option value="grumpy cupcake">Grumpy cupcake</option>
+          <option value="tiny nervous ghost bean">Nervous ghost bean</option>
+          <option value="proud pencil stub">Proud pencil stub</option>
+          <option value="dreamy mushroom charm">Dreamy mushroom charm</option>
+          <option value="sassy coffee cup">Sassy coffee cup</option>
+          <option value="confused little cloud">Confused little cloud</option>
+          <option value="mischievous gem sprite">Mischievous gem sprite</option>
+          <option value="dramatic bow mask">Dramatic bow mask</option>
+          <option value="calm leaf blob">Calm leaf blob</option>
+        </select>
+      </div>
+      <div class="panel">
+        <label for="paletteMood">Palette mood</label>
+        <select id="paletteMood">
+          <option value="">Auto</option>
+          <option value="soft peach, cream, and warm cocoa">Soft peach + cream + cocoa</option>
+          <option value="lavender, moon blue, and silver mist">Lavender + moon blue + silver</option>
+          <option value="mint, butter yellow, and soft white">Mint + butter yellow + white</option>
+          <option value="berry pink, cocoa, and dusty rose">Berry pink + cocoa + dusty rose</option>
+          <option value="inky violet, antique gold, and black plum">Inky violet + antique gold</option>
+          <option value="sage green, clay, and oat beige">Sage + clay + oat</option>
+          <option value="cotton candy blue, bubblegum pink, and cream">Cotton candy pastel</option>
+          <option value="pumpkin orange, warm brown, and vanilla">Pumpkin cozy</option>
+          <option value="storm blue, cloudy gray, and pale yellow">Storm cloud soft</option>
+          <option value="cherry red, cream, and chocolate">Cherry dessert</option>
+          <option value="teal, coral, and pearl white">Teal coral pop</option>
+          <option value="deep blackberry, lilac, and champagne">Blackberry lilac luxe</option>
+          <option value="moss green, mushroom beige, and soft blush">Moss mushroom</option>
+          <option value="midnight navy, cyan glow, and violet">Midnight neon cute</option>
+          <option value="strawberry milk, pistachio, and honey">Strawberry pistachio</option>
+          <option value="soft black, ivory, and muted gold">Tiny luxury mascot</option>
+          <option value="ghost white, dusty blue, and pale lavender">Ghostly soft</option>
+          <option value="sunny yellow, sky blue, and tomato red">Playground primary</option>
+          <option value="rosewood, mauve, and cream">Vintage rosy</option>
+          <option value="seafoam, shell pink, and sand">Beach trinket</option>
+        </select>
+      </div>
+    </section>
+
+    <section class="panel ai-settings">
+      <label for="customIdea">Optional idea</label>
+      <textarea id="customIdea" placeholder="Example: haunted strawberry, cute paint tube, shy moon badge..."></textarea>
+
+      <section class="controls" style="margin-bottom:0;">
+        <div>
+          <label for="apiKey">OpenRouter key, optional</label>
+          <input id="apiKey" type="password" placeholder="sk-or-v1-..." autocomplete="off" />
+        </div>
+        <div>
+          <label for="model">Model</label>
+          <input id="model" value="openrouter/free" />
+        </div>
+        <div>
+          <label for="aiStyle">AI help</label>
+          <select id="aiStyle">
+            <option value="simplify">Make it easier</option>
+            <option value="explain">Explain like I am brand new</option>
+            <option value="variation">Give a similar variation</option>
+            <option value="stepByStep">Break into smaller steps</option>
+            <option value="mistakes">Tell me what mistakes to avoid</option>
+            <option value="procreateLayers">Focus on Procreate layers</option>
+            <option value="blueprint">Make the blueprint clearer</option>
+            <option value="critique">Critique my idea gently</option>
+            <option value="cozyPlus">Make it more creative but still easy</option>
+            <option value="practiceDrill">Turn it into a practice drill</option>
+          </select>
+        </div>
+        <div>
+          <label>Note</label>
+          <p class="small">AI is optional. The lesson generator works offline.</p>
+        </div>
+      </section>
+      <div id="status" class="status"></div>
+    </section>
+
+    <div class="actions">
+      <button class="primary" onclick="newLesson()">Give me a mascot lesson</button>
+      <button class="ai" id="aiBtn" onclick="aiLesson()">AI simplify this lesson</button>
+      <button class="ghost" onclick="saveSettings()">Save key</button>
+      <button class="ghost" onclick="window.print()">Print / save</button>
+      <button class="ghost" onclick="resetChecks()">Reset checks</button>
+      <button class="ghost" id="installBtn" onclick="installApp()" style="display:none;">Install app</button>
+    </div>
+
+    <section class="main">
+      <article class="lesson">
+        <div class="lesson-head">
+          <h2 id="title">Shy Toast Buddy</h2>
+          <div id="meta" class="lesson-meta">Food mascot · shy · face placement</div>
+        </div>
+
+        <div class="lesson-body">
+          <div id="goal" class="focus-box"></div>
+
+          <div class="creative-row">
+            <div class="creative-card">
+              <strong>Shape spell</strong>
+              <span id="shapeSpell"></span>
+              <div class="meter"><div id="meterFill" class="meter-fill"></div></div>
+              <span class="small" id="meterText"></span>
+            </div>
+            <div class="creative-card">
+              <strong>Style recipe</strong>
+              <span id="styleRecipe"></span>
+            </div>
+          </div>
+
+          <h3>Today's drawing path</h3>
+          <div class="path-grid">
+            <label class="path-card"><input type="checkbox"> <span><strong>Warm-up</strong><br>Draw 3 simple base shapes.</span></label>
+            <label class="path-card"><input type="checkbox"> <span><strong>Main mascot</strong><br>Follow the phase lesson below.</span></label>
+            <label class="path-card"><input type="checkbox"> <span><strong>Tiny remix</strong><br>Change one feature only.</span></label>
+            <label class="path-card"><input type="checkbox"> <span><strong>Save thought</strong><br>Name what improved.</span></label>
+          </div>
+
+          <h3>Draw this in phases</h3>
+          <div id="phases"></div>
+
+          <h3 style="margin-top:18px;">Checkpoint before moving on</h3>
+          <div id="checks" class="checklist"></div>
+
+          <h3 style="margin-top:18px;">What to avoid</h3>
+          <div id="avoid" class="coach-card"></div>
+
+          <div class="fun-strip">
+            <div class="fun-card"><strong><span class="spark">✦</span>Tiny quest</strong><span id="quest"></span></div>
+            <div class="fun-card"><strong><span class="spark">♡</span>Gremlin coach note</strong><span id="praise"></span></div>
+          </div>
+        </div>
+      </article>
+
+      <aside>
+        <section class="blueprint">
+          <h3>Trace this construction</h3>
+          <svg id="blueprintSvg" viewBox="0 0 520 560" aria-label="Beginner traceable mascot blueprint"></svg>
+          <div id="traceNote" class="mini-note"></div>
+        </section>
+
+        <section class="coach">
+          <h3>Procreate setup</h3>
+          <div class="coach-grid">
+            <div class="coach-card"><strong>Canvas:</strong> 2000 × 2000 px. Big enough to draw comfortably.</div>
+            <div class="coach-card"><strong>Brush:</strong> Start with Monoline or Studio Pen. Texture later.</div>
+            <div class="coach-card"><strong>Layers:</strong> Guide → rough sketch → clean line → flat color → shadow → highlight.</div>
+            <div class="coach-card"><strong>Rule:</strong> Hide the guide at the end. If the mascot still reads clearly, the drawing worked.</div>
+          </div>
+        </section>
+
+        <section class="coach">
+          <h3>Mini remix lab</h3>
+          <div class="coach-grid">
+            <div class="coach-card"><strong>One change:</strong> <span id="remixOne"></span></div>
+            <div class="coach-card"><strong>Second version:</strong> <span id="remixTwo"></span></div>
+          </div>
+        </section>
+      </aside>
+    </section>
+  </main>
+
+  <script>
+    const lessonData = {
+      blob: {
+        names: ["Sleepy Bean Blob", "Pocket Puff", "Wobble Dot", "Mochi Sprout"],
+        subject: "Blob mascot",
+        base: "one uneven oval blob",
+        focus: "simple shapes",
+        goals: [
+          "Draw a soft blob mascot with a clear silhouette, tiny face, and small arms.",
+          "Draw a squishy bean creature using one lumpy oval and a face placed below center."
+        ]
+      },
+      food: {
+        names: ["Shy Toast Buddy", "Berry Bop", "Dumpling Dot", "Cupcake Sprout"],
+        subject: "Food mascot",
+        base: "one rounded food shape",
+        focus: "face placement",
+        goals: [
+          "Draw a cute food mascot using one rounded base shape, tiny limbs, and a clear expression.",
+          "Draw a simple snack character that still looks readable when zoomed out."
+        ]
+      },
+      object: {
+        names: ["Tiny Paint Tube", "Button Bean", "Key Charm", "Candle Dot"],
+        subject: "Object character",
+        base: "one object silhouette",
+        focus: "turning objects into characters",
+        goals: [
+          "Draw a simple object character by keeping the object readable and placing a tiny face on it.",
+          "Draw an everyday object as a mascot with only two eyes, one mouth, and tiny limbs."
+        ]
+      },
+      icon: {
+        names: ["Spark Badge Buddy", "Moon Tile", "Gem Dot", "Shield Sprite"],
+        subject: "Icon mascot",
+        base: "one clean emblem shape",
+        focus: "icon readability",
+        goals: [
+          "Draw a simple icon mascot that could work as a tiny app icon.",
+          "Draw a badge-like mascot with a readable silhouette and minimal details."
+        ]
+      },
+      letter: {
+        names: ["Letter Bean", "Alphabet Sprite", "Soft A Buddy", "Curly M Mascot"],
+        subject: "Letter mascot",
+        base: "one chunky letter",
+        focus: "letter construction",
+        goals: [
+          "Draw a chunky letter mascot with a face and tiny limbs.",
+          "Turn one letter into a character without making it hard to read."
+        ]
+      },
+      mask: {
+        names: ["Soft Chaos Mask", "Tiny Mask Friend", "Moon Mask", "Button-Eye Mask"],
+        subject: "Mask mascot",
+        base: "one rounded mask shape",
+        focus: "symmetry and expression",
+        goals: [
+          "Draw a beginner mask mascot with a rounded mask shape and simple expressive features.",
+          "Draw a cute mask character using symmetry guides and one strong expression."
+        ]
+      },
+      plant: {
+        names: ["Leaf Bean", "Sprout Dot", "Moss Buddy", "Tiny Bloom"],
+        subject: "Plant mascot",
+        base: "one leaf, sprout, or flower shape",
+        focus: "soft organic shapes",
+        goals: [
+          "Draw a tiny plant mascot using one leaf-like body, a low face, and simple stem details.",
+          "Draw a soft sprout character with a clear body shape and one plant detail."
+        ]
+      },
+      star: {
+        names: ["Moon Dot", "Starry Bean", "Sleepy Crescent", "Tiny Comet"],
+        subject: "Star / moon mascot",
+        base: "one moon, star, or comet shape",
+        focus: "celestial silhouette",
+        goals: [
+          "Draw a simple celestial mascot with a readable moon or star silhouette.",
+          "Draw a tiny sky character using one bold shape and a soft expression."
+        ]
+      },
+      potion: {
+        names: ["Potion Pip", "Bottle Bop", "Tiny Elixir", "Corky Charm"],
+        subject: "Potion bottle mascot",
+        base: "one rounded bottle shape",
+        focus: "object clarity",
+        goals: [
+          "Draw a little potion bottle mascot with a clear bottle shape, face, and one label.",
+          "Turn a simple bottle into a mascot without adding too many details."
+        ]
+      },
+      bug: {
+        names: ["Pebble Bug", "Button Beetle", "Moth Dot", "Tiny Flutter"],
+        subject: "Tiny bug mascot",
+        base: "one oval bug body",
+        focus: "small repeated shapes",
+        goals: [
+          "Draw a tiny bug mascot using one oval body, simple eyes, and tiny antennae.",
+          "Draw a cute bug character with small wings or antennae but no complex anatomy."
+        ]
+      },
+      cloud: {
+        names: ["Cloud Puff", "Rainy Bean", "Storm Dot", "Sunny Wisp"],
+        subject: "Cloud / weather mascot",
+        base: "one puffy cloud or weather shape",
+        focus: "soft edges",
+        goals: [
+          "Draw a cloud mascot with soft bumps, a low face, and one weather detail.",
+          "Draw a simple weather character using a cloud, raindrop, sun, or puff shape."
+        ]
+      },
+      gem: {
+        names: ["Gem Sprite", "Charm Pebble", "Crystal Dot", "Tiny Relic"],
+        subject: "Gem / charm mascot",
+        base: "one diamond or charm shape",
+        focus: "faceted simplicity",
+        goals: [
+          "Draw a gem mascot with one clear faceted shape and a tiny expressive face.",
+          "Draw a little charm character that works like a sticker or app icon."
+        ]
+      },
+      stationery: {
+        names: ["Pencil Pip", "Eraser Bean", "Marker Dot", "Sticky Note Buddy"],
+        subject: "Pencil / stationery mascot",
+        base: "one simple stationery silhouette",
+        focus: "object-to-character design",
+        goals: [
+          "Draw a stationery mascot while keeping the original object readable.",
+          "Turn a pencil, eraser, marker, or sticky note into a simple character."
+        ]
+      }
+    };
+
+    const emotionData = {
+      shy: {
+        face: "low dot eyes, blush cheeks, tiny curved mouth",
+        detail: "hands tucked close to the body",
+        avoid: "Do not place the face too high. A low face usually feels cuter and softer."
+      },
+      happy: {
+        face: "bright dot eyes, lifted smile, small sparkle cheek",
+        detail: "tiny raised arms",
+        avoid: "Do not make the smile too wide. Keep it simple so the mascot stays beginner-friendly."
+      },
+      sleepy: {
+        face: "closed curved eyes, tiny yawn mouth, droopy posture",
+        detail: "small pillow-like cheek or blanket shape",
+        avoid: "Do not add too many sleepy symbols. One droopy face is enough."
+      },
+      grumpy: {
+        face: "flat eyebrows, dot eyes, tiny frown",
+        detail: "stubby crossed arms",
+        avoid: "Do not make the expression too harsh. Keep the body round so it remains cute."
+      },
+      curious: {
+        face: "wide eyes, small open mouth, tilted head",
+        detail: "one tiny question mark or raised hand",
+        avoid: "Do not tilt every part. Tilt the face or body, not all details."
+      },
+      spooky: {
+        face: "uneven eyes, tiny fang, nervous smile",
+        detail: "soft shadow halo or tiny ghost mark",
+        avoid: "Do not over-detail the spooky parts. Make it sweet first, spooky second."
+      },
+      sassy: {
+        face: "half-lidded eyes, tiny side-smile, one raised brow",
+        detail: "one cheek mark or confident tilt",
+        avoid: "Do not make every feature sharp. Keep the body soft so it stays cute."
+      },
+      nervous: {
+        face: "uneven eyes, tiny worried mouth, small blush dots",
+        detail: "hands close to the body or a tiny sweat drop",
+        avoid: "Do not add too many worry marks. One nervous detail is enough."
+      },
+      proud: {
+        face: "bright eyes, tiny confident smile, lifted brow",
+        detail: "small cape, sparkle, or upright pose",
+        avoid: "Do not make the pose too complex. Pride can be shown with a tiny tilt."
+      },
+      dreamy: {
+        face: "soft sleepy eyes, tiny smile, relaxed cheeks",
+        detail: "small star, moon, or floating sparkle",
+        avoid: "Do not cover the mascot in stars. Use one dreamy symbol."
+      },
+      mischievous: {
+        face: "one raised brow, dot eyes, crooked tiny smile",
+        detail: "small tail, fang, or tilted accessory",
+        avoid: "Do not make it look mean. Keep the shapes round and playful."
+      },
+      dramatic: {
+        face: "large shiny eyes, tiny frown or open mouth",
+        detail: "one tear, cape, or over-the-top sparkle",
+        avoid: "Do not make the pose too busy. Drama works best with one clear gesture."
+      },
+      calm: {
+        face: "soft closed eyes, tiny peaceful smile",
+        detail: "small leaf, halo, or gentle shadow",
+        avoid: "Do not add loud accessories. Calm mascots need quiet space."
+      },
+      confused: {
+        face: "one big eye, one small eye, tiny O mouth",
+        detail: "small question mark or tilted head",
+        avoid: "Do not tilt every detail. One confused cue is enough."
+      }
+    };
+
+    const phaseBase = {
+      micro: [
+        ["Draw one big shape", "Use one simple body shape only. No face yet.", "Do not start with details."],
+        ["Add a low face", "Place two eyes slightly below center and add one tiny mouth.", "A high face usually feels less cute."],
+        ["Tiny finish", "Add one tiny limb pair or one tiny twist. Stop there.", "Micro lessons work because they are small."]
+      ],
+      tiny: [
+        ["Block the big shape", "Draw the mascot as one large simple shape. Do not add details yet.", "If the outline feels messy, redraw it once. Do not keep scratching over the same line."],
+        ["Place the face", "Add the eyes below the center line. Then add the mouth close underneath.", "Beginners often put the face too high, which makes the mascot feel less cute."],
+        ["Add tiny limbs", "Use simple curved lines for arms and feet. Keep them smaller than you think.", "Large limbs can steal attention from the mascot’s main shape."],
+        ["Clean and color", "Make a new clean-line layer, then add one flat color and one shadow.", "One shadow is enough. Do not shade every edge."]
+      ],
+      normal: [
+        ["Draw the ghost shape", "Make a very light loose outline of the base. Think of it as a sticker silhouette, not a detailed drawing.", "This keeps you from getting trapped in details too early."],
+        ["Add a center guide", "Draw a faint vertical line and a faint horizontal face line. The face line should sit a little below center.", "Guides are not cheating. They are how clean characters are built."],
+        ["Place the eyes first", "Draw the eyes before the mouth. The distance between eyes controls the personality.", "Eyes too far apart can look blank. Eyes too close can look intense."],
+        ["Choose one mouth", "Try three tiny mouths beside the drawing, then copy the best one onto the face.", "Do not marry the first mouth. Tiny mouth changes alter the whole mood."],
+        ["Add limbs as simple marks", "Use short curved arms and tiny oval feet. Keep them secondary.", "If the limbs are complicated, the mascot becomes harder to finish."],
+        ["Clean line layer", "Lower sketch opacity. On a new layer, draw slow confident lines. Use undo instead of fuzzy correction strokes.", "Clean linework is mostly patience, not talent."],
+        ["Flat color and one shadow", "Color the base first. Add one clipped shadow under the face or lower body. Add one small highlight.", "Too much shading will make the beginner structure harder to see."]
+      ],
+      slow: [
+        ["Warm-up shape", "Draw the base shape three times quickly. Pick the friendliest version. Friendliest usually means round, clear, and slightly imperfect.", "You are training your hand, not making a masterpiece yet."],
+        ["Final base shape", "Draw the selected base larger. Leave room for tiny arms and feet.", "A bigger drawing is easier to control in Procreate."],
+        ["Guide lines", "Add a faint vertical center line. Add a horizontal face line slightly below the middle.", "This teaches placement. Placement matters more than detail."],
+        ["Eye test", "Draw three eye sets next to the mascot: dots, sleepy curves, and uneven curious eyes. Choose one.", "Testing options prevents stiff, random faces."],
+        ["Mouth test", "Draw three mouths: tiny smile, tiny frown, small O. Choose the one that matches the emotion.", "Small mouth changes carry a lot of expression."],
+        ["Attach limbs", "Add arms and feet using only C-curves and small ovals.", "Beginner characters improve fastest when limbs are reduced to simple marks."],
+        ["Accessory limit", "Add only one accessory: sparkle, blush, bow, patch, cape, leaf, or tiny symbol.", "One good accessory beats five distracting decorations."],
+        ["Clean line pass", "Lower the rough sketch to 20–30%. Use a new layer for clean lines.", "Do not clean every wobble. Some softness gives charm."],
+        ["Color pass", "Use base color, one darker shadow, one lighter highlight. Stop there.", "Stopping is a skill. Overworking makes beginner drawings muddy."]
+      ],
+      study: [
+        ["Version 1: simple", "Draw the mascot with only body, face, and tiny limbs.", "Do not judge version 1. It is your baseline."],
+        ["Version 2: better face", "Redraw the same body and improve only the eye spacing and mouth.", "Do not change everything at once."],
+        ["Version 3: better silhouette", "Redraw again and improve only the outer body shape.", "The silhouette matters more than decoration."],
+        ["Pick the winner", "Circle the version that reads best when zoomed out.", "The prettiest close-up is not always the clearest mascot."],
+        ["Final tiny polish", "Add one shadow, one highlight, and one small twist.", "Stop before the design gets noisy."]
+      ],
+      iconSheet: [
+        ["Draw four boxes", "Make four small squares on your canvas like tiny app icons.", "Small boxes keep you from over-detailing."],
+        ["Version A: plain", "Draw the mascot with body and face only.", "This checks if the main idea works."],
+        ["Version B: emotion", "Draw the same mascot with a stronger expression.", "Change the face, not the whole design."],
+        ["Version C: twist", "Draw the mascot with one tiny twist or accessory.", "Keep the accessory readable."],
+        ["Version D: sticker", "Draw the mascot with thicker outline and fewer details.", "Icon designs need bold shapes."],
+        ["Choose one", "Pick the clearest version and redraw it larger.", "Clarity wins over complexity."]
+      ],
+      polish: [
+        ["Check the silhouette", "Zoom out and simplify any edge that feels confusing.", "Polish starts with removing clutter."],
+        ["Clean the line", "Lower the sketch opacity and redraw with confident smooth lines.", "Do not trace every wobble."],
+        ["Balance the face", "Move the eyes or mouth slightly if the expression feels off.", "Small face moves make big emotional changes."],
+        ["Add controlled color", "Use one base color, one shadow, and one highlight.", "Too many colors make beginner mascots muddy."],
+        ["Final charm", "Add one final small detail only if the mascot still reads clearly.", "Decoration is optional, readability is not."]
+      ]
+    };
+
+    const twistData = {
+      none: {
+        phrase: "no extra decoration",
+        instruction: "Skip decoration this time. Let the shape and face do the work.",
+        svg: ""
+      },
+      sparkle: {
+        phrase: "one little sparkle",
+        instruction: "Add one tiny sparkle near the cheek or top corner. Keep it smaller than the eyes.",
+        svg: '<path class="feature" d="M380 130 L388 150 L408 158 L388 166 L380 186 L372 166 L352 158 L372 150 Z"></path>'
+      },
+      hat: {
+        phrase: "a tiny hat",
+        instruction: "Add a very small hat or cap. It should sit on the body, not cover the face.",
+        svg: '<path class="feature" d="M220 130 L300 130 L285 95 L235 95 Z M210 132 L310 132"></path>'
+      },
+      patch: {
+        phrase: "a cute patch",
+        instruction: "Add one patch shape on the side of the body with two simple stitch marks.",
+        svg: '<rect class="feature" x="330" y="315" width="45" height="38" rx="10"></rect><path class="feature" d="M340 326 L350 336 M365 326 L355 336"></path>'
+      },
+      charm: {
+        phrase: "a mini charm tag",
+        instruction: "Add a small charm tag hanging from one side. Use a circle or tiny diamond.",
+        svg: '<path class="feature" d="M370 335 Q400 365 390 395"></path><path class="feature" d="M390 395 L410 415 L390 435 L370 415 Z"></path>'
+      },
+      freckle: {
+        phrase: "dot freckles",
+        instruction: "Add three tiny dots near each cheek. Keep them light and spaced out.",
+        svg: '<circle class="solid" cx="195" cy="305" r="4"></circle><circle class="solid" cx="207" cy="318" r="4"></circle><circle class="solid" cx="320" cy="305" r="4"></circle><circle class="solid" cx="332" cy="318" r="4"></circle>'
+      },
+      bow: {
+        phrase: "a tiny bow",
+        instruction: "Add a tiny bow on one side. Keep it smaller than the face.",
+        svg: '<path class="feature" d="M198 135 L230 155 L198 175 Z M262 135 L230 155 L262 175 Z"></path>'
+      },
+      halo: {
+        phrase: "a soft halo",
+        instruction: "Add a floating oval halo above the mascot. Leave space between halo and body.",
+        svg: '<ellipse class="feature" cx="260" cy="92" rx="58" ry="16"></ellipse>'
+      },
+      fang: {
+        phrase: "a tiny fang",
+        instruction: "Add one tiny fang under the mouth. Keep it small and sweet, not scary.",
+        svg: '<path class="feature" d="M263 315 L270 332 L277 315"></path>'
+      },
+      glow: {
+        phrase: "a glow mark",
+        instruction: "Add one small glow dash near the body edge to suggest magic.",
+        svg: '<path class="feature" d="M118 190 Q96 176 82 152 M405 190 Q426 174 440 150"></path>'
+      },
+      ribbon: {
+        phrase: "a little ribbon tail",
+        instruction: "Add a small ribbon tail behind one side of the body.",
+        svg: '<path class="feature" d="M355 350 L425 382 L380 404 L425 435 L350 405"></path>'
+      },
+      stitches: {
+        phrase: "simple stitches",
+        instruction: "Add three short stitch marks along one side. Space them evenly.",
+        svg: '<path class="feature" d="M154 230 L176 242 M148 275 L172 282 M154 318 L176 310"></path>'
+      },
+      leaf: {
+        phrase: "a tiny leaf",
+        instruction: "Add one leaf sprout on top. Keep it simple: one stem, one leaf.",
+        svg: '<path class="feature" d="M260 132 C260 102 292 94 312 112 C288 118 272 128 260 132 Z"></path>'
+      },
+      starCheek: {
+        phrase: "a star cheek",
+        instruction: "Add one tiny star on one cheek. Do not add a matching second star.",
+        svg: '<path class="feature" d="M202 295 L207 306 L219 310 L207 314 L202 326 L197 314 L185 310 L197 306 Z"></path>'
+      },
+      button: {
+        phrase: "a button cheek",
+        instruction: "Add one small button cheek with two dot holes.",
+        svg: '<circle class="feature" cx="203" cy="305" r="16"></circle><circle class="solid" cx="198" cy="303" r="3"></circle><circle class="solid" cx="208" cy="307" r="3"></circle>'
+      },
+      teardrop: {
+        phrase: "a tiny teardrop",
+        instruction: "Add one little teardrop or sweat drop near the eye.",
+        svg: '<path class="feature" d="M320 278 C335 295 335 312 320 318 C305 312 305 295 320 278 Z"></path>'
+      }
+    };
+
+    const quests = [
+      "Zoom out. Can you still tell what it is?",
+      "Use only one accessory. Make it count.",
+      "Redraw the body shape once, then pick the better one.",
+      "Try three mouths before choosing the final mouth.",
+      "Hide the sketch layer at the end and check the silhouette."
+    ];
+
+    const praises = [
+      "Messy first sketch allowed. Clean line comes later.",
+      "The goal is readable, not perfect.",
+      "If the face feels weird, move it lower before redrawing everything.",
+      "Tiny arms are powerful. Do not let them become noodles of chaos.",
+      "Stop after one shadow. Future you can over-render later."
+    ];
+
+    const styleRecipes = [
+      "Soft sticker: rounded lines, one blush mark, one pale shadow.",
+      "Tiny app icon: big silhouette, simple face, no tiny details.",
+      "Storybook doodle: slightly wobbly outline, warm color, tiny sparkle.",
+      "Plush toy: round corners, small face, soft shadow under the body.",
+      "Badge mascot: strong outside shape, centered face, one symbol."
+    ];
+
+    const shapeSpells = {
+      cozy: [
+        "One big shape carries the whole mascot. Details are only seasoning.",
+        "Round body, low face, tiny limbs. That is the beginner mascot formula.",
+        "Make the silhouette readable first. Cute comes after clarity."
+      ],
+      cozyPlus: [
+        "Use big-medium-small: one big body, one medium accessory, two tiny expression marks.",
+        "Push the silhouette slightly: tilt the body, squash the base, or add one asymmetrical detail.",
+        "Design like a sticker: clear edge, readable face, one memorable feature."
+      ],
+      remix: [
+        "Change one thing only: eyes, mouth, accessory, or tilt. Do not mutate the whole creature.",
+        "Make a twin version with the opposite mood while keeping the same body shape.",
+        "Give the mascot one strange-but-simple clue: charm tag, patch, tiny hat, or uneven eyes."
+      ]
+    };
+
+    const remixIdeas = [
+      "Change the mouth only and see how the personality shifts.",
+      "Move the eyes lower and compare which version feels cuter.",
+      "Make the body slightly tilted, but keep the face straight.",
+      "Swap the accessory for a sparkle, patch, charm, or tiny hat.",
+      "Make a tiny icon version with fewer lines."
+    ];
+
+    const advancedPhases = [
+      ["Push the silhouette", "Adjust one edge of the body: flatten the bottom, tilt the top, or add one soft bump.", "Do not redesign the whole mascot. One silhouette change is enough."],
+      ["Add a focal detail", "Choose one thing the viewer notices first: sparkle, cheek patch, tiny tag, hat, or unusual eye pair.", "If everything is special, nothing is special."],
+      ["Add simple shadow logic", "Put one shadow where the form turns away: under the face, under the accessory, or at the bottom edge.", "Do not shade every side. Pick one light direction."],
+      ["Make a mini version", "Redraw the mascot very small beside the main drawing. Remove any detail that disappears.", "This teaches icon readability without making the drawing harder."]
+    ];
+
+    function pick(arr) {
+      return arr[Math.floor(Math.random() * arr.length)];
+    }
+
+    function status(msg, kind) {
+      const box = document.getElementById("status");
+      box.textContent = msg;
+      box.className = "status show " + (kind || "");
+    }
+
+    function toggleTheme() {
+      const root = document.documentElement;
+      const next = root.getAttribute("data-theme") === "dark" ? "light" : "dark";
+      root.setAttribute("data-theme", next);
+      localStorage.setItem("mascotSparkTheme", next);
+      document.getElementById("themeBtn").textContent = next === "dark" ? "Light mode" : "Dark mode";
+    }
+
+    function loadTheme() {
+      const saved = localStorage.getItem("mascotSparkTheme") || "light";
+      document.documentElement.setAttribute("data-theme", saved);
+      document.getElementById("themeBtn").textContent = saved === "dark" ? "Light mode" : "Dark mode";
+    }
+
+    function makeBlueprint(type, emotion, twist) {
+      let body = "";
+      let extraGuide = "";
+
+      if (type === "blob") {
+        body = '<path class="shape" d="M150 235 C145 150 225 105 300 132 C372 158 394 244 360 326 C330 398 229 420 169 365 C125 325 119 274 150 235 Z"></path>';
+      } else if (type === "food") {
+        body = '<path class="shape" d="M155 205 C155 145 200 115 260 115 C320 115 365 145 365 205 L365 380 L155 380 Z"></path>';
+        extraGuide = '<path class="guide" d="M175 195 C185 155 220 140 260 140 C300 140 335 155 345 195"></path>';
+      } else if (type === "object") {
+        body = '<rect class="shape" x="165" y="135" width="190" height="270" rx="38"></rect><path class="guide" d="M185 190 L335 190"></path><path class="guide" d="M185 345 L335 345"></path>';
+      } else if (type === "icon") {
+        body = '<path class="shape" d="M260 105 L375 170 L375 330 L260 405 L145 330 L145 170 Z"></path>';
+        extraGuide = '<circle class="guide" cx="260" cy="255" r="115"></circle>';
+      } else if (type === "letter") {
+        body = '<path class="shape" d="M200 400 L248 135 L310 135 L360 400 L305 400 L295 340 L218 340 L208 400 Z M232 285 L281 285 L256 185 Z"></path>';
+      } else if (type === "plant") {
+        body = '<path class="shape" d="M260 125 C320 145 350 215 315 285 C292 332 250 375 210 405 C198 350 168 290 182 230 C195 170 225 142 260 125 Z"></path><path class="guide" d="M260 125 C255 210 240 300 210 405"></path>';
+      } else if (type === "star") {
+        body = '<path class="shape" d="M260 100 L302 206 L415 215 L328 288 L355 400 L260 338 L165 400 L192 288 L105 215 L218 206 Z"></path>';
+      } else if (type === "potion") {
+        body = '<path class="shape" d="M225 105 L295 105 L295 165 C340 185 365 238 350 310 C338 370 300 408 260 408 C220 408 182 370 170 310 C155 238 180 185 225 165 Z"></path><path class="guide" d="M205 330 L315 330"></path>';
+      } else if (type === "bug") {
+        body = '<ellipse class="shape" cx="260" cy="285" rx="120" ry="150"></ellipse><path class="feature" d="M220 140 Q205 102 170 92 M300 140 Q315 102 350 92"></path><path class="guide" d="M260 150 L260 420"></path>';
+      } else if (type === "cloud") {
+        body = '<path class="shape" d="M145 305 C105 300 95 245 135 225 C145 175 205 160 235 190 C265 145 340 160 350 220 C400 225 420 300 360 320 L165 320 C158 320 151 315 145 305 Z"></path>';
+      } else if (type === "gem") {
+        body = '<path class="shape" d="M185 150 L335 150 L390 235 L260 410 L130 235 Z"></path><path class="guide" d="M185 150 L260 410 L335 150 M130 235 L390 235"></path>';
+      } else if (type === "stationery") {
+        body = '<path class="shape" d="M210 115 L310 115 L310 355 L260 425 L210 355 Z"></path><path class="guide" d="M210 165 L310 165 M210 355 L310 355"></path>';
+      } else {
+        body = '<path class="shape" d="M145 198 C154 120 229 102 260 132 C292 102 366 120 375 198 C390 305 328 390 260 405 C192 390 130 305 145 198 Z"></path>';
+      }
+
+      let eyes = '<circle class="solid" cx="225" cy="265" r="10"></circle><circle class="solid" cx="295" cy="265" r="10"></circle>';
+      let mouth = '<path class="feature" d="M245 306 Q260 318 275 306"></path>';
+
+      if (emotion === "sleepy") {
+        eyes = '<path class="feature" d="M207 258 Q225 270 243 258"></path><path class="feature" d="M277 258 Q295 270 313 258"></path>';
+        mouth = '<circle class="feature" cx="260" cy="306" r="9"></circle>';
+      } else if (emotion === "grumpy") {
+        eyes = '<path class="feature" d="M207 248 L245 260"></path><path class="feature" d="M313 248 L275 260"></path>';
+        mouth = '<path class="feature" d="M246 315 Q260 305 274 315"></path>';
+      } else if (emotion === "curious") {
+        eyes = '<circle class="solid" cx="220" cy="260" r="13"></circle><circle class="solid" cx="300" cy="260" r="9"></circle>';
+        mouth = '<circle class="feature" cx="260" cy="310" r="8"></circle>';
+      } else if (emotion === "spooky") {
+        eyes = '<circle class="solid" cx="222" cy="260" r="9"></circle><path class="feature" d="M285 250 L310 275 M310 250 L285 275"></path>';
+        mouth = '<path class="feature" d="M244 306 Q260 320 276 306 M265 315 L270 330"></path>';
+      } else if (emotion === "sassy") {
+        eyes = '<path class="feature" d="M205 258 L242 258"></path><path class="feature" d="M278 258 L315 252"></path>';
+        mouth = '<path class="feature" d="M248 312 Q268 322 282 304"></path>';
+      } else if (emotion === "nervous") {
+        eyes = '<circle class="solid" cx="222" cy="262" r="8"></circle><circle class="solid" cx="300" cy="258" r="12"></circle>';
+        mouth = '<path class="feature" d="M248 315 Q260 307 272 315"></path>';
+      } else if (emotion === "proud") {
+        eyes = '<circle class="solid" cx="225" cy="260" r="10"></circle><circle class="solid" cx="295" cy="260" r="10"></circle><path class="feature" d="M207 238 Q225 230 243 238 M277 238 Q295 230 313 238"></path>';
+        mouth = '<path class="feature" d="M244 306 Q262 322 282 302"></path>';
+      } else if (emotion === "dreamy" || emotion === "calm") {
+        eyes = '<path class="feature" d="M207 258 Q225 270 243 258"></path><path class="feature" d="M277 258 Q295 270 313 258"></path>';
+        mouth = '<path class="feature" d="M246 308 Q260 318 274 308"></path>';
+      } else if (emotion === "mischievous") {
+        eyes = '<circle class="solid" cx="225" cy="262" r="9"></circle><path class="feature" d="M280 260 Q298 250 316 260"></path>';
+        mouth = '<path class="feature" d="M246 312 Q270 325 285 302"></path>';
+      } else if (emotion === "dramatic") {
+        eyes = '<circle class="feature" cx="225" cy="260" r="18"></circle><circle class="feature" cx="295" cy="260" r="18"></circle><circle class="solid" cx="232" cy="252" r="5"></circle><circle class="solid" cx="302" cy="252" r="5"></circle>';
+        mouth = '<circle class="feature" cx="260" cy="315" r="10"></circle>';
+      } else if (emotion === "confused") {
+        eyes = '<circle class="solid" cx="220" cy="260" r="14"></circle><circle class="solid" cx="302" cy="265" r="7"></circle>';
+        mouth = '<circle class="feature" cx="260" cy="312" r="8"></circle>';
+      }
+
+      const twistSvg = (twistData[twist] || twistData.none).svg;
+
+      return `
+        <text class="label" x="24" y="32">TRACE ORDER: 1 body → 2 guide → 3 eyes → 4 mouth → 5 tiny limbs</text>
+        <line class="guide" x1="260" y1="82" x2="260" y2="440"></line>
+        <line class="guide" x1="130" y1="275" x2="390" y2="275"></line>
+        <ellipse class="guide" cx="260" cy="265" rx="145" ry="180"></ellipse>
+        ${extraGuide}
+        ${body}
+        <path class="feature" d="M155 300 Q112 305 105 342"></path>
+        <path class="feature" d="M365 300 Q408 305 415 342"></path>
+        <path class="feature" d="M215 392 Q205 425 178 435"></path>
+        <path class="feature" d="M305 392 Q315 425 342 435"></path>
+        ${eyes}
+        ${mouth}
+        <circle class="guide" cx="212" cy="298" r="12"></circle>
+        <circle class="guide" cx="308" cy="298" r="12"></circle>
+        ${twistSvg}
+        <text class="label" x="35" y="508">Screenshot/import into Procreate, lower opacity, draw over it.</text>
+      `;
+    }
+
+    function buildLesson(data) {
+      document.getElementById("title").textContent = data.title;
+      document.getElementById("meta").textContent = data.meta;
+      document.getElementById("goal").textContent = data.goal;
+      document.getElementById("avoid").textContent = data.avoid;
+      document.getElementById("traceNote").innerHTML = data.traceNote;
+      document.getElementById("quest").textContent = data.quest || pick(quests);
+      document.getElementById("praise").textContent = data.praise || pick(praises);
+      document.getElementById("shapeSpell").textContent = data.shapeSpell || pick(shapeSpells.cozy);
+      document.getElementById("styleRecipe").textContent = data.styleRecipe || pick(styleRecipes);
+      document.getElementById("remixOne").textContent = data.remixOne || pick(remixIdeas);
+      document.getElementById("remixTwo").textContent = data.remixTwo || "Draw the same mascot again with a different mouth, not a different body.";
+      document.getElementById("meterFill").style.width = (data.complexity || 42) + "%";
+      document.getElementById("meterText").textContent = data.meterText || "Cozy difficulty: easy and drawable.";
+
+      document.getElementById("phases").innerHTML = data.phases.map((p, i) => `
+        <div class="phase">
+          <div class="phase-title"><span class="num">${i + 1}</span>${p[0]}</div>
+          <p>${p[1]}</p>
+          <div class="mistake">${p[2]}</div>
+        </div>
+      `).join("");
+
+      document.getElementById("checks").innerHTML = data.checks.map(c => `
+        <label class="check">
+          <input type="checkbox">
+          <span>${c}</span>
+        </label>
+      `).join("");
+
+      document.getElementById("blueprintSvg").innerHTML = makeBlueprint(data.type, data.emotion, data.twist || "none");
+    }
+
+    function newLesson() {
+      const type = document.getElementById("lessonType").value;
+      const emotion = document.getElementById("emotion").value;
+      const level = document.getElementById("level").value;
+      const creativeMode = document.getElementById("creativeMode").value;
+      const twist = document.getElementById("funTwist").value;
+      const customTyped = document.getElementById("customIdea").value.trim();
+      const ideaPreset = document.getElementById("ideaPreset").value;
+      const paletteMood = document.getElementById("paletteMood").value;
+      const custom = customTyped || ideaPreset;
+
+      const subject = lessonData[type];
+      const emo = emotionData[emotion];
+      const twistInfo = twistData[twist] || twistData.none;
+      const title = custom ? titleCase(custom).slice(0, 34) : pick(subject.names);
+      const twistLine = twist === "none" ? "" : ` Add ${twistInfo.phrase} as the only decoration.`;
+
+      const paletteLine = paletteMood ? ` Try a ${paletteMood} palette.` : "";
+      const goal = custom
+        ? `Draw ${custom} as a ${emotion} beginner mascot. Use ${subject.base}, ${emo.face}, and ${emo.detail}.${twistLine}${paletteLine}`
+        : `${pick(subject.goals)} Use ${emo.face} and ${emo.detail}.${twistLine}${paletteLine}`;
+
+      const phases = (phaseBase[level] || phaseBase.normal).map(step => [...step]);
+
+      if (level !== "tiny") {
+        phases[0][1] += ` For this lesson, the base is ${subject.base}.`;
+        phases[2][1] += ` Use this emotion formula: ${emo.face}.`;
+      }
+
+      if (twist !== "none") {
+        const insertAt = Math.max(0, phases.length - 2);
+        phases.splice(insertAt, 0, [
+          "Add the tiny twist",
+          twistInfo.instruction,
+          "Do not add a second decoration. One fun thing is easier to draw and easier to read."
+        ]);
+      }
+
+      if (creativeMode === "cozyPlus") {
+        phases.splice(Math.min(3, phases.length), 0, advancedPhases[0], advancedPhases[1]);
+      }
+
+      if (creativeMode === "remix") {
+        phases.splice(Math.min(3, phases.length), 0, [
+          "Make one playful swap",
+          "Change exactly one thing: the eyes, mouth, pose tilt, or accessory. Keep the base shape the same.",
+          "Remix mode gets messy if you change everything at once."
+        ]);
+      }
+
+      buildLesson({
+        title,
+        meta: `${subject.subject} · ${emotion} · ${subject.focus}`,
+        goal,
+        phases,
+        avoid: emo.avoid,
+        type,
+        emotion,
+        twist,
+        checks: [
+          "The body shape reads clearly before details are added.",
+          "The face is placed slightly below the center of the body.",
+          "The arms and feet are simple enough to redraw without stress.",
+          "There is only one main accessory or decoration.",
+          "The mascot still reads when zoomed out."
+        ],
+        traceNote: "<strong>Beginner use:</strong><br>Do not trace perfectly. Trace the big body shape, then let your own line wobble a little. That is how it starts feeling alive instead of stiff.",
+        quest: pick(quests),
+        praise: pick(praises),
+        shapeSpell: pick(shapeSpells[creativeMode] || shapeSpells.cozy),
+        styleRecipe: paletteMood ? `${pick(styleRecipes)} Palette: ${paletteMood}.` : pick(styleRecipes),
+        remixOne: pick(remixIdeas),
+        remixTwo: creativeMode === "cozyPlus" ? "Make a sticker version: thicker outline, fewer details, stronger silhouette." : "Draw the same mascot again with a different mouth, not a different body.",
+        complexity: creativeMode === "cozyPlus" ? 68 : creativeMode === "remix" ? 56 : 42,
+        meterText: creativeMode === "cozyPlus" ? "Cozy+ difficulty: more design thinking, still beginner-safe." : creativeMode === "remix" ? "Remix difficulty: playful, but only one change at a time." : "Cozy difficulty: easy and drawable."
+      });
+
+      status("New simple mascot lesson created.", "ok");
+    }
+
+    function titleCase(str) {
+      return str.split(" ").filter(Boolean).map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(" ");
+    }
+
+    function resetChecks() {
+      document.querySelectorAll(".check input").forEach(c => c.checked = false);
+    }
+
+    function saveSettings() {
+      localStorage.setItem("mascotSparkApiKey", document.getElementById("apiKey").value.trim());
+      localStorage.setItem("mascotSparkModel", document.getElementById("model").value.trim() || "openrouter/free");
+      status("Key/model saved in this browser.", "ok");
+    }
+
+    function loadSettings() {
+      document.getElementById("apiKey").value = localStorage.getItem("mascotSparkApiKey") || "";
+      document.getElementById("model").value = localStorage.getItem("mascotSparkModel") || "openrouter/free";
+    }
+
+    function extractJson(text) {
+      try { return JSON.parse(text); } catch(e) {}
+      const match = text.match(/\{[\s\S]*\}/);
+      if (match) {
+        try { return JSON.parse(match[0]); } catch(e) {}
+      }
+      return null;
+    }
+
+    async function aiLesson() {
+      const key = document.getElementById("apiKey").value.trim();
+      const model = document.getElementById("model").value.trim() || "openrouter/free";
+
+      if (!key) {
+        status("Add your OpenRouter key first, or use the normal lesson button. The app works without AI.", "bad");
+        return;
+      }
+
+      saveSettings();
+
+      const btn = document.getElementById("aiBtn");
+      btn.disabled = true;
+      status("AI is simplifying the lesson into clearer drawing steps...", "");
+
+      const type = document.getElementById("lessonType").value;
+      const emotion = document.getElementById("emotion").value;
+      const level = document.getElementById("level").value;
+      const creativeMode = document.getElementById("creativeMode").value;
+      const twist = document.getElementById("funTwist").value;
+      const customTyped = document.getElementById("customIdea").value.trim();
+      const ideaPreset = document.getElementById("ideaPreset").value;
+      const paletteMood = document.getElementById("paletteMood").value;
+      const custom = customTyped || ideaPreset;
+      const aiStyle = document.getElementById("aiStyle").value;
+
+      const system = `You are a calm beginner drawing teacher for Procreate. Return ONLY valid JSON. No markdown.
+The user is overwhelmed. Keep it simple, concrete, and lightly fun.
+Use this JSON schema:
+{
+ "title": "short mascot title",
+ "meta": "subject · emotion · focus",
+ "goal": "one clear beginner drawing goal",
+ "phases": [["phase title","specific drawing instruction","common mistake warning"]],
+ "avoid": "one paragraph: what to avoid",
+ "checks": ["5 checkpoint items"],
+ "traceNote": "short trace/import tip for Procreate"
+}
+Rules:
+- Use 3 to 9 phases depending on the requested lesson size.
+- Each phase must be drawable in Procreate.
+- Include body, guide, face, limbs, clean line, color.
+- No advanced anatomy. No professional jargon.
+- Keep it helpful, not overwhelming.`;
+
+      const user = `Create a simplified mascot drawing lesson.
+Subject type: ${type}
+Emotion: ${emotion}
+Lesson size: ${level}
+Creative mode: ${creativeMode}
+Tiny fun twist: ${twist}
+AI help style: ${aiStyle}
+Optional user idea: ${custom || "none"}
+Palette mood: ${paletteMood || "auto"}`;
+
+      try {
+        const res = await fetch("https://openrouter.ai/api/v1/chat/completions", {
+          method: "POST",
+          headers: {
+            "Authorization": `Bearer ${key}`,
+            "Content-Type": "application/json",
+            "HTTP-Referer": window.location.href,
+            "X-Title": "Mascot Spark Cozy Drawing Teacher"
+          },
+          body: JSON.stringify({
+            model,
+            messages: [{ role: "system", content: system }, { role: "user", content: user }],
+            temperature: 0.55,
+            max_tokens: 1100
+          })
+        });
+
+        if (!res.ok) {
+          const err = await res.text();
+          throw new Error("OpenRouter error " + res.status + ": " + err.slice(0, 220));
+        }
+
+        const json = await res.json();
+        const text = json.choices && json.choices[0] && json.choices[0].message ? json.choices[0].message.content : "";
+        const data = extractJson(text);
+
+        if (!data) throw new Error("AI returned unusable formatting. Try again or use normal lesson.");
+
+        buildLesson({
+          title: data.title || "Simple Mascot Lesson",
+          meta: data.meta || `${type} · ${emotion} · beginner`,
+          goal: data.goal || "Draw one simple mascot using big shapes and a low face.",
+          phases: data.phases || phaseBase.normal,
+          avoid: data.avoid || "Avoid adding details before the body shape and face placement are working.",
+          checks: data.checks || [
+            "The big shape reads clearly.",
+            "The face is below center.",
+            "The limbs are simple.",
+            "There is only one accessory.",
+            "The drawing still reads when zoomed out."
+          ],
+          traceNote: data.traceNote || "Import the guide into Procreate, lower opacity, and draw over it on a new layer.",
+          type,
+          emotion,
+          twist,
+          quest: pick(quests),
+          praise: pick(praises),
+          shapeSpell: pick(shapeSpells[creativeMode] || shapeSpells.cozy),
+          styleRecipe: paletteMood ? `${pick(styleRecipes)} Palette: ${paletteMood}.` : pick(styleRecipes),
+          remixOne: pick(remixIdeas),
+          remixTwo: creativeMode === "cozyPlus" ? "Make a sticker version: thicker outline, fewer details, stronger silhouette." : "Draw the same mascot again with a different mouth, not a different body.",
+          complexity: creativeMode === "cozyPlus" ? 68 : creativeMode === "remix" ? 56 : 42,
+          meterText: creativeMode === "cozyPlus" ? "Cozy+ difficulty: more design thinking, still beginner-safe." : creativeMode === "remix" ? "Remix difficulty: playful, but only one change at a time." : "Cozy difficulty: easy and drawable."
+        });
+
+        status("AI simplified the lesson.", "ok");
+      } catch (err) {
+        status(err.message + " Use the normal lesson button if free models are rate-limited.", "bad");
+      } finally {
+        btn.disabled = false;
+      }
+    }
+
+    document.addEventListener("DOMContentLoaded", function() {
+      loadTheme();
+      loadSettings();
+      newLesson();
+    });
+
+    let deferredInstallPrompt = null;
+
+    window.addEventListener("beforeinstallprompt", function(event) {
+      event.preventDefault();
+      deferredInstallPrompt = event;
+      const btn = document.getElementById("installBtn");
+      if (btn) btn.style.display = "inline-flex";
+    });
+
+    async function installApp() {
+      if (!deferredInstallPrompt) {
+        status("Use your browser menu to add this app to your home screen.", "");
+        return;
+      }
+      deferredInstallPrompt.prompt();
+      await deferredInstallPrompt.userChoice;
+      deferredInstallPrompt = null;
+      const btn = document.getElementById("installBtn");
+      if (btn) btn.style.display = "none";
+    }
+
+    if ("serviceWorker" in navigator) {
+      window.addEventListener("load", function() {
+        navigator.serviceWorker.register("./service-worker.js").catch(function(error) {
+          console.warn("Service worker registration failed:", error);
+        });
+      });
+    }
+
+  </script>
+</body>
+</html>

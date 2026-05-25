@@ -1,10 +1,13 @@
-const CACHE_NAME = "mascot-spark-v4";
+const CACHE_NAME = "mascot-spark-v7";
+
 const APP_SHELL = [
   "./",
   "./index.html",
   "./manifest.json",
   "./icon-192.png",
-  "./icon-512.png"
+  "./icon-512.png",
+  "./icon.svg",
+  "./README.md"
 ];
 
 self.addEventListener("install", event => {

@@ -1,11 +1,11 @@
 {
-  "name": "Mascot Spark \u2014 Stitched Halo Bloom",
+  "name": "Mascot Spark V7 \u2014 Stitched Halo Bloom",
   "short_name": "Mascot Spark",
-  "description": "A cozy Procreate mascot drawing teacher with the Stitched Halo Bloom 3-mode UI theme system.",
+  "description": "A cozy Procreate mascot drawing teacher with expanded draw-first guidance, blueprint variations, duo emotions, tiny twists, palette profiles, tabs, Surprise Me, AI help, and iPad layouts.",
   "start_url": "./index.html",
   "scope": "./",
   "display": "standalone",
-  "orientation": "portrait-primary",
+  "orientation": "any",
   "background_color": "#FFF7FB",
   "theme_color": "#F27BA6",
   "icons": [

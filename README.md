@@ -230,3 +230,26 @@ Also added:
 ```js
 const CACHE_NAME = "mascot-spark-v13";
 ```
+
+
+## V14 compact tools update
+
+Added:
+
+- Simple / Advanced view toggle
+- Better palette usage roles:
+  - Body
+  - Accent
+  - Soft fill
+  - Shadow
+  - Highlight
+- Local worksheet export as a `.txt` file
+- More compact layout behavior
+- Reduced AI output height so it does not take over the page
+- Sticky compact action bar
+
+Service worker cache:
+
+```js
+const CACHE_NAME = "mascot-spark-v14";
+```

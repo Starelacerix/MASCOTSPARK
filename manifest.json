@@ -1,7 +1,7 @@
 {
-  "name": "Mascot Spark V13 \u2014 AI Coach Workspace",
+  "name": "Mascot Spark V14 \u2014 Compact Tools",
   "short_name": "Mascot Spark",
-  "description": "Mascot Spark V13 adds a roomy Coach tab with Subject-Specific Drawing Logic, Emotion Coach, Palette Coach, and dedicated AI output space.",
+  "description": "Mascot Spark V14 adds Simple/Advanced mode, better palette usage roles, local worksheet export, and a more compact layout.",
   "start_url": "./index.html",
   "scope": "./",
   "display": "standalone",

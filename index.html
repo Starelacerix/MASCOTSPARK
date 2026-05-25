@@ -1039,7 +1039,7 @@
     }
 
     .ai-output-card {
-      min-height: 560px;
+      min-height: 420px;
       overflow: hidden;
     }
 
@@ -1111,6 +1111,121 @@
       line-height: 1.42;
     }
 
+
+    .hero-tools {
+      display: flex;
+      gap: 8px;
+      align-items: flex-start;
+      justify-content: flex-end;
+      flex-wrap: wrap;
+    }
+
+    body.simple-mode [data-advanced-only="true"] {
+      display: none !important;
+    }
+
+    body.simple-mode .tab-buttons {
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    body.simple-mode .shell {
+      padding: 10px;
+    }
+
+    body.simple-mode .lesson-body {
+      padding: 14px;
+    }
+
+    body.simple-mode .info-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .compact-help {
+      margin-top: 8px;
+      padding: 9px 11px;
+      border-radius: 14px;
+      background: color-mix(in srgb, var(--color-surface-2) 86%, white 5%);
+      border: 1px solid color-mix(in srgb, var(--color-border) 75%, transparent);
+      color: var(--color-muted);
+      font-size: 13px;
+      line-height: 1.35;
+    }
+
+    .palette-role-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 8px;
+      margin-top: 10px;
+    }
+
+    .palette-role {
+      border-radius: 16px;
+      border: 1px solid color-mix(in srgb, var(--color-border) 76%, transparent);
+      background: color-mix(in srgb, var(--color-surface) 88%, white 4%);
+      overflow: hidden;
+      min-height: 92px;
+    }
+
+    .palette-role-color {
+      height: 30px;
+      border-bottom: 1px solid rgba(0,0,0,.12);
+    }
+
+    .palette-role-body {
+      padding: 8px;
+      font-size: 12px;
+      line-height: 1.25;
+    }
+
+    .palette-role-body strong {
+      display: block;
+      color: var(--color-text);
+      margin-bottom: 3px;
+    }
+
+    .compact-output {
+      max-height: 420px;
+      overflow: auto;
+    }
+
+    .lesson-body > h3 {
+      margin-top: 14px;
+    }
+
+    .path-grid {
+      margin-bottom: 10px;
+    }
+
+    .actions {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      padding: 8px;
+      border: 1px solid color-mix(in srgb, var(--color-border) 70%, transparent);
+      border-radius: 22px;
+      background: color-mix(in srgb, var(--color-background) 84%, transparent);
+      backdrop-filter: blur(14px);
+    }
+
+    @media (max-width: 699px) {
+      .hero-tools {
+        justify-content: stretch;
+      }
+      .hero-tools button {
+        flex: 1;
+      }
+      .palette-role-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media (min-width: 700px) and (max-width: 1180px) and (orientation: portrait) {
+      .palette-role-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+
     @media (max-width: 699px) {
       .ai-workbench {
         grid-template-columns: 1fr;
@@ -1135,7 +1250,7 @@
       }
 
       .ai-output-card {
-        min-height: 480px;
+        min-height: 380px;
       }
     }
 
@@ -1264,7 +1379,10 @@
             <span>Dark: Bleeding Hope Afterglow</span>
           </div>
         </div>
-        <button onclick="toggleTheme()" id="themeBtn">Theme: Light</button>
+        <div class="hero-tools">
+          <button onclick="toggleTheme()" id="themeBtn">Theme: Light</button>
+          <button onclick="toggleViewMode()" id="viewModeBtn">Simple mode</button>
+        </div>
       </div>
     </section>
 
@@ -1273,8 +1391,8 @@
         <button class="tab-btn active" type="button" data-tab="tab-lesson" onclick="showTab('tab-lesson')"><span class="tab-icon">✦</span>Start</button>
         <button class="tab-btn" type="button" data-tab="tab-character" onclick="showTab('tab-character')"><span class="tab-icon">◕</span>Personality</button>
         <button class="tab-btn" type="button" data-tab="tab-color" onclick="showTab('tab-color')"><span class="tab-icon">●</span>Palette</button>
-        <button class="tab-btn" type="button" data-tab="tab-blueprint" onclick="showTab('tab-blueprint')"><span class="tab-icon">⌁</span>Trace Guide</button>
-        <button class="tab-btn" type="button" data-tab="tab-ai" onclick="showTab('tab-ai')"><span class="tab-icon">?</span>Coach</button>
+        <button class="tab-btn" type="button" data-tab="tab-blueprint" data-advanced-only="true" onclick="showTab('tab-blueprint')"><span class="tab-icon">⌁</span>Trace Guide</button>
+        <button class="tab-btn" type="button" data-tab="tab-ai" data-advanced-only="true" onclick="showTab('tab-ai')"><span class="tab-icon">?</span>Coach</button>
       </div>
 
       <div id="tab-lesson" class="tab-panel active">
@@ -1353,7 +1471,7 @@
         </section>
       </div>
 
-      <div id="tab-blueprint" class="tab-panel">
+      <div id="tab-blueprint" class="tab-panel" data-advanced-only="true">
         <p class="tab-hint">Choose how the trace guide should teach the drawing structure.</p>
         <section class="controls">
           <div class="panel">
@@ -1376,7 +1494,7 @@
       </div>
 
       
-<div id="tab-ai" class="tab-panel">
+<div id="tab-ai" class="tab-panel" data-advanced-only="true">
         <p class="tab-hint">Use the Coach tools to get focused help. All AI help output appears here for easier reading and more room.</p>
 
         <section class="ai-workbench">
@@ -1436,7 +1554,7 @@
                 <h3 id="aiOutputTitle">Coach Output</h3>
                 <button class="utility-action" onclick="clearAiOutput()">Clear</button>
               </div>
-              <div id="aiOutputBody" class="ai-output-body">
+              <div id="aiOutputBody" class="ai-output-body compact-output">
                 <p class="small">Run one of the Coach tools to see help here.</p>
               </div>
             </div>
@@ -1449,9 +1567,10 @@
 
       <button class="primary main-action" onclick="newLesson()">Give me a mascot lesson</button>
       <button class="surprise playful-action" onclick="surpriseMe()">Surprise me</button>
-      <button class="ai-btn coach-action" onclick="aiLesson()" id="aiBtn">AI help this lesson</button>
-      <button class="utility-action" onclick="saveSettings()">Save AI key</button>
+      <button class="ai-btn coach-action" data-advanced-only="true" onclick="aiLesson()" id="aiBtn">AI help this lesson</button>
+      <button class="utility-action" data-advanced-only="true" onclick="saveSettings()">Save AI key</button>
       <button class="utility-action" onclick="resetChecks()">Reset checks</button>
+      <button class="utility-action" onclick="exportWorksheet()">Export worksheet</button>
       <button class="utility-action" onclick="window.print()">Print / save</button>
       <button class="utility-action" onclick="installApp()" id="installBtn" style="display:none;">Install app</button>
     </div>
@@ -1481,6 +1600,7 @@
               <strong>Lesson palette</strong>
               <div id="lessonPaletteSwatches" class="lesson-palette-swatches"></div>
               <span id="lessonPaletteName" class="small"></span>
+              <div id="paletteRoleGuide" class="palette-role-grid"></div>
             </div>
           </div>
 
@@ -2170,6 +2290,116 @@
 
 
 
+
+    function setViewMode(mode) {
+      const simple = mode === "simple";
+      document.body.classList.toggle("simple-mode", simple);
+      localStorage.setItem("mascotSparkViewMode", simple ? "simple" : "advanced");
+      const btn = document.getElementById("viewModeBtn");
+      if (btn) btn.textContent = simple ? "Advanced mode" : "Simple mode";
+
+      const activeAdvancedPanel = document.querySelector(".tab-panel.active[data-advanced-only='true']");
+      if (simple && activeAdvancedPanel) showTab("tab-lesson");
+    }
+
+    function toggleViewMode() {
+      const current = localStorage.getItem("mascotSparkViewMode") || "advanced";
+      setViewMode(current === "simple" ? "advanced" : "simple");
+    }
+
+    function loadViewMode() {
+      setViewMode(localStorage.getItem("mascotSparkViewMode") || "advanced");
+    }
+
+    function getPaletteRoles(palette) {
+      const colors = (palette && palette.colors) ? palette.colors : [];
+      if (!colors.length) return [];
+      return [
+        { role: "Body", color: colors[0], tip: "main mascot shape" },
+        { role: "Accent", color: colors[1] || colors[0], tip: "twist or cheeks" },
+        { role: "Soft fill", color: colors[2] || colors[0], tip: "secondary area" },
+        { role: "Shadow", color: colors[colors.length - 2] || colors[1] || colors[0], tip: "one small shadow" },
+        { role: "Highlight", color: colors[colors.length - 1] || colors[0], tip: "shine spot only" }
+      ];
+    }
+
+    function renderPaletteRoleGuide(paletteKey) {
+      const palette = palettes[paletteKey] || palettes.auto;
+      const box = document.getElementById("paletteRoleGuide");
+      if (!box) return;
+
+      const roles = getPaletteRoles(palette);
+      if (!roles.length) {
+        box.innerHTML = '<div class="compact-help">Auto palette: choose 1 body color, 1 accent, 1 shadow, and 1 highlight.</div>';
+        return;
+      }
+
+      box.innerHTML = roles.map(item => `
+        <div class="palette-role">
+          <div class="palette-role-color" style="background:${item.color}"></div>
+          <div class="palette-role-body">
+            <strong>${item.role}</strong>
+            <span>${item.tip}</span>
+          </div>
+        </div>
+      `).join("");
+    }
+
+    function exportWorksheet() {
+      const title = document.getElementById("title")?.textContent || "Mascot Spark Worksheet";
+      const meta = document.getElementById("meta")?.textContent || "";
+      const goal = document.getElementById("goal")?.textContent || "";
+      const palette = document.getElementById("lessonPaletteName")?.textContent || "";
+      const drawFirst = Array.from(document.querySelectorAll("#drawFirstPanels .draw-card")).map((card, i) => `${i + 1}. ${card.innerText}`).join("\\n\\n");
+      const phases = Array.from(document.querySelectorAll("#phases .phase")).map((phase, i) => `${i + 1}. ${phase.innerText}`).join("\\n\\n");
+      const checks = Array.from(document.querySelectorAll("#checks .check")).map((check, i) => `${i + 1}. ${check.innerText}`).join("\\n");
+      const remix = `One change: ${document.getElementById("remixOne")?.textContent || ""}\\nSecond version: ${document.getElementById("remixTwo")?.textContent || ""}`;
+
+      const worksheet = [
+        "MASCOT SPARK WORKSHEET",
+        "=======================",
+        "",
+        title,
+        meta,
+        "",
+        "GOAL",
+        goal,
+        "",
+        "PALETTE",
+        palette,
+        "",
+        "DRAW THIS FIRST",
+        drawFirst,
+        "",
+        "STEP-BY-STEP PHASES",
+        phases,
+        "",
+        "CHECKLIST",
+        checks,
+        "",
+        "VERSION 2 CHALLENGE",
+        remix,
+        "",
+        "REFLECTION",
+        "What improved?",
+        "",
+        "What would I redraw?",
+        ""
+      ].join("\\n");
+
+      const blob = new Blob([worksheet], { type: "text/plain;charset=utf-8" });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      const safeTitle = title.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "") || "mascot-spark";
+      a.href = url;
+      a.download = `${safeTitle}-worksheet.txt`;
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      URL.revokeObjectURL(url);
+      status("Worksheet exported locally as a text file.", "ok");
+    }
+
     function getCurrentCoachContext() {
       const subjectKey = document.getElementById("lessonType")?.value || "blob";
       const emotionKey = document.getElementById("emotion")?.value || "happy";
@@ -2548,6 +2778,7 @@
       if (!palette || !palette.colors || palette.colors.length === 0) {
         swatchBox.innerHTML = "";
         nameBox.textContent = "Auto palette";
+        renderPaletteRoleGuide("auto");
         return;
       }
 
@@ -2555,6 +2786,8 @@
         `<span class="lesson-palette-swatch" style="background-color:${color};" aria-label="${palette.label} color"></span>`
       ).join("");
       nameBox.textContent = `${palette.label} · ${palette.colors.length} colors`;
+      const currentKey = document.getElementById("paletteMood")?.value || "auto";
+      renderPaletteRoleGuide(currentKey);
     }
 
     function renderLesson(data) {
@@ -2798,6 +3031,7 @@
       bootSelects();
       document.getElementById("paletteMood").addEventListener("change", () => { renderPalettePreview(); renderCoachContext(); });
       renderCoachContext();
+      loadViewMode();
       loadTheme();
       loadSettings();
       newLesson();

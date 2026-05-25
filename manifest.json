@@ -1,7 +1,7 @@
 {
-  "name": "Mascot Spark V20 \u2014 Final Cleanup",
+  "name": "Mascot Spark V25 \u2014 Subject Blueprint Completion",
   "short_name": "Mascot Spark",
-  "description": "Mascot Spark V20 final cleanup build with guided mascot drawing lessons, Blueprint Studio, Stash, PNG export, accessibility polish, and Procreate-friendly practice tools.",
+  "description": "Mascot Spark V25 adds custom subject blueprint guides for the remaining subject categories so the current subject set has full custom guide coverage.",
   "start_url": "./index.html",
   "scope": "./",
   "display": "standalone",

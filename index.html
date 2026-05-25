@@ -1756,6 +1756,105 @@
     }
 
 
+
+    .shade-lab {
+      display: grid;
+      grid-template-columns: minmax(280px, 360px) minmax(0, 1fr);
+      gap: 16px;
+      align-items: start;
+    }
+
+    .shade-side,
+    .shade-main {
+      display: grid;
+      gap: 14px;
+    }
+
+    .shade-quick-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+
+    .shade-output {
+      display: grid;
+      gap: 14px;
+    }
+
+    .shade-export-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      align-items: center;
+      justify-content: flex-end;
+    }
+
+    .shade-preview-wrap {
+      border-radius: 22px;
+      padding: 12px;
+      border: 1px solid color-mix(in srgb, var(--color-border) 78%, transparent);
+      background:
+        radial-gradient(circle at top left, color-mix(in srgb, var(--color-accent) 8%, transparent), transparent 15rem),
+        linear-gradient(180deg, color-mix(in srgb, var(--color-surface) 96%, white 4%), var(--color-surface-2));
+      box-shadow: 0 10px 24px color-mix(in srgb, #000 5%, transparent);
+    }
+
+    #shadeMapSvg {
+      display: block;
+      width: 100%;
+      height: auto;
+      border-radius: 16px;
+      overflow: hidden;
+      background: #173b63;
+    }
+
+    .shade-chip-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 8px;
+    }
+
+    .shade-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      border-radius: 999px;
+      padding: 7px 10px;
+      font-size: 12px;
+      font-weight: 800;
+      border: 1px solid color-mix(in srgb, var(--color-border) 75%, transparent);
+      background: color-mix(in srgb, var(--color-surface-2) 88%, white 6%);
+      color: var(--color-text);
+    }
+
+    .shade-chip-swatch {
+      width: 12px;
+      height: 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(0,0,0,.12);
+      flex: 0 0 auto;
+    }
+
+    @media (max-width: 699px) {
+      .shade-lab {
+        grid-template-columns: 1fr;
+      }
+      .shade-quick-grid {
+        grid-template-columns: 1fr;
+      }
+      .shade-export-actions {
+        justify-content: flex-start;
+      }
+    }
+
+    @media (min-width: 700px) and (max-width: 1180px) and (orientation: portrait) {
+      .shade-lab {
+        grid-template-columns: 1fr;
+      }
+    }
+
+
     @media (max-width: 699px) {
       .today-card {
         grid-template-columns: 1fr;
@@ -2060,6 +2159,7 @@
         <button class="tab-btn" type="button" data-tab="tab-color" onclick="showTab('tab-color')"><span class="tab-icon">●</span>Palette</button>
         <button class="tab-btn" type="button" data-tab="tab-blueprint" data-advanced-only="true" onclick="showTab('tab-blueprint')"><span class="tab-icon">⌁</span>Trace Guide</button>
         <button class="tab-btn" type="button" data-tab="tab-ai" data-advanced-only="true" onclick="showTab('tab-ai')"><span class="tab-icon">?</span>Coach</button>
+        <button class="tab-btn" type="button" data-tab="tab-shade" data-advanced-only="true" onclick="showTab('tab-shade')"><span class="tab-icon">✦</span>Shade Lab</button>
       </div>
 
       <div id="tab-lesson" class="tab-panel active">
@@ -2268,6 +2368,90 @@
               </div>
               <div id="aiOutputBody" class="ai-output-body compact-output">
                 <p class="small">Run one of the Coach tools to see help here.</p>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      
+      <div id="tab-shade" class="tab-panel" data-advanced-only="true">
+        <p class="tab-hint">Subject Blueprint Completion turns your current mascot into a gentle shading plan: where the shadow goes, where the shine goes, which palette colors do what, and how to handle it in Procreate.</p>
+
+        <section class="shade-lab">
+          <div class="shade-side">
+            <section class="controls">
+              <div class="panel">
+                <label for="shadeStyle">Shading style</label>
+                <select id="shadeStyle"></select>
+              </div>
+              <div class="panel">
+                <label for="lightDirection">Light direction</label>
+                <select id="lightDirection"></select>
+              </div>
+              <div class="panel">
+                <label for="shadeIntensity">Shading intensity</label>
+                <select id="shadeIntensity"></select>
+              </div>
+              <div class="panel">
+                <label for="shadeOutputType">Output type</label>
+                <select id="shadeOutputType"></select>
+              </div>
+            </section>
+
+            <div class="shade-quick-grid">
+              <button class="coach-tool-btn compact-coach-button" onclick="runShadingLab()">
+                <span class="coach-tool-title">Generate Shading Plan</span>
+                <span class="coach-tool-copy">Make a simple beginner-safe shading guide.</span>
+              </button>
+
+              <button class="coach-tool-btn compact-coach-button" onclick="setShadePreset('simpler')">
+                <span class="coach-tool-title">Make It Simpler</span>
+                <span class="coach-tool-copy">One shadow, one shine, less overwhelm.</span>
+              </button>
+
+              <button class="coach-tool-btn compact-coach-button" onclick="setShadePreset('glossy')">
+                <span class="coach-tool-title">Make It More Glossy</span>
+                <span class="coach-tool-copy">More gummy, shiny, candy-like polish.</span>
+              </button>
+
+              <button class="coach-tool-btn compact-coach-button" onclick="setShadePreset('icon')">
+                <span class="coach-tool-title">Make It More Icon-Readable</span>
+                <span class="coach-tool-copy">Clearer shadow and stronger small-size read.</span>
+              </button>
+            </div>
+
+            <div class="coach-context-card">
+              <strong>Current shade context</strong>
+              <div id="shadeContext" class="coach-context-list"></div>
+            </div>
+
+            <div class="coach-context-card">
+              <strong>Shading note</strong>
+              <p class="small">This lab works offline first. If you already added an OpenRouter key in the Coach tab, Shade Lab can also generate a custom AI shading plan.</p>
+            </div>
+          </div>
+
+          <div class="shade-main">
+            <div class="coach-output shade-output">
+              <div class="coach-output-head">
+                <div>
+                  <h3 id="shadeOutputTitle">Subject Blueprint Completion</h3>
+                  <p class="small">Generate a shading plan to see color roles, shadow placement, shine placement, Procreate layers, and what to avoid.</p>
+                </div>
+
+                <div class="shade-export-actions">
+                  <button class="utility-action" onclick="downloadShadeMapSvg()">Export SVG</button>
+                  <button class="utility-action" onclick="downloadShadeMapPng()">Export PNG</button>
+                </div>
+              </div>
+
+              <div class="shade-preview-wrap">
+                <svg id="shadeMapSvg" viewBox="0 0 520 560" role="img" aria-label="Shading map preview"></svg>
+              </div>
+
+              <div id="shadeOutputBody" class="coach-output-body">
+                <p class="small">Generate a shading plan to see the beginner-safe map.</p>
               </div>
             </div>
           </div>
@@ -2520,7 +2704,7 @@
     </section>
 
       <footer class="final-footer" aria-label="App version">
-      <span id="finalBuildBadge">Mascot Spark V20 · Final Cleanup Build · Cache mascot-spark-v20</span>
+      <span id="finalBuildBadge">Mascot Spark V20 · Subject Blueprint Completion · Cache mascot-spark-v25</span>
     </footer>
   </main>
 
@@ -2838,6 +3022,40 @@
       makeWorksheet: "Make it feel like a worksheet"
     };
 
+
+    const shadeStyles = {
+      softPlush: "Soft Plush",
+      stickerShine: "Sticker Shine",
+      gummyGloss: "Gummy Gloss",
+      painterlySoft: "Painterly Soft",
+      flatIcon: "Flat Icon",
+      spookyGlow: "Spooky Glow",
+      velvetShadow: "Velvet Shadow",
+      rainyMist: "Rainy Mist"
+    };
+
+    const lightDirections = {
+      topLeft: "Top Left",
+      topRight: "Top Right",
+      frontSoft: "Front Soft",
+      underGlow: "Under Glow",
+      backRim: "Back Rim Light"
+    };
+
+    const shadeIntensities = {
+      tinyShade: "Tiny Shade",
+      softShade: "Soft Shade",
+      fullCute: "Full Cute Polish",
+      iconPolish: "Icon Polish",
+      atmospheric: "Atmospheric"
+    };
+
+    const shadeOutputTypes = {
+      stepByStep: "Step-by-step",
+      mapOnly: "Map only",
+      layersOnly: "Procreate layers"
+    };
+
     const styleRecipes = [
       "Soft sticker: rounded line, one blush mark, one pale shadow.",
       "Tiny app icon: big silhouette, simple face, no tiny details.",
@@ -2920,6 +3138,10 @@
       populateSelect("blueprintStyle", blueprintOptions, "autoSubject");
       populateSelect("drawOrderMode", drawOrders, "simple");
       populateSelect("aiStyle", aiModes, "simplify");
+      populateSelect("shadeStyle", shadeStyles, "softPlush");
+      populateSelect("lightDirection", lightDirections, "topLeft");
+      populateSelect("shadeIntensity", shadeIntensities, "tinyShade");
+      populateSelect("shadeOutputType", shadeOutputTypes, "stepByStep");
     }
 
     function pick(arr) { return arr[Math.floor(Math.random() * arr.length)]; }
@@ -3008,6 +3230,256 @@
       return '<path class="shape" d="M160 205 C160 130 230 100 285 125 C348 153 384 218 363 292 C345 356 288 398 218 380 C153 363 124 298 160 205 Z"></path>';
     }
 
+
+    const EMOTION_BLUEPRINT_PASS_1 = [
+      "shy",
+      "happy",
+      "sleepy",
+      "grumpy",
+      "spooky",
+      "sassy",
+      "nervous",
+      "proud",
+      "dreamy",
+      "mischievous",
+      "dramatic",
+      "calm",
+      "confused",
+      "angryTiny",
+      "sadHopeful",
+      "delightedShy",
+      "gloomySweet",
+      "softSuspicious",
+      "hauntedHappy",
+      "chaoticSoft",
+      "bashfulProud",
+      "braveScared",
+      "jealousCute",
+      "lonelySparkly",
+      "feralCute",
+      "meltyHappy",
+      "embarrassedBrave",
+      "sleepyMischief",
+      "anxiousProud",
+      "hopefulGrumpy",
+      "bashfulChaotic",
+      "smugCute",
+      "timidMagical",
+      "dramaticSleepy",
+      "woundedSparkly",
+      "overexcitedSoft",
+      "suspiciousHappy",
+      "gloomyGlam",
+      "lonelyBrave",
+      "tenderFeral",
+      "eerieCalm",
+      "gigglyNervous",
+      "softVillain",
+      "rainyHopeful",
+      "cursedAdorable",
+      "seriousTiny",
+    ];
+
+    function getEmotionBlueprintGuide(emotion) {
+      const guides = {
+        shy: {
+          overlay: '<ellipse class="guide" cx="260" cy="285" rx="88" ry="58"></ellipse><path class="guide" d="M205 318 Q190 340 170 350 M315 318 Q330 340 350 350"></path>',
+          label: "Shy guide: low face, tucked-in tiny arms, blush zone close to eyes."
+        },
+        happy: {
+          overlay: '<path class="guide" d="M195 250 Q225 225 255 250 M265 250 Q295 225 325 250"></path><path class="guide" d="M210 325 Q260 365 310 325"></path>',
+          label: "Happy guide: lifted eyes, clear smile arc, open cheerful spacing."
+        },
+        sleepy: {
+          overlay: '<path class="guide" d="M198 258 Q225 278 252 258 M268 258 Q295 278 322 258"></path><path class="guide" d="M245 315 Q260 328 275 315"></path><line class="guide" x1="330" y1="195" x2="370" y2="165"></line>',
+          label: "Sleepy guide: closed eyes, droopy mouth, soft downward rhythm."
+        },
+        grumpy: {
+          overlay: '<path class="guide" d="M196 235 L248 258 M324 235 L272 258"></path><path class="guide" d="M238 326 Q260 308 282 326"></path>',
+          label: "Grumpy-cute guide: angled brows + tiny frown, but keep body round."
+        },
+        spooky: {
+          overlay: '<circle class="guide" cx="222" cy="260" r="24"></circle><path class="guide" d="M282 238 L322 278 M322 238 L282 278"></path><path class="guide" d="M248 320 Q260 336 272 320 M266 326 L272 344"></path>',
+          label: "Spooky-sweet guide: one uneven eye, one spooky mark, tiny fang."
+        },
+        sassy: {
+          overlay: '<path class="guide" d="M196 252 L248 252 M274 252 L326 242"></path><path class="guide" d="M242 320 Q270 336 292 305"></path>',
+          label: "Sassy-soft guide: half-lids, side smile, slight face asymmetry."
+        },
+        nervous: {
+          overlay: '<circle class="guide" cx="222" cy="264" r="16"></circle><circle class="guide" cx="300" cy="268" r="10"></circle><path class="guide" d="M246 318 Q260 308 274 318"></path><path class="guide" d="M332 230 Q350 250 338 270"></path>',
+          label: "Nervous-cute guide: uneven eyes, tiny worried mouth, one sweat/blush cue."
+        },
+        proud: {
+          overlay: '<path class="guide" d="M205 245 Q225 232 245 245 M275 245 Q295 232 315 245"></path><path class="guide" d="M242 315 Q260 330 282 315"></path><path class="guide" d="M260 390 L260 420"></path>',
+          label: "Proud-tiny guide: lifted eyes, confident small smile, upright center."
+        },
+        dreamy: {
+          overlay: '<path class="guide" d="M200 258 Q225 278 250 258 M270 258 Q295 278 320 258"></path><circle class="guide" cx="370" cy="190" r="22"></circle><path class="guide" d="M252 318 Q260 324 268 318"></path>',
+          label: "Dreamy-sad guide: soft closed eyes, tiny mouth, floating moon/spark cue."
+        },
+        mischievous: {
+          overlay: '<path class="guide" d="M198 245 L248 255 M274 255 Q300 238 326 248"></path><path class="guide" d="M244 316 Q265 336 290 310"></path><path class="guide" d="M270 320 L276 338"></path>',
+          label: "Mischievous-sweet guide: one raised brow, crooked smile, tiny fang optional."
+        },
+        dramatic: {
+          overlay: '<circle class="guide" cx="222" cy="260" r="26"></circle><circle class="guide" cx="298" cy="260" r="26"></circle><path class="guide" d="M252 322 Q260 340 268 322"></path><path class="guide" d="M330 288 Q350 318 330 342"></path>',
+          label: "Dramatic-soft guide: bigger eyes, small O/frown mouth, one tear cue."
+        },
+        calm: {
+          overlay: '<path class="guide" d="M200 260 Q225 275 250 260 M270 260 Q295 275 320 260"></path><path class="guide" d="M245 318 Q260 330 275 318"></path><ellipse class="guide" cx="260" cy="210" rx="78" ry="24"></ellipse>',
+          label: "Calm-glowy guide: closed peaceful eyes, small smile, soft halo zone."
+        },
+        confused: {
+          overlay: '<circle class="guide" cx="220" cy="260" r="24"></circle><circle class="guide" cx="304" cy="268" r="12"></circle><circle class="guide" cx="260" cy="318" r="13"></circle><path class="guide" d="M360 200 C390 175 420 195 405 225 C397 242 378 242 378 260"></path>',
+          label: "Confused-cute guide: one big eye, one small eye, O mouth, question cue."
+        },
+        angryTiny: {
+          overlay: '<path class="guide" d="M198 238 L248 262 M322 238 L272 262"></path><path class="guide" d="M244 324 Q260 312 276 324"></path><circle class="guide" cx="260" cy="270" r="96"></circle>',
+          label: "Tiny-angry guide: angry brows, very small frown, keep the round cute body."
+        },
+        sadHopeful: {
+          overlay: '<path class="guide" d="M198 252 Q224 240 250 260 M270 260 Q296 240 322 252"></path><path class="guide" d="M246 322 Q260 314 274 322"></path><path class="guide" d="M365 210 L374 232 L396 240 L374 248 L365 270 L356 248 L334 240 L356 232 Z"></path>',
+          label: "Sad-hopeful guide: soft sad eyes, tiny restrained mouth, one hopeful glow mark."
+        },
+        delightedShy: {
+          overlay: '<path class="guide" d="M198 252 Q225 232 252 252 M268 252 Q295 232 322 252"></path><path class="guide" d="M242 320 Q260 344 278 320"></path><path class="guide" d="M206 318 Q190 336 176 346 M314 318 Q330 336 344 346"></path>',
+          label: "Delighted-shy guide: happy lifted eyes, tucked tiny mouth, inward bashful arms."
+        },
+        gloomySweet: {
+          overlay: '<path class="guide" d="M198 262 Q224 246 250 264 M270 264 Q296 246 322 262"></path><path class="guide" d="M244 324 Q260 318 276 324"></path><path class="guide" d="M360 208 Q378 228 365 248"></path>',
+          label: "Gloomy-sweet guide: soft sad eyes, tiny kind mouth, one droop cue only."
+        },
+        softSuspicious: {
+          overlay: '<path class="guide" d="M198 250 L248 254 M276 258 Q302 244 326 250"></path><path class="guide" d="M244 320 Q262 334 286 312"></path>',
+          label: "Soft-suspicious guide: one flatter eye, one lifted eye, small side-smile."
+        },
+        hauntedHappy: {
+          overlay: '<circle class="guide" cx="222" cy="260" r="20"></circle><path class="guide" d="M284 240 L320 280 M320 240 L284 280"></path><path class="guide" d="M210 324 Q260 360 310 324"></path>',
+          label: "Haunted-happy guide: spooky eye mismatch with a clear cheerful smile."
+        },
+        chaoticSoft: {
+          overlay: '<circle class="guide" cx="224" cy="260" r="22"></circle><path class="guide" d="M282 250 Q302 232 324 254"></path><path class="guide" d="M242 322 Q265 346 292 314"></path><path class="guide" d="M352 188 L382 202 L364 224"></path>',
+          label: "Chaotic-soft guide: uneven face rhythm, but keep the overall body cuddly."
+        },
+        excited: {
+          overlay: '<circle class="guide" cx="222" cy="260" r="18"></circle><circle class="guide" cx="300" cy="260" r="18"></circle><path class="guide" d="M220 322 Q260 368 300 322"></path>',
+          label: "Excited guide: bright wide eyes and a big smile arc."
+        },
+        curious: {
+          overlay: '<circle class="guide" cx="220" cy="260" r="16"></circle><circle class="guide" cx="300" cy="266" r="24"></circle><circle class="guide" cx="260" cy="320" r="11"></circle>',
+          label: "Curious guide: one slightly larger eye and a tiny O-mouth."
+        },
+        surprised: {
+          overlay: '<circle class="guide" cx="220" cy="260" r="22"></circle><circle class="guide" cx="300" cy="260" r="22"></circle><circle class="guide" cx="260" cy="324" r="15"></circle>',
+          label: "Surprised guide: round eyes, round mouth, simple lifted spacing."
+        },
+        embarrassed: {
+          overlay: '<path class="guide" d="M202 260 Q226 278 250 260 M270 260 Q294 278 318 260"></path><path class="guide" d="M246 322 Q260 330 274 322"></path><path class="guide" d="M190 304 Q202 314 214 304 M306 304 Q318 314 330 304"></path>',
+          label: "Embarrassed guide: shy closed eyes, tiny mouth, blush zones near cheeks."
+        },
+        determined: {
+          overlay: '<path class="guide" d="M198 244 L248 256 M272 256 L322 244"></path><path class="guide" d="M242 320 Q260 330 278 320"></path>',
+          label: "Determined guide: focused angled brows and a small firm mouth."
+        },
+        cozy: {
+          overlay: '<path class="guide" d="M202 260 Q226 276 250 260 M270 260 Q294 276 318 260"></path><path class="guide" d="M244 320 Q260 334 276 320"></path><ellipse class="guide" cx="260" cy="210" rx="86" ry="28"></ellipse>',
+          label: "Cozy guide: peaceful closed eyes, small smile, warm halo or blanket vibe."
+        },
+        sicklyCute: {
+          overlay: '<path class="guide" d="M202 260 Q226 278 250 260 M270 260 Q294 278 318 260"></path><path class="guide" d="M244 324 Q260 314 276 324"></path><path class="guide" d="M340 210 L376 210"></path>',
+          label: "Sickly-cute guide: tired eyes, tiny downturned mouth, one thermometer or bandage zone."
+        },
+        bashfulProud: {
+          overlay: '<path class="guide" d="M202 252 Q226 238 250 252 M270 252 Q294 238 318 252"></path><path class="guide" d="M244 320 Q260 338 282 318"></path><path class="guide" d="M210 320 Q194 338 178 348"></path>',
+          label: "Bashful-proud guide: lifted eyes, small confident smile, one tucked side cue."
+        },
+        worriedHopeful: {
+          overlay: '<circle class="guide" cx="220" cy="264" r="15"></circle><circle class="guide" cx="300" cy="268" r="11"></circle><path class="guide" d="M246 322 Q260 314 274 322"></path><path class="guide" d="M365 210 L374 232 L396 240 L374 248 L365 270 L356 248 L334 240 L356 232 Z"></path>',
+          label: "Worried-hopeful guide: worried small eyes, tiny unsure mouth, one hopeful star cue."
+        },
+        silly: {
+          overlay: '<circle class="guide" cx="224" cy="260" r="18"></circle><path class="guide" d="M286 248 Q304 236 322 258"></path><path class="guide" d="M236 324 Q260 346 288 312"></path><path class="guide" d="M258 326 L272 344"></path>',
+          label: "Silly guide: uneven playful eyes and a goofy crooked mouth."
+
+        },
+        bashfulChaotic: {
+          overlay: '<path class="guide" d="M202 254 Q225 240 248 256 M272 252 Q296 238 320 258"></path><path class="guide" d="M242 322 Q260 344 286 316"></path><path class="guide" d="M210 320 Q190 340 174 352 M338 202 L372 214 L350 238"></path>',
+          label: "Bashful-chaotic guide: shy lifted eyes, crooked smile, one chaotic accent only."
+        },
+        smugCute: {
+          overlay: '<path class="guide" d="M198 252 L248 252 M274 256 Q298 242 322 248"></path><path class="guide" d="M242 320 Q268 336 292 312"></path>',
+          label: "Smug-cute guide: flat confident eye, one lifted brow, tiny smug side-mouth."
+        },
+        timidMagical: {
+          overlay: '<path class="guide" d="M202 260 Q226 278 250 260 M270 260 Q294 278 318 260"></path><path class="guide" d="M246 322 Q260 330 274 322"></path><path class="guide" d="M365 208 L374 230 L396 238 L374 246 L365 268 L356 246 L334 238 L356 230 Z"></path>',
+          label: "Timid-magical guide: shy closed eyes, tiny mouth, one magical star cue."
+        },
+        dramaticSleepy: {
+          overlay: '<path class="guide" d="M196 258 Q224 282 252 258 M268 258 Q296 282 324 258"></path><path class="guide" d="M244 324 Q260 346 276 324"></path><path class="guide" d="M330 286 Q352 314 334 344"></path>',
+          label: "Dramatic-sleepy guide: sleepy lids with one dramatic droop or tear curve."
+        },
+        woundedSparkly: {
+          overlay: '<path class="guide" d="M202 262 Q226 278 250 262 M270 262 Q294 278 318 262"></path><path class="guide" d="M246 324 Q260 316 274 324"></path><path class="guide" d="M334 212 L372 212"></path><path class="guide" d="M365 242 L374 260 L394 268 L374 276 L365 294 L356 276 L336 268 L356 260 Z"></path>',
+          label: "Wounded-sparkly guide: tired kind eyes, one small hurt mark, one sparkle of resilience."
+        },
+        overexcitedSoft: {
+          overlay: '<circle class="guide" cx="220" cy="260" r="20"></circle><circle class="guide" cx="300" cy="260" r="20"></circle><path class="guide" d="M216 322 Q260 372 304 322"></path><path class="guide" d="M170 300 Q188 286 202 302 M318 302 Q332 286 350 300"></path>',
+          label: "Overexcited-soft guide: big cheerful eyes and mouth, but keep limbs soft and rounded."
+        },
+        suspiciousHappy: {
+          overlay: '<path class="guide" d="M198 250 L248 254 M274 254 Q300 240 324 250"></path><path class="guide" d="M220 324 Q260 352 300 324"></path>',
+          label: "Suspicious-happy guide: one questioning eye with a still-readable happy smile."
+        },
+        gloomyGlam: {
+          overlay: '<path class="guide" d="M198 262 Q224 246 250 264 M270 264 Q296 246 322 262"></path><path class="guide" d="M244 324 Q260 318 276 324"></path><path class="guide" d="M206 214 Q232 194 260 208 Q288 194 314 214"></path>',
+          label: "Gloomy-glam guide: droopy sweet eyes, tiny mouth, elegant brow or lash silhouette."
+        },
+        lonelyBrave: {
+          overlay: '<path class="guide" d="M202 260 Q226 276 250 264 M270 264 Q294 248 318 260"></path><path class="guide" d="M246 324 Q260 316 274 324"></path><path class="guide" d="M260 388 L260 420"></path>',
+          label: "Lonely-brave guide: soft low eyes, small brave mouth, centered upright posture."
+        },
+        tenderFeral: {
+          overlay: '<circle class="guide" cx="222" cy="260" r="18"></circle><path class="guide" d="M286 248 Q304 236 322 256"></path><path class="guide" d="M240 324 Q262 346 288 314"></path><path class="guide" d="M258 324 L272 342"></path>',
+          label: "Tender-feral guide: one sweet eye, one wild eye, tiny fang or crooked grin."
+        },
+        eerieCalm: {
+          overlay: '<path class="guide" d="M202 260 Q226 276 250 260 M270 260 Q294 276 318 260"></path><path class="guide" d="M246 320 Q260 332 274 320"></path><ellipse class="guide" cx="260" cy="206" rx="84" ry="24"></ellipse><path class="guide" d="M352 210 Q380 236 352 262"></path>',
+          label: "Eerie-calm guide: peaceful closed eyes with one strange floating cue."
+        },
+        gigglyNervous: {
+          overlay: '<circle class="guide" cx="222" cy="264" r="15"></circle><circle class="guide" cx="300" cy="268" r="10"></circle><path class="guide" d="M238 322 Q260 346 286 320"></path><path class="guide" d="M332 228 Q350 248 338 268"></path>',
+          label: "Giggly-nervous guide: worried uneven eyes with a tiny giggle-smile."
+        },
+        softVillain: {
+          overlay: '<path class="guide" d="M198 250 L248 254 M276 254 Q302 240 326 248"></path><path class="guide" d="M242 322 Q266 338 292 312"></path><path class="guide" d="M205 214 Q232 200 260 210 Q288 200 316 214"></path>',
+          label: "Soft-villain guide: sly eyes and a small cunning mouth, still plush not harsh."
+        },
+        rainyHopeful: {
+          overlay: '<path class="guide" d="M200 262 Q226 246 252 264 M268 264 Q294 246 320 262"></path><path class="guide" d="M246 324 Q260 316 274 324"></path><path class="guide" d="M356 202 Q344 222 356 242 Q368 222 356 202"></path><path class="guide" d="M385 210 L394 232 L416 240 L394 248 L385 270 L376 248 L354 240 L376 232 Z"></path>',
+          label: "Rainy-hopeful guide: sad-soft eyes, a tiny hopeful mouth, raindrop plus one star cue."
+        },
+        cursedAdorable: {
+          overlay: '<circle class="guide" cx="222" cy="260" r="20"></circle><path class="guide" d="M284 240 L320 280 M320 240 L284 280"></path><path class="guide" d="M244 324 Q264 340 286 320"></path><path class="guide" d="M352 206 Q376 190 392 212 Q372 224 366 244"></path>',
+          label: "Cursed-adorable guide: spooky mismatch face, but keep the mouth tiny and cute."
+        },
+        seriousTiny: {
+          overlay: '<path class="guide" d="M200 250 L248 252 M272 252 L320 250"></path><path class="guide" d="M246 320 Q260 326 274 320"></path><circle class="guide" cx="260" cy="272" r="92"></circle>',
+          label: "Serious-tiny guide: level eyes, very small firm mouth, extra emphasis on tiny scale."
+        }
+      };
+
+      return guides[emotion] || {
+        overlay: '<ellipse class="guide" cx="260" cy="285" rx="95" ry="68"></ellipse>',
+        label: "Emotion guide coming next pass: keep the face low and readable."
+      };
+    }
+
+    function emotionBlueprintBadge(emotion) {
+      const supported = EMOTION_BLUEPRINT_PASS_1.includes(emotion);
+      return supported ? "Emotion blueprint: full current set supported" : "Emotion blueprint: fallback guide";
+    }
+
     function makeFace(emotion) {
       if (emotion === "sleepy" || emotion === "calm" || emotion === "dreamy") return ['<path class="feature" d="M207 258 Q225 270 243 258"></path><path class="feature" d="M277 258 Q295 270 313 258"></path>', '<path class="feature" d="M246 308 Q260 318 274 308"></path>'];
       if (emotion === "grumpy" || emotion === "angryTiny") return ['<path class="feature" d="M207 248 L245 260"></path><path class="feature" d="M313 248 L275 260"></path>', '<path class="feature" d="M246 315 Q260 305 274 315"></path>'];
@@ -3020,6 +3492,102 @@
 
 
     function getSubjectGuide(type) {
+      if (["blob"].includes(type)) {
+        return {
+          overlay: '<ellipse class="guide" cx="260" cy="272" rx="126" ry="152"></ellipse><path class="guide" d="M176 352 C210 372 310 372 344 352"></path>',
+          note: "Build one soft jelly body first, then add the face low."
+        };
+      }
+      if (["food"].includes(type)) {
+        return {
+          overlay: '<ellipse class="guide" cx="260" cy="275" rx="120" ry="142"></ellipse><path class="guide" d="M185 200 Q260 150 335 200"></path>',
+          note: "Start with a simple food body, then add one clear edible cue."
+        };
+      }
+      if (["object"].includes(type)) {
+        return {
+          overlay: '<rect class="guide" x="168" y="145" width="184" height="240" rx="38"></rect><line class="guide" x1="260" y1="145" x2="260" y2="385"></line>',
+          note: "Use a clean object silhouette first, then add the face and limbs."
+        };
+      }
+      if (["mask"].includes(type)) {
+        return {
+          overlay: '<path class="guide" d="M165 190 C200 150 320 150 355 190 C350 295 318 352 260 382 C202 352 170 295 165 190 Z"></path><line class="guide" x1="165" y1="245" x2="355" y2="245"></line>',
+          note: "Keep the mask silhouette centered and balanced before adding facial symbols."
+        };
+      }
+      if (["flower"].includes(type)) {
+        return {
+          overlay: '<circle class="guide" cx="260" cy="260" r="48"></circle><circle class="guide" cx="260" cy="175" r="52"></circle><circle class="guide" cx="336" cy="228" r="52"></circle><circle class="guide" cx="308" cy="320" r="52"></circle><circle class="guide" cx="212" cy="320" r="52"></circle><circle class="guide" cx="184" cy="228" r="52"></circle>',
+          note: "Place the flower center first, then build a few readable petals around it."
+        };
+      }
+      if (["star"].includes(type)) {
+        return {
+          overlay: '<path class="guide" d="M260 128 L292 220 L390 220 L310 276 L340 372 L260 314 L180 372 L210 276 L130 220 L228 220 Z"></path>',
+          note: "Use the big five-point star silhouette first; keep the face small inside it."
+        };
+      }
+      if (["bug"].includes(type)) {
+        return {
+          overlay: '<ellipse class="guide" cx="260" cy="288" rx="86" ry="118"></ellipse><line class="guide" x1="260" y1="170" x2="260" y2="406"></line><path class="guide" d="M216 170 L190 130 M304 170 L330 130"></path>',
+          note: "Build the rounded bug body, center line, and antennae before tiny details."
+        };
+      }
+      if (["stationery"].includes(type)) {
+        return {
+          overlay: '<rect class="guide" x="182" y="130" width="156" height="270" rx="24"></rect><path class="guide" d="M182 176 L338 176"></path><line class="guide" x1="260" y1="130" x2="260" y2="400"></line>',
+          note: "Use the paper or tool frame first, then place the face low and simple."
+        };
+      }
+      if (["candy"].includes(type)) {
+        return {
+          overlay: '<ellipse class="guide" cx="260" cy="265" rx="86" ry="104"></ellipse><path class="guide" d="M174 250 L126 224 L126 308 L174 282"></path><path class="guide" d="M346 250 L394 224 L394 308 L346 282"></path>',
+          note: "Center the sweet body first, then add wrapper or candy cues."
+        };
+      }
+      if (["toy"].includes(type)) {
+        return {
+          overlay: '<ellipse class="guide" cx="260" cy="260" rx="108" ry="124"></ellipse><circle class="guide" cx="214" cy="176" r="28"></circle><circle class="guide" cx="306" cy="176" r="28"></circle>',
+          note: "Use a plushy toy body first, then one toy-defining part like ears or seams."
+        };
+      }
+      if (["tool"].includes(type)) {
+        return {
+          overlay: '<line class="guide" x1="260" y1="126" x2="260" y2="390"></line><rect class="guide" x="224" y="284" width="72" height="122" rx="20"></rect><path class="guide" d="M195 170 L325 170"></path>',
+          note: "Build the handle or main axis first, then the tool head."
+        };
+      }
+      if (["household"].includes(type)) {
+        return {
+          overlay: '<rect class="guide" x="176" y="152" width="168" height="230" rx="32"></rect><line class="guide" x1="260" y1="152" x2="260" y2="382"></line><line class="guide" x1="176" y1="220" x2="344" y2="220"></line>',
+          note: "Keep the home-object silhouette readable before character details."
+        };
+      }
+      if (["drink"].includes(type)) {
+        return {
+          overlay: '<path class="guide" d="M200 148 L320 148 L304 386 L216 386 Z"></path><line class="guide" x1="200" y1="186" x2="320" y2="186"></line><path class="guide" d="M260 90 L260 148"></path>',
+          note: "Cup or bottle shape first, liquid zone second, face third."
+        };
+      }
+      if (["sauce"].includes(type)) {
+        return {
+          overlay: '<path class="guide" d="M224 118 L296 118 L312 176 L312 382 L208 382 L208 176 Z"></path><line class="guide" x1="208" y1="176" x2="312" y2="176"></line>',
+          note: "Use a squeeze bottle or jar body first, then the flavor cue."
+        };
+      }
+      if (["artSupply"].includes(type)) {
+        return {
+          overlay: '<line class="guide" x1="220" y1="130" x2="320" y2="350"></line><path class="guide" d="M320 350 L336 388 L298 372 Z"></path><path class="guide" d="M220 130 L198 158 L236 166 Z"></path>',
+          note: "Use a strong pencil or brush axis first, then add the cute face."
+        };
+      }
+      if (["plushKeychain"].includes(type)) {
+        return {
+          overlay: '<ellipse class="guide" cx="260" cy="278" rx="106" ry="126"></ellipse><circle class="guide" cx="260" cy="118" r="34"></circle><line class="guide" x1="260" y1="152" x2="260" y2="170"></line>',
+          note: "Build the plush charm body first, then add the hanging loop up top."
+        };
+      }
       if (["fruit", "vegetable", "dessert", "breakfast"].includes(type)) {
         return {
           overlay: '<circle class="guide" cx="260" cy="265" r="118"></circle><path class="guide" d="M260 150 C245 125 255 110 280 100"></path>',
@@ -3170,6 +3738,7 @@
       const [eyes, mouth] = makeFace(emotion);
       const twistSvg = twists[twist] ? twists[twist][3] : "";
       const subjectGuide = getSubjectGuide(type);
+      const emotionGuide = getEmotionBlueprintGuide(emotion);
       let overlay = style === "autoSubject" ? `${subjectGuide.overlay}<text class="label" x="35" y="535">Auto subject guide: ${subjectGuide.note}</text>` : "";
       if (style === "bodyFirst") overlay = '<text class="label" x="35" y="535">Body-first: trace only the outside shape before adding face.</text>';
       if (style === "faceMap") overlay = '<rect class="guide" x="185" y="235" width="150" height="105" rx="35"></rect><text class="label" x="35" y="535">Face map: keep eyes and mouth inside this soft box.</text>';
@@ -3218,8 +3787,10 @@
         <path class="feature" d="M305 392 Q315 425 342 435"></path>
         ${eyes}
         ${mouth}
+        ${emotionGuide.overlay}
         ${twistSvg}
         ${overlay}
+        <text class="label" x="35" y="486">${emotionGuide.label}</text>
         <text class="label" x="35" y="508">Import into Procreate, lower opacity, draw on a new layer.</text>
       `;
     }
@@ -3231,6 +3802,7 @@
       const eyes = face[0];
       const mouth = face[1];
       const twistSvg = twists[twist] ? twists[twist][3] : "";
+      const emotionGuide = getEmotionBlueprintGuide(emotion);
 
       const guides = getStageGuides(type, stage);
 
@@ -3244,9 +3816,9 @@
       let content = "";
       if (stage === "body") content = `${body}`;
       if (stage === "guide") content = `${guides}${body}`;
-      if (stage === "face") content = `${guides}${body}${eyes}${mouth}`;
-      if (stage === "limbs") content = `${guides}${body}${limbs}${eyes}${mouth}`;
-      if (stage === "final") content = `${guides}${body}${limbs}${eyes}${mouth}${twistSvg}<path class="guide" d="M165 360 C220 415 315 415 365 360"></path>`;
+      if (stage === "face") content = `${guides}${body}${eyes}${mouth}${emotionGuide.overlay}`;
+      if (stage === "limbs") content = `${guides}${body}${limbs}${eyes}${mouth}${emotionGuide.overlay}`;
+      if (stage === "final") content = `${guides}${body}${limbs}${eyes}${mouth}${emotionGuide.overlay}${twistSvg}<path class="guide" d="M165 360 C220 415 315 415 365 360"></path>`;
 
       return `<svg viewBox="0 0 520 520" aria-hidden="true">${content}</svg>`;
     }
@@ -3808,8 +4380,8 @@
       box.textContent = suggestion;
     }
 
-    const APP_VERSION = "V20";
-    const APP_CACHE_NAME = "mascot-spark-v20";
+    const APP_VERSION = "V25";
+    const APP_CACHE_NAME = "mascot-spark-v25";
 
     function escapeHtml(value) {
       return String(value ?? "").replace(/[&<>"']/g, char => ({
@@ -4253,7 +4825,7 @@ ${currentBlueprint ? `<section><h2>Blueprint</h2>${currentBlueprint}</section>` 
 
       if (skillBox) skillBox.innerHTML = `<b>${skill.title}</b><br>${skill.goal}<ul>${skill.drills.map(x => `<li>${x}</li>`).join("")}</ul>`;
       if (anatomyBox) anatomyBox.innerHTML = `<ul>${anatomy.map(x => `<li>${x}</li>`).join("")}</ul>`;
-      if (rulesBox) rulesBox.innerHTML = `<ul>${subjectRules.map(x => `<li>${x}</li>`).join("")}</ul>`;
+      if (rulesBox) rulesBox.innerHTML = `<ul>${subjectRules.map(x => `<li>${x}</li>`).join("")}<li>${emotionBlueprintBadge(data.emotion)}</li></ul>`;
       if (versionBox) versionBox.innerHTML = `<b>${version2.title}</b><br>${version2.body}`;
     }
 
@@ -4464,6 +5036,467 @@ ${currentBlueprint ? `<section><h2>Blueprint</h2>${currentBlueprint}</section>` 
         ],
         note: "If you feel unsure, stop after flat color + one shadow + one shine spot."
       };
+    }
+
+
+    function defaultShadeStyleForCurrentLesson() {
+      const type = document.getElementById("lessonType")?.value || "blob";
+      const emotion = document.getElementById("emotion")?.value || "happy";
+      if (["food", "fruit", "dessert", "breakfast", "candy", "drink", "sauce"].includes(type)) return "gummyGloss";
+      if (["icon", "badge", "sticker", "logoMark", "emoji"].includes(type)) return "flatIcon";
+      if (["ghost", "tinyMonster"].includes(type) || ["spooky", "hauntedHappy", "eerieCalm", "cursedAdorable"].includes(emotion)) return "spookyGlow";
+      if (["shell", "aquatic", "cloud", "weatherIcon"].includes(type)) return "rainyMist";
+      return "softPlush";
+    }
+
+    function getCurrentShadeContext() {
+      const coach = getCurrentCoachContext();
+      return {
+        ...coach,
+        shadeStyleKey: document.getElementById("shadeStyle")?.value || defaultShadeStyleForCurrentLesson(),
+        shadeStyle: shadeStyles[document.getElementById("shadeStyle")?.value || defaultShadeStyleForCurrentLesson()] || "Soft Plush",
+        lightKey: document.getElementById("lightDirection")?.value || "topLeft",
+        lightDirection: lightDirections[document.getElementById("lightDirection")?.value || "topLeft"] || "Top Left",
+        intensityKey: document.getElementById("shadeIntensity")?.value || "tinyShade",
+        intensity: shadeIntensities[document.getElementById("shadeIntensity")?.value || "tinyShade"] || "Tiny Shade",
+        outputKey: document.getElementById("shadeOutputType")?.value || "stepByStep",
+        outputType: shadeOutputTypes[document.getElementById("shadeOutputType")?.value || "stepByStep"] || "Step-by-step"
+      };
+    }
+
+    function getShadeRoleColors(context) {
+      const colors = (context.palette.colors && context.palette.colors.length ? context.palette.colors : ["#F27BA6", "#FFB7D0", "#FFF7FB", "#8EDAF7", "#D7C4F4"]).slice();
+      const body = colors[0] || "#F27BA6";
+      const secondary = colors[1] || body;
+      const accent = colors[2] || secondary;
+      const shadow = colors[Math.max(0, colors.length - 2)] || secondary;
+      const highlight = colors[Math.max(0, colors.length - 1)] || accent;
+      const blush = colors[1] || "#FFB7D0";
+      const outline = colors.length > 5 ? colors[0] : "#352733";
+      return { body, secondary, accent, shadow, highlight, blush, outline };
+    }
+
+    function shadeSvgClasses(svg, colors) {
+      if (!svg) return "";
+      return svg
+        .replace(/class="shape"/g, `fill="${colors.body}" stroke="${colors.outline}" stroke-width="4" stroke-linejoin="round"`)
+        .replace(/class="solid"/g, `fill="${colors.outline}"`)
+        .replace(/class="feature"/g, `fill="none" stroke="${colors.outline}" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"`)
+        .replace(/class="guide"/g, `fill="none" stroke="${colors.highlight}" stroke-width="2.5" stroke-dasharray="8 8" stroke-linecap="round" stroke-linejoin="round"`);
+    }
+
+    function getShadeMapZones(context, colors) {
+      const style = context.shadeStyleKey;
+      const light = context.lightKey;
+      const intensity = context.intensityKey;
+
+      const zones = {
+        topLeft: {
+          shadow: '<ellipse cx="318" cy="336" rx="120" ry="140" fill="' + colors.shadow + '" opacity=".26" transform="rotate(-12 318 336)"></ellipse>',
+          highlight: '<ellipse cx="212" cy="208" rx="72" ry="50" fill="' + colors.highlight + '" opacity=".55" transform="rotate(-18 212 208)"></ellipse>',
+          rim: '<path d="M158 178 C182 140 220 124 244 120" stroke="' + colors.highlight + '" stroke-width="8" stroke-linecap="round" fill="none" opacity=".32"></path>'
+        },
+        topRight: {
+          shadow: '<ellipse cx="202" cy="336" rx="120" ry="140" fill="' + colors.shadow + '" opacity=".26" transform="rotate(12 202 336)"></ellipse>',
+          highlight: '<ellipse cx="308" cy="208" rx="72" ry="50" fill="' + colors.highlight + '" opacity=".55" transform="rotate(18 308 208)"></ellipse>',
+          rim: '<path d="M362 178 C338 140 300 124 276 120" stroke="' + colors.highlight + '" stroke-width="8" stroke-linecap="round" fill="none" opacity=".32"></path>'
+        },
+        frontSoft: {
+          shadow: '<ellipse cx="260" cy="350" rx="124" ry="108" fill="' + colors.shadow + '" opacity=".22"></ellipse>',
+          highlight: '<ellipse cx="260" cy="196" rx="84" ry="42" fill="' + colors.highlight + '" opacity=".48"></ellipse>',
+          rim: ''
+        },
+        underGlow: {
+          shadow: '<ellipse cx="260" cy="216" rx="122" ry="88" fill="' + colors.shadow + '" opacity=".22"></ellipse>',
+          highlight: '<ellipse cx="260" cy="368" rx="110" ry="74" fill="' + colors.highlight + '" opacity=".58"></ellipse>',
+          rim: '<ellipse cx="260" cy="402" rx="102" ry="32" fill="' + colors.highlight + '" opacity=".18"></ellipse>'
+        },
+        backRim: {
+          shadow: '<ellipse cx="260" cy="290" rx="120" ry="146" fill="' + colors.shadow + '" opacity=".28"></ellipse>',
+          highlight: '',
+          rim: '<path d="M165 205 C175 140 220 118 260 118 C300 118 345 140 355 205 C366 280 338 360 260 388 C182 360 154 280 165 205 Z" stroke="' + colors.highlight + '" stroke-width="12" fill="none" opacity=".55" stroke-linejoin="round"></path>'
+        }
+      };
+
+      let picked = zones[light] || zones.topLeft;
+
+      let blush = '<circle cx="220" cy="308" r="18" fill="' + colors.blush + '" opacity=".22"></circle><circle cx="300" cy="308" r="18" fill="' + colors.blush + '" opacity=".22"></circle>';
+      let extra = '';
+
+      if (intensity === "tinyShade") {
+        blush = '';
+      }
+      if (intensity === "iconPolish") {
+        blush = '';
+        picked.shadow = picked.shadow.replace('opacity=".26"', 'opacity=".18"').replace('opacity=".22"', 'opacity=".18"');
+        picked.highlight = picked.highlight.replace('opacity=".55"', 'opacity=".45"').replace('opacity=".48"', 'opacity=".4"');
+      }
+      if (intensity === "fullCute") {
+        extra += '<ellipse cx="205" cy="178" rx="22" ry="12" fill="' + colors.highlight + '" opacity=".65" transform="rotate(-18 205 178)"></ellipse>';
+      }
+      if (intensity === "atmospheric") {
+        extra += '<ellipse cx="260" cy="440" rx="132" ry="26" fill="' + colors.shadow + '" opacity=".18"></ellipse>';
+      }
+
+      if (style === "gummyGloss") {
+        extra += '<ellipse cx="190" cy="182" rx="26" ry="14" fill="#FFFFFF" opacity=".55" transform="rotate(-22 190 182)"></ellipse><ellipse cx="222" cy="210" rx="16" ry="10" fill="#FFFFFF" opacity=".35" transform="rotate(-22 222 210)"></ellipse>';
+      }
+      if (style === "stickerShine" || style === "flatIcon") {
+        blush = '';
+        extra += '<ellipse cx="208" cy="196" rx="30" ry="16" fill="#FFFFFF" opacity=".45" transform="rotate(-18 208 196)"></ellipse>';
+      }
+      if (style === "spookyGlow") {
+        extra += '<circle cx="260" cy="270" r="142" fill="' + colors.highlight + '" opacity=".06"></circle>';
+      }
+      if (style === "velvetShadow") {
+        picked.shadow = picked.shadow.replace('opacity=".26"', 'opacity=".33"').replace('opacity=".22"', 'opacity=".28"');
+      }
+      if (style === "rainyMist") {
+        extra += '<ellipse cx="260" cy="176" rx="118" ry="34" fill="' + colors.highlight + '" opacity=".15"></ellipse><ellipse cx="260" cy="392" rx="138" ry="28" fill="' + colors.highlight + '" opacity=".08"></ellipse>';
+      }
+      if (style === "painterlySoft") {
+        extra += '<path d="M164 322 C194 296 220 302 244 316" stroke="' + colors.shadow + '" stroke-width="10" stroke-linecap="round" fill="none" opacity=".14"></path><path d="M282 182 C308 170 330 182 346 200" stroke="#FFFFFF" stroke-width="10" stroke-linecap="round" fill="none" opacity=".16"></path>';
+      }
+
+      return { shadow: picked.shadow, highlight: picked.highlight, rim: picked.rim, blush, extra };
+    }
+
+    function makeShadeMapSVG(context) {
+      const colors = getShadeRoleColors(context);
+      const type = document.getElementById("lessonType")?.value || "blob";
+      const emotion = document.getElementById("emotion")?.value || "happy";
+      const twist = document.getElementById("funTwist")?.value || "none";
+
+      const rawBody = makeBody(type);
+      const rawEyes = makeFace(emotion)[0];
+      const rawMouth = makeFace(emotion)[1];
+      const rawTwist = twists[twist] ? twists[twist][3] : "";
+
+      const clipBody = rawBody.replace(/class="shape"/g, 'fill="#fff"');
+      const body = shadeSvgClasses(rawBody, colors);
+      const face = shadeSvgClasses(rawEyes + rawMouth, colors);
+      const twistSvg = shadeSvgClasses(rawTwist, colors);
+      const zones = getShadeMapZones(context, colors);
+
+      return `
+        <defs>
+          <clipPath id="shadeClip">${clipBody}</clipPath>
+        </defs>
+        <rect x="0" y="0" width="520" height="560" fill="#173b63"></rect>
+        <text x="24" y="38" fill="#DCEEFF" font-size="22" font-weight="800">${context.shadeStyle} · ${context.lightDirection}</text>
+        <text x="24" y="62" fill="#A9C6DF" font-size="13">${context.intensity} · ${context.outputType}</text>
+        <ellipse cx="260" cy="452" rx="124" ry="24" fill="#0E2B49" opacity=".55"></ellipse>
+
+        ${body}
+        <g clip-path="url(#shadeClip)">
+          ${zones.shadow}
+          ${zones.highlight}
+          ${zones.blush}
+          ${zones.extra}
+        </g>
+        ${zones.rim}
+        ${twistSvg}
+        ${face}
+
+        <g>
+          <rect x="24" y="470" width="156" height="64" rx="18" fill="rgba(255,255,255,.08)" stroke="rgba(220,238,255,.18)"></rect>
+          <text x="40" y="492" fill="#DCEEFF" font-size="12" font-weight="800">SHADOW</text>
+          <text x="40" y="510" fill="#A9C6DF" font-size="11">main form shadow</text>
+          <circle cx="148" cy="502" r="10" fill="${colors.shadow}"></circle>
+
+          <rect x="188" y="470" width="156" height="64" rx="18" fill="rgba(255,255,255,.08)" stroke="rgba(220,238,255,.18)"></rect>
+          <text x="204" y="492" fill="#DCEEFF" font-size="12" font-weight="800">HIGHLIGHT</text>
+          <text x="204" y="510" fill="#A9C6DF" font-size="11">shine / glow zone</text>
+          <circle cx="312" cy="502" r="10" fill="${colors.highlight}"></circle>
+
+          <rect x="352" y="470" width="144" height="64" rx="18" fill="rgba(255,255,255,.08)" stroke="rgba(220,238,255,.18)"></rect>
+          <text x="368" y="492" fill="#DCEEFF" font-size="12" font-weight="800">BLUSH</text>
+          <text x="368" y="510" fill="#A9C6DF" font-size="11">soft cheek warmth</text>
+          <circle cx="470" cy="502" r="10" fill="${colors.blush}"></circle>
+        </g>
+      `;
+    }
+
+    function renderShadeMap() {
+      const box = document.getElementById("shadeMapSvg");
+      if (!box) return;
+      const context = getCurrentShadeContext();
+      box.innerHTML = makeShadeMapSVG(context);
+    }
+
+    function renderShadeContext() {
+      const c = getCurrentShadeContext();
+      const box = document.getElementById("shadeContext");
+      if (!box) return;
+      box.innerHTML = `
+        <span>Subject: ${c.subject[0]}</span>
+        <span>Emotion: ${c.emotion[0]}</span>
+        <span>Palette: ${c.palette.label || "Auto"}</span>
+        <span>Shade style: ${c.shadeStyle}</span>
+        <span>Light: ${c.lightDirection}</span>
+        <span>Intensity: ${c.intensity}</span>
+      `;
+    }
+
+    function getShadingMapText(context) {
+      const lightText = context.lightDirection.toLowerCase();
+      if (context.lightKey === "topRight") {
+        return [
+          "Main shadow: lower-left side of the body.",
+          "Highlight: upper-right side.",
+          "Contact shadow: tiny shadow under the mascot.",
+          "Cheek glow: keep it smaller than the eyes.",
+          "Accent shine: one tiny shine on the twist or accessory."
+        ];
+      }
+      if (context.lightKey === "frontSoft") {
+        return [
+          "Main shadow: soft low band across the lower body.",
+          "Highlight: top-center soft oval.",
+          "Contact shadow: small shadow directly underneath.",
+          "Cheek glow: subtle, centered near the face.",
+          "Keep both sides balanced so it stays gentle."
+        ];
+      }
+      if (context.lightKey === "underGlow") {
+        return [
+          "Main shadow: upper half of the body.",
+          "Glow highlight: lower body and lower edge.",
+          "Contact shadow: keep it light so the glow still reads.",
+          "Use this when you want magical or spooky softness.",
+          "One lower glow is enough."
+        ];
+      }
+      if (context.lightKey === "backRim") {
+        return [
+          "Main shadow: center and front plane of the body.",
+          "Rim light: thin bright edge around the outside silhouette.",
+          "Keep the rim thinner than your line art where possible.",
+          "Use it for eerie, luxe, or dramatic mascots.",
+          "Do not add many interior highlights with this setup."
+        ];
+      }
+      return [
+        "Main shadow: lower-right side of the body.",
+        "Highlight: upper-left side.",
+        "Contact shadow: tiny shadow under the mascot.",
+        "Cheek glow: small soft blush under the eyes.",
+        "Accent shine: one tiny shine on the twist or accessory."
+      ];
+    }
+
+    function shadingLabFallback() {
+      const c = getCurrentShadeContext();
+      const roles = getShadeRoleColors(c);
+      const simpleLayerPlan = c.intensityKey === "tinyShade"
+        ? [
+            "Layer 1: flat base color.",
+            "Layer 2: shadow clipping mask — multiply around 20–25%.",
+            "Layer 3: highlight clipping mask — normal or add around 35–45%."
+          ]
+        : [
+            "Layer 1: blueprint guide at low opacity.",
+            "Layer 2: rough sketch.",
+            "Layer 3: clean line.",
+            "Layer 4: flat body color.",
+            "Layer 5: shadow clipping mask — multiply around 20–30%.",
+            "Layer 6: highlight clipping mask — normal or add around 35–45%.",
+            "Layer 7: blush / glow accents."
+          ];
+
+      const styleNote = {
+        softPlush: "Use very round shadow shapes. Think plush toy, not hard cel shading.",
+        stickerShine: "Use clean, graphic shine spots that still read small.",
+        gummyGloss: "Use one big glossy shine and maybe one tiny secondary shine.",
+        painterlySoft: "Use loose soft brush shading, but stop early.",
+        flatIcon: "Keep shadow simple so the mascot still reads at icon size.",
+        spookyGlow: "Use soft glow instead of many hard shadows.",
+        velvetShadow: "Use slightly deeper shadows, but keep the edges soft.",
+        rainyMist: "Keep the contrast soft and slightly misty."
+      }[c.shadeStyleKey] || "Keep it simple and readable.";
+
+      const summary = `Use ${c.shadeStyle.toLowerCase()} with light from ${c.lightDirection.toLowerCase()}. The goal is not full rendering — just a clean beginner-safe shadow map that helps the mascot feel more dimensional without muddying it.`;
+
+      const sections = [
+        {
+          heading: "Suggested color jobs",
+          items: [
+            `Body: ${roles.body}`,
+            `Secondary detail: ${roles.secondary}`,
+            `Shadow: ${roles.shadow}`,
+            `Highlight or shine: ${roles.highlight}`,
+            `Blush or warmth: ${roles.blush}`
+          ]
+        },
+        {
+          heading: "Shading map",
+          items: getShadingMapText(c)
+        },
+        {
+          heading: "Procreate layer plan",
+          items: simpleLayerPlan
+        },
+        {
+          heading: "Avoid muddy shading",
+          items: [
+            "Do not shade every edge.",
+            "Do not use every palette color as a shadow.",
+            "Do not make the shadow darker than the line art unless you want a dramatic style.",
+            "Stop after one main shadow + one main shine if the mascot already reads."
+          ]
+        },
+        {
+          heading: "Version 2 shading challenge",
+          items: [
+            "Make one cleaner second version using fewer shading shapes.",
+            "Try moving the highlight slightly higher or lower and compare the result.",
+            "Export the shading map and trace only the shadow shape once."
+          ]
+        }
+      ];
+
+      if (c.outputKey === "mapOnly") {
+        sections.splice(2, 2);
+      }
+      if (c.outputKey === "layersOnly") {
+        sections.splice(0, 2);
+      }
+
+      return {
+        title: `Subject Blueprint Completion — ${c.shadeStyle}`,
+        summary,
+        sections,
+        note: styleNote
+      };
+    }
+
+    function renderShadeOutput(data) {
+      const title = document.getElementById("shadeOutputTitle");
+      const body = document.getElementById("shadeOutputBody");
+      if (!title || !body) return;
+      title.textContent = data.title || "Subject Blueprint Completion";
+
+      const context = getCurrentShadeContext();
+      const roles = getShadeRoleColors(context);
+      const chips = `
+        <div class="shade-chip-row">
+          <span class="shade-chip"><span class="shade-chip-swatch" style="background:${roles.body}"></span>Body</span>
+          <span class="shade-chip"><span class="shade-chip-swatch" style="background:${roles.shadow}"></span>Shadow</span>
+          <span class="shade-chip"><span class="shade-chip-swatch" style="background:${roles.highlight}"></span>Highlight</span>
+          <span class="shade-chip"><span class="shade-chip-swatch" style="background:${roles.blush}"></span>Blush</span>
+        </div>
+      `;
+
+      const summary = data.summary ? `<div class="coach-summary">${data.summary}</div>` : "";
+      const sections = (data.sections || []).map(section => `
+        <section class="coach-section">
+          <h4>${section.heading}</h4>
+          <ul>${(section.items || []).map(item => `<li>${item}</li>`).join("")}</ul>
+        </section>
+      `).join("");
+      const note = data.note ? `<div class="coach-inline-note">${data.note}</div>` : "";
+      body.innerHTML = summary + chips + sections + note;
+    }
+
+    async function callShadingModel() {
+      const key = document.getElementById("apiKey")?.value.trim();
+      const model = document.getElementById("model")?.value.trim() || "openrouter/free";
+      const context = getCurrentShadeContext();
+
+      if (!key) return shadingLabFallback();
+      saveSettings();
+
+      const system = `You are a beginner shading coach for mascot drawing in Procreate. Return ONLY valid JSON with keys: title, summary, sections, note. sections must be an array of objects with heading and items arrays. Focus on simple mascot shading: assign palette color roles, explain where the shadow goes, where the highlight goes, give a simple Procreate layer plan, and what to avoid so the drawing does not get muddy. Keep it concise, practical, and beginner-safe.`;
+
+      const payload = {
+        subject: context.subject[0],
+        emotion: context.emotion[0],
+        twist: context.twist[0],
+        palette: context.palette.label || "Auto",
+        paletteColors: context.palette.colors || [],
+        shadingStyle: context.shadeStyle,
+        lightDirection: context.lightDirection,
+        shadingIntensity: context.intensity,
+        outputType: context.outputType,
+        lessonSize: context.lesson[0]
+      };
+
+      const res = await fetch("https://openrouter.ai/api/v1/chat/completions", {
+        method: "POST",
+        headers: {
+          "Authorization": `Bearer ${key}`,
+          "Content-Type": "application/json",
+          "HTTP-Referer": window.location.href,
+          "X-Title": "Mascot Spark V24"
+        },
+        body: JSON.stringify({
+          model,
+          messages: [
+            { role: "system", content: system },
+            { role: "user", content: JSON.stringify(payload) }
+          ],
+          temperature: 0.55,
+          max_tokens: 900
+        })
+      });
+
+      if (!res.ok) throw new Error("OpenRouter error " + res.status + ": " + (await res.text()).slice(0, 220));
+      const raw = await res.json();
+      const text = raw.choices && raw.choices[0] && raw.choices[0].message ? raw.choices[0].message.content : "";
+      const data = extractJson(text);
+      if (!data) throw new Error("AI response was not usable JSON.");
+      return data;
+    }
+
+    async function runShadingLab() {
+      showTab("tab-shade");
+      renderShadeContext();
+      renderShadeMap();
+      status("Building shading plan...", "");
+      try {
+        const data = await callShadingModel();
+        renderShadeOutput(data);
+        status("Shading plan ready.", "ok");
+      } catch (err) {
+        renderShadeOutput(shadingLabFallback());
+        status(err.message + " Showing offline shading plan instead.", "bad");
+      }
+    }
+
+    function setShadePreset(mode) {
+      if (mode === "simpler") {
+        document.getElementById("shadeIntensity").value = "tinyShade";
+        document.getElementById("shadeOutputType").value = "stepByStep";
+        if (document.getElementById("shadeStyle").value === "velvetShadow") document.getElementById("shadeStyle").value = "softPlush";
+      }
+      if (mode === "glossy") {
+        document.getElementById("shadeStyle").value = "gummyGloss";
+        document.getElementById("shadeIntensity").value = "fullCute";
+        document.getElementById("lightDirection").value = "topLeft";
+      }
+      if (mode === "icon") {
+        document.getElementById("shadeStyle").value = "flatIcon";
+        document.getElementById("shadeIntensity").value = "iconPolish";
+        document.getElementById("shadeOutputType").value = "mapOnly";
+      }
+      renderShadeContext();
+      renderShadeMap();
+      renderShadeOutput(shadingLabFallback());
+      status("Shade Lab preset applied.", "ok");
+    }
+
+    function downloadShadeMapSvg() {
+      const svg = document.getElementById("shadeMapSvg");
+      if (!svg) return;
+      const doc = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 560">${svg.innerHTML}</svg>`;
+      downloadBlob(new Blob([doc], { type: "image/svg+xml;charset=utf-8" }), "mascot-spark-shading-map.svg");
+      status("Shading map SVG exported.", "ok");
+    }
+
+    function downloadShadeMapPng() {
+      const svg = document.getElementById("shadeMapSvg");
+      if (!svg) return;
+      downloadSvgElementAsPng(svg, "mascot-spark-shading-map.png");
     }
 
     function generalLessonFallback() {
@@ -4720,7 +5753,13 @@ ${currentBlueprint ? `<section><h2>Blueprint</h2>${currentBlueprint}</section>` 
       document.getElementById("traceNote").innerHTML = data.traceNote;
       renderPalettePreview();
       document.getElementById("blueprintSvg").innerHTML = makeBlueprint(data.type, data.emotion, data.twist, data.blueprintStyle);
+      if (document.getElementById("shadeStyle") && !document.getElementById("shadeStyle").dataset.touched) {
+        document.getElementById("shadeStyle").value = defaultShadeStyleForCurrentLesson();
+      }
       renderCoachContext();
+      renderShadeContext();
+      renderShadeMap();
+      renderShadeOutput(shadingLabFallback());
       updateGuidedStep();
     }
 
@@ -4920,7 +5959,7 @@ ${currentBlueprint ? `<section><h2>Blueprint</h2>${currentBlueprint}</section>` 
         praise: pick(praises),
         remixOne: pick(remixIdeas),
         remixTwo: mode === "cozyPlus" ? "Make a sticker version with a thicker outline and fewer details." : "Draw the same mascot again with a different mouth, not a different body.",
-        traceNote: "<strong>Beginner use:</strong><br>Trace the big body shape first. Hide the guide when done. If the mascot still reads, the drawing worked. Some blueprint variants now match specific mascot families like plush, fruit, shell, aquatic, cloud, robot, device, ghost, gem, letter, package, furniture, garden, logo, badge, and weather."
+        traceNote: `<strong>Beginner use:</strong><br>Trace the big body shape first. Hide the guide when done. If the mascot still reads, the drawing worked. Emotion blueprint pass: ${emotionBlueprintBadge(emotion)}.`
       });
     }
 
@@ -4986,14 +6025,22 @@ ${currentBlueprint ? `<section><h2>Blueprint</h2>${currentBlueprint}</section>` 
 
     function updateFinalBuildBadge() {
       const badge = document.getElementById("finalBuildBadge");
-      if (badge) badge.textContent = `Mascot Spark ${APP_VERSION || "V20"} · Final Cleanup Build · Cache ${APP_CACHE_NAME || "mascot-spark-v20"}`;
+      if (badge) badge.textContent = `Mascot Spark ${APP_VERSION || "V20"} · Subject Blueprint Completion · Cache ${APP_CACHE_NAME || "mascot-spark-v25"}`;
     }
 
     document.addEventListener("keydown", closeOpenModalsOnEscape);
 
     document.addEventListener("DOMContentLoaded", () => {
       bootSelects();
-      document.getElementById("paletteMood").addEventListener("change", () => { renderPalettePreview(); renderCoachContext(); });
+      document.getElementById("paletteMood").addEventListener("change", () => { renderPalettePreview(); renderCoachContext(); renderShadeContext(); renderShadeMap(); renderShadeOutput(shadingLabFallback()); });
+      ["shadeStyle","lightDirection","shadeIntensity","shadeOutputType"].forEach(id => {
+        document.getElementById(id)?.addEventListener("change", () => {
+          document.getElementById("shadeStyle").dataset.touched = "true";
+          renderShadeContext();
+          renderShadeMap();
+          renderShadeOutput(shadingLabFallback());
+        });
+      });
       document.getElementById("subjectPack")?.addEventListener("change", (event) => filterSubjectsByPack(event.target.value));
       document.getElementById("sessionTimer")?.addEventListener("change", setupTimerFromSelect);
       setupTimerFromSelect();

@@ -127,3 +127,183 @@ Before treating this as final:
 ## Notes
 
 All data is stored locally in the browser using localStorage. Saved lessons and settings do not sync across devices unless you export/import them manually.
+
+
+## V21 emotion blueprint pass 1
+
+This build begins adding emotion-specific construction guides directly into the blueprints.
+
+Pass 1 emotion blueprint coverage:
+
+- Added: 15
+- Total current emotion entries: 46
+- Remaining for next pass: 31
+
+Added emotion blueprint guides for:
+
+- shy
+- happy
+- sleepy
+- grumpy
+- spooky
+- sassy
+- nervous
+- proud
+- dreamy
+- mischievous
+- dramatic
+- calm
+- confused
+- angryTiny
+- sadHopeful
+
+What changed:
+
+- Main blueprint now includes an emotion guide overlay.
+- Traceable step panels now include emotion guides from the Face Placement step onward.
+- Practice Intelligence indicates whether the selected emotion is supported in Pass 1 or still waiting for the next pass.
+- Unsupported emotions still show a safe placeholder face-zone guide.
+
+Service worker cache:
+
+```js
+const CACHE_NAME = "mascot-spark-v21";
+```
+
+
+## V22 emotion blueprint pass 2
+
+Added another 15 emotion blueprint guides.
+
+Pass 2 totals:
+
+- Added this pass: 15
+- Total emotion blueprint coverage now: 30
+- Total current emotion entries: 46
+- Remaining for next pass: 16
+
+New emotion blueprint guides added in Pass 2:
+
+- delightedShy
+- gloomySweet
+- softSuspicious
+- hauntedHappy
+- chaoticSoft
+- bashfulProud
+- braveScared
+- jealousCute
+- lonelySparkly
+- feralCute
+- meltyHappy
+- embarrassedBrave
+- sleepyMischief
+- anxiousProud
+- hopefulGrumpy
+
+Service worker cache:
+
+```js
+const CACHE_NAME = "mascot-spark-v22";
+```
+
+
+## V23 emotion blueprint pass 3
+
+Added the final remaining 16 emotion blueprint guides.
+
+Pass 3 totals:
+
+- Added this pass: 16
+- Total emotion blueprint coverage now: 46
+- Total current emotion entries: 46
+- Remaining for next pass: 0
+
+New emotion blueprint guides added in Pass 3:
+
+- bashfulChaotic
+- smugCute
+- timidMagical
+- dramaticSleepy
+- woundedSparkly
+- overexcitedSoft
+- suspiciousHappy
+- gloomyGlam
+- lonelyBrave
+- tenderFeral
+- eerieCalm
+- gigglyNervous
+- softVillain
+- rainyHopeful
+- cursedAdorable
+- seriousTiny
+
+Service worker cache:
+
+```js
+const CACHE_NAME = "mascot-spark-v23";
+```
+
+
+## V24 AI Shading Lab
+
+Added a new Shade Lab focused on simple mascot shading for Procreate.
+
+Included:
+
+- new **Shade Lab** tab
+- shading style selector
+- light direction selector
+- shading intensity selector
+- output mode selector
+- offline fallback shading guidance
+- optional OpenRouter-powered shading help
+- visual shading map preview
+- shading map SVG export
+- shading map PNG export
+- palette role suggestions
+- Procreate layer plan
+- “don’t muddy it” guidance
+- quick presets:
+  - Make It Simpler
+  - Make It More Glossy
+  - Make It More Icon-Readable
+
+Service worker cache:
+
+```js
+const CACHE_NAME = "mascot-spark-v24";
+```
+
+
+## V25 subject blueprint completion
+
+Added custom subject blueprint guides for the remaining 16 subject categories:
+
+- blob
+- food
+- object
+- mask
+- flower
+- star
+- bug
+- stationery
+- candy
+- toy
+- tool
+- household
+- drink
+- sauce
+- artSupply
+- plushKeychain
+
+Subject blueprint coverage now:
+
+- Total subject categories: 50
+- Custom subject blueprint guides: 50
+- Remaining without custom guides: 0
+
+Service worker cache:
+
+```js
+const CACHE_NAME = "mascot-spark-v25";
+```

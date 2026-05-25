@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-  <meta name="theme-color" content="#ff9f7a" />
+  <meta name="theme-color" content="#F27BA6" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="default" />
   <meta name="apple-mobile-web-app-title" content="Mascot Spark" />
@@ -11,40 +11,80 @@
   <link rel="apple-touch-icon" href="./icon-192.png" />
   <link rel="icon" type="image/png" sizes="192x192" href="./icon-192.png" />
   <link rel="icon" type="image/png" sizes="512x512" href="./icon-512.png" />
-  <title>Mascot Spark PWA — Cozy Mascot Drawing Teacher</title>
+  <title>Mascot Spark PWA — Stitched Halo Bloom</title>
   <style>
-    :root {
-      --bg1: #fff8f3;
-      --bg2: #fff1ec;
-      --paper: rgba(255,255,255,.9);
-      --paper-solid: #fffdfb;
-      --ink: #241b18;
-      --muted: #7a625a;
-      --line: #ead8ce;
-      --soft: #fff1e8;
-      --primary: #ff9f7a;
-      --accent: #ffd97d;
-      --blueprint: #173b63;
-      --shadow: 0 18px 44px rgba(89, 55, 38, .12);
-      --good: #356b4c;
-      --bad: #9f2d2d;
+    :root[data-theme="light"] {
+      --color-primary: #F27BA6;
+      --color-secondary: #9DC8B2;
+      --color-accent: #8EDAF7;
+      --color-background: #FFF7FB;
+      --color-surface: #FDEEF5;
+      --color-surface-2: #F7F6FB;
+      --color-text: #352733;
+      --color-muted: #7D6D79;
+      --color-border: #D7C4F4;
+      --color-danger-accent: #D95A72;
     }
 
-    html[data-theme="dark"] {
-      --bg1: #120f16;
-      --bg2: #241827;
-      --paper: rgba(31, 27, 38, .92);
-      --paper-solid: #211b29;
-      --ink: #fff7f0;
-      --muted: #cdb9ae;
-      --line: #4a3944;
-      --soft: #332536;
-      --primary: #ff9f7a;
-      --accent: #c084fc;
-      --blueprint: #111c33;
-      --shadow: 0 18px 44px rgba(0, 0, 0, .34);
-      --good: #96e6b3;
-      --bad: #ff9a9a;
+    :root[data-theme="neutral"] {
+      --color-primary: #B97195;
+      --color-secondary: #8FA79D;
+      --color-accent: #8EBFD2;
+      --color-background: #F3F0F2;
+      --color-surface: #E7E1E5;
+      --color-surface-2: #DDDDE2;
+      --color-text: #2F2A30;
+      --color-muted: #6F6870;
+      --color-border: #BFAFD0;
+      --color-danger-accent: #A55C6E;
+    }
+
+    :root[data-theme="dark"] {
+      --color-primary: #E785B3;
+      --color-secondary: #7FB2A3;
+      --color-accent: #74D6F7;
+      --color-background: #140F18;
+      --color-surface: #221928;
+      --color-surface-2: #2D2333;
+      --color-text: #F8F2F8;
+      --color-muted: #B8A9B8;
+      --color-border: #7D62A8;
+      --color-danger-accent: #C9526E;
+    }
+
+    :root {
+      --bg1: var(--color-background);
+      --bg2: color-mix(in srgb, var(--color-background) 84%, var(--color-surface));
+      --paper: color-mix(in srgb, var(--color-surface) 88%, transparent);
+      --paper-solid: var(--color-surface);
+      --ink: var(--color-text);
+      --muted: var(--color-muted);
+      --line: var(--color-border);
+      --soft: var(--color-surface-2);
+      --primary: var(--color-primary);
+      --accent: var(--color-accent);
+      --blueprint: color-mix(in srgb, var(--color-surface-2) 54%, #173b63);
+      --shadow: 0 18px 44px color-mix(in srgb, #000 14%, transparent);
+      --good: var(--color-secondary);
+      --bad: var(--color-danger-accent);
+
+      --radius-sm: 14px;
+      --radius-md: 20px;
+      --radius-lg: 28px;
+      --radius-xl: 36px;
+
+      --shadow-soft: 0 10px 30px color-mix(in srgb, #000 9%, transparent);
+      --shadow-card: 0 14px 40px color-mix(in srgb, #000 11%, transparent);
+      --shadow-button: 0 8px 24px color-mix(in srgb, #000 10%, transparent);
+
+      --glow-primary: 0 0 0 1px color-mix(in srgb, var(--color-primary) 35%, transparent),
+                      0 0 24px color-mix(in srgb, var(--color-primary) 22%, transparent);
+
+      --glow-accent: 0 0 0 1px color-mix(in srgb, var(--color-accent) 35%, transparent),
+                     0 0 24px color-mix(in srgb, var(--color-accent) 18%, transparent);
+
+      --transition-fast: 160ms ease;
+      --transition-med: 240ms ease;
     }
 
     * { box-sizing: border-box; }
@@ -54,11 +94,13 @@
       min-height: 100vh;
       font-family: ui-rounded, "SF Pro Rounded", "Avenir Next", system-ui, -apple-system, sans-serif;
       background:
-        radial-gradient(circle at 10% 5%, color-mix(in srgb, var(--accent) 28%, transparent), transparent 32rem),
-        radial-gradient(circle at 90% 12%, color-mix(in srgb, var(--primary) 18%, transparent), transparent 28rem),
-        linear-gradient(135deg, var(--bg1), var(--bg2));
-      color: var(--ink);
+        radial-gradient(circle at top left, color-mix(in srgb, var(--color-primary) 14%, transparent), transparent 31rem),
+        radial-gradient(circle at top right, color-mix(in srgb, var(--color-accent) 12%, transparent), transparent 34rem),
+        radial-gradient(circle at bottom left, color-mix(in srgb, var(--color-secondary) 12%, transparent), transparent 30rem),
+        linear-gradient(180deg, var(--color-background), color-mix(in srgb, var(--color-background) 84%, var(--color-surface)));
+      color: var(--color-text);
       padding: 14px;
+      transition: background var(--transition-med), color var(--transition-fast);
     }
 
     .app {
@@ -67,10 +109,11 @@
     }
 
     .hero, .panel, .lesson, .coach {
-      background: var(--paper);
-      border: 1px solid var(--line);
-      border-radius: 26px;
-      box-shadow: var(--shadow);
+      background:
+        linear-gradient(180deg, color-mix(in srgb, var(--color-surface) 92%, white 8%), var(--color-surface));
+      border: 1px solid color-mix(in srgb, var(--color-border) 84%, white 10%);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-card);
       backdrop-filter: blur(14px);
     }
 
@@ -88,8 +131,8 @@
 
     .badge {
       display: inline-flex;
-      background: var(--soft);
-      border: 1px solid var(--line);
+      background: color-mix(in srgb, var(--color-primary) 14%, var(--color-surface-2));
+      border: 1px solid color-mix(in srgb, var(--color-border) 86%, white 8%);
       color: var(--muted);
       border-radius: 999px;
       padding: 8px 12px;
@@ -111,6 +154,25 @@
       line-height: 1.5;
       max-width: 780px;
       margin: 12px 0 0;
+    }
+
+
+    .theme-notes {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 14px;
+    }
+
+    .theme-notes span {
+      display: inline-flex;
+      border-radius: 999px;
+      padding: 7px 10px;
+      background: color-mix(in srgb, var(--color-surface-2) 82%, white 8%);
+      border: 1px solid color-mix(in srgb, var(--color-border) 80%, white 8%);
+      color: var(--color-muted);
+      font-size: 13px;
+      font-weight: 800;
     }
 
     .controls {
@@ -173,19 +235,28 @@
       transition: transform .15s ease, opacity .15s ease;
     }
 
+    button:hover { box-shadow: var(--shadow-button), var(--glow-accent); transform: translateY(-1px); }
     button:active { transform: translateY(1px) scale(.99); }
+    button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible {
+      outline: none;
+      box-shadow: var(--glow-primary);
+    }
     button:disabled { opacity: .55; cursor: not-allowed; }
 
     .primary {
-      background: linear-gradient(135deg, var(--primary), var(--accent));
-      color: #281811;
-      box-shadow: 0 12px 26px color-mix(in srgb, var(--primary) 30%, transparent);
+      background:
+        linear-gradient(135deg, var(--color-primary), color-mix(in srgb, var(--color-primary) 68%, var(--color-accent)));
+      color: white;
+      border: 1px solid color-mix(in srgb, var(--color-primary) 65%, var(--color-border));
+      box-shadow: var(--shadow-button), var(--glow-primary);
     }
 
     .ai {
-      background: linear-gradient(135deg, #25223f, #8b5cf6);
+      background:
+        linear-gradient(135deg, color-mix(in srgb, var(--color-border) 48%, #25223f), var(--color-accent));
       color: white;
-      box-shadow: 0 12px 26px rgba(69, 47, 135, .25);
+      border: 1px solid color-mix(in srgb, var(--color-accent) 56%, var(--color-border));
+      box-shadow: var(--shadow-button), var(--glow-accent);
     }
 
     .ghost {
@@ -487,7 +558,26 @@
 
     @media (max-width: 880px) {
       body { padding: 10px; }
-      .controls { grid-template-columns: 1fr; }
+  
+    .theme-notes {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 14px;
+    }
+
+    .theme-notes span {
+      display: inline-flex;
+      border-radius: 999px;
+      padding: 7px 10px;
+      background: color-mix(in srgb, var(--color-surface-2) 82%, white 8%);
+      border: 1px solid color-mix(in srgb, var(--color-border) 80%, white 8%);
+      color: var(--color-muted);
+      font-size: 13px;
+      font-weight: 800;
+    }
+
+    .controls { grid-template-columns: 1fr; }
       .main { grid-template-columns: 1fr; }
       .fun-strip, .creative-row, .path-grid { grid-template-columns: 1fr; }
       .top-row { flex-direction: column; }
@@ -507,13 +597,18 @@
     <section class="hero">
       <div class="top-row">
         <div>
-          <div class="badge">Tiny mascot lessons · calm, cute, drawable</div>
+          <div class="badge">Stitched Halo Bloom · cute, rainwashed, slightly eerie</div>
           <h1>Mascot Spark</h1>
           <p class="subtitle">
             A cozy Procreate drawing teacher. One mascot, one clear path: big shape → face → tiny limbs → clean line → color → tiny sparkle. Use Cozy+ for a small creative upgrade that stays beginner-safe.
           </p>
+          <div class="theme-notes">
+            <span>Light: Gummy Halo Morning</span>
+            <span>Neutral: Rainthread Veil</span>
+            <span>Dark: Bleeding Hope Afterglow</span>
+          </div>
         </div>
-        <button class="ghost" onclick="toggleTheme()" id="themeBtn">Dark mode</button>
+        <button class="ghost" onclick="toggleTheme()" id="themeBtn">Theme: Light</button>
       </div>
     </section>
 
@@ -1196,18 +1291,37 @@
       box.className = "status show " + (kind || "");
     }
 
+    function themeLabel(mode) {
+      if (mode === "light") return "Theme: Light";
+      if (mode === "neutral") return "Theme: Neutral";
+      return "Theme: Dark";
+    }
+
+    function themeMetaColor(mode) {
+      if (mode === "light") return "#F27BA6";
+      if (mode === "neutral") return "#B97195";
+      return "#E785B3";
+    }
+
+    function setTheme(mode) {
+      document.documentElement.setAttribute("data-theme", mode);
+      localStorage.setItem("mascotSparkTheme", mode);
+      const btn = document.getElementById("themeBtn");
+      if (btn) btn.textContent = themeLabel(mode);
+      const meta = document.querySelector('meta[name="theme-color"]');
+      if (meta) meta.setAttribute("content", themeMetaColor(mode));
+    }
+
     function toggleTheme() {
-      const root = document.documentElement;
-      const next = root.getAttribute("data-theme") === "dark" ? "light" : "dark";
-      root.setAttribute("data-theme", next);
-      localStorage.setItem("mascotSparkTheme", next);
-      document.getElementById("themeBtn").textContent = next === "dark" ? "Light mode" : "Dark mode";
+      const current = document.documentElement.getAttribute("data-theme") || "light";
+      const next = current === "light" ? "neutral" : current === "neutral" ? "dark" : "light";
+      setTheme(next);
     }
 
     function loadTheme() {
       const saved = localStorage.getItem("mascotSparkTheme") || "light";
-      document.documentElement.setAttribute("data-theme", saved);
-      document.getElementById("themeBtn").textContent = saved === "dark" ? "Light mode" : "Dark mode";
+      const allowed = ["light", "neutral", "dark"];
+      setTheme(allowed.includes(saved) ? saved : "light");
     }
 
     function makeBlueprint(type, emotion, twist) {

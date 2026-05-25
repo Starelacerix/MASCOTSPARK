@@ -2,6 +2,50 @@
 
 Mascot Spark is a cozy beginner-friendly drawing teacher for Procreate. It helps you generate simple mascot lessons, traceable blueprint-style guides, creative twists, palette moods, and optional AI-assisted lesson help through OpenRouter.
 
+
+## Theme system: Stitched Halo Bloom
+
+This build includes a 3-mode UI theme system based on the provided seeds.
+
+Theme family:
+
+```txt
+Stitched Halo Bloom
+```
+
+Modes:
+
+```txt
+Light   — Gummy Halo Morning
+Neutral — Rainthread Veil
+Dark    — Bleeding Hope Afterglow
+```
+
+The app cycles themes with the top-right theme button:
+
+```txt
+Light → Neutral → Dark → Light
+```
+
+Core visual direction:
+
+- Soft rounded cards
+- Plush candy surfaces
+- Misty rainwashed backgrounds
+- Subtle holographic borders
+- Gentle glow on buttons and focus states
+- Readable contrast
+- Cute but slightly eerie emotional tone
+
+The exact CSS variables are inside `index.html` under:
+
+```css
+:root[data-theme="light"]
+:root[data-theme="neutral"]
+:root[data-theme="dark"]
+```
+
+
 ## What this app does
 
 Mascot Spark gives you one calm drawing lesson at a time.

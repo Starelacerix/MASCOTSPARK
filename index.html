@@ -611,6 +611,108 @@
       font-size: 14px;
     }
 
+
+    .tab-buttons {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 8px;
+      margin-bottom: 12px;
+    }
+
+    .tab-btn {
+      text-align: center;
+      padding: 12px 10px;
+      min-height: 48px;
+    }
+
+    .palette-preview {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 12px;
+      margin-top: 8px;
+    }
+
+    .palette-card {
+      background: color-mix(in srgb, var(--color-surface-2) 88%, white 6%);
+      border: 1px solid var(--color-border);
+      border-radius: 18px;
+      padding: 12px;
+    }
+
+    .palette-card.active {
+      box-shadow: var(--glow-primary);
+      border-color: color-mix(in srgb, var(--color-primary) 55%, var(--color-border));
+    }
+
+    .palette-title {
+      display: block;
+      color: var(--color-muted);
+      font-weight: 900;
+      margin-bottom: 8px;
+      font-size: 13px;
+    }
+
+    .palette-dots {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+    }
+
+    .palette-dot {
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      border: 1px solid rgba(0,0,0,.12);
+      box-shadow: inset 0 1px 1px rgba(255,255,255,.4);
+    }
+
+    .palette-count {
+      display: inline-block;
+      margin-top: 8px;
+      color: var(--color-muted);
+      font-size: 12px;
+      font-weight: 800;
+    }
+
+    .tab-section-title {
+      margin: 0 0 8px;
+      color: var(--color-muted);
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: .09em;
+      font-weight: 900;
+    }
+
+    @media (max-width: 699px) {
+      .tab-buttons { grid-template-columns: repeat(2, 1fr); }
+      .palette-preview { grid-template-columns: 1fr; }
+    }
+
+    @media (min-width: 700px) and (max-width: 1180px) and (orientation: portrait) {
+      .main { grid-template-columns: 1fr; }
+      .controls { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .tab-buttons { grid-template-columns: repeat(3, 1fr); }
+      .palette-preview { grid-template-columns: repeat(2, 1fr); }
+      .hero-content { grid-template-columns: 1fr; }
+      .actions { display: grid; grid-template-columns: repeat(2, 1fr); }
+      .blueprint { position: relative; top: auto; }
+      .lesson-body { padding: 18px; }
+    }
+
+    @media (min-width: 900px) and (max-width: 1180px) and (orientation: landscape) {
+      .main {
+        grid-template-columns: minmax(0, 1.05fr) minmax(390px, .95fr);
+        gap: 16px;
+      }
+      .controls { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+      .tab-buttons { grid-template-columns: repeat(5, 1fr); }
+      .palette-preview { grid-template-columns: repeat(3, 1fr); }
+      .actions { gap: 10px; }
+      .blueprint { position: sticky; top: 12px; }
+      .card, .blueprint, .coach { border-radius: 24px; }
+    }
+
+
     @media (max-width: 699px) {
       .trace-panel-grid {
         grid-template-columns: 1fr;
@@ -690,15 +792,14 @@
 
     <section class="shell">
       <div class="tab-buttons" role="tablist" aria-label="Mascot Spark controls">
-        <button class="tab-btn active" type="button" data-tab="tab-core" onclick="showTab('tab-core')">Core</button>
+        <button class="tab-btn active" type="button" data-tab="tab-lesson" onclick="showTab('tab-lesson')">Lesson</button>
         <button class="tab-btn" type="button" data-tab="tab-character" onclick="showTab('tab-character')">Character</button>
-        <button class="tab-btn" type="button" data-tab="tab-style" onclick="showTab('tab-style')">Style</button>
-        <button class="tab-btn" type="button" data-tab="tab-guide" onclick="showTab('tab-guide')">Guide</button>
-        <button class="tab-btn" type="button" data-tab="tab-ai" onclick="showTab('tab-ai')">AI</button>
-        <button class="tab-btn" type="button" data-tab="tab-help" onclick="showTab('tab-help')">Help</button>
+        <button class="tab-btn" type="button" data-tab="tab-color" onclick="showTab('tab-color')">Color</button>
+        <button class="tab-btn" type="button" data-tab="tab-blueprint" onclick="showTab('tab-blueprint')">Blueprint</button>
+        <button class="tab-btn" type="button" data-tab="tab-ai" onclick="showTab('tab-ai')">AI + Help</button>
       </div>
 
-      <div id="tab-core" class="tab-panel active">
+      <div id="tab-lesson" class="tab-panel active">
         <section class="controls">
           <div class="panel">
             <label for="lessonType">Subject category</label>
@@ -745,8 +846,13 @@
         </section>
       </div>
 
-      <div id="tab-style" class="tab-panel">
+      <div id="tab-color" class="tab-panel">
         <section class="controls">
+          <div class="panel" style="grid-column: 1 / -1;">
+            <label>Palette preview</label>
+            <div id="palettePreview" class="palette-preview"></div>
+            <p class="small">These dots preview the selected palette profile visually.</p>
+          </div>
           <div class="panel">
             <label for="paletteMood">Specific palette profile</label>
             <select id="paletteMood"></select>
@@ -766,7 +872,7 @@
         </section>
       </div>
 
-      <div id="tab-guide" class="tab-panel">
+      <div id="tab-blueprint" class="tab-panel">
         <section class="controls">
           <div class="panel">
             <label for="blueprintStyle">Traceable blueprint variation</label>
@@ -808,13 +914,12 @@
         </section>
         <div id="status" class="status"></div>
       </div>
-
-      <div id="tab-help" class="tab-panel">
-        <section class="controls">
-          <div class="panel"><label>01</label><p class="small">Draw-first cards show what to draw first, second, third, fourth, and fifth.</p></div>
-          <div class="panel"><label>02</label><p class="small">Blueprint variation changes the traceable construction guide.</p></div>
-          <div class="panel"><label>03</label><p class="small">Duo emotions create more expressive mascot personalities.</p></div>
-          <div class="panel"><label>04</label><p class="small">Optional flavor does not change the subject character.</p></div>
+    </section>
+        <section class="controls" style="margin-top:12px;">
+          <div class="panel"><label>01</label><p class="small">Draw-first cards now tell you what to draw, what not to do yet, and which Procreate layer to use.</p></div>
+          <div class="panel"><label>02</label><p class="small">Palette swatches show color dots visually. They are for choosing mood, not replacing your subject.</p></div>
+          <div class="panel"><label>03</label><p class="small">Blueprint variants now adapt more strongly to different subject families.</p></div>
+          <div class="panel"><label>04</label><p class="small">Surprise Me randomizes a full lesson while keeping your optional flavor mood-only.</p></div>
         </section>
       </div>
     </section>
@@ -1082,21 +1187,21 @@
     };
 
     const palettes = {
-      auto: "Auto",
-      gummyHalo: "Gummy Halo Morning — 5 colors: #F27BA6, #FFB7D0, #FFF7FB, #8EDAF7, #D7C4F4",
-      rainthread: "Rainthread Veil — 6 colors: #B97195, #8FA79D, #8EBFD2, #F3F0F2, #BFAFD0, #6F6870",
-      bleedingHope: "Bleeding Hope Afterglow — 7 colors: #140F18, #221928, #E785B3, #74D6F7, #C9526E, #F8F2F8, #7D62A8",
-      gummySky: "Mushy Gummybear Sky — 5 colors: #FF8FBA, #FFD1E5, #AEE7FF, #FFF5C8, #BDA7FF",
-      rainGrass: "Clouded Raindrop Grass — 6 colors: #DCE8E5, #9DC8B2, #8EDAF7, #F7F6FB, #7D6D79, #CDE7D8",
-      cutGrin: "Cut-Grin Candy — 5 colors: #F25787, #352733, #FFF7FB, #FFD166, #8EDAF7",
-      holoThread: "Holographic Thread — 6 colors: #D7C4F4, #8EDAF7, #F27BA6, #FDEEF5, #9DC8B2, #FFFFFF",
-      bleedingBeauty: "Bleeding Beauty — 6 colors: #D95A72, #F27BA6, #FFF7FB, #7D62A8, #140F18, #F8F2F8",
-      ghostCandy: "Ghost Candy — 6 colors: #F8F2F8, #B8A9B8, #74D6F7, #E785B3, #221928, #7D62A8",
-      blackberry: "Blackberry Lilac Luxe — 7 colors: #140F18, #2D2333, #B97195, #D7C4F4, #F8F2F8, #C9A8FF, #74D6F7",
-      strawberry: "Strawberry Pistachio — 5 colors: #FFB7D0, #F27BA6, #CDE7D8, #9DC8B2, #FFF7E8",
-      storm: "Storm Cloud Soft — 6 colors: #2D3A4A, #8EBFD2, #DDDDE2, #F3F0F2, #FFE8A3, #6F6870",
-      luxury: "Tiny Luxury Mascot — 5 colors: #140F18, #F8F2F8, #E785B3, #D6B96A, #7D62A8",
-      beach: "Beach Trinket — 6 colors: #8EDAF7, #FDEEF5, #F3D9B1, #9DC8B2, #FFF7FB, #B97195"
+      auto: { label: "Auto", colors: [] },
+      gummyHalo: { label: "Gummy Halo Morning", colors: ["#F27BA6", "#FFB7D0", "#FFF7FB", "#8EDAF7", "#D7C4F4"] },
+      rainthread: { label: "Rainthread Veil", colors: ["#B97195", "#8FA79D", "#8EBFD2", "#F3F0F2", "#BFAFD0", "#6F6870"] },
+      bleedingHope: { label: "Bleeding Hope Afterglow", colors: ["#140F18", "#221928", "#E785B3", "#74D6F7", "#C9526E", "#F8F2F8", "#7D62A8"] },
+      gummySky: { label: "Mushy Gummybear Sky", colors: ["#FF8FBA", "#FFD1E5", "#AEE7FF", "#FFF5C8", "#BDA7FF"] },
+      rainGrass: { label: "Clouded Raindrop Grass", colors: ["#DCE8E5", "#9DC8B2", "#8EDAF7", "#F7F6FB", "#7D6D79", "#CDE7D8"] },
+      cutGrin: { label: "Cut-Grin Candy", colors: ["#F25787", "#352733", "#FFF7FB", "#FFD166", "#8EDAF7"] },
+      holoThread: { label: "Holographic Thread", colors: ["#D7C4F4", "#8EDAF7", "#F27BA6", "#FDEEF5", "#9DC8B2", "#FFFFFF"] },
+      bleedingBeauty: { label: "Bleeding Beauty", colors: ["#D95A72", "#F27BA6", "#FFF7FB", "#7D62A8", "#140F18", "#F8F2F8"] },
+      ghostCandy: { label: "Ghost Candy", colors: ["#F8F2F8", "#B8A9B8", "#74D6F7", "#E785B3", "#221928", "#7D62A8"] },
+      blackberry: { label: "Blackberry Lilac Luxe", colors: ["#140F18", "#2D2333", "#B97195", "#D7C4F4", "#F8F2F8", "#C9A8FF", "#74D6F7"] },
+      strawberry: { label: "Strawberry Pistachio", colors: ["#FFB7D0", "#F27BA6", "#CDE7D8", "#9DC8B2", "#FFF7E8"] },
+      storm: { label: "Storm Cloud Soft", colors: ["#2D3A4A", "#8EBFD2", "#DDDDE2", "#F3F0F2", "#FFE8A3", "#6F6870"] },
+      luxury: { label: "Tiny Luxury Mascot", colors: ["#140F18", "#F8F2F8", "#E785B3", "#D6B96A", "#7D62A8"] },
+      beach: { label: "Beach Trinket", colors: ["#8EDAF7", "#FDEEF5", "#F3D9B1", "#9DC8B2", "#FFF7FB", "#B97195"] }
     };
 
     const flavors = {
@@ -1133,7 +1238,18 @@
       accessoryZone: "Accessory-safe zone",
       shadowMap: "Simple shadow map",
       fourPanel: "Four-step panel guide",
-      worksheet: "Printable worksheet layout"
+      worksheet: "Printable worksheet layout",
+      plushBody: "Plush body guide",
+      fruitSlice: "Fruit body guide",
+      potionBottle: "Potion bottle guide",
+      cloudPuff: "Cloud puff guide",
+      robotGrid: "Robot grid guide",
+      ghostDrape: "Ghost drape guide",
+      gemFacet: "Gem facet guide",
+      letterBuild: "Letter build guide",
+      numberBuild: "Number build guide",
+      badgeEmblem: "Badge emblem guide",
+      weatherSymbol: "Weather symbol guide"
     };
 
     const drawOrders = {
@@ -1212,9 +1328,27 @@
     function populateSelect(id, data, selected) {
       const el = document.getElementById(id);
       el.innerHTML = Object.entries(data).map(([value, label]) => {
-        const text = Array.isArray(label) ? label[0] : label;
+        const text = Array.isArray(label) ? label[0] : (label && label.label ? label.label : label);
         return `<option value="${value}" ${value === selected ? "selected" : ""}>${text}</option>`;
       }).join("");
+    }
+
+
+    function renderPalettePreview() {
+      const selected = document.getElementById("paletteMood").value;
+      const preview = document.getElementById("palettePreview");
+      if (!preview) return;
+
+      const entries = Object.entries(palettes).filter(([key]) => key !== "auto");
+      preview.innerHTML = entries.map(([key, value]) => `
+        <div class="palette-card ${key === selected ? "active" : ""}">
+          <span class="palette-title">${value.label}</span>
+          <div class="palette-dots">
+            ${value.colors.map(color => `<span class="palette-dot" style="background:${color}" title="${value.label} color"></span>`).join("")}
+          </div>
+          <span class="palette-count">${value.colors.length} colors</span>
+        </div>
+      `).join("");
     }
 
     function bootSelects() {
@@ -1224,6 +1358,7 @@
       populateSelect("funTwist", twists, "sparkle");
       populateSelect("ideaPreset", flavors, "");
       populateSelect("paletteMood", palettes, "gummyHalo");
+      renderPalettePreview();
       populateSelect("blueprintStyle", blueprintOptions, "classic");
       populateSelect("drawOrderMode", drawOrders, "simple");
       populateSelect("aiStyle", aiModes, "simplify");
@@ -1276,7 +1411,7 @@
       ["lessonType", "emotion", "level", "creativeMode", "funTwist", "ideaPreset", "paletteMood", "blueprintStyle", "drawOrderMode", "aiStyle"].forEach(randomSelect);
       document.getElementById("customIdea").value = "";
       newLesson();
-      status("Surprise lesson created. Optional flavor did not override the subject.", "ok");
+      status("Surprise lesson created. Subject, emotion, palette, blueprint, and lesson mode were randomized while optional flavor stayed mood-only.", "ok");
     }
 
     function makeBody(type) {
@@ -1344,6 +1479,17 @@
       if (style === "shadowMap") overlay = '<path class="guide" d="M165 360 C220 415 315 415 365 360"></path><text class="label" x="35" y="535">Shadow map: put one shadow under the lower body.</text>';
       if (style === "fourPanel") overlay = '<line class="guide" x1="260" y1="70" x2="260" y2="460"></line><line class="guide" x1="90" y1="265" x2="430" y2="265"></line><text class="label" x="35" y="535">Four panels: body, face, limbs, final polish.</text>';
       if (style === "worksheet") overlay = '<rect class="guide" x="80" y="80" width="360" height="400" rx="35"></rect><text class="label" x="35" y="535">Worksheet mode: trace, redraw, then hide the guide.</text>';
+      if (style === "plushBody") overlay = '<circle class="guide" cx="205" cy="175" r="42"></circle><circle class="guide" cx="315" cy="175" r="42"></circle><text class="label" x="35" y="535">Plush body: keep ears/head bumps soft and round.</text>';
+      if (style === "fruitSlice") overlay = '<circle class="guide" cx="260" cy="265" r="118"></circle><path class="guide" d="M260 147 L260 383 M158 210 L362 320 M158 320 L362 210"></path><text class="label" x="35" y="535">Fruit guide: think juicy round body + simple slice lines.</text>';
+      if (style === "potionBottle") overlay = '<rect class="guide" x="218" y="100" width="84" height="70" rx="12"></rect><ellipse class="guide" cx="260" cy="285" rx="105" ry="135"></ellipse><text class="label" x="35" y="535">Potion guide: neck first, bottle body second.</text>';
+      if (style === "cloudPuff") overlay = '<circle class="guide" cx="195" cy="250" r="55"></circle><circle class="guide" cx="260" cy="220" r="70"></circle><circle class="guide" cx="330" cy="250" r="55"></circle><text class="label" x="35" y="535">Cloud guide: build the body from overlapping puffs.</text>';
+      if (style === "robotGrid") overlay = '<rect class="guide" x="165" y="145" width="190" height="235" rx="35"></rect><line class="guide" x1="165" y1="225" x2="355" y2="225"></line><line class="guide" x1="260" y1="145" x2="260" y2="380"></line><text class="label" x="35" y="535">Robot guide: use a cleaner grid and keep corners rounded.</text>';
+      if (style === "ghostDrape") overlay = '<line class="guide" x1="150" y1="210" x2="370" y2="210"></line><path class="guide" d="M150 390 L180 360 L215 390 L245 360 L285 390 L325 360 L370 390"></path><text class="label" x="35" y="535">Ghost guide: top is soft, bottom is draped and wavy.</text>';
+      if (style === "gemFacet") overlay = '<path class="guide" d="M185 150 L260 235 L335 150 M130 235 L260 235 L390 235"></path><text class="label" x="35" y="535">Gem guide: use a few clean facet lines only.</text>';
+      if (style === "letterBuild") overlay = '<rect class="guide" x="165" y="120" width="190" height="285" rx="25"></rect><text class="label" x="35" y="535">Letter guide: build the mascot from chunky letter strokes.</text>';
+      if (style === "numberBuild") overlay = '<rect class="guide" x="175" y="140" width="170" height="240" rx="25"></rect><text class="label" x="35" y="535">Number guide: keep the number readable before adding a face.</text>';
+      if (style === "badgeEmblem") overlay = '<path class="guide" d="M260 115 L360 175 L360 325 L260 385 L160 325 L160 175 Z"></path><text class="label" x="35" y="535">Badge guide: strong centered emblem shape first.</text>';
+      if (style === "weatherSymbol") overlay = '<circle class="guide" cx="260" cy="230" r="55"></circle><path class="guide" d="M245 290 L220 360 L275 325 L250 400"></path><text class="label" x="35" y="535">Weather guide: one symbol body + one forecast accent.</text>';
 
       return `
         <text class="label" x="24" y="32">TRACE ORDER: 1 body → 2 guide → 3 eyes → 4 mouth → 5 limbs/twist</text>
@@ -1489,6 +1635,7 @@
       document.getElementById("remixOne").textContent = data.remixOne;
       document.getElementById("remixTwo").textContent = data.remixTwo;
       document.getElementById("traceNote").innerHTML = data.traceNote;
+      renderPalettePreview();
       document.getElementById("blueprintSvg").innerHTML = makeBlueprint(data.type, data.emotion, data.twist, data.blueprintStyle);
     }
 
@@ -1499,7 +1646,7 @@
       const mode = document.getElementById("creativeMode").value;
       const twist = document.getElementById("funTwist").value;
       const flavor = document.getElementById("customIdea").value.trim() || flavors[document.getElementById("ideaPreset").value] || ""; // flavor-only: never replaces subject
-      const palette = palettes[document.getElementById("paletteMood").value] || "";
+      const palette = palettes[document.getElementById("paletteMood").value] || { label: "Auto", colors: [] };
       const blueprintStyle = document.getElementById("blueprintStyle").value;
       const drawOrderMode = document.getElementById("drawOrderMode").value;
 
@@ -1552,8 +1699,48 @@
         phases.push(["Redraw as a worksheet", "Make four boxes: body only, guide + face, limbs + twist, clean final.", "Do not skip the redraw box. The redraw is where learning happens."]);
       }
 
+      if (blueprintStyle === "plushBody") {
+        phases.splice(1, 0, ["Use plush bumps", "Build the head/body from soft rounded bumps. Keep every edge soft.", "Do not sharpen the silhouette."]);
+      }
+
+      if (blueprintStyle === "fruitSlice") {
+        phases.splice(2, 0, ["Keep it juicy and simple", "Use one round fruit body and only a few inner slice lines if needed.", "Do not overdraw fruit texture."]);
+      }
+
+      if (blueprintStyle === "potionBottle") {
+        phases.splice(1, 0, ["Neck then bottle", "Draw the bottle neck first, then the larger rounded body underneath.", "Do not make the neck wider than the bottle."]);
+      }
+
+      if (blueprintStyle === "cloudPuff") {
+        phases.splice(1, 0, ["Build from puffs", "Use overlapping circles or puff bumps to form the cloud.", "Do not flatten the cloud too early."]);
+      }
+
+      if (blueprintStyle === "robotGrid") {
+        phases.splice(1, 0, ["Use the robot grid", "Keep the face and body aligned to the grid, but keep corners rounded.", "Do not make it too stiff or sharp."]);
+      }
+
+      if (blueprintStyle === "ghostDrape") {
+        phases.push(["Shape the drape", "Use a soft top and a wavy bottom edge for the ghost sheet.", "Do not overcomplicate the bottom scallops."]);
+      }
+
+      if (blueprintStyle === "gemFacet") {
+        phases.push(["Add only a few facets", "One to three inner facet lines are enough.", "Too many lines make the gem feel noisy."]);
+      }
+
+      if (blueprintStyle === "letterBuild" || blueprintStyle === "numberBuild") {
+        phases.unshift(["Keep the symbol readable", "Before adding any face or limbs, make sure the base letter/number still reads clearly.", "Do not decorate a symbol that is not readable yet."]);
+      }
+
+      if (blueprintStyle === "badgeEmblem") {
+        phases.unshift(["Center the emblem", "Build a strong centered badge silhouette first.", "Do not let side details unbalance the shape."]);
+      }
+
+      if (blueprintStyle === "weatherSymbol") {
+        phases.push(["Use one forecast accent", "Add one rain, bolt, or sun accent only after the base symbol works.", "Do not stack too many weather icons together."]);
+      }
+
       const flavorText = flavor ? ` Flavor: ${flavor}.` : "";
-      const paletteText = palette && palette !== "Auto" ? ` Palette: ${palette}.` : "";
+      const paletteText = palette && palette.label !== "Auto" ? ` Palette: ${palette.label}.` : "";
       const title = pick(subject[3]);
 
       renderLesson({
@@ -1565,7 +1752,7 @@
         meta: `${subject[0]} · ${emo[0]} · ${lesson[0]}`,
         goal: `Draw a ${emo[0].toLowerCase()} ${subject[0].toLowerCase()} using ${subject[1]}, ${emo[1]}, and ${emo[2]}. Add ${tw[1]}.${flavorText}${paletteText} Subject lock: stay with ${subject[0].toLowerCase()}; flavor only changes the vibe.`,
         shapeSpell: mode === "cozyPlus" ? "Use big-medium-small: one big body, one medium detail, two tiny expression marks." : mode === "remix" ? "Change one thing only. Keep the body shape stable." : "Big shape first. Face second. Decoration last.",
-        styleRecipe: palette && palette !== "Auto" ? palette : pick(styleRecipes),
+        styleRecipe: palette && palette.label !== "Auto" ? `${palette.label} · ${palette.colors.length} colors` : pick(styleRecipes),
         complexity: mode === "cozyPlus" ? 68 : mode === "remix" ? 56 : 42,
         meterText: mode === "cozyPlus" ? "Cozy+ difficulty: more design thinking, still beginner-safe." : mode === "remix" ? "Remix difficulty: playful, one change at a time." : "Cozy difficulty: easy and drawable.",
         drawOrder: drawOrders[drawOrderMode][1],
@@ -1582,7 +1769,7 @@
         praise: pick(praises),
         remixOne: pick(remixIdeas),
         remixTwo: mode === "cozyPlus" ? "Make a sticker version with a thicker outline and fewer details." : "Draw the same mascot again with a different mouth, not a different body.",
-        traceNote: "<strong>Beginner use:</strong><br>Trace the big body shape first. Hide the guide when done. If the mascot still reads, the drawing worked."
+        traceNote: "<strong>Beginner use:</strong><br>Trace the big body shape first. Hide the guide when done. If the mascot still reads, the drawing worked. Some blueprint variants now match specific mascot families like plush, fruit, cloud, robot, ghost, gem, letter, badge, and weather."
       });
     }
 
@@ -1630,7 +1817,7 @@
         creativeMode: document.getElementById("creativeMode").value,
         tinyTwist: twists[document.getElementById("funTwist").value][0],
         flavorOnly: document.getElementById("customIdea").value.trim() || flavors[document.getElementById("ideaPreset").value] || "none",
-        paletteProfile: palettes[document.getElementById("paletteMood").value] || "auto",
+        paletteProfile: (palettes[document.getElementById("paletteMood").value] || { label: "auto" }).label,
         blueprint: blueprintOptions[document.getElementById("blueprintStyle").value],
         drawOrder: drawOrders[document.getElementById("drawOrderMode").value][0],
         aiHelp: aiModes[document.getElementById("aiStyle").value]
@@ -1698,6 +1885,7 @@ Important: optional flavor must NOT change the selected subject category.`;
 
     document.addEventListener("DOMContentLoaded", () => {
       bootSelects();
+      document.getElementById("paletteMood").addEventListener("change", renderPalettePreview);
       loadTheme();
       loadSettings();
       newLesson();

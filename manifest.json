@@ -1,7 +1,7 @@
 {
-  "name": "Mascot Spark V9 \u2014 Expanded Character Library",
+  "name": "Mascot Spark V10 \u2014 UI + Unique Blueprints",
   "short_name": "Mascot Spark",
-  "description": "Mascot Spark V9 expands mascot subjects, duo emotions, tiny twists, and locks optional flavor so it never changes the selected subject.",
+  "description": "Mascot Spark V10 adds palette swatch previews, better tabs, stronger Surprise Me, unique blueprint variants, and improved iPad portrait and landscape layouts.",
   "start_url": "./index.html",
   "scope": "./",
   "display": "standalone",

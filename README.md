@@ -141,3 +141,27 @@ Subject: Robot mascot
 Optional flavor: with sleepy bedtime softness
 Result: still a robot mascot, just softer and sleepier.
 ```
+
+
+## V10 UI + blueprint update
+
+This version adds:
+
+- Surprise Me button improvements
+- Palette swatch preview with visual color dots
+- Better tab organization
+- More organized UI
+- More unique blueprint variants, including:
+  - plush body
+  - fruit body
+  - potion bottle
+  - cloud puff
+  - robot grid
+  - ghost drape
+  - gem facet
+  - letter build
+  - number build
+  - badge emblem
+  - weather symbol
+- Better iPad portrait mode layout
+- Better iPad landscape mode layout

@@ -86,3 +86,58 @@ openrouter/free
 ```
 
 Do not hard-code your API key into the file.
+
+
+## V8 teaching update
+
+This build improves the actual drawing-teacher behavior.
+
+Added:
+
+- Stronger “Draw this first, then this” cards
+- Procreate layer guidance inside each draw-first card
+- Traceable step blueprint panels:
+  - Body only
+  - Guide lines
+  - Face placement
+  - Tiny limbs
+  - Twist + polish
+- Better step-by-step lesson phases
+- Each phase now tells:
+  - what to draw
+  - which Procreate layer to use
+  - what the canvas should look like
+  - what mistake to avoid
+  - what to check before moving on
+- Copy lesson text button
+- Service worker cache updated to:
+
+```js
+const CACHE_NAME = "mascot-spark-v8";
+```
+
+
+## V9 expansion update
+
+This version expands:
+
+- More mascot subjects
+- More duo emotions
+- More tiny twists
+- Stronger optional flavor lock
+
+Optional flavor is now explicitly treated as style/mood only. It cannot replace the selected subject category.
+
+Examples:
+
+```txt
+Subject: Fruit mascot
+Optional flavor: with holographic thread accents
+Result: still a fruit mascot, just with holographic thread styling.
+```
+
+```txt
+Subject: Robot mascot
+Optional flavor: with sleepy bedtime softness
+Result: still a robot mascot, just softer and sleepier.
+```

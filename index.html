@@ -518,6 +518,118 @@
     .status.ok { color: var(--color-secondary); }
     .status.bad { color: var(--color-danger-accent); }
 
+
+    .trace-panel-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 10px;
+      margin: 12px 0 18px;
+    }
+
+    .trace-panel {
+      background:
+        linear-gradient(180deg, color-mix(in srgb, var(--color-surface) 92%, white 8%), var(--color-surface-2));
+      border: 1px solid var(--color-border);
+      border-radius: 18px;
+      padding: 10px;
+      overflow: hidden;
+    }
+
+    .trace-panel strong {
+      display: block;
+      color: var(--color-muted);
+      font-size: 13px;
+      margin-bottom: 7px;
+    }
+
+    .trace-panel svg {
+      border-radius: 14px;
+      border: 1px solid color-mix(in srgb, var(--color-border) 75%, transparent);
+      background:
+        linear-gradient(rgba(255,255,255,.045) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.045) 1px, transparent 1px),
+        color-mix(in srgb, #173b63 78%, var(--color-surface-2));
+      background-size: 18px 18px;
+    }
+
+    .draw-card {
+      min-height: 138px;
+    }
+
+    .draw-card .do-line {
+      display: block;
+      font-weight: 850;
+      color: var(--color-text);
+      margin-bottom: 6px;
+    }
+
+    .draw-card .dont-line,
+    .draw-card .layer-line {
+      display: block;
+      color: var(--color-muted);
+      font-size: 13px;
+      margin-top: 6px;
+    }
+
+    .phase-parts {
+      display: grid;
+      gap: 8px;
+      margin-top: 8px;
+    }
+
+    .phase-part {
+      background: color-mix(in srgb, var(--color-surface) 74%, transparent);
+      border: 1px solid color-mix(in srgb, var(--color-border) 72%, transparent);
+      border-radius: 14px;
+      padding: 9px 10px;
+      line-height: 1.42;
+    }
+
+    .phase-part b {
+      color: var(--color-muted);
+    }
+
+    .phase-check {
+      margin-top: 8px;
+      color: var(--color-muted);
+      font-size: 14px;
+      line-height: 1.4;
+      border-left: 3px solid var(--color-accent);
+      padding-left: 10px;
+    }
+
+    .blueprint-actions {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      margin-top: 10px;
+    }
+
+    .blueprint-actions button {
+      min-height: 40px;
+      padding: 9px 11px;
+      font-size: 14px;
+    }
+
+    @media (max-width: 699px) {
+      .trace-panel-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (min-width: 700px) and (max-width: 1180px) and (orientation: portrait) {
+      .trace-panel-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (min-width: 900px) and (max-width: 1180px) and (orientation: landscape) {
+      .trace-panel-grid {
+        grid-template-columns: repeat(5, 1fr);
+      }
+    }
+
+
     @media (max-width: 699px) {
       body { padding: 10px; }
       .hero-content { grid-template-columns: 1fr; }
@@ -628,7 +740,7 @@
           </div>
           <div class="panel">
             <label>Subject lock</label>
-            <p class="small">The selected subject category always stays the character base.</p>
+            <p class="small">The selected subject category always stays the character base. Optional flavor cannot turn it into a different subject.</p>
           </div>
         </section>
       </div>
@@ -751,6 +863,9 @@
           <h3>Draw this first, then this</h3>
           <div id="drawFirstPanels" class="draw-first-grid"></div>
 
+          <h3>Traceable step blueprints</h3>
+          <div id="traceStepPanels" class="trace-panel-grid"></div>
+
           <h3>Draw this in phases</h3>
           <div id="phases"></div>
 
@@ -772,6 +887,10 @@
           <h3>Traceable blueprint</h3>
           <svg id="blueprintSvg" viewBox="0 0 520 560" aria-label="Traceable mascot construction blueprint"></svg>
           <div id="traceNote" class="blue-note"></div>
+          <div class="blueprint-actions">
+            <button onclick="copyLessonText()">Copy lesson text</button>
+            <button onclick="resetChecks()">Reset practice</button>
+          </div>
         </section>
 
         <section class="coach">
@@ -812,7 +931,33 @@
       ghost: ["Ghost mascot", "one soft ghost sheet shape", "soft spooky silhouette", ["Ghost Bean", "Sheet Sprite", "Tiny Boo Buddy"]],
       creature: ["Tiny creature mascot", "one simple creature body", "invented creature design", ["Pocket Gremlin", "Nub Creature", "Soft Monster Dot"]],
       household: ["Household object mascot", "one simple household object", "everyday object character", ["Lamp Dot", "Mug Bean", "Pillow Pal"]],
-      drink: ["Drink mascot", "one cup, bottle, or juice box shape", "container clarity", ["Tea Cup Dot", "Soda Bean", "Juice Box Pal"]]
+      drink: ["Drink mascot", "one cup, bottle, or juice box shape", "container clarity", ["Tea Cup Dot", "Soda Bean", "Juice Box Pal"]],
+
+      fruit: ["Fruit mascot", "one fruit body shape", "round edible character design", ["Peach Pip", "Apple Dot", "Citrus Bean"]],
+      vegetable: ["Vegetable mascot", "one vegetable body shape", "organic object character", ["Carrot Pip", "Radish Dot", "Mushroom Sprout"]],
+      dessert: ["Dessert mascot", "one dessert silhouette", "sweet treat character design", ["Pudding Dot", "Cake Bean", "Cookie Charm"]],
+      breakfast: ["Breakfast mascot", "one breakfast food shape", "cozy food character", ["Pancake Puff", "Eggy Dot", "Waffle Bean"]],
+      sauce: ["Sauce / condiment mascot", "one bottle, jar, or packet shape", "container personality", ["Ketchup Pip", "Honey Dot", "Jam Jar Buddy"]],
+      shell: ["Shell mascot", "one shell or beach trinket shape", "soft beach object design", ["Shell Bean", "Pearl Dot", "Tiny Conch"]],
+      aquatic: ["Aquatic mascot", "one fish, droplet, or sea-creature shape", "water-soft silhouette", ["Bubble Fish", "Droplet Dot", "Tiny Jelly"]],
+      robot: ["Tiny robot mascot", "one rounded mechanical body", "cute machine design", ["Bolt Bean", "Robo Dot", "Tiny Circuit"]],
+      device: ["Device mascot", "one phone, tablet, or tiny screen shape", "tech object character", ["Pixel Pal", "Tiny Tablet", "Screen Bean"]],
+      clothing: ["Clothing mascot", "one clothing item silhouette", "soft fabric character", ["Sock Gremlin", "Mittens Dot", "Tiny Hoodie"]],
+      accessory: ["Accessory mascot", "one wearable accessory shape", "fashion object personality", ["Bow Bean", "Charm Clip", "Tiny Locket"]],
+      music: ["Music mascot", "one musical object or note shape", "sound-symbol character", ["Note Dot", "Tiny Tambourine", "Chord Bean"]],
+      artSupply: ["Art supply mascot", "one art supply shape", "creative studio character", ["Crayon Dot", "Paint Pot", "Ink Bean"]],
+      magicObject: ["Magic object mascot", "one wand, crystal, scroll, or charm shape", "mystic object design", ["Wand Wisp", "Scroll Bean", "Rune Dot"]],
+      celestialObject: ["Celestial object mascot", "one planet, cloud moon, or star object", "sky-symbol character", ["Planet Pip", "Comet Bean", "Orbit Dot"]],
+      plushKeychain: ["Plush keychain mascot", "one tiny hanging plush shape", "keychain character design", ["Keychain Puff", "Clip Bean", "Charm Plush"]],
+      tinyMonster: ["Tiny monster mascot", "one small monster body", "soft creature attitude", ["Fang Puff", "Nub Goblin", "Tiny Howl"]],
+      zodiac: ["Zodiac mascot", "one zodiac-symbol-inspired body", "symbolic character design", ["Aries Puff", "Moon Sign Dot", "Star Chart Bean"]],
+      emoji: ["Emoji mascot", "one simple expression-ball body", "face-first character design", ["Mood Dot", "Emoji Bean", "Tiny Reaction"]],
+      package: ["Package mascot", "one box, mailer, or wrapped shape", "parcel character design", ["Parcel Pip", "Box Bean", "Tiny Mailer"]],
+      furniture: ["Furniture mascot", "one furniture silhouette", "home object character", ["Chair Dot", "Lampy Bean", "Tiny Table"]],
+      garden: ["Garden mascot", "one garden object or nature shape", "outdoor cozy character", ["Watering Can Dot", "Seed Packet", "Garden Bean"]],
+      weatherIcon: ["Weather icon mascot", "one weather-symbol shape", "forecast icon character", ["Thunder Dot", "Snow Puff", "Sunny Bean"]],
+      abstractShape: ["Abstract shape mascot", "one invented abstract shape", "shape-language practice", ["Blob Glyph", "Loop Dot", "Wiggle Bean"]],
+      logoMark: ["Logo mark mascot", "one brand-mark shape", "brandable mascot silhouette", ["Mark Dot", "Logo Bean", "Crestling"]]
     };
 
     const emotions = {
@@ -840,7 +985,29 @@
       gloomySweet: ["Gloomy-sweet", "droopy eyes, soft little smile, low brows", "raindrop or cloud mark", "Keep one sweet color."],
       feralCute: ["Feral-cute", "tiny fang, wide eyes, chaotic small grin", "one tuft or claw mark", "Still use simple shapes."],
       meltyHappy: ["Melty-happy", "smiling eyes, tiny open smile, droopy cheeks", "one melting edge", "One droop reads better."],
-      softSuspicious: ["Soft-suspicious", "half-lidded eyes, tiny side mouth, raised brow", "slight body tilt", "One suspicious cue is enough."]
+      softSuspicious: ["Soft-suspicious", "half-lidded eyes, tiny side mouth, raised brow", "slight body tilt", "One suspicious cue is enough."],
+
+      embarrassedBrave: ["Embarrassed-brave", "blush cheeks, determined brows, tiny nervous smile", "small cape or upright pose", "Keep the bravery small and readable."],
+      sleepyMischief: ["Sleepy-mischievous", "sleepy eyes, tiny crooked grin, soft brow", "one tilted accessory", "Do not add too much chaos."],
+      anxiousProud: ["Anxious-proud", "wide eyes, proud smile, tense brows", "tiny badge or sparkle", "Show both feelings with face, not extra props."],
+      hopefulGrumpy: ["Hopeful-grumpy", "flat brows, small frown, bright cheek sparkle", "one hopeful glow mark", "Keep the glow tiny."],
+      bashfulChaotic: ["Bashful-chaotic", "blush, uneven eyes, tiny grin", "crooked bow or patch", "One chaotic detail is enough."],
+      smugCute: ["Smug-cute", "half-lidded eyes, tiny smirk, raised brow", "small shine or crown", "Avoid making the expression mean."],
+      timidMagical: ["Timid-magical", "small worried eyes, tiny smile, sparkle freckles", "soft wand or glow", "Use gentle magic, not clutter."],
+      dramaticSleepy: ["Dramatic-sleepy", "closed eyes, dramatic tiny frown, droopy pose", "little tear or moon mark", "Keep the drama simple."],
+      woundedSparkly: ["Wounded-sparkly", "soft sad eyes, bandage mark, tiny hopeful sparkle", "small bandage detail", "Do not overdo injury details."],
+      overexcitedSoft: ["Overexcited-soft", "wide eyes, open smile, blushy cheeks", "tiny raised arms", "Keep limbs tiny."],
+      suspiciousHappy: ["Suspicious-happy", "side-eye with tiny smile", "tilted head", "One side-eye is enough."],
+      gloomyGlam: ["Gloomy-glam", "droopy eyes, glossy shine, tiny pout", "small luxe sparkle", "Do not make the palette too dark."],
+      lonelyBrave: ["Lonely-brave", "small low eyes, determined brow, tiny smile", "mini cape or glow", "Leave some empty space."],
+      tenderFeral: ["Tender-feral", "wide eyes, tiny fang, soft blush", "one messy tuft", "Keep feral details rounded."],
+      eerieCalm: ["Eerie-calm", "closed peaceful eyes, faint spooky smile", "halo or ghost glow", "Do not make it scary."],
+      gigglyNervous: ["Giggly-nervous", "uneven eyes, tiny nervous laugh", "sweat drop or blush", "Keep the mouth small."],
+      softVillain: ["Soft-villain", "tiny smirk, angled brows, plush body", "small cape or crown", "Villain cue should be cute, not harsh."],
+      rainyHopeful: ["Rainy-hopeful", "sad eyes, tiny smile, raindrop bead", "soft blue accent", "Use one rain detail."],
+      cursedAdorable: ["Cursed-adorable", "mismatched eyes, tiny smile, cute patch", "soft spooky mark", "Do not add horror details."],
+      delightedShy: ["Delighted-shy", "bright eyes, tiny hidden smile, blush", "hands tucked in", "Make delight small and sweet."],
+      seriousTiny: ["Serious-tiny", "straight brows, tiny line mouth, round body", "simple badge or mark", "Serious does not mean complex."]
     };
 
     const lessonSizes = {
@@ -890,7 +1057,28 @@
       shine: ["Glossy shine spot", "a glossy shine spot", "Add one oval shine.", '<ellipse class="feature" cx="210" cy="190" rx="28" ry="12" transform="rotate(-25 210 190)"></ellipse>'],
       thread: ["Holographic thread stitch", "a holographic thread stitch", "Add a dashed edge stitch.", '<path class="feature" d="M155 210 L175 225 M150 250 L175 260 M155 292 L178 292 M165 330 L185 315"></path>'],
       raindrop: ["Raindrop bead", "a raindrop bead", "Add one raindrop bead.", '<path class="feature" d="M385 220 C405 248 405 275 385 285 C365 275 365 248 385 220 Z"></path>'],
-      sprout: ["Sprout tuft", "a sprout tuft", "Add a sprout tuft.", '<path class="feature" d="M260 145 L260 105 M260 112 C235 90 210 108 220 130 M260 112 C285 90 310 108 300 130"></path>']
+      sprout: ["Sprout tuft", "a sprout tuft", "Add a sprout tuft.", '<path class="feature" d="M260 145 L260 105 M260 112 C235 90 210 108 220 130 M260 112 C285 90 310 108 300 130"></path>'],
+      zipper: ["Tiny zipper", "a tiny zipper", "Add a short zipper line on one side.", '<path class="feature" d="M350 220 L350 315 M340 235 L360 235 M340 255 L360 255 M340 275 L360 275 M340 295 L360 295"></path>'],
+      safetyPin: ["Safety pin", "a safety pin", "Add one tiny safety pin detail.", '<path class="feature" d="M350 230 C390 230 390 285 350 285 C320 285 320 245 350 245 M350 245 L380 275"></path>'],
+      bell: ["Little bell", "a little bell", "Add a small bell charm.", '<path class="feature" d="M365 350 C365 320 405 320 405 350 L415 380 L355 380 Z"></path><circle class="solid" cx="385" cy="390" r="6"></circle>'],
+      flowerPin: ["Flower pin", "a flower pin", "Add one small flower pin.", '<circle class="feature" cx="360" cy="275" r="10"></circle><circle class="feature" cx="345" cy="275" r="9"></circle><circle class="feature" cx="375" cy="275" r="9"></circle><circle class="feature" cx="360" cy="260" r="9"></circle><circle class="feature" cx="360" cy="290" r="9"></circle>'],
+      brokenHeart: ["Broken heart patch", "a broken heart patch", "Add a tiny broken heart patch.", '<path class="feature" d="M205 292 C190 275 165 292 180 315 L205 340 L230 315 C245 292 220 275 205 292 Z M205 292 L195 310 L212 320 L202 340"></path>'],
+      gumdropShine: ["Gumdrop shine", "a gumdrop shine", "Add a fat candy shine spot.", '<ellipse class="feature" cx="220" cy="190" rx="35" ry="14" transform="rotate(-25 220 190)"></ellipse><ellipse class="feature" cx="190" cy="220" rx="16" ry="7" transform="rotate(-25 190 220)"></ellipse>'],
+      ghostWisp: ["Ghost wisp", "a ghost wisp", "Add one tiny floating ghost wisp.", '<path class="feature" d="M390 175 C370 150 405 125 420 155 C435 185 390 190 405 220"></path>'],
+      threadLoop: ["Thread loop", "a thread loop", "Add a loose thread loop.", '<path class="feature" d="M150 235 C100 210 100 280 150 260 C190 245 170 210 140 220"></path>'],
+      tinyBoots: ["Tiny boots", "tiny boots", "Add two tiny boot shapes at the bottom.", '<path class="feature" d="M175 420 L220 420 L220 445 L165 445 Z M300 420 L345 420 L355 445 L300 445 Z"></path>'],
+      oneMitten: ["One mitten", "one mitten", "Add one mitten hand.", '<path class="feature" d="M115 300 C90 275 110 245 140 265 C155 285 145 315 115 300 Z"></path>'],
+      blanket: ["Sleepy blanket", "a sleepy blanket", "Add a small blanket fold.", '<path class="feature" d="M155 350 C220 325 300 375 365 345 L365 405 L155 405 Z"></path>'],
+      peelCorner: ["Sticker peel corner", "a sticker peel corner", "Add a small peeled corner.", '<path class="feature" d="M335 160 L390 160 L390 215 C365 190 350 175 335 160 Z"></path>'],
+      waxSeal: ["Wax seal", "a wax seal", "Add a tiny wax seal stamp.", '<circle class="feature" cx="355" cy="315" r="24"></circle><path class="feature" d="M345 315 L365 315 M355 305 L355 325"></path>'],
+      crescentBrow: ["Crescent brow", "a crescent brow", "Add one crescent eyebrow accent.", '<path class="feature" d="M205 225 C225 205 255 215 265 235"></path>'],
+      mismatchedButtons: ["Mismatched buttons", "mismatched buttons", "Add two different button details.", '<circle class="feature" cx="205" cy="305" r="14"></circle><rect class="feature" x="315" y="292" width="28" height="28" rx="8"></rect>'],
+      tinyBackpack: ["Tiny backpack", "a tiny backpack", "Add a small backpack shape behind one side.", '<path class="feature" d="M145 230 L95 250 L95 350 L145 365"></path><path class="feature" d="M105 270 L135 270"></path>'],
+      bowtie: ["Bowtie", "a bowtie", "Add a tiny bowtie under the mouth.", '<path class="feature" d="M230 330 L260 345 L230 360 Z M290 330 L260 345 L290 360 Z"></path>'],
+      floatingStar: ["Floating mini star", "a floating mini star", "Add a tiny floating star.", '<path class="feature" d="M105 150 L112 170 L134 170 L116 182 L123 204 L105 190 L87 204 L94 182 L76 170 L98 170 Z"></path>'],
+      blushStripe: ["Blush stripes", "blush stripes", "Add two small cheek stripes.", '<path class="feature" d="M180 300 L205 292 M315 292 L340 300"></path>'],
+      tinySatchel: ["Tiny satchel", "a tiny satchel", "Add a little side bag.", '<path class="feature" d="M370 320 L425 325 L420 385 L365 380 Z M380 320 C385 290 410 292 415 325"></path>']
+
     };
 
     const palettes = {
@@ -949,11 +1137,43 @@
     };
 
     const drawOrders = {
-      simple: ["Simple order", [["Body", "Draw the one big shape."], ["Guide", "Add face line below center."], ["Face", "Place eyes, then mouth."], ["Limbs", "Add tiny arms or feet."], ["Polish", "Color, one shadow, one shine."]]],
-      extraGuided: ["Extra guided: draw this first", [["Body first", "Only draw the silhouette."], ["Face map", "Mark where eyes and mouth go."], ["Expression", "Test two mouths before choosing."], ["Attachment", "Add limbs and twist after face works."], ["Clean pass", "Hide rough layer and redraw slowly."]]],
-      traceThenHide: ["Trace then hide guide", [["Trace", "Import/screenshot the blueprint."], ["Lower opacity", "Set guide to 20–30%."], ["Draw above", "Sketch on a new layer."], ["Hide guide", "Check if it still reads clearly."], ["Finish", "Line, color, shadow, highlight."]]],
-      iconFirst: ["Icon-first order", [["Square", "Draw within a small square."], ["Silhouette", "Make the outline read first."], ["Face", "Add a tiny face."], ["Remove", "Delete details that vanish."], ["Enlarge", "Redraw the winning icon bigger."]]],
-      worksheet: ["Worksheet order", [["Box 1", "Body only."], ["Box 2", "Face only."], ["Box 3", "Limbs and twist."], ["Box 4", "Clean final."], ["Review", "Circle what improved."]]]
+      simple: ["Simple order", [
+        ["Body", "Draw the one big shape.", "Do not draw eyes yet.", "Guide / rough sketch layer"],
+        ["Guide", "Add a vertical center and low face line.", "Do not decorate the guide.", "Same sketch layer"],
+        ["Face", "Place eyes first, then mouth.", "Do not add limbs until face works.", "Face test layer"],
+        ["Limbs", "Add tiny arms or feet with simple curves.", "Do not make them large.", "Limb sketch layer"],
+        ["Polish", "Clean line, flat color, one shadow, one shine.", "Do not over-render.", "Line / color / shadow layers"]
+      ]],
+      extraGuided: ["Extra guided: draw this first", [
+        ["Body only", "Spend one minute on the outer silhouette.", "No face, no limbs, no twist.", "Rough shape layer"],
+        ["Best body", "Redraw the body once and pick the clearer version.", "Do not keep both versions.", "Second sketch layer"],
+        ["Face map", "Draw a low face box and place eyes inside it.", "Do not place the face high.", "Guide layer"],
+        ["Expression", "Try two mouths next to the mascot before choosing.", "Do not settle instantly.", "Face test layer"],
+        ["Attach", "Add tiny limbs and one twist after the face works.", "Do not cover the face.", "Detail layer"],
+        ["Clean", "Lower sketch opacity and redraw slowly.", "Do not trace every wobble.", "Clean line layer"]
+      ]],
+      traceThenHide: ["Trace then hide guide", [
+        ["Screenshot", "Screenshot or save the blueprint.", "Do not redraw from memory yet.", "Photo import"],
+        ["Import", "Place it in Procreate and set opacity to 20–30%.", "Do not draw on the guide layer.", "Guide layer"],
+        ["Trace body", "Trace only the outer shape first.", "Do not trace details yet.", "Sketch layer above"],
+        ["Trace face", "Add face and limbs on the sketch layer.", "Do not over-copy the guide.", "Sketch layer"],
+        ["Hide guide", "Turn off the guide and check readability.", "Do not color before checking.", "Layer visibility check"],
+        ["Finish", "Clean line, color, shadow, highlight.", "Stop after one shadow.", "Final layers"]
+      ]],
+      iconFirst: ["Icon-first order", [
+        ["Icon box", "Draw inside a small square.", "Do not use the whole canvas.", "Icon boundary layer"],
+        ["Silhouette", "Make the outside shape readable at tiny size.", "No facial details yet.", "Rough icon layer"],
+        ["Face", "Add the simplest possible face.", "Do not add tiny eyelashes or clutter.", "Face layer"],
+        ["Remove", "Delete anything that disappears when zoomed out.", "Do not protect weak details.", "Cleanup pass"],
+        ["Enlarge", "Redraw the winning tiny icon bigger.", "Do not enlarge a cluttered version.", "Final sketch layer"]
+      ]],
+      worksheet: ["Worksheet order", [
+        ["Box 1", "Draw body only.", "No face.", "Worksheet box 1"],
+        ["Box 2", "Draw body plus face guide.", "No decoration.", "Worksheet box 2"],
+        ["Box 3", "Add eyes, mouth, limbs.", "One expression only.", "Worksheet box 3"],
+        ["Box 4", "Add one tiny twist.", "No second accessory.", "Worksheet box 4"],
+        ["Final", "Redraw the clean version larger.", "Do not skip the redraw.", "Final layer"]
+      ]]
     };
 
     const aiModes = {
@@ -1079,7 +1299,22 @@
       if (type === "book") return '<path class="shape" d="M145 150 L260 130 L375 150 L375 390 L260 370 L145 390 Z"></path><path class="guide" d="M260 130 L260 370"></path>';
       if (type === "ghost") return '<path class="shape" d="M150 390 L150 210 C150 140 210 105 260 105 C310 105 370 140 370 210 L370 390 L325 360 L285 390 L245 360 L205 390 L170 360 Z"></path>';
       if (type === "creature") return '<path class="shape" d="M160 250 C130 170 205 115 260 150 C315 115 390 170 360 250 C395 315 335 405 260 385 C185 405 125 315 160 250 Z"></path>';
-      if (type === "household" || type === "drink") return '<path class="shape" d="M185 160 L335 160 L350 360 C350 405 170 405 170 360 Z"></path>';
+      if (type === "household" || type === "drink" || type === "sauce") return '<path class="shape" d="M185 160 L335 160 L350 360 C350 405 170 405 170 360 Z"></path>';
+      if (type === "fruit" || type === "vegetable" || type === "dessert" || type === "breakfast") return '<path class="shape" d="M165 250 C165 165 220 125 270 145 C335 125 380 190 360 270 C340 360 280 405 220 385 C170 368 145 310 165 250 Z"></path>';
+      if (type === "shell" || type === "aquatic") return '<path class="shape" d="M135 300 C165 180 275 120 390 190 C345 230 330 310 370 380 C275 405 180 380 135 300 Z"></path>';
+      if (type === "robot" || type === "device") return '<rect class="shape" x="165" y="145" width="190" height="235" rx="35"></rect><path class="feature" d="M225 145 L215 105 M295 145 L305 105"></path>';
+      if (type === "clothing" || type === "accessory") return '<path class="shape" d="M180 160 C220 125 300 125 340 160 L370 350 C330 405 190 405 150 350 Z"></path>';
+      if (type === "music") return '<path class="shape" d="M240 120 L320 105 L320 330 C320 380 240 390 230 340 C220 295 275 285 295 315 L295 160 L240 170 Z"></path>';
+      if (type === "artSupply") return '<path class="shape" d="M210 110 L310 110 L300 350 L260 425 L220 350 Z"></path>';
+      if (type === "magicObject") return '<path class="shape" d="M180 390 L330 125 M330 125 L350 160 M330 125 L295 130"></path><circle class="shape" cx="180" cy="390" r="50"></circle>';
+      if (type === "celestialObject") return '<circle class="shape" cx="260" cy="265" r="130"></circle><path class="guide" d="M140 300 C220 220 330 220 405 300"></path>';
+      if (type === "plushKeychain") return '<path class="shape" d="M185 180 C185 120 245 115 260 160 C275 115 335 120 335 180 L335 350 C335 410 185 410 185 350 Z"></path><circle class="feature" cx="260" cy="105" r="28"></circle>';
+      if (type === "tinyMonster") return '<path class="shape" d="M160 250 C130 170 205 115 260 150 C315 115 390 170 360 250 C395 315 335 405 260 385 C185 405 125 315 160 250 Z"></path><path class="feature" d="M220 150 L205 105 M300 150 L315 105"></path>';
+      if (type === "zodiac" || type === "emoji" || type === "abstractShape" || type === "logoMark") return '<path class="shape" d="M160 205 C160 130 230 100 285 125 C348 153 384 218 363 292 C345 356 288 398 218 380 C153 363 124 298 160 205 Z"></path>';
+      if (type === "package") return '<path class="shape" d="M150 180 L260 120 L370 180 L370 360 L260 420 L150 360 Z"></path><path class="guide" d="M150 180 L260 240 L370 180 M260 240 L260 420"></path>';
+      if (type === "furniture") return '<path class="shape" d="M175 170 L345 170 L345 300 L315 300 L315 400 L285 400 L285 300 L235 300 L235 400 L205 400 L205 300 L175 300 Z"></path>';
+      if (type === "garden") return '<path class="shape" d="M180 180 L340 180 L320 390 L200 390 Z"></path><path class="feature" d="M210 150 C230 110 270 120 260 180 M300 150 C330 120 350 150 320 180"></path>';
+      if (type === "weatherIcon") return '<path class="shape" d="M145 305 C105 300 95 245 135 225 C145 175 205 160 235 190 C265 145 340 160 350 220 C400 225 420 300 360 320 L165 320 C158 320 151 315 145 305 Z"></path><path class="feature" d="M250 335 L220 410 L275 370 L245 450"></path>';
       return '<path class="shape" d="M160 205 C160 130 230 100 285 125 C348 153 384 218 363 292 C345 356 288 398 218 380 C153 363 124 298 160 205 Z"></path>';
     }
 
@@ -1128,6 +1363,94 @@
       `;
     }
 
+
+    function miniBlueprintSvg(type, emotion, twist, stage) {
+      const body = makeBody(type);
+      const face = makeFace(emotion);
+      const eyes = face[0];
+      const mouth = face[1];
+      const twistSvg = twists[twist] ? twists[twist][3] : "";
+
+      const guides = `
+        <line class="guide" x1="260" y1="70" x2="260" y2="430"></line>
+        <line class="guide" x1="120" y1="270" x2="400" y2="270"></line>
+        <ellipse class="guide" cx="260" cy="265" rx="145" ry="175"></ellipse>
+      `;
+
+      const limbs = `
+        <path class="feature" d="M155 300 Q112 305 105 342"></path>
+        <path class="feature" d="M365 300 Q408 305 415 342"></path>
+        <path class="feature" d="M215 392 Q205 425 178 435"></path>
+        <path class="feature" d="M305 392 Q315 425 342 435"></path>
+      `;
+
+      let content = "";
+      if (stage === "body") content = `${body}`;
+      if (stage === "guide") content = `${guides}${body}`;
+      if (stage === "face") content = `${guides}${body}${eyes}${mouth}`;
+      if (stage === "limbs") content = `${guides}${body}${limbs}${eyes}${mouth}`;
+      if (stage === "final") content = `${guides}${body}${limbs}${eyes}${mouth}${twistSvg}<path class="guide" d="M165 360 C220 415 315 415 365 360"></path>`;
+
+      return `<svg viewBox="0 0 520 520" aria-hidden="true">${content}</svg>`;
+    }
+
+    function renderTraceStepPanels(data) {
+      const steps = [
+        ["1. Body only", "body"],
+        ["2. Guide lines", "guide"],
+        ["3. Face placement", "face"],
+        ["4. Tiny limbs", "limbs"],
+        ["5. Twist + polish", "final"]
+      ];
+
+      document.getElementById("traceStepPanels").innerHTML = steps.map(([label, stage]) => `
+        <div class="trace-panel">
+          <strong>${label}</strong>
+          ${miniBlueprintSvg(data.type, data.emotion, data.twist, stage)}
+        </div>
+      `).join("");
+    }
+
+    function phaseLayerName(index) {
+      const names = [
+        "Rough shape layer",
+        "Guide layer",
+        "Face test layer",
+        "Detail sketch layer",
+        "Clean line layer",
+        "Flat color layer",
+        "Shadow/highlight layer",
+        "Final check"
+      ];
+      return names[index] || "Practice layer";
+    }
+
+    function phaseCanvasLook(index) {
+      const looks = [
+        "You should only see a simple outer shape.",
+        "You should see light guide lines, not finished details.",
+        "You should see the expression starting to read.",
+        "You should see tiny limbs/details attached lightly.",
+        "You should see clean confident lines.",
+        "You should see flat readable color.",
+        "You should see one shadow and one highlight.",
+        "You should see a mascot that still reads when zoomed out."
+      ];
+      return looks[index] || "You should see one clear improvement.";
+    }
+
+    function copyLessonText() {
+      const title = document.getElementById("title").textContent;
+      const goal = document.getElementById("goal").textContent;
+      const phases = Array.from(document.querySelectorAll(".phase")).map((p, i) => `${i + 1}. ${p.innerText}`).join("\n\n");
+      const text = `${title}\n\n${goal}\n\n${phases}`;
+      navigator.clipboard?.writeText(text).then(() => {
+        status("Lesson text copied.", "ok");
+      }).catch(() => {
+        status("Copy failed. You can still select and copy manually.", "bad");
+      });
+    }
+
     function renderLesson(data) {
       document.getElementById("title").textContent = data.title;
       document.getElementById("meta").textContent = data.meta;
@@ -1136,8 +1459,29 @@
       document.getElementById("styleRecipe").textContent = data.styleRecipe;
       document.getElementById("meterFill").style.width = data.complexity + "%";
       document.getElementById("meterText").textContent = data.meterText;
-      document.getElementById("drawFirstPanels").innerHTML = data.drawOrder.map((item, i) => `<div class="draw-card" data-step="${i + 1}"><strong>${item[0]}</strong><span>${item[1]}</span></div>`).join("");
-      document.getElementById("phases").innerHTML = data.phases.map((p, i) => `<div class="phase"><div class="phase-title"><span class="num">${i + 1}</span>${p[0]}</div><div>${p[1]}</div><div class="mistake">${p[2]}</div></div>`).join("");
+      document.getElementById("drawFirstPanels").innerHTML = data.drawOrder.map((item, i) => `
+        <div class="draw-card" data-step="${i + 1}">
+          <strong>${item[0]}</strong>
+          <span class="do-line">${item[1]}</span>
+          <span class="dont-line">Avoid: ${item[2] || "adding too much too soon."}</span>
+          <span class="layer-line">Procreate: ${item[3] || "new sketch layer"}</span>
+        </div>
+      `).join("");
+
+      renderTraceStepPanels(data);
+
+      document.getElementById("phases").innerHTML = data.phases.map((p, i) => `
+        <div class="phase">
+          <div class="phase-title"><span class="num">${i + 1}</span>${p[0]}</div>
+          <div class="phase-parts">
+            <div class="phase-part"><b>Draw:</b> ${p[1]}</div>
+            <div class="phase-part"><b>Procreate layer:</b> ${phaseLayerName(i)}</div>
+            <div class="phase-part"><b>Canvas should look like:</b> ${phaseCanvasLook(i)}</div>
+          </div>
+          <div class="mistake">${p[2]}</div>
+          <div class="phase-check">Before moving on: zoom out and check that this step still reads clearly.</div>
+        </div>
+      `).join("");
       document.getElementById("checks").innerHTML = data.checks.map(c => `<label class="check"><input type="checkbox"><span>${c}</span></label>`).join("");
       document.getElementById("avoid").textContent = data.avoid;
       document.getElementById("quest").textContent = data.quest;
@@ -1154,7 +1498,7 @@
       const level = document.getElementById("level").value;
       const mode = document.getElementById("creativeMode").value;
       const twist = document.getElementById("funTwist").value;
-      const flavor = document.getElementById("customIdea").value.trim() || flavors[document.getElementById("ideaPreset").value] || "";
+      const flavor = document.getElementById("customIdea").value.trim() || flavors[document.getElementById("ideaPreset").value] || ""; // flavor-only: never replaces subject
       const palette = palettes[document.getElementById("paletteMood").value] || "";
       const blueprintStyle = document.getElementById("blueprintStyle").value;
       const drawOrderMode = document.getElementById("drawOrderMode").value;
@@ -1179,11 +1523,33 @@
       }
 
       if (drawOrderMode === "extraGuided") {
-        phases.unshift(["Before anything: body only", "Draw only the outside shape for one minute.", "Do not decorate before the body works."]);
+        phases.unshift(
+          ["Before anything: body only", "Draw only the outside shape for one minute. No eyes, mouth, limbs, color, or accessory yet.", "Do not decorate before the body works."],
+          ["Redraw the body once", "Make a second version of the same body beside the first. Pick the clearer silhouette.", "Do not keep polishing the weaker first shape."]
+        );
       }
 
       if (blueprintStyle === "faceMap") {
-        phases.splice(2, 0, ["Use the face map", "Place eyes on the lower face line, then put the mouth close underneath.", "A mascot often looks wrong because of face placement."]);
+        phases.splice(2, 0,
+          ["Use the face map", "Place eyes on the lower face line, then put the mouth close underneath.", "A mascot often looks wrong because of face placement."],
+          ["Test face height", "Move the same face slightly lower on a duplicate sketch and compare which version feels cuter.", "Do not redraw the whole mascot when only the face is off."]
+        );
+      }
+
+      if (blueprintStyle === "bodyFirst") {
+        phases.unshift(["Trace body only first", "Use the blueprint as a body-only tracing guide. Hide all detail thinking until the outer shape works.", "Do not start with the eyes."]);
+      }
+
+      if (blueprintStyle === "limbMap") {
+        phases.splice(Math.min(4, phases.length), 0, ["Place limbs in zones", "Use the limb map circles to add tiny arms and feet. Keep every limb smaller than the face area.", "Large limbs make beginner mascots feel clumsy."]);
+      }
+
+      if (blueprintStyle === "shadowMap") {
+        phases.push(["Use the shadow map", "Add one soft shadow under the lower body or under the accessory. Keep the light direction simple.", "Do not shade every edge. One shadow is enough."]);
+      }
+
+      if (blueprintStyle === "fourPanel" || blueprintStyle === "worksheet") {
+        phases.push(["Redraw as a worksheet", "Make four boxes: body only, guide + face, limbs + twist, clean final.", "Do not skip the redraw box. The redraw is where learning happens."]);
       }
 
       const flavorText = flavor ? ` Flavor: ${flavor}.` : "";
@@ -1197,7 +1563,7 @@
         twist,
         blueprintStyle,
         meta: `${subject[0]} · ${emo[0]} · ${lesson[0]}`,
-        goal: `Draw a ${emo[0].toLowerCase()} ${subject[0].toLowerCase()} using ${subject[1]}, ${emo[1]}, and ${emo[2]}. Add ${tw[1]}.${flavorText}${paletteText}`,
+        goal: `Draw a ${emo[0].toLowerCase()} ${subject[0].toLowerCase()} using ${subject[1]}, ${emo[1]}, and ${emo[2]}. Add ${tw[1]}.${flavorText}${paletteText} Subject lock: stay with ${subject[0].toLowerCase()}; flavor only changes the vibe.`,
         shapeSpell: mode === "cozyPlus" ? "Use big-medium-small: one big body, one medium detail, two tiny expression marks." : mode === "remix" ? "Change one thing only. Keep the body shape stable." : "Big shape first. Face second. Decoration last.",
         styleRecipe: palette && palette !== "Auto" ? palette : pick(styleRecipes),
         complexity: mode === "cozyPlus" ? 68 : mode === "remix" ? 56 : 42,
@@ -1209,7 +1575,7 @@
           "The face is slightly below center.",
           "The mascot uses one main tiny twist only.",
           "The silhouette reads when zoomed out.",
-          "The optional flavor changed mood/style, not the subject."
+          "The optional flavor changed mood/style only; the selected subject stayed recognizable."
         ],
         avoid: emo[3],
         quest: pick(quests),

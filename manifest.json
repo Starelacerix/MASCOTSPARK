@@ -1,7 +1,7 @@
 {
-  "name": "Mascot Spark V7 \u2014 Stitched Halo Bloom",
+  "name": "Mascot Spark V9 \u2014 Expanded Character Library",
   "short_name": "Mascot Spark",
-  "description": "A cozy Procreate mascot drawing teacher with expanded draw-first guidance, blueprint variations, duo emotions, tiny twists, palette profiles, tabs, Surprise Me, AI help, and iPad layouts.",
+  "description": "Mascot Spark V9 expands mascot subjects, duo emotions, tiny twists, and locks optional flavor so it never changes the selected subject.",
   "start_url": "./index.html",
   "scope": "./",
   "display": "standalone",

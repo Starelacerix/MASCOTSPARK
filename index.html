@@ -683,6 +683,278 @@
       font-weight: 900;
     }
 
+
+    .tab-icon {
+      display: inline-grid;
+      place-items: center;
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      margin-right: 6px;
+      background: color-mix(in srgb, var(--color-primary) 16%, var(--color-surface));
+      border: 1px solid color-mix(in srgb, var(--color-border) 75%, transparent);
+      font-size: 13px;
+      line-height: 1;
+    }
+
+    .tab-hint {
+      margin: 0 0 12px;
+      padding: 10px 12px;
+      color: var(--color-muted);
+      background: color-mix(in srgb, var(--color-surface-2) 88%, white 5%);
+      border: 1px solid color-mix(in srgb, var(--color-border) 78%, transparent);
+      border-radius: 16px;
+      line-height: 1.4;
+      font-size: 14px;
+      font-weight: 750;
+    }
+
+    .main-action {
+      min-width: 210px;
+      font-size: 16px;
+      box-shadow: var(--glow-primary), var(--shadow-card);
+    }
+
+    .playful-action {
+      min-width: 150px;
+      box-shadow: var(--glow-accent);
+    }
+
+    .coach-action {
+      min-width: 170px;
+      background:
+        linear-gradient(135deg, color-mix(in srgb, var(--color-border) 55%, #25223f), var(--color-accent));
+      color: white;
+    }
+
+    .utility-action {
+      opacity: .88;
+      background: color-mix(in srgb, var(--color-surface-2) 90%, white 4%);
+      box-shadow: none;
+    }
+
+    .utility-action:hover {
+      opacity: 1;
+    }
+
+    .goal {
+      font-size: 19px;
+      border-width: 2px;
+      box-shadow: var(--glow-primary);
+    }
+
+    .guided-card {
+      border: 2px solid color-mix(in srgb, var(--color-primary) 55%, var(--color-border));
+      border-radius: 24px;
+      background:
+        radial-gradient(circle at top left, color-mix(in srgb, var(--color-primary) 14%, transparent), transparent 16rem),
+        linear-gradient(180deg, color-mix(in srgb, var(--color-surface) 94%, white 6%), var(--color-surface-2));
+      box-shadow: var(--shadow-card), var(--glow-primary);
+      padding: 16px;
+      margin: 10px 0 18px;
+    }
+
+    .guided-topline {
+      display: flex;
+      justify-content: space-between;
+      gap: 8px;
+      color: var(--color-muted);
+      font-size: 13px;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: .06em;
+      margin-bottom: 10px;
+    }
+
+    .guided-card h4 {
+      margin: 0 0 8px;
+      font-size: clamp(22px, 3vw, 32px);
+      letter-spacing: -0.04em;
+      color: var(--color-text);
+    }
+
+    .guided-card p {
+      margin: 0 0 12px;
+      font-size: 17px;
+      line-height: 1.48;
+      color: var(--color-text);
+    }
+
+    .guided-note {
+      background: color-mix(in srgb, var(--color-surface) 74%, transparent);
+      border: 1px solid color-mix(in srgb, var(--color-border) 74%, transparent);
+      border-radius: 14px;
+      padding: 10px 11px;
+      margin-top: 8px;
+      color: var(--color-muted);
+      line-height: 1.38;
+    }
+
+    .guided-note strong {
+      color: var(--color-text);
+    }
+
+    .guided-actions {
+      display: grid;
+      grid-template-columns: 1fr 1.2fr 1fr;
+      gap: 8px;
+      margin-top: 12px;
+    }
+
+    .phases-collapsed {
+      display: none;
+    }
+
+    .phases-collapsed.show-all {
+      display: block;
+    }
+
+    .lesson-head {
+      background:
+        linear-gradient(135deg, color-mix(in srgb, var(--color-primary) 14%, var(--color-surface-2)), var(--color-surface-2));
+    }
+
+    h3 {
+      padding-top: 3px;
+    }
+
+    .mini-card, .path-card, .draw-card, .phase, .check, .coach-card {
+      box-shadow: 0 6px 18px color-mix(in srgb, #000 5%, transparent);
+    }
+
+    .draw-card {
+      border-left: 4px solid color-mix(in srgb, var(--color-accent) 70%, var(--color-border));
+    }
+
+    .phase {
+      border-left: 4px solid color-mix(in srgb, var(--color-primary) 60%, var(--color-border));
+    }
+
+
+    .palette-preview {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+      gap: 12px;
+      margin-top: 8px;
+    }
+
+    .palette-card {
+      background:
+        linear-gradient(180deg, color-mix(in srgb, var(--color-surface-2) 92%, white 5%), var(--color-surface));
+      border: 1px solid var(--color-border);
+      border-radius: 20px;
+      padding: 13px;
+      overflow: hidden;
+    }
+
+    .palette-card.active {
+      box-shadow: var(--glow-primary);
+      border-color: color-mix(in srgb, var(--color-primary) 60%, var(--color-border));
+    }
+
+    .palette-title {
+      display: block;
+      color: var(--color-text);
+      font-weight: 950;
+      margin-bottom: 9px;
+      font-size: 14px;
+      line-height: 1.25;
+    }
+
+    .palette-dots {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      align-items: center;
+      margin: 8px 0;
+    }
+
+    .palette-dot {
+      width: 30px;
+      height: 30px;
+      border-radius: 999px;
+      border: 2px solid rgba(255,255,255,.68);
+      box-shadow:
+        0 2px 8px rgba(0,0,0,.16),
+        inset 0 1px 2px rgba(255,255,255,.45);
+      flex: 0 0 auto;
+    }
+
+    .palette-strip {
+      display: grid;
+      grid-auto-flow: column;
+      grid-auto-columns: 1fr;
+      height: 28px;
+      overflow: hidden;
+      border-radius: 999px;
+      border: 1px solid color-mix(in srgb, var(--color-border) 76%, transparent);
+      margin-top: 8px;
+    }
+
+    .palette-strip span {
+      display: block;
+      min-width: 20px;
+    }
+
+    .palette-count {
+      display: inline-block;
+      margin-top: 8px;
+      color: var(--color-muted);
+      font-size: 12px;
+      font-weight: 900;
+    }
+
+    .palette-selected-note {
+      margin-top: 10px;
+      padding: 10px 12px;
+      border-radius: 16px;
+      background: color-mix(in srgb, var(--color-primary) 10%, var(--color-surface-2));
+      border: 1px solid color-mix(in srgb, var(--color-primary) 35%, var(--color-border));
+      color: var(--color-muted);
+      line-height: 1.4;
+      font-size: 13px;
+      font-weight: 750;
+    }
+
+
+
+    .lesson-palette-card {
+      grid-column: 1 / -1;
+    }
+
+    .lesson-palette-swatches {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin: 8px 0;
+    }
+
+    .lesson-palette-swatch {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      border: 2px solid rgba(255,255,255,.7);
+      box-shadow:
+        0 2px 8px rgba(0,0,0,.16),
+        inset 0 1px 2px rgba(255,255,255,.45);
+    }
+
+
+    @media (max-width: 699px) {
+      .guided-actions {
+        grid-template-columns: 1fr;
+      }
+
+      .guided-topline {
+        flex-direction: column;
+      }
+
+      .main-action, .playful-action, .coach-action {
+        width: 100%;
+      }
+    }
+
+
     @media (max-width: 699px) {
       .tab-buttons { grid-template-columns: repeat(2, 1fr); }
       .palette-preview { grid-template-columns: 1fr; }
@@ -792,14 +1064,15 @@
 
     <section class="shell">
       <div class="tab-buttons" role="tablist" aria-label="Mascot Spark controls">
-        <button class="tab-btn active" type="button" data-tab="tab-lesson" onclick="showTab('tab-lesson')">Lesson</button>
-        <button class="tab-btn" type="button" data-tab="tab-character" onclick="showTab('tab-character')">Character</button>
-        <button class="tab-btn" type="button" data-tab="tab-color" onclick="showTab('tab-color')">Color</button>
-        <button class="tab-btn" type="button" data-tab="tab-blueprint" onclick="showTab('tab-blueprint')">Blueprint</button>
-        <button class="tab-btn" type="button" data-tab="tab-ai" onclick="showTab('tab-ai')">AI + Help</button>
+        <button class="tab-btn active" type="button" data-tab="tab-lesson" onclick="showTab('tab-lesson')"><span class="tab-icon">✦</span>Start</button>
+        <button class="tab-btn" type="button" data-tab="tab-character" onclick="showTab('tab-character')"><span class="tab-icon">◕</span>Personality</button>
+        <button class="tab-btn" type="button" data-tab="tab-color" onclick="showTab('tab-color')"><span class="tab-icon">●</span>Palette</button>
+        <button class="tab-btn" type="button" data-tab="tab-blueprint" onclick="showTab('tab-blueprint')"><span class="tab-icon">⌁</span>Trace Guide</button>
+        <button class="tab-btn" type="button" data-tab="tab-ai" onclick="showTab('tab-ai')"><span class="tab-icon">?</span>Coach</button>
       </div>
 
       <div id="tab-lesson" class="tab-panel active">
+        <p class="tab-hint">Pick what you want to draw and how long you want to practice.</p>
         <section class="controls">
           <div class="panel">
             <label for="lessonType">Subject category</label>
@@ -825,6 +1098,7 @@
       </div>
 
       <div id="tab-character" class="tab-panel">
+        <p class="tab-hint">Choose one personality direction and one small twist. Do not overdecorate.</p>
         <section class="controls">
           <div class="panel">
             <label for="funTwist">Tiny twist</label>
@@ -847,6 +1121,7 @@
       </div>
 
       <div id="tab-color" class="tab-panel">
+        <p class="tab-hint">Pick a color mood. The subject character stays the same.</p>
         <section class="controls">
           <div class="panel" style="grid-column: 1 / -1;">
             <label>Palette preview</label>
@@ -873,6 +1148,7 @@
       </div>
 
       <div id="tab-blueprint" class="tab-panel">
+        <p class="tab-hint">Choose how the trace guide should teach the drawing structure.</p>
         <section class="controls">
           <div class="panel">
             <label for="blueprintStyle">Traceable blueprint variation</label>
@@ -894,6 +1170,7 @@
       </div>
 
       <div id="tab-ai" class="tab-panel">
+        <p class="tab-hint">Optional coach help. The app works without AI.</p>
         <section class="controls">
           <div class="panel">
             <label for="apiKey">OpenRouter key, optional</label>
@@ -925,13 +1202,13 @@
     </section>
 
     <div class="actions">
-      <button class="primary" onclick="newLesson()">Give me a mascot lesson</button>
-      <button class="surprise" onclick="surpriseMe()">Surprise me</button>
-      <button class="ai-btn" onclick="aiLesson()" id="aiBtn">AI help this lesson</button>
-      <button onclick="saveSettings()">Save AI key</button>
-      <button onclick="resetChecks()">Reset checks</button>
-      <button onclick="window.print()">Print / save</button>
-      <button onclick="installApp()" id="installBtn" style="display:none;">Install app</button>
+      <button class="primary main-action" onclick="newLesson()">Give me a mascot lesson</button>
+      <button class="surprise playful-action" onclick="surpriseMe()">Surprise me</button>
+      <button class="ai-btn coach-action" onclick="aiLesson()" id="aiBtn">AI help this lesson</button>
+      <button class="utility-action" onclick="saveSettings()">Save AI key</button>
+      <button class="utility-action" onclick="resetChecks()">Reset checks</button>
+      <button class="utility-action" onclick="window.print()">Print / save</button>
+      <button class="utility-action" onclick="installApp()" id="installBtn" style="display:none;">Install app</button>
     </div>
 
     <section class="main">
@@ -955,6 +1232,11 @@
               <strong>Style recipe</strong>
               <span id="styleRecipe"></span>
             </div>
+            <div class="mini-card lesson-palette-card">
+              <strong>Lesson palette</strong>
+              <div id="lessonPaletteSwatches" class="lesson-palette-swatches"></div>
+              <span id="lessonPaletteName" class="small"></span>
+            </div>
           </div>
 
           <h3>Today's drawing path</h3>
@@ -971,8 +1253,25 @@
           <h3>Traceable step blueprints</h3>
           <div id="traceStepPanels" class="trace-panel-grid"></div>
 
-          <h3>Draw this in phases</h3>
-          <div id="phases"></div>
+          <h3>Guided step mode</h3>
+          <section class="guided-card" id="guidedCard">
+            <div class="guided-topline">
+              <span id="guidedProgress">Step 1 of 1</span>
+              <span id="guidedLayer">Layer: Rough sketch</span>
+            </div>
+            <h4 id="guidedTitle">Step title</h4>
+            <p id="guidedDraw">Draw instruction appears here.</p>
+            <div class="guided-note"><strong>Avoid:</strong> <span id="guidedAvoid">Avoid note appears here.</span></div>
+            <div class="guided-note"><strong>Canvas check:</strong> <span id="guidedCheck">Check note appears here.</span></div>
+            <div class="guided-actions">
+              <button class="utility-action" onclick="previousGuidedStep()">Previous</button>
+              <button class="primary" onclick="nextGuidedStep()">Next step</button>
+              <button class="utility-action" onclick="toggleAllSteps()">Show all steps</button>
+            </div>
+          </section>
+
+          <h3>All phases</h3>
+          <div id="phases" class="phases-collapsed"></div>
 
           <h3>Check before moving on</h3>
           <div id="checks" class="check-grid"></div>
@@ -1335,20 +1634,47 @@
 
 
     function renderPalettePreview() {
-      const selected = document.getElementById("paletteMood").value;
+      const selected = document.getElementById("paletteMood")?.value || "auto";
       const preview = document.getElementById("palettePreview");
       if (!preview) return;
 
       const entries = Object.entries(palettes).filter(([key]) => key !== "auto");
-      preview.innerHTML = entries.map(([key, value]) => `
-        <div class="palette-card ${key === selected ? "active" : ""}">
-          <span class="palette-title">${value.label}</span>
-          <div class="palette-dots">
-            ${value.colors.map(color => `<span class="palette-dot" style="background:${color}" title="${value.label} color"></span>`).join("")}
+      const selectedPalette = palettes[selected];
+
+      preview.innerHTML = entries.map(([key, value]) => {
+        const dots = value.colors.map(color =>
+          `<span class="palette-dot" style="background-color:${color};" aria-label="${value.label} swatch"></span>`
+        ).join("");
+
+        const strip = value.colors.map(color =>
+          `<span style="background-color:${color};"></span>`
+        ).join("");
+
+        return `
+          <div class="palette-card ${key === selected ? "active" : ""}" onclick="selectPalette('${key}')" role="button" tabindex="0">
+            <span class="palette-title">${value.label}</span>
+            <div class="palette-dots">${dots}</div>
+            <div class="palette-strip">${strip}</div>
+            <span class="palette-count">${value.colors.length} visible color swatches</span>
           </div>
-          <span class="palette-count">${value.colors.length} colors</span>
-        </div>
-      `).join("");
+        `;
+      }).join("");
+
+      if (selectedPalette && selectedPalette.colors && selectedPalette.colors.length) {
+        preview.insertAdjacentHTML("afterbegin", `
+          <div class="palette-selected-note" style="grid-column:1 / -1;">
+            Selected palette: <strong>${selectedPalette.label}</strong>. The color dots and strip below show the actual palette colors.
+          </div>
+        `);
+      }
+    }
+
+    function selectPalette(key) {
+      const el = document.getElementById("paletteMood");
+      if (!el) return;
+      el.value = key;
+      renderPalettePreview();
+      newLesson();
     }
 
     function bootSelects() {
@@ -1597,12 +1923,78 @@
       });
     }
 
+
+    let currentLessonData = null;
+    let guidedStepIndex = 0;
+    let showAllPhases = false;
+
+    function updateGuidedStep() {
+      if (!currentLessonData || !currentLessonData.phases || currentLessonData.phases.length === 0) return;
+
+      const phases = currentLessonData.phases;
+      guidedStepIndex = Math.max(0, Math.min(guidedStepIndex, phases.length - 1));
+      const step = phases[guidedStepIndex];
+
+      document.getElementById("guidedProgress").textContent = `Step ${guidedStepIndex + 1} of ${phases.length}`;
+      document.getElementById("guidedLayer").textContent = `Layer: ${phaseLayerName(guidedStepIndex)}`;
+      document.getElementById("guidedTitle").textContent = step[0];
+      document.getElementById("guidedDraw").textContent = step[1];
+      document.getElementById("guidedAvoid").textContent = step[2];
+      document.getElementById("guidedCheck").textContent = phaseCanvasLook(guidedStepIndex);
+    }
+
+    function nextGuidedStep() {
+      if (!currentLessonData) return;
+      if (guidedStepIndex < currentLessonData.phases.length - 1) {
+        guidedStepIndex += 1;
+        updateGuidedStep();
+      } else {
+        status("You reached the final step. Redraw it once or generate a new lesson.", "ok");
+      }
+    }
+
+    function previousGuidedStep() {
+      if (!currentLessonData) return;
+      guidedStepIndex = Math.max(0, guidedStepIndex - 1);
+      updateGuidedStep();
+    }
+
+    function toggleAllSteps() {
+      showAllPhases = !showAllPhases;
+      const phases = document.getElementById("phases");
+      phases.classList.toggle("show-all", showAllPhases);
+      status(showAllPhases ? "All phases shown." : "Guided mode active. Full phase list hidden.", "ok");
+    }
+
+    function renderLessonPalette(key) {
+      const palette = palettes[key];
+      const swatchBox = document.getElementById("lessonPaletteSwatches");
+      const nameBox = document.getElementById("lessonPaletteName");
+      if (!swatchBox || !nameBox) return;
+
+      if (!palette || !palette.colors || palette.colors.length === 0) {
+        swatchBox.innerHTML = "";
+        nameBox.textContent = "Auto palette";
+        return;
+      }
+
+      swatchBox.innerHTML = palette.colors.map(color =>
+        `<span class="lesson-palette-swatch" style="background-color:${color};" aria-label="${palette.label} color"></span>`
+      ).join("");
+      nameBox.textContent = `${palette.label} · ${palette.colors.length} colors`;
+    }
+
     function renderLesson(data) {
+      currentLessonData = data;
+      guidedStepIndex = 0;
+      showAllPhases = false;
+      document.getElementById("phases")?.classList.remove("show-all");
       document.getElementById("title").textContent = data.title;
       document.getElementById("meta").textContent = data.meta;
       document.getElementById("goal").textContent = data.goal;
       document.getElementById("shapeSpell").textContent = data.shapeSpell;
       document.getElementById("styleRecipe").textContent = data.styleRecipe;
+      renderLessonPalette(data.paletteKey || "auto");
       document.getElementById("meterFill").style.width = data.complexity + "%";
       document.getElementById("meterText").textContent = data.meterText;
       document.getElementById("drawFirstPanels").innerHTML = data.drawOrder.map((item, i) => `
@@ -1637,6 +2029,7 @@
       document.getElementById("traceNote").innerHTML = data.traceNote;
       renderPalettePreview();
       document.getElementById("blueprintSvg").innerHTML = makeBlueprint(data.type, data.emotion, data.twist, data.blueprintStyle);
+      updateGuidedStep();
     }
 
     function newLesson() {
@@ -1753,6 +2146,7 @@
         goal: `Draw a ${emo[0].toLowerCase()} ${subject[0].toLowerCase()} using ${subject[1]}, ${emo[1]}, and ${emo[2]}. Add ${tw[1]}.${flavorText}${paletteText} Subject lock: stay with ${subject[0].toLowerCase()}; flavor only changes the vibe.`,
         shapeSpell: mode === "cozyPlus" ? "Use big-medium-small: one big body, one medium detail, two tiny expression marks." : mode === "remix" ? "Change one thing only. Keep the body shape stable." : "Big shape first. Face second. Decoration last.",
         styleRecipe: palette && palette.label !== "Auto" ? `${palette.label} · ${palette.colors.length} colors` : pick(styleRecipes),
+        paletteKey: document.getElementById("paletteMood").value,
         complexity: mode === "cozyPlus" ? 68 : mode === "remix" ? 56 : 42,
         meterText: mode === "cozyPlus" ? "Cozy+ difficulty: more design thinking, still beginner-safe." : mode === "remix" ? "Remix difficulty: playful, one change at a time." : "Cozy difficulty: easy and drawable.",
         drawOrder: drawOrders[drawOrderMode][1],

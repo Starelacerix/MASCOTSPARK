@@ -1,7 +1,7 @@
 {
-  "name": "Mascot Spark V10 \u2014 UI + Unique Blueprints",
+  "name": "Mascot Spark V12 \u2014 Palette Preview Fix",
   "short_name": "Mascot Spark",
-  "description": "Mascot Spark V10 adds palette swatch previews, better tabs, stronger Surprise Me, unique blueprint variants, and improved iPad portrait and landscape layouts.",
+  "description": "Mascot Spark V12 fixes palette swatch previews with visible color dots and color strips, plus lesson palette swatches.",
   "start_url": "./index.html",
   "scope": "./",
   "display": "standalone",

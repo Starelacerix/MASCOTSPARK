@@ -165,3 +165,44 @@ This version adds:
   - weather symbol
 - Better iPad portrait mode layout
 - Better iPad landscape mode layout
+
+
+## V11 guided UI update
+
+Added:
+
+- Next Step guided mode
+- Previous / Next / Show All Steps controls
+- Stronger section hierarchy
+- More distinct button hierarchy:
+  - main generate action
+  - playful Surprise Me action
+  - AI coach action
+  - quieter utility actions
+- Tiny icons added to tabs
+- Friendlier tab names:
+  - Start
+  - Personality
+  - Palette
+  - Trace Guide
+  - Coach
+
+
+## V12 palette preview fix
+
+This version fixes palette previews so the colors are visibly shown.
+
+Added:
+
+- Larger visible palette dots
+- Full palette color strip
+- Selected palette note
+- Palette swatches inside the generated lesson output
+- Palette cards can be tapped/clicked to select that palette
+- No copy buttons added
+
+Service worker cache:
+
+```js
+const CACHE_NAME = "mascot-spark-v12";
+```

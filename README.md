@@ -307,3 +307,129 @@ Service worker cache:
 ```js
 const CACHE_NAME = "mascot-spark-v25";
 ```
+
+
+## V26 tiny twist blueprint pass 1
+
+Added custom tiny twist blueprint guides for the first 15 twists:
+
+- sparkle
+- hat
+- patch
+- charm
+- freckle
+- bow
+- halo
+- fang
+- glow
+- ribbon
+- stitches
+- leaf
+- starCheek
+- button
+- teardrop
+
+Twist blueprint coverage now:
+
+- Total twist options: 51
+- Decorative twists needing custom guides: 50
+- Custom twist blueprint guides added so far: 15
+- Remaining custom twist guides to add: 35
+
+What changed:
+
+- Main blueprint now includes a twist guide overlay + twist guide label.
+- Final trace step panel now includes the twist guide overlay.
+- Practice Intelligence now reports twist blueprint support status.
+- Trace note now includes twist blueprint support status.
+
+Service worker cache:
+
+```js
+const CACHE_NAME = "mascot-spark-v26";
+```
+
+
+## V27 surprise fix + tiny twist blueprint pass 2
+
+Changed Surprise Me:
+
+- Randomizes every main option.
+- Always randomizes emotion.
+- Always randomizes tiny twist.
+- Surprise Type now nudges the result instead of locking the emotion.
+
+Added 15 more tiny twist blueprint guides:
+
+- bandage
+- crown
+- cape
+- wings
+- antenna
+- question
+- moon
+- heart
+- glasses
+- scarf
+- paint
+- shine
+- thread
+- raindrop
+- sprout
+
+Twist blueprint coverage now:
+
+- Total twist options: 51
+- Decorative twists needing custom guides: 50
+- Custom twist blueprint guides added so far: 30
+- Remaining custom twist guides to add: 20
+
+Service worker cache:
+
+```js
+const CACHE_NAME = "mascot-spark-v27";
+```
+
+
+## V28 lesson + blueprint trigger + tiny twist blueprint pass 3
+
+Updated lesson trigger:
+
+- Clicking **Give me a mascot lesson** now generates the lesson and automatically opens the **Trace Guide** tab.
+- The top **New lesson** button now does the same.
+
+Added the final 20 tiny twist blueprint guides:
+
+- zipper
+- safetyPin
+- bell
+- flowerPin
+- brokenHeart
+- gumdropShine
+- ghostWisp
+- threadLoop
+- tinyBoots
+- oneMitten
+- blanket
+- peelCorner
+- waxSeal
+- crescentBrow
+- mismatchedButtons
+- tinyBackpack
+- bowtie
+- floatingStar
+- blushStripe
+- tinySatchel
+
+Twist blueprint coverage now:
+
+- Total twist options: 51
+- Decorative twists needing custom guides: 50
+- Custom twist blueprint guides added so far: 50
+- Remaining custom twist guides to add: 0
+
+Service worker cache:
+
+```js
+const CACHE_NAME = "mascot-spark-v28";
+```

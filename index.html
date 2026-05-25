@@ -2146,7 +2146,7 @@
       </div>
 
       <div class="today-actions">
-        <button class="primary main-action" onclick="newLesson()">New lesson</button>
+        <button class="primary main-action" onclick="newLesson(true)">New lesson</button>
         <button class="playful-action" onclick="surpriseMe()">Surprise me</button>
         <button class="utility-action" onclick="toggleFocusMode()">Focus mode</button>
       </div>
@@ -2376,7 +2376,7 @@
 
       
       <div id="tab-shade" class="tab-panel" data-advanced-only="true">
-        <p class="tab-hint">Subject Blueprint Completion turns your current mascot into a gentle shading plan: where the shadow goes, where the shine goes, which palette colors do what, and how to handle it in Procreate.</p>
+        <p class="tab-hint">Lesson + Blueprint Trigger + Tiny Twist Pass 3 turns your current mascot into a gentle shading plan: where the shadow goes, where the shine goes, which palette colors do what, and how to handle it in Procreate.</p>
 
         <section class="shade-lab">
           <div class="shade-side">
@@ -2436,7 +2436,7 @@
             <div class="coach-output shade-output">
               <div class="coach-output-head">
                 <div>
-                  <h3 id="shadeOutputTitle">Subject Blueprint Completion</h3>
+                  <h3 id="shadeOutputTitle">Lesson + Blueprint Trigger + Tiny Twist Pass 3</h3>
                   <p class="small">Generate a shading plan to see color roles, shadow placement, shine placement, Procreate layers, and what to avoid.</p>
                 </div>
 
@@ -2481,7 +2481,7 @@
 
     <div class="actions">
 
-      <button class="primary main-action" onclick="newLesson()">Give me a mascot lesson</button>
+      <button class="primary main-action" onclick="newLesson(true)">Give me a mascot lesson</button>
       <button class="surprise playful-action" onclick="surpriseMe()">Surprise me</button>
       <button class="ai-btn coach-action" data-advanced-only="true" onclick="aiLesson()" id="aiBtn">AI help this lesson</button>
       <button class="utility-action" data-advanced-only="true" onclick="saveSettings()">Save AI key</button>
@@ -2704,7 +2704,7 @@
     </section>
 
       <footer class="final-footer" aria-label="App version">
-      <span id="finalBuildBadge">Mascot Spark V20 · Subject Blueprint Completion · Cache mascot-spark-v25</span>
+      <span id="finalBuildBadge">Mascot Spark V20 · Lesson + Blueprint Trigger + Tiny Twist Pass 3 · Cache mascot-spark-v28</span>
     </footer>
   </main>
 
@@ -3739,6 +3739,7 @@
       const twistSvg = twists[twist] ? twists[twist][3] : "";
       const subjectGuide = getSubjectGuide(type);
       const emotionGuide = getEmotionBlueprintGuide(emotion);
+      const twistGuide = getTwistBlueprintGuide(twist);
       let overlay = style === "autoSubject" ? `${subjectGuide.overlay}<text class="label" x="35" y="535">Auto subject guide: ${subjectGuide.note}</text>` : "";
       if (style === "bodyFirst") overlay = '<text class="label" x="35" y="535">Body-first: trace only the outside shape before adding face.</text>';
       if (style === "faceMap") overlay = '<rect class="guide" x="185" y="235" width="150" height="105" rx="35"></rect><text class="label" x="35" y="535">Face map: keep eyes and mouth inside this soft box.</text>';
@@ -3788,9 +3789,11 @@
         ${eyes}
         ${mouth}
         ${emotionGuide.overlay}
+        ${twistGuide.overlay}
         ${twistSvg}
         ${overlay}
         <text class="label" x="35" y="486">${emotionGuide.label}</text>
+        <text class="label" x="35" y="510">${twistGuide.label}</text>
         <text class="label" x="35" y="508">Import into Procreate, lower opacity, draw on a new layer.</text>
       `;
     }
@@ -3803,6 +3806,7 @@
       const mouth = face[1];
       const twistSvg = twists[twist] ? twists[twist][3] : "";
       const emotionGuide = getEmotionBlueprintGuide(emotion);
+      const twistGuide = getTwistBlueprintGuide(twist);
 
       const guides = getStageGuides(type, stage);
 
@@ -3818,7 +3822,7 @@
       if (stage === "guide") content = `${guides}${body}`;
       if (stage === "face") content = `${guides}${body}${eyes}${mouth}${emotionGuide.overlay}`;
       if (stage === "limbs") content = `${guides}${body}${limbs}${eyes}${mouth}${emotionGuide.overlay}`;
-      if (stage === "final") content = `${guides}${body}${limbs}${eyes}${mouth}${emotionGuide.overlay}${twistSvg}<path class="guide" d="M165 360 C220 415 315 415 365 360"></path>`;
+      if (stage === "final") content = `${guides}${body}${limbs}${eyes}${mouth}${emotionGuide.overlay}${twistGuide.overlay}${twistSvg}<path class="guide" d="M165 360 C220 415 315 415 365 360"></path>`;
 
       return `<svg viewBox="0 0 520 520" aria-hidden="true">${content}</svg>`;
     }
@@ -4188,58 +4192,80 @@
     }
 
     function smartSurprise() {
-      const type = document.getElementById("surpriseType")?.value || "softBeginner";
+      const surpriseType = document.getElementById("surpriseType")?.value || "softBeginner";
 
-      if (type === "softBeginner") {
-        chooseSubjectFromPack("snack");
-        setSelect("level", "tiny");
+      // Randomize the subject pack first so the subject list refreshes before picking subject.
+      randomFromOptions("subjectPack");
+      filterSubjectsByPack(document.getElementById("subjectPack")?.value || "all");
+
+      // Randomize every main lesson option. This fixes emotion getting stuck.
+      [
+        "lessonType",
+        "emotion",
+        "funTwist",
+        "paletteMood",
+        "blueprintStyle",
+        "level",
+        "creativeMode",
+        "skillFocus",
+        "drawOrderMode",
+        "ideaPreset",
+        "aiStyle",
+        "shadeStyle",
+        "lightDirection",
+        "shadeIntensity",
+        "shadeOutputType"
+      ].forEach(id => randomFromOptions(id));
+
+      // Surprise Type now nudges the result instead of fully locking it.
+      if (surpriseType === "softBeginner") {
         setSelect("creativeMode", "cozy");
-        setSelect("skillFocus", "shapeControl");
-        setSelect("blueprintStyle", "bodyFirst");
-        setSelect("funTwist", "sparkle");
-      } else if (type === "weirdCute") {
-        chooseSubjectFromPack("magic");
-        setSelect("creativeMode", "remix");
-        setSelect("skillFocus", "expressionDesign");
-        randomFromOptions("funTwist");
-        randomFromOptions("emotion");
-      } else if (type === "spookySweet") {
+        setSelect("level", "tiny");
+        setSelect("blueprintStyle", "autoSubject");
+      }
+
+      if (surpriseType === "spookySweet") {
         chooseSubjectFromPack("softMonster");
-        setSelect("emotion", "spooky");
-        setSelect("skillFocus", "expressionDesign");
-        setSelect("blueprintStyle", "ghostDrape");
-        setSelect("funTwist", "fang");
-      } else if (type === "iconReady") {
+        setSelect("blueprintStyle", "autoSubject");
+        setSelect("shadeStyle", "spookyGlow");
+      }
+
+      if (surpriseType === "iconReady") {
         chooseSubjectFromPack("logo");
         setSelect("skillFocus", "iconReadability");
         setSelect("blueprintStyle", "iconGrid");
-        setSelect("level", "iconSheet");
-        setSelect("creativeMode", "cozy");
-      } else if (type === "paletteFirst") {
-        randomFromOptions("paletteMood");
-        chooseSubjectFromPack("all");
-        setSelect("skillFocus", "paletteControl");
-      } else if (type === "blueprintFirst") {
-        randomFromOptions("blueprintStyle");
-        chooseSubjectFromPack("all");
-        setSelect("skillFocus", "objectCharacter");
-      } else if (type === "skillDrill") {
-        randomFromOptions("skillFocus");
-        chooseSubjectFromPack("all");
-        setSelect("level", "study");
-      } else if (type === "chaosButton") {
-        chooseSubjectFromPack("all");
-        randomFromOptions("emotion");
-        randomFromOptions("funTwist");
-        randomFromOptions("paletteMood");
-        randomFromOptions("blueprintStyle");
-        setSelect("creativeMode", "remix");
+        setSelect("shadeStyle", "flatIcon");
       }
 
-      randomFromOptions("ideaPreset");
+      if (surpriseType === "paletteFirst") {
+        randomFromOptions("paletteMood");
+        setSelect("skillFocus", "paletteControl");
+      }
+
+      if (surpriseType === "blueprintFirst") {
+        randomFromOptions("blueprintStyle");
+      }
+
+      if (surpriseType === "skillDrill") {
+        randomFromOptions("skillFocus");
+        setSelect("level", "study");
+      }
+
+      if (surpriseType === "chaosButton") {
+        setSelect("creativeMode", "remix");
+        randomFromOptions("blueprintStyle");
+        randomFromOptions("paletteMood");
+      }
+
+      // Critical: always randomize emotion and tiny twist at the end.
+      randomFromOptions("emotion");
+      randomFromOptions("funTwist");
+
       document.getElementById("customIdea").value = "";
+      renderPalettePreview();
+      setupTimerFromSelect?.();
       newLesson();
-      status(`Smart Surprise created: ${surpriseTypes[type]}.`, "ok");
+      status(`Surprise randomized: ${surpriseTypes[surpriseType] || "Surprise"} — including emotion and tiny twist.`, "ok");
     }
 
     function setSelect(id, value) {
@@ -4380,8 +4406,8 @@
       box.textContent = suggestion;
     }
 
-    const APP_VERSION = "V25";
-    const APP_CACHE_NAME = "mascot-spark-v25";
+    const APP_VERSION = "V28";
+    const APP_CACHE_NAME = "mascot-spark-v28";
 
     function escapeHtml(value) {
       return String(value ?? "").replace(/[&<>"']/g, char => ({
@@ -4825,7 +4851,7 @@ ${currentBlueprint ? `<section><h2>Blueprint</h2>${currentBlueprint}</section>` 
 
       if (skillBox) skillBox.innerHTML = `<b>${skill.title}</b><br>${skill.goal}<ul>${skill.drills.map(x => `<li>${x}</li>`).join("")}</ul>`;
       if (anatomyBox) anatomyBox.innerHTML = `<ul>${anatomy.map(x => `<li>${x}</li>`).join("")}</ul>`;
-      if (rulesBox) rulesBox.innerHTML = `<ul>${subjectRules.map(x => `<li>${x}</li>`).join("")}<li>${emotionBlueprintBadge(data.emotion)}</li></ul>`;
+      if (rulesBox) rulesBox.innerHTML = `<ul>${subjectRules.map(x => `<li>${x}</li>`).join("")}<li>${emotionBlueprintBadge(data.emotion)}</li><li>${twistBlueprintBadge(data.twist)}</li></ul>`;
       if (versionBox) versionBox.innerHTML = `<b>${version2.title}</b><br>${version2.body}`;
     }
 
@@ -5363,7 +5389,7 @@ ${currentBlueprint ? `<section><h2>Blueprint</h2>${currentBlueprint}</section>` 
       }
 
       return {
-        title: `Subject Blueprint Completion — ${c.shadeStyle}`,
+        title: `Lesson + Blueprint Trigger + Tiny Twist Pass 3 — ${c.shadeStyle}`,
         summary,
         sections,
         note: styleNote
@@ -5374,7 +5400,7 @@ ${currentBlueprint ? `<section><h2>Blueprint</h2>${currentBlueprint}</section>` 
       const title = document.getElementById("shadeOutputTitle");
       const body = document.getElementById("shadeOutputBody");
       if (!title || !body) return;
-      title.textContent = data.title || "Subject Blueprint Completion";
+      title.textContent = data.title || "Lesson + Blueprint Trigger + Tiny Twist Pass 3";
 
       const context = getCurrentShadeContext();
       const roles = getShadeRoleColors(context);
@@ -5499,7 +5525,282 @@ ${currentBlueprint ? `<section><h2>Blueprint</h2>${currentBlueprint}</section>` 
       downloadSvgElementAsPng(svg, "mascot-spark-shading-map.png");
     }
 
-    function generalLessonFallback() {
+    
+    const TWIST_BLUEPRINT_PASS_1 = [
+      "sparkle",
+      "hat",
+      "patch",
+      "charm",
+      "freckle",
+      "bow",
+      "halo",
+      "fang",
+      "glow",
+      "ribbon",
+      "stitches",
+      "leaf",
+      "starCheek",
+      "button",
+      "teardrop",
+      "bandage",
+      "crown",
+      "cape",
+      "wings",
+      "antenna",
+      "question",
+      "moon",
+      "heart",
+      "glasses",
+      "scarf",
+      "paint",
+      "shine",
+      "thread",
+      "raindrop",
+      "sprout",
+      "zipper",
+      "safetyPin",
+      "bell",
+      "flowerPin",
+      "brokenHeart",
+      "gumdropShine",
+      "ghostWisp",
+      "threadLoop",
+      "tinyBoots",
+      "oneMitten",
+      "blanket",
+      "peelCorner",
+      "waxSeal",
+      "crescentBrow",
+      "mismatchedButtons",
+      "tinyBackpack",
+      "bowtie",
+      "floatingStar",
+      "blushStripe",
+      "tinySatchel",
+    ];
+
+    function getTwistBlueprintGuide(twist) {
+      const guides = {
+        sparkle: {
+          overlay: '<circle class="guide" cx="380" cy="158" r="34"></circle><path class="guide" d="M380 120 L380 196 M342 158 L418 158"></path>',
+          label: "Twist guide: keep the sparkle in a corner zone away from the face."
+        },
+        hat: {
+          overlay: '<rect class="guide" x="210" y="82" width="100" height="58" rx="14"></rect><line class="guide" x1="210" y1="140" x2="310" y2="140"></line>',
+          label: "Twist guide: rest the tiny hat above the head, not over the eyes."
+        },
+        patch: {
+          overlay: '<rect class="guide" x="326" y="300" width="58" height="52" rx="14"></rect>',
+          label: "Twist guide: place the patch on the outer side wall, not the center face."
+        },
+        charm: {
+          overlay: '<path class="guide" d="M360 322 Q400 352 390 402"></path><circle class="guide" cx="392" cy="416" r="26"></circle>',
+          label: "Twist guide: use a side hanging path first, then place the charm shape."
+        },
+        freckle: {
+          overlay: '<circle class="guide" cx="202" cy="308" r="18"></circle><circle class="guide" cx="328" cy="308" r="18"></circle>',
+          label: "Twist guide: keep freckles in the cheek zones and make them tiny."
+        },
+        bow: {
+          overlay: '<ellipse class="guide" cx="230" cy="155" rx="42" ry="28"></ellipse><circle class="guide" cx="230" cy="155" r="10"></circle>',
+          label: "Twist guide: build a small bow side-cluster, then add the knot in the middle."
+        },
+        halo: {
+          overlay: '<ellipse class="guide" cx="260" cy="92" rx="74" ry="24"></ellipse>',
+          label: "Twist guide: float the halo above the mascot with a little breathing room."
+        },
+        fang: {
+          overlay: '<rect class="guide" x="254" y="304" width="28" height="34" rx="8"></rect>',
+          label: "Twist guide: the fang should hang from the mouth zone, not become the mouth."
+        },
+        glow: {
+          overlay: '<path class="guide" d="M116 188 Q90 170 72 146"></path><path class="guide" d="M404 188 Q430 170 448 146"></path>',
+          label: "Twist guide: keep glow marks on the outside silhouette as side accents."
+        },
+        ribbon: {
+          overlay: '<path class="guide" d="M350 344 L430 380 L382 406 L430 438 L346 404"></path>',
+          label: "Twist guide: let the ribbon trail from one side and stay behind the body."
+        },
+        stitches: {
+          overlay: '<rect class="guide" x="142" y="214" width="46" height="118" rx="14"></rect>',
+          label: "Twist guide: stack small stitch marks in a side strip, not all over."
+        },
+        leaf: {
+          overlay: '<path class="guide" d="M260 138 C260 98 300 90 322 112 C292 118 274 130 260 138 Z"></path>',
+          label: "Twist guide: grow the leaf from the top edge like a sprout."
+        },
+        starCheek: {
+          overlay: '<circle class="guide" cx="202" cy="310" r="24"></circle>',
+          label: "Twist guide: keep the star cheek inside one cheek circle only."
+        },
+        button: {
+          overlay: '<circle class="guide" cx="203" cy="305" r="24"></circle>',
+          label: "Twist guide: place the button cheek on one side and keep it smaller than the eye."
+        },
+        teardrop: {
+          overlay: '<path class="guide" d="M320 270 C344 296 344 320 320 330 C296 320 296 296 320 270 Z"></path>',
+          label: "Twist guide: hang the teardrop under one eye, not at the mouth."
+        },
+        bandage: {
+          overlay: '<rect class="guide" x="326" y="278" width="66" height="38" rx="14"></rect><line class="guide" x1="346" y1="286" x2="370" y2="310"></line><line class="guide" x1="370" y1="286" x2="346" y2="310"></line>',
+          label: "Twist guide: place the bandage on one side and keep it smaller than the face."
+        },
+        crown: {
+          overlay: '<path class="guide" d="M214 142 L238 96 L260 136 L284 96 L308 142 Z"></path><line class="guide" x1="212" y1="146" x2="310" y2="146"></line>',
+          label: "Twist guide: float the crown just above the top edge with a clear base line."
+        },
+        cape: {
+          overlay: '<path class="guide" d="M166 238 C108 284 124 372 196 398"></path><path class="guide" d="M166 238 Q190 278 196 398"></path>',
+          label: "Twist guide: keep the cape behind the body and visible on one side only."
+        },
+        wings: {
+          overlay: '<path class="guide" d="M150 270 C94 226 88 316 146 326"></path><path class="guide" d="M370 270 C426 226 432 316 374 326"></path>',
+          label: "Twist guide: mirror the wings lightly, but keep them smaller than the body."
+        },
+        antenna: {
+          overlay: '<path class="guide" d="M230 145 Q210 100 180 95"></path><path class="guide" d="M290 145 Q310 100 340 95"></path><circle class="guide" cx="180" cy="95" r="12"></circle><circle class="guide" cx="340" cy="95" r="12"></circle>',
+          label: "Twist guide: attach antennae to the top curve and keep their tips tiny."
+        },
+        question: {
+          overlay: '<path class="guide" d="M365 225 C385 205 420 218 410 248 C405 264 385 267 385 285"></path><circle class="guide" cx="385" cy="310" r="12"></circle>',
+          label: "Twist guide: keep the question charm floating to the side, not over the eyes."
+        },
+        moon: {
+          overlay: '<circle class="guide" cx="350" cy="305" r="34"></circle><circle class="guide" cx="362" cy="305" r="28"></circle>',
+          label: "Twist guide: place the crescent mark in a side patch zone."
+        },
+        heart: {
+          overlay: '<path class="guide" d="M205 292 C190 275 165 292 180 315 L205 340 L230 315 C245 292 220 275 205 292 Z"></path>',
+          label: "Twist guide: place the heart patch on the cheek or side, never covering the mouth."
+        },
+        glasses: {
+          overlay: '<circle class="guide" cx="225" cy="265" r="32"></circle><circle class="guide" cx="295" cy="265" r="32"></circle><line class="guide" x1="257" y1="265" x2="263" y2="265"></line>',
+          label: "Twist guide: align glasses to the eye line before drawing rims."
+        },
+        scarf: {
+          overlay: '<line class="guide" x1="192" y1="338" x2="328" y2="338"></line><path class="guide" d="M285 338 L334 386"></path>',
+          label: "Twist guide: wrap the scarf below the face and let one tail hang."
+        },
+        paint: {
+          overlay: '<path class="guide" d="M330 160 C348 196 324 214 338 246 C362 218 370 184 350 160"></path>',
+          label: "Twist guide: keep the paint drip at the top or side edge as one rounded drip."
+        },
+        shine: {
+          overlay: '<ellipse class="guide" cx="210" cy="190" rx="38" ry="18" transform="rotate(-25 210 190)"></ellipse>',
+          label: "Twist guide: put the glossy shine on the light side and keep it oval."
+        },
+        thread: {
+          overlay: '<path class="guide" d="M150 206 L184 334"></path><path class="guide" d="M155 210 L178 226 M150 250 L178 262 M154 292 L180 292 M164 330 L188 314"></path>',
+          label: "Twist guide: stitch along one edge strip instead of scattering stitches."
+        },
+        raindrop: {
+          overlay: '<path class="guide" d="M385 220 C410 252 410 278 385 292 C360 278 360 252 385 220 Z"></path>',
+          label: "Twist guide: hang the raindrop as a side bead or under-eye droplet."
+        },
+        sprout: {
+          overlay: '<line class="guide" x1="260" y1="145" x2="260" y2="104"></line><path class="guide" d="M260 112 C235 90 210 108 220 130"></path><path class="guide" d="M260 112 C285 90 310 108 300 130"></path>',
+          label: "Twist guide: grow the sprout from the top center with two simple leaves."
+        }
+,
+        zipper: {
+          overlay: '<line class="guide" x1="362" y1="186" x2="362" y2="356"></line><path class="guide" d="M350 228 L374 228 M350 260 L374 260 M350 292 L374 292 M350 324 L374 324"></path>',
+          label: "Twist guide: place the zipper on one outer side strip and keep the teeth evenly spaced."
+        },
+        safetyPin: {
+          overlay: '<path class="guide" d="M346 286 C386 252 416 326 368 336"></path><path class="guide" d="M368 336 L388 350"></path>',
+          label: "Twist guide: let the safety pin sit along one side curve like a clipped accent."
+        },
+        bell: {
+          overlay: '<path class="guide" d="M360 260 C334 260 334 300 360 314 C386 300 386 260 360 260 Z"></path><circle class="guide" cx="360" cy="322" r="8"></circle>',
+          label: "Twist guide: keep the bell small and hanging near the lower side edge."
+        },
+        flowerPin: {
+          overlay: '<circle class="guide" cx="342" cy="214" r="16"></circle><circle class="guide" cx="342" cy="188" r="16"></circle><circle class="guide" cx="366" cy="202" r="16"></circle><circle class="guide" cx="318" cy="202" r="16"></circle><circle class="guide" cx="342" cy="216" r="8"></circle>',
+          label: "Twist guide: make the flower pin a tiny petal cluster on one upper side."
+        },
+        brokenHeart: {
+          overlay: '<path class="guide" d="M210 292 C194 274 168 292 182 314 L208 340 L220 324 L232 340 L258 314 C272 292 246 274 230 292 Z"></path><line class="guide" x1="220" y1="302" x2="220" y2="330"></line>',
+          label: "Twist guide: keep the broken heart patch cheek-sized and split by one center crack."
+        },
+        gumdropShine: {
+          overlay: '<ellipse class="guide" cx="206" cy="188" rx="34" ry="20" transform="rotate(-25 206 188)"></ellipse><ellipse class="guide" cx="226" cy="212" rx="16" ry="10" transform="rotate(-25 226 212)"></ellipse>',
+          label: "Twist guide: use two shine ovals on the light side like glossy candy."
+        },
+        ghostWisp: {
+          overlay: '<path class="guide" d="M372 210 C410 204 424 242 400 262 C420 276 414 310 382 314"></path>',
+          label: "Twist guide: float the wisp near the outside edge and keep it airy, not thick."
+        },
+        threadLoop: {
+          overlay: '<path class="guide" d="M150 204 Q128 240 150 272 Q174 306 150 338"></path>',
+          label: "Twist guide: make one looping thread line on an edge instead of tangling the whole mascot."
+        },
+        tinyBoots: {
+          overlay: '<rect class="guide" x="208" y="398" width="38" height="28" rx="8"></rect><rect class="guide" x="274" y="398" width="38" height="28" rx="8"></rect>',
+          label: "Twist guide: place the boots under the body and keep them blocky and tiny."
+        },
+        oneMitten: {
+          overlay: '<circle class="guide" cx="374" cy="334" r="22"></circle><path class="guide" d="M352 334 L330 326"></path>',
+          label: "Twist guide: put the mitten on one hand side only so it reads as a cute mismatch."
+        },
+        blanket: {
+          overlay: '<path class="guide" d="M156 262 Q260 230 364 262 L338 388 Q260 410 182 388 Z"></path>',
+          label: "Twist guide: let the blanket wrap the lower half, leaving the face fully visible."
+        },
+        peelCorner: {
+          overlay: '<path class="guide" d="M334 150 Q374 150 374 190 Q354 182 334 150 Z"></path>',
+          label: "Twist guide: curl one top corner only so the peel effect stays readable."
+        },
+        waxSeal: {
+          overlay: '<circle class="guide" cx="350" cy="280" r="30"></circle>',
+          label: "Twist guide: place the wax seal as one centered side stamp, not near the eyes."
+        },
+        crescentBrow: {
+          overlay: '<path class="guide" d="M192 224 C214 200 242 218 232 238 C220 230 204 226 192 224 Z"></path>',
+          label: "Twist guide: keep the crescent brow just above one eye as a small mood accent."
+        },
+        mismatchedButtons: {
+          overlay: '<circle class="guide" cx="204" cy="304" r="20"></circle><circle class="guide" cx="324" cy="318" r="14"></circle>',
+          label: "Twist guide: use two uneven button accents so the mismatch reads clearly."
+        },
+        tinyBackpack: {
+          overlay: '<rect class="guide" x="346" y="286" width="54" height="76" rx="16"></rect><path class="guide" d="M356 286 Q373 266 390 286"></path>',
+          label: "Twist guide: place the backpack behind one side of the body like a strapped accessory."
+        },
+        bowtie: {
+          overlay: '<path class="guide" d="M220 338 L250 354 L220 370 Z M300 338 L270 354 L300 370 Z"></path><circle class="guide" cx="260" cy="354" r="8"></circle>',
+          label: "Twist guide: center the bowtie below the mouth and keep it smaller than the face."
+        },
+        floatingStar: {
+          overlay: '<path class="guide" d="M374 182 L380 196 L395 200 L380 204 L374 218 L368 204 L353 200 L368 196 Z"></path>',
+          label: "Twist guide: let the floating star hover in a corner zone away from the main face."
+        },
+        blushStripe: {
+          overlay: '<rect class="guide" x="178" y="296" width="46" height="12" rx="6"></rect><rect class="guide" x="296" y="296" width="46" height="12" rx="6"></rect>',
+          label: "Twist guide: keep blush stripes low on the cheeks and shorter than the eye width."
+        },
+        tinySatchel: {
+          overlay: '<path class="guide" d="M324 286 Q358 250 392 286"></path><rect class="guide" x="346" y="286" width="62" height="54" rx="12"></rect>',
+          label: "Twist guide: hang the satchel from a strap arc and keep the bag body small."
+        }
+
+      };
+
+      return guides[twist] || {
+        overlay: '',
+        label: twist === "none"
+          ? "Twist guide: no extra twist selected."
+          : "Twist guide: custom blueprint guide not added yet."
+      };
+    }
+
+    function twistBlueprintBadge(twist) {
+      if (twist === "none") return "Twist blueprint: none selected";
+      return TWIST_BLUEPRINT_PASS_1.includes(twist)
+        ? "Twist blueprint: full current set supported"
+        : "Twist blueprint: fallback guide";
+    }
+
+function generalLessonFallback() {
       const c = getCurrentCoachContext();
       return {
         title: "General Lesson Help",
@@ -5763,7 +6064,7 @@ ${currentBlueprint ? `<section><h2>Blueprint</h2>${currentBlueprint}</section>` 
       updateGuidedStep();
     }
 
-    function newLesson() {
+    function newLesson(openBlueprint = false) {
       const type = document.getElementById("lessonType").value;
       const emotion = document.getElementById("emotion").value;
       const level = document.getElementById("level").value;
@@ -5959,8 +6260,13 @@ ${currentBlueprint ? `<section><h2>Blueprint</h2>${currentBlueprint}</section>` 
         praise: pick(praises),
         remixOne: pick(remixIdeas),
         remixTwo: mode === "cozyPlus" ? "Make a sticker version with a thicker outline and fewer details." : "Draw the same mascot again with a different mouth, not a different body.",
-        traceNote: `<strong>Beginner use:</strong><br>Trace the big body shape first. Hide the guide when done. If the mascot still reads, the drawing worked. Emotion blueprint pass: ${emotionBlueprintBadge(emotion)}.`
+        traceNote: `<strong>Beginner use:</strong><br>Trace the big body shape first. Hide the guide when done. If the mascot still reads, the drawing worked. Emotion blueprint pass: ${emotionBlueprintBadge(emotion)}. Twist blueprint pass: ${twistBlueprintBadge(twist)}.`
       });
+
+      if (openBlueprint) {
+        showTab("tab-blueprint");
+        status("Mascot lesson + blueprint ready.", "ok");
+      }
     }
 
     function resetChecks() {
@@ -6025,7 +6331,7 @@ ${currentBlueprint ? `<section><h2>Blueprint</h2>${currentBlueprint}</section>` 
 
     function updateFinalBuildBadge() {
       const badge = document.getElementById("finalBuildBadge");
-      if (badge) badge.textContent = `Mascot Spark ${APP_VERSION || "V20"} · Subject Blueprint Completion · Cache ${APP_CACHE_NAME || "mascot-spark-v25"}`;
+      if (badge) badge.textContent = `Mascot Spark ${APP_VERSION || "V20"} · Lesson + Blueprint Trigger + Tiny Twist Pass 3 · Cache ${APP_CACHE_NAME || "mascot-spark-v28"}`;
     }
 
     document.addEventListener("keydown", closeOpenModalsOnEscape);

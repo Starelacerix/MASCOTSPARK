@@ -1,4 +1,4 @@
-const CACHE_NAME = "mascot-spark-v1";
+const CACHE_NAME = "mascot-spark-v4";
 const APP_SHELL = [
   "./",
   "./index.html",

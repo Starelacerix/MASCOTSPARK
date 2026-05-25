@@ -940,6 +940,212 @@
     }
 
 
+
+    .ai-workbench {
+      display: grid;
+      grid-template-columns: minmax(320px, .95fr) minmax(0, 1.15fr);
+      gap: 14px;
+      align-items: start;
+    }
+
+    .ai-side {
+      display: grid;
+      gap: 12px;
+    }
+
+    .ai-tool-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+
+    .coach-tool-btn {
+      display: grid;
+      gap: 5px;
+      align-content: start;
+      text-align: left;
+      border-radius: 20px;
+      padding: 14px;
+      min-height: 110px;
+      background:
+        linear-gradient(180deg, color-mix(in srgb, var(--color-surface) 94%, white 5%), var(--color-surface-2));
+      border: 1px solid color-mix(in srgb, var(--color-border) 78%, transparent);
+      box-shadow: 0 10px 22px color-mix(in srgb, #000 6%, transparent);
+    }
+
+    .coach-tool-btn:hover {
+      box-shadow: var(--glow-primary);
+    }
+
+    .coach-tool-title {
+      display: block;
+      color: var(--color-text);
+      font-weight: 950;
+      font-size: 15px;
+      line-height: 1.3;
+    }
+
+    .coach-tool-copy {
+      display: block;
+      color: var(--color-muted);
+      font-size: 13px;
+      line-height: 1.35;
+      font-weight: 700;
+    }
+
+    .coach-context-card,
+    .ai-output-card {
+      background:
+        linear-gradient(180deg, color-mix(in srgb, var(--color-surface) 94%, white 4%), var(--color-surface-2));
+      border: 1px solid var(--color-border);
+      border-radius: 24px;
+      box-shadow: var(--shadow-card);
+    }
+
+    .coach-context-card {
+      padding: 14px;
+    }
+
+    .coach-context-card strong {
+      display: block;
+      margin-bottom: 8px;
+      color: var(--color-muted);
+      text-transform: uppercase;
+      font-size: 12px;
+      letter-spacing: .08em;
+    }
+
+    .coach-context-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .coach-context-list span {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      border-radius: 999px;
+      padding: 8px 11px;
+      border: 1px solid color-mix(in srgb, var(--color-border) 80%, transparent);
+      background: color-mix(in srgb, var(--color-surface-2) 86%, white 5%);
+      color: var(--color-text);
+      font-size: 13px;
+      font-weight: 850;
+    }
+
+    .ai-output-wrap {
+      min-width: 0;
+    }
+
+    .ai-output-card {
+      min-height: 560px;
+      overflow: hidden;
+    }
+
+    .ai-output-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      padding: 18px 18px 12px;
+      border-bottom: 1px solid color-mix(in srgb, var(--color-border) 80%, transparent);
+      background:
+        linear-gradient(135deg, color-mix(in srgb, var(--color-primary) 12%, var(--color-surface-2)), var(--color-surface-2));
+    }
+
+    .ai-output-head h3 {
+      margin: 0;
+      color: var(--color-text);
+      font-size: 18px;
+      letter-spacing: -.02em;
+      padding-top: 0;
+    }
+
+    .ai-output-body {
+      padding: 18px;
+      display: grid;
+      gap: 12px;
+      line-height: 1.5;
+    }
+
+    .coach-summary {
+      background: color-mix(in srgb, var(--color-primary) 10%, var(--color-surface));
+      border: 1px solid color-mix(in srgb, var(--color-primary) 35%, var(--color-border));
+      border-radius: 18px;
+      padding: 14px;
+      font-size: 16px;
+      color: var(--color-text);
+    }
+
+    .coach-section {
+      background: color-mix(in srgb, var(--color-surface) 88%, white 4%);
+      border: 1px solid color-mix(in srgb, var(--color-border) 82%, transparent);
+      border-radius: 18px;
+      padding: 14px;
+    }
+
+    .coach-section h4 {
+      margin: 0 0 8px;
+      color: var(--color-muted);
+      font-size: 13px;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+
+    .coach-section ul {
+      margin: 0;
+      padding-left: 18px;
+    }
+
+    .coach-section li + li {
+      margin-top: 6px;
+    }
+
+    .coach-inline-note {
+      padding: 10px 12px;
+      border-left: 4px solid color-mix(in srgb, var(--color-accent) 70%, var(--color-border));
+      color: var(--color-muted);
+      background: color-mix(in srgb, var(--color-surface-2) 85%, white 4%);
+      border-radius: 12px;
+      line-height: 1.42;
+    }
+
+    @media (max-width: 699px) {
+      .ai-workbench {
+        grid-template-columns: 1fr;
+      }
+
+      .ai-tool-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .ai-output-card {
+        min-height: 420px;
+      }
+    }
+
+    @media (min-width: 700px) and (max-width: 1180px) and (orientation: portrait) {
+      .ai-workbench {
+        grid-template-columns: 1fr;
+      }
+
+      .ai-tool-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .ai-output-card {
+        min-height: 480px;
+      }
+    }
+
+    @media (min-width: 900px) and (max-width: 1180px) and (orientation: landscape) {
+      .ai-workbench {
+        grid-template-columns: minmax(320px, .9fr) minmax(0, 1.1fr);
+      }
+    }
+
+
     @media (max-width: 699px) {
       .guided-actions {
         grid-template-columns: 1fr;
@@ -1169,39 +1375,78 @@
         </section>
       </div>
 
-      <div id="tab-ai" class="tab-panel">
-        <p class="tab-hint">Optional coach help. The app works without AI.</p>
-        <section class="controls">
-          <div class="panel">
-            <label for="apiKey">OpenRouter key, optional</label>
-            <input id="apiKey" type="password" placeholder="sk-or-v1-..." autocomplete="off" />
+      
+<div id="tab-ai" class="tab-panel">
+        <p class="tab-hint">Use the Coach tools to get focused help. All AI help output appears here for easier reading and more room.</p>
+
+        <section class="ai-workbench">
+          <div class="ai-side">
+            <section class="controls">
+              <div class="panel">
+                <label for="apiKey">OpenRouter key, optional</label>
+                <input id="apiKey" type="password" placeholder="sk-or-v1-..." autocomplete="off" />
+              </div>
+              <div class="panel">
+                <label for="model">Model</label>
+                <input id="model" value="openrouter/free" />
+              </div>
+              <div class="panel">
+                <label for="aiStyle">General help mode</label>
+                <select id="aiStyle"></select>
+              </div>
+              <div class="panel">
+                <label>Coach note</label>
+                <p class="small">If you do not add an API key, the Coach still gives offline guidance based on your selected lesson.</p>
+              </div>
+            </section>
+
+            <div class="ai-tool-grid">
+              <button class="coach-tool-btn" onclick="aiLesson()">
+                <span class="coach-tool-title">General Lesson Help</span>
+                <span class="coach-tool-copy">Summarize and support the whole lesson.</span>
+              </button>
+
+              <button class="coach-tool-btn" onclick="aiSubjectLogic()">
+                <span class="coach-tool-title">Subject-Specific Drawing Logic</span>
+                <span class="coach-tool-copy">How to draw this subject so it still reads clearly.</span>
+              </button>
+
+              <button class="coach-tool-btn" onclick="aiEmotionCoach()">
+                <span class="coach-tool-title">Emotion Coach</span>
+                <span class="coach-tool-copy">Expression formula for the selected duo emotion.</span>
+              </button>
+
+              <button class="coach-tool-btn" onclick="aiPaletteCoach()">
+                <span class="coach-tool-title">Palette Coach</span>
+                <span class="coach-tool-copy">How to use the selected palette without muddying the drawing.</span>
+              </button>
+            </div>
+
+            <div class="coach-context-card">
+              <strong>Current coach context</strong>
+              <div id="coachContext" class="coach-context-list"></div>
+            </div>
+
+            <div id="status" class="status"></div>
           </div>
-          <div class="panel">
-            <label for="model">Model</label>
-            <input id="model" value="openrouter/free" />
+
+          <div class="ai-output-wrap">
+            <div class="ai-output-card">
+              <div class="ai-output-head">
+                <h3 id="aiOutputTitle">Coach Output</h3>
+                <button class="utility-action" onclick="clearAiOutput()">Clear</button>
+              </div>
+              <div id="aiOutputBody" class="ai-output-body">
+                <p class="small">Run one of the Coach tools to see help here.</p>
+              </div>
+            </div>
           </div>
-          <div class="panel">
-            <label for="aiStyle">AI help category</label>
-            <select id="aiStyle"></select>
-          </div>
-          <div class="panel">
-            <label>AI note</label>
-            <p class="small">AI is optional. The offline lesson system works without it.</p>
-          </div>
-        </section>
-        <div id="status" class="status"></div>
-      </div>
-    </section>
-        <section class="controls" style="margin-top:12px;">
-          <div class="panel"><label>01</label><p class="small">Draw-first cards now tell you what to draw, what not to do yet, and which Procreate layer to use.</p></div>
-          <div class="panel"><label>02</label><p class="small">Palette swatches show color dots visually. They are for choosing mood, not replacing your subject.</p></div>
-          <div class="panel"><label>03</label><p class="small">Blueprint variants now adapt more strongly to different subject families.</p></div>
-          <div class="panel"><label>04</label><p class="small">Surprise Me randomizes a full lesson while keeping your optional flavor mood-only.</p></div>
         </section>
       </div>
     </section>
 
     <div class="actions">
+
       <button class="primary main-action" onclick="newLesson()">Give me a mascot lesson</button>
       <button class="surprise playful-action" onclick="surpriseMe()">Surprise me</button>
       <button class="ai-btn coach-action" onclick="aiLesson()" id="aiBtn">AI help this lesson</button>
@@ -1924,6 +2169,334 @@
     }
 
 
+
+    function getCurrentCoachContext() {
+      const subjectKey = document.getElementById("lessonType")?.value || "blob";
+      const emotionKey = document.getElementById("emotion")?.value || "happy";
+      const paletteKey = document.getElementById("paletteMood")?.value || "auto";
+      const blueprintKey = document.getElementById("blueprintStyle")?.value || "classic";
+      const twistKey = document.getElementById("funTwist")?.value || "none";
+      const lessonKey = document.getElementById("level")?.value || "normal";
+
+      return {
+        subjectKey,
+        emotionKey,
+        paletteKey,
+        blueprintKey,
+        twistKey,
+        lessonKey,
+        subject: subjectData[subjectKey] || subjectData.blob,
+        emotion: emotions[emotionKey] || emotions.happy,
+        palette: palettes[paletteKey] || palettes.auto,
+        blueprint: blueprintOptions[blueprintKey] || blueprintOptions.classic,
+        twist: twists[twistKey] || twists.none,
+        lesson: lessonSizes[lessonKey] || lessonSizes.normal,
+        flavor: document.getElementById("customIdea")?.value.trim() || flavors[document.getElementById("ideaPreset")?.value] || "none"
+      };
+    }
+
+    function renderCoachContext() {
+      const c = getCurrentCoachContext();
+      const box = document.getElementById("coachContext");
+      if (!box) return;
+      box.innerHTML = `
+        <span>Subject: ${c.subject[0]}</span>
+        <span>Emotion: ${c.emotion[0]}</span>
+        <span>Twist: ${c.twist[0]}</span>
+        <span>Palette: ${c.palette.label || "Auto"}</span>
+        <span>Blueprint: ${c.blueprint}</span>
+        <span>Lesson: ${c.lesson[0]}</span>
+      `;
+    }
+
+    function clearAiOutput() {
+      const title = document.getElementById("aiOutputTitle");
+      const body = document.getElementById("aiOutputBody");
+      if (title) title.textContent = "Coach Output";
+      if (body) body.innerHTML = '<p class="small">Run one of the Coach tools to see help here.</p>';
+    }
+
+    function renderCoachOutput(data) {
+      showTab('tab-ai');
+      const title = document.getElementById("aiOutputTitle");
+      const body = document.getElementById("aiOutputBody");
+      if (!title || !body) return;
+
+      title.textContent = data.title || "Coach Output";
+
+      const summary = data.summary ? `<div class="coach-summary">${data.summary}</div>` : "";
+      const sections = (data.sections || []).map(section => `
+        <section class="coach-section">
+          <h4>${section.heading}</h4>
+          <ul>${(section.items || []).map(item => `<li>${item}</li>`).join("")}</ul>
+        </section>
+      `).join("");
+
+      const note = data.note ? `<div class="coach-inline-note">${data.note}</div>` : "";
+
+      body.innerHTML = summary + sections + note;
+    }
+
+    function subjectLogicFallback() {
+      const c = getCurrentCoachContext();
+      return {
+        title: "Subject-Specific Drawing Logic",
+        summary: `Use the selected subject as the core shape language. The goal is for the mascot to still read clearly as ${c.subject[0].toLowerCase()} even after you add emotion and a tiny twist.`,
+        sections: [
+          {
+            heading: "Start with",
+            items: [
+              `Begin with ${c.subject[1]}.`,
+              `Focus on ${c.subject[2]} before adding personality details.`,
+              `Keep the outside silhouette simple first, then add the face.`
+            ]
+          },
+          {
+            heading: "What makes it read",
+            items: [
+              `Preserve one obvious cue that says “${c.subject[0]}.”`,
+              `Use only one or two subject-defining details so the shape stays beginner-friendly.`,
+              `If the subject is getting lost, remove decorations before changing the main body.`
+            ]
+          },
+          {
+            heading: "Avoid",
+            items: [
+              `Do not let the optional flavor turn it into a different subject.`,
+              `Do not add the face before the base shape reads clearly.`,
+              `Do not stack multiple accessories if they cover the subject cue.`
+            ]
+          }
+        ],
+        note: `Good rule: if you zoom out and it no longer reads as ${c.subject[0].toLowerCase()}, simplify the silhouette before doing anything else.`
+      };
+    }
+
+    function emotionCoachFallback() {
+      const c = getCurrentCoachContext();
+      return {
+        title: "Emotion Coach",
+        summary: `Use one dominant face cue, one body cue, and one optional extra mark. That keeps the selected duo emotion readable without making the mascot too busy.`,
+        sections: [
+          {
+            heading: "Expression formula",
+            items: [
+              `Face cue: ${c.emotion[1]}.`,
+              `Body cue: ${c.emotion[2]}.`,
+              `Keep the face low on the body so the emotion reads cuter and more mascot-like.`
+            ]
+          },
+          {
+            heading: "How to balance the duo emotion",
+            items: [
+              `Choose one side of the duo emotion as the main read and let the second side be the accent.`,
+              `Use the mouth and eye shape first before adding any extra symbol.`,
+              `If the emotion feels muddy, remove one detail and make the mouth clearer.`
+            ]
+          },
+          {
+            heading: "Avoid",
+            items: [
+              c.emotion[3],
+              `Do not use too many emotional symbols at once.`,
+              `Do not let the twist overpower the face.`
+            ]
+          }
+        ],
+        note: "Best practice: keep one emotional cue in the face and one in the pose or accessory, then stop."
+      };
+    }
+
+    function paletteCoachFallback() {
+      const c = getCurrentCoachContext();
+      const colors = (c.palette.colors || []);
+      const body = colors[0] || "your main color";
+      const secondary = colors[1] || colors[0] || "a secondary color";
+      const accent = colors[2] || colors[1] || colors[0] || "an accent color";
+      const shadow = colors[Math.max(0, colors.length - 2)] || secondary;
+      const highlight = colors[Math.max(0, colors.length - 1)] || accent;
+
+      return {
+        title: "Palette Coach",
+        summary: `Use the selected palette in a simple order: main body color first, one supporting accent second, then one shadow and one highlight. That keeps the mascot colorful without becoming muddy.`,
+        sections: [
+          {
+            heading: "Suggested color jobs",
+            items: [
+              `Main body: ${body}`,
+              `Secondary detail: ${secondary}`,
+              `Accent: ${accent}`,
+              `Shadow: ${shadow}`,
+              `Highlight or shine: ${highlight}`
+            ]
+          },
+          {
+            heading: "Keep it clean",
+            items: [
+              `Do not try to use every palette color equally.`,
+              `Pick one main body color and let the others support it.`,
+              `Use the lightest or brightest color in smaller doses so it feels special.`
+            ]
+          },
+          {
+            heading: "Avoid muddy color",
+            items: [
+              `Avoid scattering similar colors everywhere in tiny pieces.`,
+              `Avoid adding too many shadows in different colors.`,
+              `If the drawing looks muddy, reduce the palette use to body + one accent + one shadow.`
+            ]
+          }
+        ],
+        note: "If you feel unsure, stop after flat color + one shadow + one shine spot."
+      };
+    }
+
+    function generalLessonFallback() {
+      const c = getCurrentCoachContext();
+      return {
+        title: "General Lesson Help",
+        summary: `Work from big to small: first the ${c.subject[0].toLowerCase()} shape, then the ${c.emotion[0].toLowerCase()} expression, then the twist, then color. The app already has a guided step mode, so let the steps carry you instead of trying to solve everything at once.`,
+        sections: [
+          {
+            heading: "What to focus on first",
+            items: [
+              `Start with the main body shape and ignore tiny details.`,
+              `Get the face placement right before adding limbs.`,
+              `Use the selected blueprint as a guide, not as something to over-copy.`
+            ]
+          },
+          {
+            heading: "When to simplify",
+            items: [
+              `If the drawing feels awkward, fix the face height before changing the body.`,
+              `If the subject stops reading, remove a detail rather than adding one.`,
+              `If the palette feels muddy, use fewer colors.`
+            ]
+          },
+          {
+            heading: "Procreate rhythm",
+            items: [
+              `Guide layer at low opacity.`,
+              `Sketch layer for body and face tests.`,
+              `Clean line layer after the form works.`,
+              `Flat color, one shadow, one highlight.`
+            ]
+          }
+        ],
+        note: "You do not have to finish every step perfectly. A cleaner second version often teaches more than a perfect first version."
+      };
+    }
+
+    async function callCoachModel(mode) {
+      const key = document.getElementById("apiKey").value.trim();
+      const model = document.getElementById("model").value.trim() || "openrouter/free";
+      const context = getCurrentCoachContext();
+
+      if (!key) {
+        if (mode === "subject") return subjectLogicFallback();
+        if (mode === "emotion") return emotionCoachFallback();
+        if (mode === "palette") return paletteCoachFallback();
+        return generalLessonFallback();
+      }
+
+      saveSettings();
+
+      let system = "";
+      if (mode === "subject") {
+        system = `You are a beginner mascot drawing coach. Return ONLY valid JSON with keys: title, summary, sections, note. sections must be an array of objects with heading and items arrays. Focus on subject-specific drawing logic: how to draw the selected subject so it reads clearly, what shape to start with, what detail makes it recognizable, and what to avoid. Keep advice concise and practical.`;
+      } else if (mode === "emotion") {
+        system = `You are a beginner mascot expression coach. Return ONLY valid JSON with keys: title, summary, sections, note. sections must be an array of objects with heading and items arrays. Explain the selected duo emotion as an expression formula: face cue, body cue, optional extra mark, balance advice, and what to avoid. Keep it concise and practical.`;
+      } else if (mode === "palette") {
+        system = `You are a beginner color coach for mascot drawing. Return ONLY valid JSON with keys: title, summary, sections, note. sections must be an array of objects with heading and items arrays. Explain how to use the selected palette without muddying the drawing. Assign likely jobs to the palette colors, explain a clean usage order, and what to avoid. Keep it concise and practical.`;
+      } else {
+        system = `You are a beginner mascot drawing coach. Return ONLY valid JSON with keys: title, summary, sections, note. sections must be an array of objects with heading and items arrays. Give concise support for the current lesson: what to focus on first, how to simplify, and a Procreate workflow.`;
+      }
+
+      const payload = {
+        subject: context.subject[0],
+        subjectShape: context.subject[1],
+        subjectFocus: context.subject[2],
+        emotion: context.emotion[0],
+        emotionFormula: context.emotion[1],
+        emotionBodyCue: context.emotion[2],
+        emotionAvoid: context.emotion[3],
+        twist: context.twist[0],
+        palette: context.palette.label || "Auto",
+        paletteColors: context.palette.colors || [],
+        blueprint: context.blueprint,
+        lessonSize: context.lesson[0],
+        optionalFlavor: context.flavor,
+        aiHelpCategory: aiModes[document.getElementById("aiStyle").value] || "General help"
+      };
+
+      const res = await fetch("https://openrouter.ai/api/v1/chat/completions", {
+        method: "POST",
+        headers: {
+          "Authorization": `Bearer ${key}`,
+          "Content-Type": "application/json",
+          "HTTP-Referer": window.location.href,
+          "X-Title": "Mascot Spark V13"
+        },
+        body: JSON.stringify({
+          model,
+          messages: [
+            { role: "system", content: system },
+            { role: "user", content: JSON.stringify(payload) }
+          ],
+          temperature: 0.55,
+          max_tokens: 900
+        })
+      });
+
+      if (!res.ok) throw new Error("OpenRouter error " + res.status + ": " + (await res.text()).slice(0, 220));
+      const raw = await res.json();
+      const text = raw.choices && raw.choices[0] && raw.choices[0].message ? raw.choices[0].message.content : "";
+      const data = extractJson(text);
+      if (!data) throw new Error("AI response was not usable JSON.");
+      return data;
+    }
+
+    async function runCoach(mode) {
+      showTab('tab-ai');
+      renderCoachContext();
+
+      const titleMap = {
+        general: "General Lesson Help",
+        subject: "Subject-Specific Drawing Logic",
+        emotion: "Emotion Coach",
+        palette: "Palette Coach"
+      };
+
+      status(`Running ${titleMap[mode] || "Coach"}...`, "");
+      try {
+        const data = await callCoachModel(mode);
+        renderCoachOutput(data);
+        status(`${titleMap[mode] || "Coach"} ready.`, "ok");
+      } catch (err) {
+        const fallback = mode === "subject"
+          ? subjectLogicFallback()
+          : mode === "emotion"
+            ? emotionCoachFallback()
+            : mode === "palette"
+              ? paletteCoachFallback()
+              : generalLessonFallback();
+        renderCoachOutput(fallback);
+        status(err.message + " Showing offline coach output instead.", "bad");
+      }
+    }
+
+    function aiSubjectLogic() {
+      runCoach("subject");
+    }
+
+    function aiEmotionCoach() {
+      runCoach("emotion");
+    }
+
+    function aiPaletteCoach() {
+      runCoach("palette");
+    }
+
     let currentLessonData = null;
     let guidedStepIndex = 0;
     let showAllPhases = false;
@@ -2029,6 +2602,7 @@
       document.getElementById("traceNote").innerHTML = data.traceNote;
       renderPalettePreview();
       document.getElementById("blueprintSvg").innerHTML = makeBlueprint(data.type, data.emotion, data.twist, data.blueprintStyle);
+      renderCoachContext();
       updateGuidedStep();
     }
 
@@ -2192,64 +2766,7 @@
     }
 
     async function aiLesson() {
-      const key = document.getElementById("apiKey").value.trim();
-      const model = document.getElementById("model").value.trim() || "openrouter/free";
-      if (!key) {
-        status("Add your OpenRouter key first. Offline lesson generation still works.", "bad");
-        return;
-      }
-
-      saveSettings();
-      const btn = document.getElementById("aiBtn");
-      btn.disabled = true;
-      status("AI is helping with the current lesson...", "");
-
-      const payload = {
-        subject: subjectData[document.getElementById("lessonType").value][0],
-        emotion: emotions[document.getElementById("emotion").value][0],
-        lessonSize: lessonSizes[document.getElementById("level").value][0],
-        creativeMode: document.getElementById("creativeMode").value,
-        tinyTwist: twists[document.getElementById("funTwist").value][0],
-        flavorOnly: document.getElementById("customIdea").value.trim() || flavors[document.getElementById("ideaPreset").value] || "none",
-        paletteProfile: (palettes[document.getElementById("paletteMood").value] || { label: "auto" }).label,
-        blueprint: blueprintOptions[document.getElementById("blueprintStyle").value],
-        drawOrder: drawOrders[document.getElementById("drawOrderMode").value][0],
-        aiHelp: aiModes[document.getElementById("aiStyle").value]
-      };
-
-      const system = `You are a calm beginner Procreate mascot drawing teacher. Return ONLY valid JSON.
-Schema: {"teacherNote":"short helpful note","extraStep":["phase title","instruction","mistake warning"],"miniCritique":"gentle critique","simplerVersion":"one sentence simpler version"}.
-Important: optional flavor must NOT change the selected subject category.`;
-
-      try {
-        const res = await fetch("https://openrouter.ai/api/v1/chat/completions", {
-          method: "POST",
-          headers: {
-            "Authorization": `Bearer ${key}`,
-            "Content-Type": "application/json",
-            "HTTP-Referer": window.location.href,
-            "X-Title": "Mascot Spark V7"
-          },
-          body: JSON.stringify({
-            model,
-            messages: [{ role: "system", content: system }, { role: "user", content: JSON.stringify(payload) }],
-            temperature: 0.55,
-            max_tokens: 800
-          })
-        });
-
-        if (!res.ok) throw new Error("OpenRouter error " + res.status + ": " + (await res.text()).slice(0, 200));
-        const raw = await res.json();
-        const text = raw.choices && raw.choices[0] && raw.choices[0].message ? raw.choices[0].message.content : "";
-        const data = extractJson(text);
-        if (!data) throw new Error("AI response was not usable JSON.");
-
-        status(`${data.teacherNote || "AI note ready"} ${data.simplerVersion || ""}`, "ok");
-      } catch (err) {
-        status(err.message + " Use offline lesson generation if the free router is rate-limited.", "bad");
-      } finally {
-        btn.disabled = false;
-      }
+      runCoach("general");
     }
 
     let deferredInstallPrompt = null;
@@ -2279,7 +2796,8 @@ Important: optional flavor must NOT change the selected subject category.`;
 
     document.addEventListener("DOMContentLoaded", () => {
       bootSelects();
-      document.getElementById("paletteMood").addEventListener("change", renderPalettePreview);
+      document.getElementById("paletteMood").addEventListener("change", () => { renderPalettePreview(); renderCoachContext(); });
+      renderCoachContext();
       loadTheme();
       loadSettings();
       newLesson();

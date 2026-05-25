@@ -206,3 +206,27 @@ Service worker cache:
 ```js
 const CACHE_NAME = "mascot-spark-v12";
 ```
+
+
+## V13 AI coach workspace
+
+Added a more spacious dedicated Coach tab.
+
+New Coach tools:
+
+- General Lesson Help
+- Subject-Specific Drawing Logic
+- Emotion Coach
+- Palette Coach
+
+All AI help output now appears in the Coach tab instead of being scattered elsewhere.
+
+Also added:
+- current coach context pills
+- larger output card
+- offline fallback guidance if no API key is entered
+- service worker cache:
+
+```js
+const CACHE_NAME = "mascot-spark-v13";
+```

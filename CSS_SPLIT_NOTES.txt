@@ -1,0 +1,19 @@
+CSS split notes
+
+What changed
+- Split css/app.css into:
+  - css/tokens.css
+  - css/layout.css
+  - css/components.css
+- Updated index.html to load the three CSS files in order.
+- Updated service-worker.js cache list and bumped cache name to v45.
+- Preserved the previous single-file stylesheet at originals/css/app.css.
+
+Safety approach
+- Kept the split contiguous to preserve cascade order as much as possible:
+  1) tokens
+  2) layout/base/core rules
+  3) later feature/component-heavy rules
+
+Deploy note
+- Hard refresh once after deploy so the new service worker can cache the new CSS file list.

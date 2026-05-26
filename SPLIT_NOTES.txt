@@ -1,0 +1,10 @@
+Split notes:
+- js/data.js: static data/config constants moved from app.js
+- js/ui.js: UI/render/theme/modal/tab helpers moved from app.js
+- js/app.js: orchestration, state, generation, export, AI, and startup boot
+- index.html updated to load data.js -> ui.js -> app.js
+- service-worker.js cache list updated for split JS files and cache name bumped
+
+Behavior goal:
+- Keep the app single-page and static
+- Avoid changing ids, storage keys, or generation logic

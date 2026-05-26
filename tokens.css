@@ -1,0 +1,89 @@
+/* =========================================================
+       STITCHED HALO BLOOM — EXACT 3 MODE VARIABLES
+    ========================================================= */
+
+:root[data-theme="light"] {
+      --color-primary: #F27BA6;
+      --color-secondary: #9DC8B2;
+      --color-accent: #8EDAF7;
+      --color-background: #FFF7FB;
+      --color-surface: #FDEEF5;
+      --color-surface-2: #F7F6FB;
+      --color-text: #352733;
+      --color-muted: #7D6D79;
+      --color-border: #D7C4F4;
+      --color-danger-accent: #D95A72;
+    }
+
+:root[data-theme="neutral"] {
+      --color-primary: #B97195;
+      --color-secondary: #8FA79D;
+      --color-accent: #8EBFD2;
+      --color-background: #F3F0F2;
+      --color-surface: #E7E1E5;
+      --color-surface-2: #DDDDE2;
+      --color-text: #2F2A30;
+      --color-muted: #6F6870;
+      --color-border: #BFAFD0;
+      --color-danger-accent: #A55C6E;
+    }
+
+:root[data-theme="dark"] {
+      --color-primary: #E785B3;
+      --color-secondary: #7FB2A3;
+      --color-accent: #74D6F7;
+      --color-background: #140F18;
+      --color-surface: #221928;
+      --color-surface-2: #2D2333;
+      --color-text: #F8F2F8;
+      --color-muted: #B8A9B8;
+      --color-border: #7D62A8;
+      --color-danger-accent: #C9526E;
+    }
+
+:root {
+      --radius-sm: 14px;
+      --radius-md: 20px;
+      --radius-lg: 28px;
+      --radius-xl: 36px;
+      --shadow-soft: 0 10px 30px color-mix(in srgb, #000 9%, transparent);
+      --shadow-card: 0 18px 50px color-mix(in srgb, #000 12%, transparent);
+      --glow-primary: 0 0 0 1px color-mix(in srgb, var(--color-primary) 38%, transparent),
+                      0 0 26px color-mix(in srgb, var(--color-primary) 24%, transparent);
+      --glow-accent: 0 0 0 1px color-mix(in srgb, var(--color-accent) 35%, transparent),
+                     0 0 26px color-mix(in srgb, var(--color-accent) 18%, transparent);
+    }
+
+
+
+/* =========================================================
+   UX POLISH TOKENS
+========================================================= */
+
+:root {
+  --radius-2xl: 42px;
+  --surface-elevated: linear-gradient(
+    180deg,
+    color-mix(in srgb, var(--color-surface) 95%, white 5%),
+    color-mix(in srgb, var(--color-surface-2) 94%, white 6%)
+  );
+  --surface-soft: linear-gradient(
+    180deg,
+    color-mix(in srgb, var(--color-surface) 90%, white 8%),
+    color-mix(in srgb, var(--color-surface-2) 92%, white 4%)
+  );
+  --border-soft: color-mix(in srgb, var(--color-border) 76%, white 10%);
+  --shadow-xs: 0 6px 18px color-mix(in srgb, #000 6%, transparent);
+  --shadow-md: 0 16px 40px color-mix(in srgb, #000 10%, transparent);
+  --shadow-lg: 0 26px 72px color-mix(in srgb, #000 14%, transparent);
+  --ring-soft: 0 0 0 1px color-mix(in srgb, white 20%, transparent) inset;
+  --focus-ring: 0 0 0 3px color-mix(in srgb, var(--color-accent) 32%, transparent);
+  --section-gap: clamp(16px, 2.2vw, 24px);
+  --content-gap: clamp(12px, 1.6vw, 18px);
+  --card-padding: clamp(14px, 2vw, 22px);
+  --touch-target: 46px;
+  --text-max: 72ch;
+  --hero-orb-1: color-mix(in srgb, var(--color-primary) 18%, transparent);
+  --hero-orb-2: color-mix(in srgb, var(--color-accent) 16%, transparent);
+  --hero-orb-3: color-mix(in srgb, var(--color-secondary) 14%, transparent);
+}

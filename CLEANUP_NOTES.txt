@@ -1,0 +1,18 @@
+Cleaned single-page static PWA package
+
+What changed
+- Extracted the main inline <style> from index(2).html into css/app.css
+- Extracted the main inline <script> from index(2).html into js/app.js
+- Renamed the app entry file to index.html
+- Updated service-worker.js to cache the new CSS and JS paths
+- Preserved original uploaded files under ./originals/
+
+What did NOT change
+- The app remains one static page
+- No framework or build step was added
+- Manifest values were preserved
+- App logic was not rewritten
+
+Deployment note
+- Keep the file/folder structure intact
+- Ensure icon-192.png, icon-512.png, and icon.svg exist in the project root if your deployed app uses them

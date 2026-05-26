@@ -1,0 +1,17 @@
+Mascot Spark UX refresh
+
+Safe UI/UX cleanup applied without changing the one-page architecture:
+
+- stronger visual hierarchy via layered surfaces and softer shadows
+- improved composition/spacing rhythm across shell, hero, today card, panels, and modal
+- clearer emphasis states for primary, playful, and utility actions
+- sticky tab rail on larger screens for easier navigation
+- improved focus-visible treatment and touch target consistency
+- lighter hover/elevation effects for cards, tabs, and tools
+- responsive adjustments preserved for tablet/mobile
+
+No intentional changes:
+- no selector renames
+- no DOM id changes
+- no storage key changes
+- no JS behavior changes

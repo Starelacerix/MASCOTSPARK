@@ -1,7 +1,7 @@
 {
-  "name": "Mascot Spark V33 \u2014 Emergency Runtime Fix",
+  "name": "Mascot Spark V39 \u2014 Cute Mixed Family Active",
   "short_name": "Mascot Spark",
-  "description": "Mascot Spark V33 fixes a runtime-breaking async function split and adds safer select population.",
+  "description": "Keeps the V38 export black fix and makes the second emotion family (cute mixed) the active Emotion Lab focus.",
   "start_url": "./index.html",
   "scope": "./",
   "display": "standalone",

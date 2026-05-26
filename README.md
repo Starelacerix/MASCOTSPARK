@@ -600,3 +600,169 @@ Service worker cache:
 ```js
 const CACHE_NAME = "mascot-spark-v33";
 ```
+
+
+## V34 blueprint + shading fix
+
+Fixed / improved:
+
+- Blueprint Studio controls are now separated into:
+  - View stage
+  - Layer visibility
+  - Export current view
+- Body/Face duplicate confusion is fixed by renaming buttons:
+  - Stage: Body / Stage: Face Placement
+  - Body Layer / Face Layer
+- Shade Lab remains local and does not require an image generator API.
+- Local SVG shadow maps now use subject-specific logic:
+  - ghost
+  - fruit
+  - snack/candy
+  - object
+  - icon/badge
+  - specific shape
+  - letter/number
+  - mask/monster
+  - tool/device
+  - soft rounded fallback
+- Shading map now includes:
+  - main form shadow
+  - highlight zone
+  - contact shadow
+  - rim/glow where relevant
+  - trace labels
+  - better Procreate layer plan
+
+Service worker cache:
+
+```js
+const CACHE_NAME = "mascot-spark-v34";
+```
+
+
+## V35 Emotion Lab Part 1
+
+Added:
+
+- Complete 46-emotion map
+- Emotion Lab tab
+- Emotion preview gallery
+- Family filter
+- Metadata cards for face, eyes, brows, mouth, blush, accent, posture, and vibe
+- Difference rule, practice tip, and example prompt for each emotion
+- Export selected emotion as SVG
+- Export selected emotion as PNG
+- Compare two emotions side by side
+- Lesson guidance now displays selected emotion logic
+
+Notes:
+
+- This build uses local generated SVG emotion previews.
+- It does not require an image generation API.
+- V34 Blueprint Studio and local shading fixes are preserved.
+
+Service worker cache:
+
+```js
+const CACHE_NAME = "mascot-spark-v35";
+```
+
+
+## V36 Simple/Core exact emotion SVGs
+
+Updated first family:
+
+- happy
+- sleepy
+- excited
+- curious
+- surprised
+- embarrassed
+- determined
+- cozy
+- silly
+
+Changed:
+
+- Replaced generated local preview SVGs for the simple/core family with the exact custom SVG artwork.
+- Replaced generated metadata with final approved labels, family, face/eye/brow/mouth/blush/accent/posture/vibe data.
+- Preserved Emotion Lab export, compare mode, and lesson guidance.
+- Preserved V34 Blueprint Studio and local shading fixes.
+
+Service worker cache:
+
+```js
+const CACHE_NAME = "mascot-spark-v36";
+```
+
+
+## V37 Compact Surprise Locks
+
+Fixed:
+
+- Surprise Me lock controls no longer use large awkward boxes.
+- Lock controls are now compact chip-style toggles.
+- The lock section spans the full row but stays shallow and easier to scan.
+- Checked lock chips visually show `Locked:` before the label.
+- Existing Surprise Me lock behavior is unchanged.
+
+Service worker cache:
+
+```js
+const CACHE_NAME = "mascot-spark-v37";
+```
+
+
+## V38 PNG Export Black Fix
+
+Fixed:
+
+- Blueprint PNG exports no longer render as black shapes.
+- Transparent PNG exports preserve visible white blueprint strokes.
+- Exporter now inlines SVG class styles before converting to PNG.
+- Regular PNG export gets a real blue background inside both SVG and canvas.
+- Transparent PNG export keeps alpha but does not lose stroke/fill styles.
+- SVG export now uses the same safe style-inlined serializer.
+
+Why this was needed:
+
+- The blueprint uses CSS classes like `.shape`, `.feature`, `.guide`, and `.label`.
+- When the browser serialized the SVG for PNG export, those external CSS rules could be lost.
+- Lost SVG styles made paths fall back to default black fill.
+
+Service worker cache:
+
+```js
+const CACHE_NAME = "mascot-spark-v38";
+```
+
+
+## V39 Cute Mixed Family Active
+
+This build keeps the V38 export-black fix and makes the second emotion family the active Emotion Lab focus.
+
+Included family:
+
+- Shy
+- Grumpy Cute
+- Nervous Cute
+- Proud Tiny
+- Confused Cute
+- Tiny Angry
+- Smug Cute
+- Bashful Proud
+- Giggly Nervous
+
+What changed:
+
+- Emotion Lab family filter now defaults to **Cute mixed**.
+- Emotion Lab selected preview now defaults to **Grumpy Cute**.
+- Compare mode defaults now spotlight **Grumpy Cute** vs **Shy**.
+- Lesson emotion default remains in the second family.
+- Keeps the **V38 PNG export black fix**.
+
+Service worker cache:
+
+```js
+const CACHE_NAME = "mascot-spark-v39";
+```

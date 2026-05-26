@@ -1,7 +1,7 @@
 {
-  "name": "Mascot Spark V28 \u2014 Lesson + Blueprint Trigger + Twist Pass 3",
+  "name": "Mascot Spark V31 \u2014 Remaining Addons",
   "short_name": "Mascot Spark",
-  "description": "Mascot Spark V28 makes the lesson buttons open the blueprint automatically and completes the remaining 20 tiny twist blueprint guides.",
+  "description": "Mascot Spark V31 adds blueprint personality variants, Blueprint Studio layer toggles, transparent shading PNG export, and practice dashboard suggestions.",
   "start_url": "./index.html",
   "scope": "./",
   "display": "standalone",

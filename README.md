@@ -433,3 +433,118 @@ Service worker cache:
 ```js
 const CACHE_NAME = "mascot-spark-v28";
 ```
+
+
+## V29 studio flow + blueprint 2.0 + dashboard
+
+Added:
+
+- Beginner Flow tab
+  - one clear drawing sequence
+  - previous / next flow controls
+  - flow step auto-routing to Trace Guide and Shade Lab
+
+- Visual step cards
+  - body only
+  - construction guide
+  - face placement
+  - limbs and twist
+  - clean final
+
+- Blueprint Studio 2.0
+  - label toggle
+  - shading map stage
+  - transparent PNG export
+  - regular PNG/SVG export preserved
+
+- Stash Dashboard
+  - saved count
+  - drawn count
+  - redrawn count
+  - favorites count
+  - stash search
+  - stash sorting
+
+- Generate Similar
+  - keeps the lesson family feeling similar
+  - changes unlocked details
+
+- Surprise Locks
+  - lock subject
+  - lock emotion
+  - lock twist
+  - lock palette
+  - lock blueprint
+  - lock skill
+
+- QA / cleanup
+  - JavaScript syntax checked
+  - service worker syntax checked
+  - root file check
+  - cache updated
+
+Service worker cache:
+
+```js
+const CACHE_NAME = "mascot-spark-v29";
+```
+
+
+## V30 cleanup + review addons
+
+Cleanup:
+
+- Removed duplicate PNG helper function definitions.
+- Kept transparent PNG support.
+- Rechecked root files.
+- Rechecked JavaScript syntax.
+- Rechecked service worker syntax.
+
+Added:
+
+- Review tab
+- AI image prompt export
+- Copy image prompt
+- Critique My Drawing Prep checklist
+- Full app backup export
+- Full app backup import
+
+Service worker cache:
+
+```js
+const CACHE_NAME = "mascot-spark-v30";
+```
+
+
+## V31 remaining addons
+
+Added:
+
+- Blueprint personality variants
+  - Simple
+  - Cute
+  - Icon
+  - Plush
+  - Dynamic
+
+- Blueprint Studio layer toggles
+  - Body
+  - Face
+  - Emotion
+  - Twist
+  - Labels
+
+- Transparent Shade Map PNG export
+
+- Practice dashboard suggestion card
+
+Notes:
+
+- Subject, emotion, and tiny twist guide coverage remains complete.
+- PNG helper cleanup from V30 is preserved.
+
+Service worker cache:
+
+```js
+const CACHE_NAME = "mascot-spark-v31";
+```

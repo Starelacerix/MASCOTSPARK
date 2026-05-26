@@ -219,7 +219,7 @@
 
     .tab-buttons {
       display: grid;
-      grid-template-columns: repeat(6, 1fr);
+      grid-template-columns: repeat(auto-fit, minmax(108px, 1fr));
       gap: 8px;
       margin-bottom: 12px;
     }
@@ -1836,6 +1836,325 @@
       flex: 0 0 auto;
     }
 
+
+    .beginner-flow-card {
+      display: grid;
+      gap: 16px;
+      border: 1px solid var(--color-border);
+      border-radius: 26px;
+      padding: 16px;
+      background:
+        radial-gradient(circle at top left, color-mix(in srgb, var(--color-primary) 12%, transparent), transparent 18rem),
+        linear-gradient(180deg, color-mix(in srgb, var(--color-surface) 95%, white 4%), var(--color-surface-2));
+      box-shadow: var(--shadow-card);
+    }
+
+    .flow-head {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 14px;
+      align-items: start;
+    }
+
+    .flow-actions,
+    .flow-current-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .flow-steps {
+      display: grid;
+      grid-template-columns: repeat(7, minmax(0, 1fr));
+      gap: 8px;
+    }
+
+    .flow-step {
+      min-height: 82px;
+      border: 1px solid color-mix(in srgb, var(--color-border) 78%, transparent);
+      border-radius: 18px;
+      padding: 10px;
+      background: color-mix(in srgb, var(--color-surface-2) 86%, white 5%);
+      cursor: pointer;
+      display: grid;
+      align-content: start;
+      gap: 5px;
+    }
+
+    .flow-step.active {
+      border-color: color-mix(in srgb, var(--color-accent) 70%, var(--color-border));
+      box-shadow: var(--focus-ring);
+      background: color-mix(in srgb, var(--color-accent) 12%, var(--color-surface));
+    }
+
+    .flow-step strong {
+      font-size: 13px;
+      line-height: 1.15;
+    }
+
+    .flow-step span {
+      font-size: 12px;
+      color: var(--color-muted);
+      font-weight: 750;
+      line-height: 1.25;
+    }
+
+    .flow-current {
+      border: 1px solid color-mix(in srgb, var(--color-border) 78%, transparent);
+      border-radius: 20px;
+      padding: 14px;
+      background: color-mix(in srgb, var(--color-background) 52%, var(--color-surface));
+      display: grid;
+      gap: 8px;
+    }
+
+    .visual-step-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 10px;
+    }
+
+    .visual-step-card {
+      border: 1px solid var(--color-border);
+      border-radius: 20px;
+      background: var(--color-surface);
+      padding: 10px;
+      display: grid;
+      gap: 8px;
+    }
+
+    .visual-step-card svg {
+      width: 100%;
+      min-height: 132px;
+      border-radius: 14px;
+      background: #173b63;
+    }
+
+    .visual-step-card strong {
+      font-size: 13px;
+      line-height: 1.2;
+    }
+
+    .visual-step-card p {
+      margin: 0;
+      color: var(--color-muted);
+      font-size: 12px;
+      line-height: 1.35;
+      font-weight: 750;
+    }
+
+    .lock-panel {
+      grid-column: span 2;
+    }
+
+    .lock-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 8px;
+    }
+
+    .lock-grid label {
+      min-height: 40px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      border: 1px solid color-mix(in srgb, var(--color-border) 70%, transparent);
+      border-radius: 14px;
+      padding: 8px 10px;
+      background: color-mix(in srgb, var(--color-surface-2) 80%, transparent);
+      font-size: 13px;
+      font-weight: 850;
+    }
+
+    .stash-dashboard {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+
+    .stash-stat {
+      border: 1px solid var(--color-border);
+      border-radius: 18px;
+      background: color-mix(in srgb, var(--color-surface-2) 88%, white 5%);
+      padding: 12px;
+      display: grid;
+      gap: 5px;
+    }
+
+    .stash-stat strong {
+      font-size: 22px;
+      line-height: 1;
+    }
+
+    .stash-stat span {
+      color: var(--color-muted);
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      font-weight: 900;
+    }
+
+    .hide-blueprint-labels text.label {
+      display: none;
+    }
+
+
+    .review-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 14px;
+      align-items: start;
+    }
+
+    .review-card {
+      border: 1px solid var(--color-border);
+      border-radius: 24px;
+      padding: 16px;
+      background:
+        radial-gradient(circle at top left, color-mix(in srgb, var(--color-primary) 10%, transparent), transparent 14rem),
+        linear-gradient(180deg, color-mix(in srgb, var(--color-surface) 94%, white 5%), var(--color-surface-2));
+      box-shadow: var(--shadow-card);
+      display: grid;
+      gap: 12px;
+    }
+
+    .review-card h3 {
+      margin: 0 0 6px;
+    }
+
+    .review-textarea {
+      width: 100%;
+      min-height: 220px;
+      font-family: inherit;
+      line-height: 1.45;
+      resize: vertical;
+    }
+
+    .review-output {
+      display: grid;
+      gap: 10px;
+    }
+
+    .review-output section {
+      border: 1px solid color-mix(in srgb, var(--color-border) 75%, transparent);
+      border-radius: 18px;
+      padding: 12px;
+      background: color-mix(in srgb, var(--color-surface-2) 86%, white 4%);
+    }
+
+    .review-output h4 {
+      margin: 0 0 8px;
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      color: var(--color-muted);
+    }
+
+    .review-output ul {
+      margin: 0;
+      padding-left: 18px;
+    }
+
+    .review-output li + li {
+      margin-top: 5px;
+    }
+
+    .review-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .import-label {
+      min-height: var(--touch-target);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      border-radius: 999px;
+      padding: 10px 14px;
+      border: 1px solid var(--color-border);
+      background: var(--color-surface-2);
+      font-weight: 900;
+      cursor: pointer;
+      position: relative;
+    }
+
+    .import-label input {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      opacity: 0;
+      pointer-events: none;
+    }
+
+
+
+    .blueprint-layer-hidden-body .bp-body,
+    .blueprint-layer-hidden-face .bp-face,
+    .blueprint-layer-hidden-emotion .bp-emotion,
+    .blueprint-layer-hidden-twist .bp-twist {
+      display: none !important;
+    }
+
+    .practice-suggestion-card {
+      grid-column: 1 / -1;
+      border: 1px solid color-mix(in srgb, var(--color-accent) 45%, var(--color-border));
+      background:
+        radial-gradient(circle at top left, color-mix(in srgb, var(--color-accent) 11%, transparent), transparent 12rem),
+        color-mix(in srgb, var(--color-surface) 92%, white 4%);
+      border-radius: 18px;
+      padding: 12px;
+      color: var(--color-text);
+      font-weight: 800;
+    }
+
+    .practice-suggestion-card span {
+      display: block;
+      margin-top: 4px;
+      color: var(--color-muted);
+      font-size: 13px;
+      font-weight: 750;
+      line-height: 1.35;
+    }
+
+
+    @media (max-width: 699px) {
+      .flow-head {
+        grid-template-columns: 1fr;
+      }
+
+      .flow-steps {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .lock-panel {
+        grid-column: auto;
+      }
+
+      .lock-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .stash-dashboard {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media (min-width: 700px) and (max-width: 1180px) and (orientation: portrait) {
+      .flow-head,
+      .flow-steps {
+        grid-template-columns: 1fr;
+      }
+
+      .stash-dashboard {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+
     @media (max-width: 699px) {
       .shade-lab {
         grid-template-columns: 1fr;
@@ -2148,6 +2467,7 @@
       <div class="today-actions">
         <button class="primary main-action" onclick="newLesson(true)">New lesson</button>
         <button class="playful-action" onclick="surpriseMe()">Surprise me</button>
+      <button class="utility-action" onclick="generateSimilar()">Generate similar</button>
         <button class="utility-action" onclick="toggleFocusMode()">Focus mode</button>
       </div>
     </section>
@@ -2155,11 +2475,14 @@
     <section class="shell">
       <div class="tab-buttons" role="tablist" aria-label="Mascot Spark controls">
         <button class="tab-btn active" type="button" data-tab="tab-lesson" onclick="showTab('tab-lesson')"><span class="tab-icon">✦</span>Start</button>
+        <button class="tab-btn" type="button" data-tab="tab-flow" onclick="showTab('tab-flow')"><span class="tab-icon">➜</span>Flow</button>
         <button class="tab-btn" type="button" data-tab="tab-character" onclick="showTab('tab-character')"><span class="tab-icon">◕</span>Personality</button>
         <button class="tab-btn" type="button" data-tab="tab-color" onclick="showTab('tab-color')"><span class="tab-icon">●</span>Palette</button>
         <button class="tab-btn" type="button" data-tab="tab-blueprint" data-advanced-only="true" onclick="showTab('tab-blueprint')"><span class="tab-icon">⌁</span>Trace Guide</button>
         <button class="tab-btn" type="button" data-tab="tab-ai" data-advanced-only="true" onclick="showTab('tab-ai')"><span class="tab-icon">?</span>Coach</button>
         <button class="tab-btn" type="button" data-tab="tab-shade" data-advanced-only="true" onclick="showTab('tab-shade')"><span class="tab-icon">✦</span>Shade Lab</button>
+        <button class="tab-btn" type="button" data-tab="tab-stash" onclick="showTab('tab-stash')"><span class="tab-icon">▣</span>Stash</button>
+        <button class="tab-btn" type="button" data-tab="tab-review" onclick="showTab('tab-review')"><span class="tab-icon">✓</span>Review</button>
       </div>
 
       <div id="tab-lesson" class="tab-panel active">
@@ -2205,6 +2528,57 @@
             <select id="sessionTimer"></select>
             <p class="small">Optional drawing-session pacing.</p>
           </div>
+
+          <div class="panel lock-panel">
+            <label>Surprise locks</label>
+            <div class="lock-grid">
+              <label><input type="checkbox" id="lockSubject"> Subject</label>
+              <label><input type="checkbox" id="lockEmotion"> Emotion</label>
+              <label><input type="checkbox" id="lockTwist"> Twist</label>
+              <label><input type="checkbox" id="lockPalette"> Palette</label>
+              <label><input type="checkbox" id="lockBlueprint"> Blueprint</label>
+              <label><input type="checkbox" id="lockSkill"> Skill</label>
+            </div>
+            <p class="small">Locked options stay fixed when using Surprise Me.</p>
+          </div>
+
+        </section>
+      </div>
+
+      
+      <div id="tab-flow" class="tab-panel">
+        <p class="tab-hint">Beginner Flow hides the noise and gives you one clean drawing path: lesson, blueprint, body, face, twist, shade, stash.</p>
+
+        <section class="beginner-flow-card">
+          <div class="flow-head">
+            <div>
+              <span class="today-kicker">Beginner Flow</span>
+              <h2 id="flowTitle">Generate a mascot lesson, then follow the path.</h2>
+              <p id="flowGoal" class="small">The flow updates with the current mascot.</p>
+            </div>
+            <div class="flow-actions">
+              <button class="primary" onclick="newLesson(true)">New lesson + blueprint</button>
+              <button onclick="startBeginnerFlow()">Start Flow Mode</button>
+              <button onclick="toggleFocusMode()">Focus mode</button>
+            </div>
+          </div>
+
+          <div class="flow-steps" id="flowSteps"></div>
+
+          <div class="flow-current">
+            <strong id="flowCurrentTitle">Current step</strong>
+            <p id="flowCurrentBody">Generate a lesson to begin.</p>
+            <div class="flow-current-actions">
+              <button onclick="previousFlowStep()">Previous</button>
+              <button class="primary" onclick="nextFlowStep()">Next step</button>
+              <button onclick="saveCurrentLessonToStash()">Save to Stash</button>
+            </div>
+          </div>
+        </section>
+
+        <section>
+          <h3>Visual step cards</h3>
+          <div id="visualStepCards" class="visual-step-grid"></div>
         </section>
       </div>
 
@@ -2264,6 +2638,7 @@
           <div class="panel">
             <label for="blueprintStyle">Traceable blueprint variation</label>
             <select id="blueprintStyle"></select>
+            <p class="small">Choose guide type.</p>
           </div>
           <div class="panel">
             <label for="drawOrderMode">Draw-first order</label>
@@ -2376,7 +2751,7 @@
 
       
       <div id="tab-shade" class="tab-panel" data-advanced-only="true">
-        <p class="tab-hint">Lesson + Blueprint Trigger + Tiny Twist Pass 3 turns your current mascot into a gentle shading plan: where the shadow goes, where the shine goes, which palette colors do what, and how to handle it in Procreate.</p>
+        <p class="tab-hint">Remaining Addons turns your current mascot into a gentle shading plan: where the shadow goes, where the shine goes, which palette colors do what, and how to handle it in Procreate.</p>
 
         <section class="shade-lab">
           <div class="shade-side">
@@ -2436,13 +2811,14 @@
             <div class="coach-output shade-output">
               <div class="coach-output-head">
                 <div>
-                  <h3 id="shadeOutputTitle">Lesson + Blueprint Trigger + Tiny Twist Pass 3</h3>
+                  <h3 id="shadeOutputTitle">Remaining Addons</h3>
                   <p class="small">Generate a shading plan to see color roles, shadow placement, shine placement, Procreate layers, and what to avoid.</p>
                 </div>
 
                 <div class="shade-export-actions">
                   <button class="utility-action" onclick="downloadShadeMapSvg()">Export SVG</button>
                   <button class="utility-action" onclick="downloadShadeMapPng()">Export PNG</button>
+                  <button class="utility-action" onclick="downloadShadeMapTransparentPng()">Transparent PNG</button>
                 </div>
               </div>
 
@@ -2461,10 +2837,13 @@
       <div id="tab-stash" class="tab-panel">
         <p class="tab-hint">Save lessons here so Mascot Spark becomes a practice journal, not just a generator.</p>
 
+        <section class="stash-dashboard" id="stashDashboard"></section>
+
         <section class="stash-toolbar">
           <button class="primary" onclick="saveCurrentLessonToStash()">Save current lesson</button>
           <button class="utility-action" onclick="exportStashJson()">Export stash JSON</button>
           <button class="utility-action" onclick="clearStash()">Clear stash</button>
+          <input id="stashSearch" type="search" placeholder="Search stash..." oninput="renderStash()" aria-label="Search stash">
           <select id="stashFilter" onchange="renderStash()">
             <option value="all">Show all</option>
             <option value="not-drawn">Not drawn</option>
@@ -2472,9 +2851,55 @@
             <option value="redrawn">Redrawn</option>
             <option value="favorite">Favorites</option>
           </select>
+          <select id="stashSort" onchange="renderStash()" aria-label="Sort stash">
+            <option value="newest">Newest first</option>
+            <option value="oldest">Oldest first</option>
+            <option value="favorites">Favorites first</option>
+          </select>
         </section>
 
         <div id="stashGrid" class="stash-grid"></div>
+      </div>
+
+
+      <div id="tab-review" class="tab-panel">
+        <p class="tab-hint">Review tools help you export the idea, self-check the drawing, and back up the app’s local data.</p>
+
+        <section class="review-grid">
+          <article class="review-card">
+            <div>
+              <h3>AI Image Prompt Export</h3>
+              <p class="small">Creates a clean prompt you can copy into an image generator for reference mood, not replacement practice.</p>
+            </div>
+            <button class="primary" onclick="generateImagePrompt()">Generate prompt</button>
+            <textarea id="imagePromptOutput" class="review-textarea" readonly placeholder="Your AI image prompt will appear here."></textarea>
+            <button onclick="copyImagePrompt()">Copy image prompt</button>
+          </article>
+
+          <article class="review-card">
+            <div>
+              <h3>Critique My Drawing Prep</h3>
+              <p class="small">A self-check checklist for after you draw the mascot in Procreate.</p>
+            </div>
+            <button class="primary" onclick="generateCritiquePrep()">Generate critique checklist</button>
+            <div id="critiquePrepOutput" class="review-output"></div>
+          </article>
+
+          <article class="review-card">
+            <div>
+              <h3>Full App Backup</h3>
+              <p class="small">Export or import Stash, settings, practice memory, redraw notes, and theme/view preferences.</p>
+            </div>
+            <div class="review-actions">
+              <button class="primary" onclick="exportFullBackup()">Export full backup</button>
+              <label class="import-label">
+                Import backup
+                <input id="backupImportInput" type="file" accept="application/json" onchange="importFullBackup(event)">
+              </label>
+            </div>
+            <div id="backupStatus" class="compact-help">Backups stay local. Do not share files containing private notes unless you mean to.</div>
+          </article>
+        </section>
       </div>
 
     </section>
@@ -2490,6 +2915,7 @@
       <button class="utility-action" onclick="exportHtmlWorksheet()">Export HTML worksheet</button>
       <button class="utility-action" onclick="openBlueprintStudio()">Blueprint Studio</button>
       <button class="utility-action" onclick="downloadCurrentBlueprintPng()">Export PNG</button>
+      <button class="utility-action" onclick="downloadCurrentBlueprintTransparentPng()">Export transparent PNG</button>
       <button class="utility-action" onclick="showVersionTools()">Version tools</button>
       <button class="utility-action" onclick="window.print()">Print / save</button>
       <button class="utility-action" onclick="installApp()" id="installBtn" style="display:none;">Install app</button>
@@ -2664,8 +3090,15 @@
           <button onclick="setBlueprintStudioStage('face')">Face</button>
           <button onclick="setBlueprintStudioStage('limbs')">Limbs</button>
           <button onclick="setBlueprintStudioStage('final')">Final</button>
+          <button onclick="toggleBlueprintLayer('body')">Body</button>
+          <button onclick="toggleBlueprintLayer('face')">Face</button>
+          <button onclick="toggleBlueprintLayer('emotion')">Emotion</button>
+          <button onclick="toggleBlueprintLayer('twist')">Twist</button>
+          <button onclick="toggleBlueprintLabels()">Labels on/off</button>
+          <button onclick="setBlueprintStudioStage('shade')">Shading map</button>
           <button class="primary" onclick="downloadBlueprintSvg()">Export SVG</button>
           <button class="primary" onclick="downloadBlueprintPng()">Export PNG</button>
+          <button class="primary" onclick="downloadBlueprintTransparentPng()">Transparent PNG</button>
         </div>
 
         <div class="blueprint-studio-view">
@@ -2704,7 +3137,7 @@
     </section>
 
       <footer class="final-footer" aria-label="App version">
-      <span id="finalBuildBadge">Mascot Spark V20 · Lesson + Blueprint Trigger + Tiny Twist Pass 3 · Cache mascot-spark-v28</span>
+      <span id="finalBuildBadge">Mascot Spark V20 · Remaining Addons · Cache mascot-spark-v31</span>
     </footer>
   </main>
 
@@ -3737,6 +4170,7 @@
       const body = makeBody(type);
       const [eyes, mouth] = makeFace(emotion);
       const twistSvg = twists[twist] ? twists[twist][3] : "";
+      const variant = getBlueprintVariant();
       const subjectGuide = getSubjectGuide(type);
       const emotionGuide = getEmotionBlueprintGuide(emotion);
       const twistGuide = getTwistBlueprintGuide(twist);
@@ -3822,7 +4256,7 @@
       if (stage === "guide") content = `${guides}${body}`;
       if (stage === "face") content = `${guides}${body}${eyes}${mouth}${emotionGuide.overlay}`;
       if (stage === "limbs") content = `${guides}${body}${limbs}${eyes}${mouth}${emotionGuide.overlay}`;
-      if (stage === "final") content = `${guides}${body}${limbs}${eyes}${mouth}${emotionGuide.overlay}${twistGuide.overlay}${twistSvg}<path class="guide" d="M165 360 C220 415 315 415 365 360"></path>`;
+      if (stage === "final") content = `${guides}${wrapBlueprintLayer(body + limbs, "body")}${wrapBlueprintLayer(eyes + mouth, "face")}${wrapBlueprintLayer(emotionGuide.overlay, "emotion")}${wrapBlueprintLayer(twistGuide.overlay + twistSvg, "twist")}<path class="guide" d="M165 360 C220 415 315 415 365 360"></path>`;
 
       return `<svg viewBox="0 0 520 520" aria-hidden="true">${content}</svg>`;
     }
@@ -4040,49 +4474,8 @@
       return new XMLSerializer().serializeToString(clone);
     }
 
-    function svgStringToPngBlob(svgString, width = 1600, height = 1600) {
-      return new Promise((resolve, reject) => {
-        const svgBlob = new Blob([svgString], { type: "image/svg+xml;charset=utf-8" });
-        const url = URL.createObjectURL(svgBlob);
-        const img = new Image();
-
-        img.onload = () => {
-          const canvas = document.createElement("canvas");
-          canvas.width = width;
-          canvas.height = height;
-          const ctx = canvas.getContext("2d");
-
-          ctx.fillStyle = "#173b63";
-          ctx.fillRect(0, 0, width, height);
-          ctx.drawImage(img, 0, 0, width, height);
-
-          URL.revokeObjectURL(url);
-          canvas.toBlob(blob => {
-            if (blob) resolve(blob);
-            else reject(new Error("Could not create PNG blob."));
-          }, "image/png");
-        };
-
-        img.onerror = () => {
-          URL.revokeObjectURL(url);
-          reject(new Error("Could not render SVG as PNG."));
-        };
-
-        img.src = url;
-      });
-    }
-
-    async function downloadSvgElementAsPng(svg, filename) {
-      try {
-        const svgString = svgElementToString(svg);
-        const blob = await svgStringToPngBlob(svgString, 1600, 1600);
-        downloadBlob(blob, filename);
-        status("Blueprint PNG exported.", "ok");
-      } catch (error) {
-        status(error.message || "PNG export failed.", "bad");
-      }
-    }
-
+    
+    async 
     function downloadCurrentBlueprintPng() {
       const svg = document.getElementById("blueprintSvg");
       if (!svg) {
@@ -4106,6 +4499,448 @@
       if (!modal) return;
       modal.classList.toggle("open", open);
       modal.setAttribute("aria-hidden", open ? "false" : "true");
+    }
+
+
+    let beginnerFlowIndex = 0;
+    let blueprintLabelsHidden = false;
+
+    const beginnerFlowSteps = [
+      { title: "Pick", body: "Generate or choose a mascot lesson. Do not edit every option first." },
+      { title: "Blueprint", body: "Open the Trace Guide and study the largest shape before drawing." },
+      { title: "Body", body: "Draw the outside silhouette only. No face yet." },
+      { title: "Face", body: "Place the face low and keep the mouth tiny." },
+      { title: "Twist", body: "Add one tiny twist using its placement guide." },
+      { title: "Shade", body: "Use Shade Lab: one shadow, one shine, stop early." },
+      { title: "Save", body: "Save to Stash, then redraw one focused Version 2." }
+    ];
+
+    function renderBeginnerFlow(data = currentLessonData) {
+      const title = document.getElementById("flowTitle");
+      const goal = document.getElementById("flowGoal");
+      const steps = document.getElementById("flowSteps");
+      const currentTitle = document.getElementById("flowCurrentTitle");
+      const currentBody = document.getElementById("flowCurrentBody");
+
+      if (title && data) title.textContent = `${data.subjectName || "Mascot"} Flow`;
+      if (goal && data) goal.textContent = data.goal || "Follow one step at a time.";
+      if (steps) {
+        steps.innerHTML = beginnerFlowSteps.map((step, i) => `
+          <button class="flow-step ${i === beginnerFlowIndex ? "active" : ""}" onclick="setFlowStep(${i})">
+            <strong>${i + 1}. ${step.title}</strong>
+            <span>${step.body}</span>
+          </button>
+        `).join("");
+      }
+
+      const active = beginnerFlowSteps[beginnerFlowIndex] || beginnerFlowSteps[0];
+      if (currentTitle) currentTitle.textContent = active.title;
+      if (currentBody) currentBody.textContent = active.body;
+    }
+
+    function setFlowStep(index) {
+      beginnerFlowIndex = Math.max(0, Math.min(beginnerFlowSteps.length - 1, index));
+      renderBeginnerFlow();
+      if (beginnerFlowIndex === 1) showTab("tab-blueprint");
+      if (beginnerFlowIndex === 5) showTab("tab-shade");
+      status(`Flow step ${beginnerFlowIndex + 1}: ${beginnerFlowSteps[beginnerFlowIndex].title}`, "ok");
+    }
+
+    function nextFlowStep() {
+      setFlowStep(beginnerFlowIndex + 1);
+    }
+
+    function previousFlowStep() {
+      setFlowStep(beginnerFlowIndex - 1);
+    }
+
+    function startBeginnerFlow() {
+      beginnerFlowIndex = 0;
+      showTab("tab-flow");
+      renderBeginnerFlow();
+      status("Beginner Flow started.", "ok");
+    }
+
+    function renderVisualStepCards(data = currentLessonData) {
+      const box = document.getElementById("visualStepCards");
+      if (!box || !data) return;
+
+      const stages = [
+        ["body", "Body only", "Trace the largest readable silhouette first."],
+        ["guide", "Construction guide", "Use the subject guide to understand the form."],
+        ["face", "Face placement", "Place eyes low and keep expression simple."],
+        ["limbs", "Limbs and twist", "Add tiny limbs and the twist placement guide."],
+        ["final", "Clean mascot", "Finish with one clear outline and one main detail."]
+      ];
+
+      box.innerHTML = stages.map(([stage, title, copy]) => `
+        <article class="visual-step-card">
+          ${miniBlueprintSvg(data.type, data.emotion, data.twist, stage)}
+          <strong>${title}</strong>
+          <p>${copy}</p>
+        </article>
+      `).join("");
+    }
+
+    function getLockedIds() {
+      return {
+        subject: document.getElementById("lockSubject")?.checked,
+        emotion: document.getElementById("lockEmotion")?.checked,
+        twist: document.getElementById("lockTwist")?.checked,
+        palette: document.getElementById("lockPalette")?.checked,
+        blueprint: document.getElementById("lockBlueprint")?.checked,
+        skill: document.getElementById("lockSkill")?.checked
+      };
+    }
+
+    function randomizeIfUnlocked(id, locked) {
+      if (!locked) randomFromOptions(id);
+    }
+
+    function generateSimilar() {
+      if (!currentLessonData) {
+        newLesson(true);
+        return;
+      }
+
+      const locked = getLockedIds();
+      const keepSubjectPack = document.getElementById("subjectPack")?.value || "all";
+      filterSubjectsByPack(keepSubjectPack);
+
+      randomizeIfUnlocked("lessonType", locked.subject);
+      randomizeIfUnlocked("emotion", locked.emotion);
+      randomizeIfUnlocked("funTwist", locked.twist);
+      randomizeIfUnlocked("paletteMood", locked.palette);
+      randomizeIfUnlocked("blueprintStyle", locked.blueprint);
+      randomizeIfUnlocked("skillFocus", locked.skill);
+
+      // Keep general learning shape stable.
+      setSelect("creativeMode", document.getElementById("creativeMode")?.value || "cozy");
+      setSelect("level", document.getElementById("level")?.value || "tiny");
+
+      newLesson(true);
+      status("Generated a similar lesson with unlocked details changed.", "ok");
+    }
+
+    function updateStashDashboard(items = getStash()) {
+      const box = document.getElementById("stashDashboard");
+      if (!box) return;
+      const total = items.length;
+      const drawn = items.filter(x => x.status === "drawn").length;
+      const redrawn = items.filter(x => x.status === "redrawn").length;
+      const favorites = items.filter(x => x.favorite).length;
+      box.innerHTML = `
+        <div class="stash-stat"><strong>${total}</strong><span>Saved</span></div>
+        <div class="stash-stat"><strong>${drawn}</strong><span>Drawn</span></div>
+        <div class="stash-stat"><strong>${redrawn}</strong><span>Redrawn</span></div>
+        <div class="stash-stat"><strong>${favorites}</strong><span>Favorites</span></div>
+        <div class="practice-suggestion-card">Practice suggestion<span>${getPracticeDashboardSuggestion(items)}</span></div>
+      `;
+    }
+
+    function svgStringToPngBlob(svgString, width = 1600, height = 1600, transparent = false) {
+      return new Promise((resolve, reject) => {
+        const svgBlob = new Blob([svgString], { type: "image/svg+xml;charset=utf-8" });
+        const url = URL.createObjectURL(svgBlob);
+        const img = new Image();
+
+        img.onload = () => {
+          const canvas = document.createElement("canvas");
+          canvas.width = width;
+          canvas.height = height;
+          const ctx = canvas.getContext("2d");
+
+          if (!transparent) {
+            ctx.fillStyle = "#173b63";
+            ctx.fillRect(0, 0, width, height);
+          }
+          ctx.drawImage(img, 0, 0, width, height);
+
+          URL.revokeObjectURL(url);
+          canvas.toBlob(blob => {
+            if (blob) resolve(blob);
+            else reject(new Error("Could not create PNG blob."));
+          }, "image/png");
+        };
+
+        img.onerror = () => {
+          URL.revokeObjectURL(url);
+          reject(new Error("Could not render SVG as PNG."));
+        };
+
+        img.src = url;
+      });
+    }
+
+    async function downloadSvgElementAsPng(svg, filename, transparent = false) {
+      try {
+        const svgString = svgElementToString(svg);
+        const blob = await svgStringToPngBlob(svgString, 1600, 1600, transparent);
+        downloadBlob(blob, filename);
+        status(transparent ? "Transparent PNG exported." : "PNG exported.", "ok");
+      } catch (error) {
+        status(error.message || "PNG export failed.", "bad");
+      }
+    }
+
+    function downloadCurrentBlueprintTransparentPng() {
+      const svg = document.getElementById("blueprintSvg");
+      if (!svg) {
+        status("No blueprint found to export.", "bad");
+        return;
+      }
+      downloadSvgElementAsPng(svg, "mascot-spark-blueprint-transparent.png", true);
+    }
+
+    function downloadBlueprintTransparentPng() {
+      const svg = document.getElementById("blueprintStudioSvg");
+      if (!svg) {
+        status("Open Blueprint Studio first.", "bad");
+        return;
+      }
+      downloadSvgElementAsPng(svg, `mascot-spark-blueprint-${blueprintStudioStage || "final"}-transparent.png`, true);
+    }
+
+    function toggleBlueprintLabels() {
+      blueprintLabelsHidden = !blueprintLabelsHidden;
+      const svg = document.getElementById("blueprintStudioSvg");
+      if (svg) svg.classList.toggle("hide-blueprint-labels", blueprintLabelsHidden);
+      const main = document.getElementById("blueprintSvg");
+      if (main) main.classList.toggle("hide-blueprint-labels", blueprintLabelsHidden);
+      status(blueprintLabelsHidden ? "Blueprint labels hidden." : "Blueprint labels shown.", "ok");
+    }
+
+
+    function currentLessonForExport() {
+      const data = currentLessonData || {};
+      const ctx = typeof getCurrentCoachContext === "function" ? getCurrentCoachContext() : {};
+      const shade = typeof getCurrentShadeContext === "function" ? getCurrentShadeContext() : {};
+      return { data, ctx, shade };
+    }
+
+    function generateImagePrompt() {
+      const { data, ctx, shade } = currentLessonForExport();
+      const palette = ctx.palette || {};
+      const paletteText = palette.colors && palette.colors.length
+        ? `${palette.label}: ${palette.colors.join(", ")}`
+        : (palette.label || "soft mascot palette");
+
+      const prompt = [
+        `A beginner-friendly mascot character concept of a ${data.subjectName || ctx.subject?.[0] || "cute mascot"}.`,
+        `Emotion: ${data.emotionName || ctx.emotion?.[0] || "cute expressive"}.`,
+        `Tiny twist/accessory: ${data.twistName || ctx.twist?.[0] || "one small charming detail"}.`,
+        `Shape language: ${data.subjectBase || "simple rounded body"}, low face placement, readable silhouette, cute icon-friendly proportions.`,
+        `Palette: ${paletteText}.`,
+        `Shading: ${shade.shadeStyle || "soft plush shading"}, light from ${shade.lightDirection || "top left"}, simple shadow and one clean highlight.`,
+        `Style: clean Procreate-friendly mascot design, rounded forms, soft sticker clarity, gentle texture, no complex background.`,
+        `Beginner drawing reference only: clear construction, simple face, one main accessory, no clutter.`
+      ].join(" ");
+
+      const box = document.getElementById("imagePromptOutput");
+      if (box) box.value = prompt;
+      status("AI image prompt generated.", "ok");
+      showTab("tab-review");
+    }
+
+    async function copyImagePrompt() {
+      const box = document.getElementById("imagePromptOutput");
+      if (!box || !box.value.trim()) generateImagePrompt();
+      try {
+        await navigator.clipboard.writeText(document.getElementById("imagePromptOutput").value);
+        status("Image prompt copied.", "ok");
+      } catch {
+        status("Copy failed. Select the prompt text and copy manually.", "bad");
+      }
+    }
+
+    function generateCritiquePrep() {
+      const { data } = currentLessonForExport();
+      const subject = data.subjectName || "subject";
+      const emotion = data.emotionName || "emotion";
+      const twist = data.twistName || "tiny twist";
+      const skill = data.skillFocus ? (skillFocusData[data.skillFocus]?.title || data.skillFocus) : "current skill";
+
+      const sections = [
+        {
+          heading: "First check",
+          items: [
+            `Can you still tell it is a ${subject}?`,
+            "Does the silhouette read when zoomed out?",
+            "Is the face slightly below center?",
+            `Does the expression clearly show ${emotion}?`
+          ]
+        },
+        {
+          heading: "Twist check",
+          items: [
+            `Does the ${twist} support the mascot instead of covering the face?`,
+            "Is the twist smaller than the main body?",
+            "Would the mascot still work if the twist was removed?"
+          ]
+        },
+        {
+          heading: "Shading check",
+          items: [
+            "Is there one clear main shadow?",
+            "Is there one clear highlight?",
+            "Did you avoid shading every edge?",
+            "Does the color still feel clean, not muddy?"
+          ]
+        },
+        {
+          heading: "Version 2 fix",
+          items: [
+            `Redraw only the part related to ${skill}.`,
+            "Make one change, not five.",
+            "Compare Version 1 and Version 2 before judging yourself."
+          ]
+        }
+      ];
+
+      const box = document.getElementById("critiquePrepOutput");
+      if (box) {
+        box.innerHTML = sections.map(section => `
+          <section>
+            <h4>${section.heading}</h4>
+            <ul>${section.items.map(item => `<li>${item}</li>`).join("")}</ul>
+          </section>
+        `).join("");
+      }
+      showTab("tab-review");
+      status("Critique checklist generated.", "ok");
+    }
+
+    function collectFullBackupData() {
+      const keys = [
+        "mascotSparkStash",
+        "mascotSparkPracticeMemory",
+        "mascotSparkRedrawTracker",
+        "mascotSparkApiKey",
+        "mascotSparkModel",
+        "mascotSparkFocusMode",
+        "mascotSparkViewMode",
+        "mascotSparkTheme"
+      ];
+
+      const storage = {};
+      keys.forEach(key => {
+        const value = localStorage.getItem(key);
+        if (value !== null) storage[key] = value;
+      });
+
+      return {
+        app: "Mascot Spark",
+        version: APP_VERSION || "V30",
+        exportedAt: new Date().toISOString(),
+        storage
+      };
+    }
+
+    function exportFullBackup() {
+      const backup = collectFullBackupData();
+      const blob = new Blob([JSON.stringify(backup, null, 2)], { type: "application/json" });
+      downloadBlob(blob, `mascot-spark-full-backup-${backup.version || "v30"}.json`);
+      const box = document.getElementById("backupStatus");
+      if (box) box.textContent = "Full backup exported.";
+      status("Full app backup exported.", "ok");
+    }
+
+    async function importFullBackup(event) {
+      const file = event.target.files && event.target.files[0];
+      if (!file) return;
+      try {
+        const text = await file.text();
+        const backup = JSON.parse(text);
+        if (!backup || backup.app !== "Mascot Spark" || !backup.storage) {
+          throw new Error("This does not look like a Mascot Spark backup.");
+        }
+
+        Object.entries(backup.storage).forEach(([key, value]) => {
+          if (typeof value === "string") localStorage.setItem(key, value);
+        });
+
+        const box = document.getElementById("backupStatus");
+        if (box) box.textContent = `Imported backup from ${backup.exportedAt || "unknown date"}. Reloading...`;
+        status("Backup imported. Reloading app.", "ok");
+        setTimeout(() => location.reload(), 700);
+      } catch (error) {
+        const box = document.getElementById("backupStatus");
+        if (box) box.textContent = error.message || "Import failed.";
+        status(error.message || "Import failed.", "bad");
+      } finally {
+        event.target.value = "";
+      }
+    }
+
+
+    const blueprintVariants = {
+      simple: "Simple",
+      cute: "Cute",
+      icon: "Icon",
+      plush: "Plush",
+      dynamic: "Dynamic"
+    };
+
+    const blueprintLayerState = {
+      body: true,
+      face: true,
+      emotion: true,
+      twist: true
+    };
+
+    function getBlueprintVariant() {
+      return document.getElementById("blueprintVariant")?.value || "simple";
+    }
+
+    function wrapBlueprintLayer(svg, layerName) {
+      return `<g class="bp-${layerName}">${svg || ""}</g>`;
+    }
+
+    function applyBlueprintVariantOverlay(type, variant) {
+      const label = blueprintVariants[variant] || "Simple";
+      const overlays = {
+        simple: '<rect class="guide bp-variant" x="138" y="112" width="244" height="312" rx="34"></rect>',
+        cute: '<ellipse class="guide bp-variant" cx="260" cy="270" rx="142" ry="170"></ellipse><path class="guide bp-variant" d="M175 350 Q260 412 345 350"></path>',
+        icon: '<rect class="guide bp-variant" x="132" y="132" width="256" height="256" rx="56"></rect><circle class="guide bp-variant" cx="260" cy="260" r="132"></circle>',
+        plush: '<ellipse class="guide bp-variant" cx="260" cy="282" rx="136" ry="158"></ellipse><path class="guide bp-variant" d="M190 380 Q260 430 330 380"></path><path class="guide bp-variant" d="M165 240 Q140 285 165 330"></path><path class="guide bp-variant" d="M355 240 Q380 285 355 330"></path>',
+        dynamic: '<path class="guide bp-variant" d="M166 360 C210 250 292 160 374 180"></path><line class="guide bp-variant" x1="168" y1="386" x2="378" y2="142"></line>'
+      };
+      return `${overlays[variant] || overlays.simple}<text class="label" x="35" y="462">Blueprint personality: ${label}</text>`;
+    }
+
+    function applyBlueprintLayerClasses() {
+      const targets = [document.getElementById("blueprintSvg"), document.getElementById("blueprintStudioSvg")].filter(Boolean);
+      targets.forEach(svg => {
+        Object.entries(blueprintLayerState).forEach(([key, visible]) => {
+          svg.classList.toggle(`blueprint-layer-hidden-${key}`, !visible);
+        });
+      });
+    }
+
+    function toggleBlueprintLayer(layer) {
+      if (!(layer in blueprintLayerState)) return;
+      blueprintLayerState[layer] = !blueprintLayerState[layer];
+      applyBlueprintLayerClasses();
+      status(`${layer} layer ${blueprintLayerState[layer] ? "shown" : "hidden"}.`, "ok");
+    }
+
+    function getPracticeDashboardSuggestion(items = getStash()) {
+      if (!items.length) {
+        return "Save a few lessons to unlock practice suggestions.";
+      }
+      const drawn = items.filter(x => x.status === "drawn" || x.status === "redrawn").length;
+      const redrawn = items.filter(x => x.status === "redrawn").length;
+      const favorites = items.filter(x => x.favorite).length;
+      if (drawn === 0) return "Pick one saved lesson and mark it drawn. Do not wait for a perfect prompt.";
+      if (redrawn === 0) return "Try one Version 2 redraw. Redrawing is where the learning starts.";
+      if (favorites > drawn / 2) return "You are collecting strong prompts. Now convert one favorite into a finished drawing.";
+      return "Good rhythm. Next: practice the least comfortable skill focus for one short session.";
+    }
+
+    function downloadShadeMapTransparentPng() {
+      const svg = document.getElementById("shadeMapSvg");
+      if (!svg) return;
+      downloadSvgElementAsPng(svg, "mascot-spark-shading-map-transparent.png", true);
     }
 
     const subjectPacks = {
@@ -4193,21 +5028,23 @@
 
     function smartSurprise() {
       const surpriseType = document.getElementById("surpriseType")?.value || "softBeginner";
+      const locked = getLockedIds();
 
-      // Randomize the subject pack first so the subject list refreshes before picking subject.
-      randomFromOptions("subjectPack");
-      filterSubjectsByPack(document.getElementById("subjectPack")?.value || "all");
+      if (!locked.subject) {
+        randomFromOptions("subjectPack");
+        filterSubjectsByPack(document.getElementById("subjectPack")?.value || "all");
+        randomFromOptions("lessonType");
+      }
 
-      // Randomize every main lesson option. This fixes emotion getting stuck.
+      randomizeIfUnlocked("emotion", locked.emotion);
+      randomizeIfUnlocked("funTwist", locked.twist);
+      randomizeIfUnlocked("paletteMood", locked.palette);
+      randomizeIfUnlocked("blueprintStyle", locked.blueprint);
+      randomizeIfUnlocked("skillFocus", locked.skill);
+
       [
-        "lessonType",
-        "emotion",
-        "funTwist",
-        "paletteMood",
-        "blueprintStyle",
         "level",
         "creativeMode",
-        "skillFocus",
         "drawOrderMode",
         "ideaPreset",
         "aiStyle",
@@ -4217,55 +5054,54 @@
         "shadeOutputType"
       ].forEach(id => randomFromOptions(id));
 
-      // Surprise Type now nudges the result instead of fully locking it.
       if (surpriseType === "softBeginner") {
         setSelect("creativeMode", "cozy");
         setSelect("level", "tiny");
-        setSelect("blueprintStyle", "autoSubject");
+        if (!locked.blueprint) setSelect("blueprintStyle", "autoSubject");
       }
 
       if (surpriseType === "spookySweet") {
-        chooseSubjectFromPack("softMonster");
-        setSelect("blueprintStyle", "autoSubject");
+        if (!locked.subject) chooseSubjectFromPack("softMonster");
+        if (!locked.blueprint) setSelect("blueprintStyle", "autoSubject");
         setSelect("shadeStyle", "spookyGlow");
       }
 
       if (surpriseType === "iconReady") {
-        chooseSubjectFromPack("logo");
-        setSelect("skillFocus", "iconReadability");
-        setSelect("blueprintStyle", "iconGrid");
+        if (!locked.subject) chooseSubjectFromPack("logo");
+        if (!locked.skill) setSelect("skillFocus", "iconReadability");
+        if (!locked.blueprint) setSelect("blueprintStyle", "iconGrid");
         setSelect("shadeStyle", "flatIcon");
       }
 
-      if (surpriseType === "paletteFirst") {
+      if (surpriseType === "paletteFirst" && !locked.palette) {
         randomFromOptions("paletteMood");
-        setSelect("skillFocus", "paletteControl");
+        if (!locked.skill) setSelect("skillFocus", "paletteControl");
       }
 
-      if (surpriseType === "blueprintFirst") {
+      if (surpriseType === "blueprintFirst" && !locked.blueprint) {
         randomFromOptions("blueprintStyle");
       }
 
       if (surpriseType === "skillDrill") {
-        randomFromOptions("skillFocus");
+        if (!locked.skill) randomFromOptions("skillFocus");
         setSelect("level", "study");
       }
 
       if (surpriseType === "chaosButton") {
         setSelect("creativeMode", "remix");
-        randomFromOptions("blueprintStyle");
-        randomFromOptions("paletteMood");
+        if (!locked.blueprint) randomFromOptions("blueprintStyle");
+        if (!locked.palette) randomFromOptions("paletteMood");
       }
 
-      // Critical: always randomize emotion and tiny twist at the end.
-      randomFromOptions("emotion");
-      randomFromOptions("funTwist");
+      // Final freshening, still respecting locks.
+      randomizeIfUnlocked("emotion", locked.emotion);
+      randomizeIfUnlocked("funTwist", locked.twist);
 
       document.getElementById("customIdea").value = "";
       renderPalettePreview();
       setupTimerFromSelect?.();
-      newLesson();
-      status(`Surprise randomized: ${surpriseTypes[surpriseType] || "Surprise"} — including emotion and tiny twist.`, "ok");
+      newLesson(true);
+      status(`Surprise randomized with locks respected: ${surpriseTypes[surpriseType] || "Surprise"}.`, "ok");
     }
 
     function setSelect(id, value) {
@@ -4406,8 +5242,8 @@
       box.textContent = suggestion;
     }
 
-    const APP_VERSION = "V28";
-    const APP_CACHE_NAME = "mascot-spark-v28";
+    const APP_VERSION = "V31";
+    const APP_CACHE_NAME = "mascot-spark-v31";
 
     function escapeHtml(value) {
       return String(value ?? "").replace(/[&<>"']/g, char => ({
@@ -4480,10 +5316,28 @@
       if (!grid) return;
 
       const filter = document.getElementById("stashFilter")?.value || "all";
+      const search = (document.getElementById("stashSearch")?.value || "").toLowerCase().trim();
+      const sort = document.getElementById("stashSort")?.value || "newest";
       let stash = getStash();
+      updateStashDashboard(stash);
 
       if (filter === "favorite") stash = stash.filter(item => item.favorite);
       else if (filter !== "all") stash = stash.filter(item => item.status === filter);
+
+      if (search) {
+        stash = stash.filter(item => [
+          item.title,
+          item.subject,
+          item.emotion,
+          item.twist,
+          item.palette,
+          item.blueprint,
+          item.note
+        ].join(" ").toLowerCase().includes(search));
+      }
+
+      if (sort === "oldest") stash = stash.slice().reverse();
+      if (sort === "favorites") stash = stash.slice().sort((a, b) => Number(b.favorite) - Number(a.favorite));
 
       if (!stash.length) {
         grid.innerHTML = `<div class="compact-help">No saved lessons here yet. Generate a mascot lesson, then tap “Save current lesson.”</div>`;
@@ -4621,9 +5475,14 @@ ${currentBlueprint ? `<section><h2>Blueprint</h2>${currentBlueprint}</section>` 
       const twist = document.getElementById("funTwist")?.value || "none";
       if (stage === "final") {
         svg.innerHTML = makeBlueprint(type, emotion, twist, document.getElementById("blueprintStyle")?.value || "autoSubject");
+      } else if (stage === "shade") {
+        renderShadeMap();
+        svg.innerHTML = document.getElementById("shadeMapSvg")?.innerHTML || "";
       } else {
         svg.innerHTML = extractSvgInner(miniBlueprintSvg(type, emotion, twist, stage));
       }
+      svg.classList.toggle("hide-blueprint-labels", blueprintLabelsHidden);
+      applyBlueprintLayerClasses();
     }
 
     function downloadBlueprintSvg() {
@@ -5389,7 +6248,7 @@ ${currentBlueprint ? `<section><h2>Blueprint</h2>${currentBlueprint}</section>` 
       }
 
       return {
-        title: `Lesson + Blueprint Trigger + Tiny Twist Pass 3 — ${c.shadeStyle}`,
+        title: `Remaining Addons — ${c.shadeStyle}`,
         summary,
         sections,
         note: styleNote
@@ -5400,7 +6259,7 @@ ${currentBlueprint ? `<section><h2>Blueprint</h2>${currentBlueprint}</section>` 
       const title = document.getElementById("shadeOutputTitle");
       const body = document.getElementById("shadeOutputBody");
       if (!title || !body) return;
-      title.textContent = data.title || "Lesson + Blueprint Trigger + Tiny Twist Pass 3";
+      title.textContent = data.title || "Remaining Addons";
 
       const context = getCurrentShadeContext();
       const roles = getShadeRoleColors(context);
@@ -6054,6 +6913,7 @@ function generalLessonFallback() {
       document.getElementById("traceNote").innerHTML = data.traceNote;
       renderPalettePreview();
       document.getElementById("blueprintSvg").innerHTML = makeBlueprint(data.type, data.emotion, data.twist, data.blueprintStyle);
+      applyBlueprintLayerClasses();
       if (document.getElementById("shadeStyle") && !document.getElementById("shadeStyle").dataset.touched) {
         document.getElementById("shadeStyle").value = defaultShadeStyleForCurrentLesson();
       }
@@ -6061,6 +6921,8 @@ function generalLessonFallback() {
       renderShadeContext();
       renderShadeMap();
       renderShadeOutput(shadingLabFallback());
+      renderBeginnerFlow(data);
+      renderVisualStepCards(data);
       updateGuidedStep();
     }
 
@@ -6331,7 +7193,7 @@ function generalLessonFallback() {
 
     function updateFinalBuildBadge() {
       const badge = document.getElementById("finalBuildBadge");
-      if (badge) badge.textContent = `Mascot Spark ${APP_VERSION || "V20"} · Lesson + Blueprint Trigger + Tiny Twist Pass 3 · Cache ${APP_CACHE_NAME || "mascot-spark-v28"}`;
+      if (badge) badge.textContent = `Mascot Spark ${APP_VERSION || "V20"} · Remaining Addons · Cache ${APP_CACHE_NAME || "mascot-spark-v31"}`;
     }
 
     document.addEventListener("keydown", closeOpenModalsOnEscape);
@@ -6348,6 +7210,9 @@ function generalLessonFallback() {
         });
       });
       document.getElementById("subjectPack")?.addEventListener("change", (event) => filterSubjectsByPack(event.target.value));
+      document.getElementById("blueprintVariant")?.addEventListener("change", () => {
+        if (currentLessonData) renderLesson(currentLessonData);
+      });
       document.getElementById("sessionTimer")?.addEventListener("change", setupTimerFromSelect);
       setupTimerFromSelect();
       renderCoachContext();

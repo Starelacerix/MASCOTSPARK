@@ -766,3 +766,121 @@ Service worker cache:
 ```js
 const CACHE_NAME = "mascot-spark-v39";
 ```
+
+
+## V40 Soft Sad Tender Family Active
+
+This build keeps the working export fix and makes the third emotion family the active Emotion Lab focus.
+
+Included family:
+
+- Dreamy Sad
+- Sad Hopeful
+- Gloomy Sweet
+- Worried Hopeful
+- Lonely Brave
+- Rainy Hopeful
+- Dramatic Soft
+- Dramatic Sleepy
+
+What changed:
+
+- Emotion Lab family filter now defaults to **Soft/sad/tender**.
+- Emotion Lab selected preview now defaults to **Dreamy Sad**.
+- Compare mode defaults now spotlight **Dreamy Sad** vs **Sad Hopeful**.
+- Lesson emotion default now opens on **Dreamy Sad**.
+- Keeps the export and transparency fix from the prior build.
+
+Service worker cache:
+
+```js
+const CACHE_NAME = "mascot-spark-v40";
+```
+
+
+## V41 Spooky Eerie Cursed Family Active
+
+This build keeps the working export and transparency fixes, cleans up the family focus text, and makes the fourth emotion family the active Emotion Lab focus.
+
+Included family:
+
+- Spooky Sweet
+- Haunted Happy
+- Eerie Calm
+- Cursed Adorable
+- Sickly Cute
+- Soft Villain
+
+What changed:
+
+- Emotion Lab family filter now defaults to **Spooky/eerie/cursed**.
+- Emotion Lab selected preview now defaults to **Spooky Sweet**.
+- Compare mode defaults now spotlight **Spooky Sweet** vs **Cursed Adorable**.
+- Lesson emotion default now opens on **Spooky Sweet**.
+- README/version labels cleaned up for this pass.
+- Keeps the black-export and transparency fixes from the prior build.
+
+Service worker cache:
+
+```js
+const CACHE_NAME = "mascot-spark-v41";
+```
+
+
+## V42 Magical Glam Strange-Pretty Family Active
+
+This build keeps the working export and transparency fixes, continues the family integration pass, and makes the fifth emotion family the active Emotion Lab focus.
+
+Included family:
+
+- Calm Glowy
+- Timid Magical
+- Gloomy Glam
+- Wounded Sparkly
+- Tender Feral
+- Serious Tiny
+- Delighted Shy
+
+What changed:
+
+- Emotion Lab family filter now defaults to **Magical/glam/strange-pretty**.
+- Emotion Lab selected preview now defaults to **Calm Glowy**.
+- Compare mode defaults now spotlight **Calm Glowy** vs **Timid Magical**.
+- Lesson emotion default now opens on **Calm Glowy**.
+- Keeps the black-export and transparency fixes from the prior build.
+- Small labeling cleanup for this pass.
+
+Service worker cache:
+
+```js
+const CACHE_NAME = "mascot-spark-v42";
+```
+
+
+## V43 Full Emotion Set Integration
+
+This build centers Emotion Lab around the full finished emotion set.
+
+Changed:
+
+- Emotion Lab now defaults to **All families**.
+- The gallery opens with the full 46-emotion set visible.
+- Added compact family-count chips:
+  - 46 total
+  - 9 core
+  - 9 cute mixed
+  - 8 soft/sad
+  - 6 spooky
+  - 7 chaotic
+  - 7 magical
+- Default selected emotion returns to **Happy** as a neutral all-family starting point.
+- Compare mode defaults to **Happy** vs **Cursed Adorable** for cross-family contrast.
+- The lesson emotion default returns to **Happy**.
+- Family helper text now explains that all 46 emotions are active.
+- Keeps the V38+ export/transparency fix.
+
+Service worker cache:
+
+```js
+const CACHE_NAME = "mascot-spark-v43";
+```

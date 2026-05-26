@@ -2240,6 +2240,29 @@
     .emotion-compare-preview { border:1px solid color-mix(in srgb,var(--color-border) 68%,transparent); border-radius:18px; padding:10px; background:color-mix(in srgb,var(--color-surface-2) 80%,transparent); display:grid; gap:8px; justify-items:center; text-align:center; }
     .emotion-lesson-hint { border-left:4px solid var(--color-primary); padding:10px 12px; border-radius:14px; background:color-mix(in srgb,var(--color-primary) 8%,var(--color-surface)); margin-top:10px; }
     .emotion-lesson-hint strong { display:block; margin-bottom:4px; }
+
+    .emotion-family-summary {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin: 8px 0 12px;
+    }
+
+    .emotion-family-summary span {
+      display: inline-flex;
+      align-items: center;
+      min-height: 28px;
+      padding: 5px 9px;
+      border-radius: 999px;
+      border: 1px solid color-mix(in srgb, var(--color-border) 66%, transparent);
+      background: color-mix(in srgb, var(--color-surface-2) 78%, transparent);
+      color: var(--color-muted);
+      font-size: 12px;
+      font-weight: 850;
+      line-height: 1;
+    }
+
+
     @media (max-width:900px) { .emotion-lab-layout { grid-template-columns:1fr; } .emotion-detail { position:static; } }
 
     @media (max-width: 699px) {
@@ -2553,7 +2576,7 @@
     <section class="hero">
       <div class="hero-content">
         <div>
-          <div class="badge">Stitched Halo Bloom · V39 cute mixed family</div>
+          <div class="badge">Stitched Halo Bloom · V43 full emotion set</div>
           <h1>Mascot Spark</h1>
           <p class="subtitle">
             A cozy Procreate mascot drawing teacher with clearer draw-first guidance, expanded subject categories, duo emotions, tiny twists, specific palette profiles, blueprint variations, AI help modes, tabs, Surprise Me, and iPad-friendly layouts.
@@ -2882,15 +2905,25 @@
             <div class="emotion-compare-controls">
               <label for="emotionFamilyFilter">Family</label>
               <select id="emotionFamilyFilter" onchange="renderEmotionLab()">
-                <option value="all">All families</option>
+                <option value="all" selected>All families</option>
                 <option value="simple/core">Simple/core</option>
-                <option value="cute mixed" selected>Cute mixed</option>
+                <option value="cute mixed">Cute mixed</option>
                 <option value="soft/sad/tender">Soft/sad/tender</option>
                 <option value="spooky/eerie/cursed">Spooky/eerie/cursed</option>
                 <option value="chaotic/oddball">Chaotic/oddball</option>
                 <option value="magical/glam/strange-pretty">Magical/glam/strange-pretty</option>
               </select>
               <button class="utility-action" onclick="syncLessonEmotionToLab()">Use current lesson emotion</button>
+            </div>
+            
+            <div class="emotion-family-summary" aria-label="Emotion family counts">
+              <span>46 total</span>
+              <span>9 core</span>
+              <span>9 cute mixed</span>
+              <span>8 soft/sad</span>
+              <span>6 spooky</span>
+              <span>7 chaotic</span>
+              <span>7 magical</span>
             </div>
             <div id="emotionGallery" class="emotion-gallery" aria-label="Emotion gallery"></div>
           </div>
@@ -2912,7 +2945,7 @@
       </div>
 
       <div id="tab-shade" class="tab-panel" data-advanced-only="true">
-        <p class="tab-hint">Cute Mixed Family Active turns your current mascot into a gentle shading plan: where the shadow goes, where the shine goes, which palette colors do what, and how to handle it in Procreate.</p>
+        <p class="tab-hint">Full Emotion Set Integration turns your current mascot into a gentle shading plan: where the shadow goes, where the shine goes, which palette colors do what, and how to handle it in Procreate.</p>
 
         <section class="shade-lab">
           <div class="shade-side">
@@ -2972,7 +3005,7 @@
             <div class="coach-output shade-output">
               <div class="coach-output-head">
                 <div>
-                  <h3 id="shadeOutputTitle">Cute Mixed Family Active</h3>
+                  <h3 id="shadeOutputTitle">Full Emotion Set Integration</h3>
                   <p class="small">Generate a shading plan to see color roles, shadow placement, shine placement, Procreate layers, and what to avoid.</p>
                 </div>
 
@@ -3308,7 +3341,7 @@
     </section>
 
       <footer class="final-footer" aria-label="App version">
-      <span id="finalBuildBadge">Mascot Spark V20 · Cute Mixed Family Active · Cache mascot-spark-v39</span>
+      <span id="finalBuildBadge">Mascot Spark V20 · Full Emotion Set Integration · Cache mascot-spark-v43</span>
     </footer>
   </main>
 
@@ -3753,7 +3786,7 @@
       populateSelect("skillFocus", skillFocuses, "auto");
       populateSelect("surpriseType", surpriseTypes, "softBeginner");
       populateSelect("sessionTimer", sessionTimers, "none");
-      populateSelect("emotion", emotions, "grumpy-cute");
+      populateSelect("emotion", emotions, "happy");
       populateSelect("level", lessonSizes, "normal");
       populateSelect("funTwist", twists, "sparkle");
       populateSelect("ideaPreset", flavors, "");
@@ -5604,8 +5637,8 @@
       box.textContent = suggestion;
     }
 
-    const APP_VERSION = "V39";
-    const APP_CACHE_NAME = "mascot-spark-v39";
+    const APP_VERSION = "V43";
+    const APP_CACHE_NAME = "mascot-spark-v43";
 
     function escapeHtml(value) {
       return String(value ?? "").replace(/[&<>"']/g, char => ({
@@ -5938,7 +5971,7 @@ ${currentBlueprint ? `<section><h2>Blueprint</h2>${currentBlueprint}</section>` 
 
     const exactEmotionOverrides = {"happy": {"label": "Happy", "family": "simple/core", "svg": "\n<svg viewBox=\"0 0 64 64\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"happy emotion\">\n  <circle cx=\"32\" cy=\"32\" r=\"26\" fill=\"#FFE680\"/>\n  <circle cx=\"32\" cy=\"32\" r=\"22\" fill=\"#FFF1A8\"/>\n  <path d=\"M19 29c2.5-4 7.5-4 10 0\" fill=\"none\" stroke=\"#3E2C18\" stroke-width=\"3.5\" stroke-linecap=\"round\"/>\n  <path d=\"M35 29c2.5-4 7.5-4 10 0\" fill=\"none\" stroke=\"#3E2C18\" stroke-width=\"3.5\" stroke-linecap=\"round\"/>\n  <path d=\"M22 38c5 7 15 9 22 0\" fill=\"none\" stroke=\"#3E2C18\" stroke-width=\"4\" stroke-linecap=\"round\"/>\n  <circle cx=\"18\" cy=\"38\" r=\"3\" fill=\"#FFAF6B\" opacity=\".75\"/>\n  <circle cx=\"47\" cy=\"38\" r=\"3\" fill=\"#FFAF6B\" opacity=\".75\"/>\n  <path d=\"M12 17l3-2 3 2-3 2zM48 13l4-2 4 2-4 3z\" fill=\"#FFFFFF\" opacity=\".9\"/>\n</svg>", "faceHeight": "middle", "eyeStyle": "two upward curved closed eyes", "browStyle": "barely lifted cheerful brows", "mouthStyle": "large open smiling arc", "blushStyle": "small warm cheek dots", "accent": "tiny gleams", "posture": "open and lifted", "vibe": "bright, simple, cheerful", "differenceRule": "Different from excited because happy is steady and round, not explosive or high‑energy.", "practiceTip": "Begin with a round face; sketch soft curved eyes and a wide beaming smile, adding a slight blush to capture warmth.", "examplePrompt": "Draw a plush mascot lying in a sunny meadow, eyes closed in delight and beaming a contented smile."}, "sleepy": {"label": "Sleepy", "family": "simple/core", "svg": "\n<svg viewBox=\"0 0 64 64\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"sleepy emotion\">\n  <circle cx=\"32\" cy=\"34\" r=\"25\" fill=\"#C7D8FF\"/>\n  <path d=\"M20 31c3 2 6 2 9 0\" fill=\"none\" stroke=\"#2C3A57\" stroke-width=\"3\" stroke-linecap=\"round\"/>\n  <path d=\"M36 31c3 2 6 2 9 0\" fill=\"none\" stroke=\"#2C3A57\" stroke-width=\"3\" stroke-linecap=\"round\"/>\n  <path d=\"M29 43c2 1 4 1 6 0\" fill=\"none\" stroke=\"#2C3A57\" stroke-width=\"2.5\" stroke-linecap=\"round\"/>\n  <path d=\"M47 13h8l-8 8h8\" fill=\"none\" stroke=\"#6B7FC7\" stroke-width=\"3\" stroke-linejoin=\"round\"/>\n  <path d=\"M39 7h6l-6 6h6\" fill=\"none\" stroke=\"#6B7FC7\" stroke-width=\"2.5\" stroke-linejoin=\"round\"/>\n  <ellipse cx=\"32\" cy=\"52\" rx=\"13\" ry=\"3\" fill=\"#8196D9\" opacity=\".22\"/>\n</svg>", "faceHeight": "low", "eyeStyle": "two droopy closed eyes", "browStyle": "absent sleepy brow", "mouthStyle": "tiny flat curve", "blushStyle": "extremely faint", "accent": "Z marks", "posture": "drooping downward", "vibe": "drowsy, quiet, drifting", "differenceRule": "Different from dramaticSleepy because sleepy is plain and calm, not theatrical or exaggerated.", "practiceTip": "Sketch a cozy round face with drooping eyes and a tiny mouth, then add soft ‘Z’ marks to hint at slumber.", "examplePrompt": "Illustrate a small creature curled up in a blanket, its droopy eyes barely open as gentle Z’s float up."}, "excited": {"label": "Excited", "family": "simple/core", "svg": "\n<svg viewBox=\"0 0 64 64\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"excited emotion\">\n  <circle cx=\"32\" cy=\"32\" r=\"26\" fill=\"#FFE066\"/>\n  <path d=\"M19 28l4-5 4 5\" fill=\"none\" stroke=\"#3D2A12\" stroke-width=\"3.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>\n  <path d=\"M37 28l4-5 4 5\" fill=\"none\" stroke=\"#3D2A12\" stroke-width=\"3.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>\n  <path d=\"M22 39c5 8 15 9 21 0\" fill=\"none\" stroke=\"#3D2A12\" stroke-width=\"4\" stroke-linecap=\"round\"/>\n  <circle cx=\"18\" cy=\"38\" r=\"3.5\" fill=\"#FF8A5B\" opacity=\".75\"/>\n  <circle cx=\"47\" cy=\"38\" r=\"3.5\" fill=\"#FF8A5B\" opacity=\".75\"/>\n  <path d=\"M10 18l4-2 2-4 2 4 4 2-4 2-2 4-2-4z\" fill=\"#FFFFFF\"/>\n  <path d=\"M47 12l3-6 3 6 6 3-6 3-3 6-3-6-6-3z\" fill=\"#FF8DE3\"/>\n</svg>", "faceHeight": "high", "eyeStyle": "two starry triangle eyes", "browStyle": "lifted invisible brows", "mouthStyle": "huge upward smile", "blushStyle": "bright round blush", "accent": "bursting sparkles", "posture": "springing upward", "vibe": "electric, bright, eager", "differenceRule": "Different from happy because excited is explosive and bouncy, not steady or simple.", "practiceTip": "Play with star‑shaped eyes and a big open mouth; add little burst symbols around the head to communicate energy.", "examplePrompt": "Draw a playful mascot leaping up with starry eyes and sparkling bursts, radiating infectious excitement."}, "curious": {"label": "Curious", "family": "simple/core", "svg": "\n<svg viewBox=\"0 0 64 64\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"curious emotion\">\n  <circle cx=\"32\" cy=\"32\" r=\"26\" fill=\"#BFE8FF\"/>\n  <circle cx=\"24\" cy=\"32\" r=\"4\" fill=\"#26394A\"/>\n  <circle cx=\"42\" cy=\"30\" r=\"5\" fill=\"#26394A\"/>\n  <circle cx=\"25.5\" cy=\"30.5\" r=\"1.2\" fill=\"#FFFFFF\"/>\n  <circle cx=\"43.8\" cy=\"28\" r=\"1.4\" fill=\"#FFFFFF\"/>\n  <path d=\"M18 24c3-3 8-3 11-1\" fill=\"none\" stroke=\"#26394A\" stroke-width=\"3\" stroke-linecap=\"round\"/>\n  <path d=\"M36 21c4-4 9-3 12 1\" fill=\"none\" stroke=\"#26394A\" stroke-width=\"3\" stroke-linecap=\"round\"/>\n  <path d=\"M28 43c3 2 6 2 9 0\" fill=\"none\" stroke=\"#26394A\" stroke-width=\"3\" stroke-linecap=\"round\"/>\n  <path d=\"M50 13c3 0 5 2 5 5 0 3-3 4-5 6\" fill=\"none\" stroke=\"#6C63FF\" stroke-width=\"3\" stroke-linecap=\"round\"/>\n  <circle cx=\"50\" cy=\"28\" r=\"1.7\" fill=\"#6C63FF\"/>\n</svg>", "faceHeight": "middle", "eyeStyle": "one small eye + one larger searching eye", "browStyle": "one raised inquisitive brow", "mouthStyle": "small neutral curve", "blushStyle": "none", "accent": "question mark", "posture": "leaning forward", "vibe": "alert, wondering, interested", "differenceRule": "Different from confused‑cute because curious is engaged and searching, not stuck or unsure.", "practiceTip": "Experiment with asymmetry: draw one eye larger and higher than the other; add a raised brow and a tiny mouth that hints at inquiry.", "examplePrompt": "Create a whimsical creature peering around a corner with one large curious eye and a floating question mark overhead."}, "surprised": {"label": "Surprised", "family": "simple/core", "svg": "\n<svg viewBox=\"0 0 64 64\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"surprised emotion\">\n  <circle cx=\"32\" cy=\"32\" r=\"26\" fill=\"#FFD6A5\"/>\n  <circle cx=\"24\" cy=\"30\" r=\"4.5\" fill=\"#3E2A1C\"/>\n  <circle cx=\"40\" cy=\"30\" r=\"4.5\" fill=\"#3E2A1C\"/>\n  <circle cx=\"25.5\" cy=\"28.4\" r=\"1.2\" fill=\"#FFFFFF\"/>\n  <circle cx=\"41.5\" cy=\"28.4\" r=\"1.2\" fill=\"#FFFFFF\"/>\n  <path d=\"M18 22c4-4 9-4 12-1\" fill=\"none\" stroke=\"#3E2A1C\" stroke-width=\"3\" stroke-linecap=\"round\"/>\n  <path d=\"M34 21c4-3 9-3 12 1\" fill=\"none\" stroke=\"#3E2A1C\" stroke-width=\"3\" stroke-linecap=\"round\"/>\n  <circle cx=\"32\" cy=\"43\" r=\"4.5\" fill=\"none\" stroke=\"#3E2A1C\" stroke-width=\"3\"/>\n  <path d=\"M11 17l3-2 3 2-3 2zM50 15l4-2 4 2-4 2z\" fill=\"#FFFFFF\" opacity=\".9\"/>\n</svg>", "faceHeight": "high", "eyeStyle": "two wide round eyes", "browStyle": "high lifted brows", "mouthStyle": "small open O mouth", "blushStyle": "faint warm cheeks", "accent": "tiny shock gleams", "posture": "popped upright", "vibe": "startled, open, innocent", "differenceRule": "Different from excited because surprised is frozen and wide‑eyed, not joyful or energetic.", "practiceTip": "Focus on big circles for the eyes and a rounded mouth; keep the brows high and curved to capture that startled look.", "examplePrompt": "Draw a small mascot with huge eyes and a round ‘O’ mouth, as if it’s just found a hidden treasure chest."}, "embarrassed": {"label": "Embarrassed", "family": "simple/core", "svg": "\n<svg viewBox=\"0 0 64 64\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"embarrassed emotion\">\n  <circle cx=\"32\" cy=\"32\" r=\"26\" fill=\"#FFC6C7\"/>\n  <path d=\"M19 29c3 2 6 2 9 0\" fill=\"none\" stroke=\"#5A2D35\" stroke-width=\"3\" stroke-linecap=\"round\"/>\n  <path d=\"M36 29c3 2 6 2 9 0\" fill=\"none\" stroke=\"#5A2D35\" stroke-width=\"3\" stroke-linecap=\"round\"/>\n  <path d=\"M28 42c3 2 6 2 9 0\" fill=\"none\" stroke=\"#5A2D35\" stroke-width=\"3\" stroke-linecap=\"round\"/>\n  <ellipse cx=\"18\" cy=\"38\" rx=\"7\" ry=\"4\" fill=\"#FF6F91\" opacity=\".7\"/>\n  <ellipse cx=\"47\" cy=\"38\" rx=\"7\" ry=\"4\" fill=\"#FF6F91\" opacity=\".7\"/>\n  <path d=\"M15 21c3-2 6-2 9 0\" fill=\"none\" stroke=\"#B85B6B\" stroke-width=\"2.5\" stroke-linecap=\"round\"/>\n  <path d=\"M40 21c3-2 6-2 9 0\" fill=\"none\" stroke=\"#B85B6B\" stroke-width=\"2.5\" stroke-linecap=\"round\"/>\n  <path d=\"M49 14l1.8 3.5 3.8.5-2.8 2.7.7 3.8-3.5-1.8-3.5 1.8.7-3.8-2.8-2.7 3.8-.5z\" fill=\"#FFF2A8\"/>\n</svg>", "faceHeight": "low", "eyeStyle": "two closed downward curved eyes", "browStyle": "awkwardly lifted brows", "mouthStyle": "small uneasy smile", "blushStyle": "large intense oval blush", "accent": "tiny nervous sparkle", "posture": "shrunk and flushed", "vibe": "flustered, exposed, sweetly awkward", "differenceRule": "Different from shy because embarrassed is hotter and more exposed, while shy is quieter and inward.", "practiceTip": "Use curved lines to close the eyes and slump the brows; overlay big oval blush marks and an uneven smile to show flustered heat.", "examplePrompt": "Draw a bashful creature hiding its face behind its hands, cheeks burning and a tiny smile peeking out."}, "determined": {"label": "Determined", "family": "simple/core", "svg": "\n<svg viewBox=\"0 0 64 64\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"determined emotion\">\n  <circle cx=\"32\" cy=\"32\" r=\"26\" fill=\"#FFCF8A\"/>\n  <path d=\"M17 25l13 3\" stroke=\"#3A2416\" stroke-width=\"4\" stroke-linecap=\"round\"/>\n  <path d=\"M47 25l-13 3\" stroke=\"#3A2416\" stroke-width=\"4\" stroke-linecap=\"round\"/>\n  <circle cx=\"24\" cy=\"33\" r=\"3.5\" fill=\"#3A2416\"/>\n  <circle cx=\"40\" cy=\"33\" r=\"3.5\" fill=\"#3A2416\"/>\n  <path d=\"M25 44c4 3 10 3 14 0\" fill=\"none\" stroke=\"#3A2416\" stroke-width=\"3.5\" stroke-linecap=\"round\"/>\n  <path d=\"M11 18l4-2 2-4 2 4 4 2-4 2-2 4-2-4z\" fill=\"#FFFFFF\"/>\n  <path d=\"M48 43l5 3-5 3-3 5-3-5-5-3 5-3 3-5z\" fill=\"#FFE066\"/>\n</svg>", "faceHeight": "middle", "eyeStyle": "two focused dot eyes", "browStyle": "strong inward angled brows", "mouthStyle": "firm confident line‑smile", "blushStyle": "none", "accent": "resolve spark", "posture": "forward and braced", "vibe": "focused, sturdy, ready", "differenceRule": "Different from tiny‑angry because determined has controlled focus, not reactive anger.", "practiceTip": "Practice drawing symmetrical eyes under firm angled brows; add a straight mouth and a tiny shine to suggest inner strength.", "examplePrompt": "Design a small hero creature standing upright with a firm grin and a single sparkle of determination in its eye."}, "cozy": {"label": "Cozy", "family": "simple/core", "svg": "\n<svg viewBox=\"0 0 64 64\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"cozy emotion\">\n  <circle cx=\"32\" cy=\"32\" r=\"26\" fill=\"#FFD8A8\"/>\n  <path d=\"M18 36c8 8 20 8 28 0v10c0 5-5 9-14 9s-14-4-14-9z\" fill=\"#B77A50\" opacity=\".85\"/>\n  <path d=\"M21 30c3 2 6 2 9 0\" fill=\"none\" stroke=\"#4A2E1F\" stroke-width=\"3\" stroke-linecap=\"round\"/>\n  <path d=\"M35 30c3 2 6 2 9 0\" fill=\"none\" stroke=\"#4A2E1F\" stroke-width=\"3\" stroke-linecap=\"round\"/>\n  <path d=\"M27 41c3 2 7 2 10 0\" fill=\"none\" stroke=\"#4A2E1F\" stroke-width=\"3\" stroke-linecap=\"round\"/>\n  <ellipse cx=\"18\" cy=\"38\" rx=\"4.5\" ry=\"3\" fill=\"#FF9A85\" opacity=\".55\"/>\n  <ellipse cx=\"46\" cy=\"38\" rx=\"4.5\" ry=\"3\" fill=\"#FF9A85\" opacity=\".55\"/>\n  <path d=\"M14 18c2-3 5-5 9-5\" fill=\"none\" stroke=\"#FFF3D1\" stroke-width=\"3\" stroke-linecap=\"round\"/>\n  <path d=\"M42 14c3 1 6 3 8 6\" fill=\"none\" stroke=\"#FFF3D1\" stroke-width=\"3\" stroke-linecap=\"round\"/>\n</svg>", "faceHeight": "low", "eyeStyle": "two relaxed closed eyes", "browStyle": "soft relaxed brow", "mouthStyle": "small warm smile", "blushStyle": "warm muted blush", "accent": "blanket wrap", "posture": "wrapped and nestled", "vibe": "warm, safe, nest‑like", "differenceRule": "Different from calm‑glowy because cozy is tactile and warm, not magical or radiant.", "practiceTip": "Draw a round face with eyes closed and mouth smiling, wrapped in a scarf or blanket; use warm, soft shading to convey softness.", "examplePrompt": "Illustrate a snuggly mascot wrapped in a chunky knit scarf, eyes closed with a contented smile."}, "silly": {"label": "Silly", "family": "simple/core", "svg": "\n<svg viewBox=\"0 0 64 64\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"silly emotion\">\n  <circle cx=\"32\" cy=\"32\" r=\"26\" fill=\"#BFF7D2\"/>\n  <circle cx=\"23\" cy=\"31\" r=\"4\" fill=\"#263A2B\"/>\n  <path d=\"M38 31c2.5-2 5.5-2 8 0\" fill=\"none\" stroke=\"#263A2B\" stroke-width=\"3.5\" stroke-linecap=\"round\"/>\n  <path d=\"M24 44c5 5 12 5 17 0\" fill=\"none\" stroke=\"#263A2B\" stroke-width=\"3.5\" stroke-linecap=\"round\"/>\n  <path d=\"M35 44c0 6 5 8 8 4\" fill=\"#FF7CA8\" stroke=\"#263A2B\" stroke-width=\"2.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>\n  <circle cx=\"18\" cy=\"38\" r=\"3\" fill=\"#FFB36B\" opacity=\".6\"/>\n  <circle cx=\"47\" cy=\"38\" r=\"3\" fill=\"#FFB36B\" opacity=\".6\"/>\n  <path d=\"M13 17l3-2 3 2-3 2zM49 15l4-2 4 2-4 2z\" fill=\"#FFFFFF\"/>\n</svg>", "faceHeight": "middle", "eyeStyle": "one dot eye + one wink", "browStyle": "bouncy mismatched brows", "mouthStyle": "goofy grin with tongue", "blushStyle": "small warm blush", "accent": "playful gleams", "posture": "loose and wobbly", "vibe": "goofy, harmless, playful", "differenceRule": "Different from chaoticSoft because silly is simple and goofy, not unstable or overcharged.", "practiceTip": "Play with asymmetry: sketch one eye winking and the other wide; add a lopsided grin with a tongue sticking out.", "examplePrompt": "Create a quirky mascot sticking out its tongue and winking, hair a bit ruffled, radiating carefree silliness."}};
     Object.assign(emotionMap, exactEmotionOverrides);
-    let selectedEmotionKey = "grumpy-cute";
+    let selectedEmotionKey = "happy";
     function getEmotionEntry(key){ return emotionMap[key] || emotionMap.happy; }
     function emotionKeys(){ return Object.keys(emotionMap); }
     function renderEmotionLab(){
@@ -5955,7 +5988,7 @@ ${currentBlueprint ? `<section><h2>Blueprint</h2>${currentBlueprint}</section>` 
       renderEmotionLab(); renderEmotionLessonHint();
     }
     function syncLessonEmotionToLab(){
-      const key=document.getElementById("emotion")?.value || "grumpy-cute";
+      const key=document.getElementById("emotion")?.value || "happy";
       if(emotionMap[key]) selectedEmotionKey=key;
       renderEmotionLab(); showTab("tab-emotions");
     }
@@ -5968,13 +6001,13 @@ ${currentBlueprint ? `<section><h2>Blueprint</h2>${currentBlueprint}</section>` 
     function renderEmotionCompareSelects(){
       const a=document.getElementById("emotionCompareA"), b=document.getElementById("emotionCompareB"); if(!a || !b) return;
       const options=emotionKeys().map(key=>`<option value="${key}">${emotionMap[key].label}</option>`).join("");
-      const currentA=a.value || selectedEmotionKey, currentB=b.value || (selectedEmotionKey==="grumpy-cute" ? "shy" : "grumpy-cute");
-      a.innerHTML=options; b.innerHTML=options; a.value=emotionMap[currentA]?currentA:selectedEmotionKey; b.value=emotionMap[currentB]?currentB:"shy";
+      const currentA=a.value || selectedEmotionKey, currentB=b.value || (selectedEmotionKey==="happy" ? "cursedAdorable" : "happy");
+      a.innerHTML=options; b.innerHTML=options; a.value=emotionMap[currentA]?currentA:selectedEmotionKey; b.value=emotionMap[currentB]?currentB:"cursedAdorable";
     }
     function renderEmotionCompare(){
       const box=document.getElementById("emotionCompare"); if(!box) return;
       const a=getEmotionEntry(document.getElementById("emotionCompareA")?.value || selectedEmotionKey);
-      const b=getEmotionEntry(document.getElementById("emotionCompareB")?.value || "shy");
+      const b=getEmotionEntry(document.getElementById("emotionCompareB")?.value || "cursedAdorable");
       box.innerHTML=`<div class="emotion-compare-preview">${a.svg}<strong>${a.label}</strong><span>${a.vibe}</span><small>${a.differenceRule}</small></div><div class="emotion-compare-preview">${b.svg}<strong>${b.label}</strong><span>${b.vibe}</span><small>${b.differenceRule}</small></div>`;
     }
     function selectedEmotionSvgDocument(){ return getEmotionEntry(selectedEmotionKey).svg.trim(); }
@@ -6904,7 +6937,7 @@ ${currentBlueprint ? `<section><h2>Blueprint</h2>${currentBlueprint}</section>` 
       }
 
       return {
-        title: `Cute Mixed Family Active — ${c.shadeStyle}`,
+        title: `Full Emotion Set Integration — ${c.shadeStyle}`,
         summary,
         sections,
         note: styleNote
@@ -6915,7 +6948,7 @@ ${currentBlueprint ? `<section><h2>Blueprint</h2>${currentBlueprint}</section>` 
       const title = document.getElementById("shadeOutputTitle");
       const body = document.getElementById("shadeOutputBody");
       if (!title || !body) return;
-      title.textContent = data.title || "Cute Mixed Family Active";
+      title.textContent = data.title || "Full Emotion Set Integration";
 
       const context = getCurrentShadeContext();
       const roles = getShadeRoleColors(context);
@@ -7859,7 +7892,7 @@ function generalLessonFallback() {
 
     function updateFinalBuildBadge() {
       const badge = document.getElementById("finalBuildBadge");
-      if (badge) badge.textContent = `Mascot Spark ${APP_VERSION || "V20"} · Cute Mixed Family Active · Cache ${APP_CACHE_NAME || "mascot-spark-v39"}`;
+      if (badge) badge.textContent = `Mascot Spark ${APP_VERSION || "V20"} · Full Emotion Set Integration · Cache ${APP_CACHE_NAME || "mascot-spark-v43"}`;
     }
 
     document.addEventListener("keydown", closeOpenModalsOnEscape);

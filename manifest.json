@@ -1,7 +1,7 @@
 {
-  "name": "Mascot Spark V39 \u2014 Cute Mixed Family Active",
+  "name": "Mascot Spark V43 \u2014 Full Emotion Set Integration",
   "short_name": "Mascot Spark",
-  "description": "Keeps the V38 export black fix and makes the second emotion family (cute mixed) the active Emotion Lab focus.",
+  "description": "Centers Emotion Lab around the full 46-emotion set while preserving export fixes and family filters.",
   "start_url": "./index.html",
   "scope": "./",
   "display": "standalone",

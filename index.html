@@ -2751,7 +2751,7 @@
 
       
       <div id="tab-shade" class="tab-panel" data-advanced-only="true">
-        <p class="tab-hint">Remaining Addons turns your current mascot into a gentle shading plan: where the shadow goes, where the shine goes, which palette colors do what, and how to handle it in Procreate.</p>
+        <p class="tab-hint">Emergency Runtime Fix turns your current mascot into a gentle shading plan: where the shadow goes, where the shine goes, which palette colors do what, and how to handle it in Procreate.</p>
 
         <section class="shade-lab">
           <div class="shade-side">
@@ -2811,7 +2811,7 @@
             <div class="coach-output shade-output">
               <div class="coach-output-head">
                 <div>
-                  <h3 id="shadeOutputTitle">Remaining Addons</h3>
+                  <h3 id="shadeOutputTitle">Emergency Runtime Fix</h3>
                   <p class="small">Generate a shading plan to see color roles, shadow placement, shine placement, Procreate layers, and what to avoid.</p>
                 </div>
 
@@ -3137,7 +3137,7 @@
     </section>
 
       <footer class="final-footer" aria-label="App version">
-      <span id="finalBuildBadge">Mascot Spark V20 · Remaining Addons · Cache mascot-spark-v31</span>
+      <span id="finalBuildBadge">Mascot Spark V20 · Emergency Runtime Fix · Cache mascot-spark-v33</span>
     </footer>
   </main>
 
@@ -3192,7 +3192,19 @@
       furniture: ["Furniture mascot", "one furniture silhouette", "home object character", ["Chair Dot", "Lampy Bean", "Tiny Table"]],
       garden: ["Garden mascot", "one garden object or nature shape", "outdoor cozy character", ["Watering Can Dot", "Seed Packet", "Garden Bean"]],
       weatherIcon: ["Weather icon mascot", "one weather-symbol shape", "forecast icon character", ["Thunder Dot", "Snow Puff", "Sunny Bean"]],
-      abstractShape: ["Abstract shape mascot", "one invented abstract shape", "shape-language practice", ["Blob Glyph", "Loop Dot", "Wiggle Bean"]],
+      abstractShape: ["Abstract shape mascot", "one invented soft abstract shape", "shape-language practice", ["Blob Glyph", "Loop Dot", "Wiggle Bean"]],
+      circleBadge: ["Circle badge mascot", "one clean circular badge shape", "centered shape readability", ["Orbit Button", "Roundy Spark", "Halo Dot"]],
+      squircleTile: ["Squircle tile mascot", "one soft squircle app-tile shape", "soft corner control", ["Tile Puff", "Soft App Bean", "Squish Icon"]],
+      roundedTriangle: ["Rounded triangle mascot", "one rounded triangle wedge shape", "point-softening and balance", ["Tri Puff", "Lucky Wedge", "Soft Peak"]],
+      diamondTile: ["Diamond tile mascot", "one rounded diamond badge", "angled symmetry", ["Gem Crest", "Diamond Dot", "Tilt Bean"]],
+      heartBadge: ["Heart badge mascot", "one plump heart-like badge shape", "heart silhouette clarity", ["Hearty Loop", "Sweet Crest", "Cupid Bean"]],
+      crescentDrop: ["Crescent drop mascot", "one crescent-moon droplet shape", "moon-curve shape control", ["Moon Drip", "Crescent Pip", "Night Drop"]],
+      cloverGlyph: ["Clover glyph mascot", "one four-lobed clover glyph shape", "multi-lobe balance", ["Clover Pop", "Lucky Puff", "Petal Node"]],
+      pillCapsule: ["Pill capsule mascot", "one capsule or lozenge shape", "capsule proportions", ["Capsule Pop", "Jelly Cap", "Lozenge Bean"]],
+      starburstSeal: ["Starburst seal mascot", "one burst-edged sticker seal", "spiky but cute edges", ["Burst Button", "Star Seal", "Spark Ruffle"]],
+      archTile: ["Arch tile mascot", "one arch-window or shrine-top tile shape", "arched silhouette control", ["Archie Tile", "Window Puff", "Shrine Dot"]],
+      ribbonLoop: ["Ribbon loop mascot", "one looped ribbon / bow-loop badge", "looped silhouette design", ["Loopie Crest", "Ribbon Bean", "Bow Knot Dot"]],
+      pebbleStack: ["Pebble stack mascot", "one stacked pebble / blob cluster shape", "asymmetric balance", ["Pebble Pile", "Stack Dot", "Smooth Cluster"]],
       logoMark: ["Logo mark mascot", "one brand-mark shape", "brandable mascot silhouette", ["Mark Dot", "Logo Bean", "Crestling"]]
     };
 
@@ -3505,10 +3517,17 @@
 
     function populateSelect(id, data, selected) {
       const el = document.getElementById(id);
+      if (!el || !data) return;
       el.innerHTML = Object.entries(data).map(([value, label]) => {
         const text = Array.isArray(label) ? label[0] : (label && label.label ? label.label : label);
         return `<option value="${value}" ${value === selected ? "selected" : ""}>${text}</option>`;
       }).join("");
+      if (selected && Object.prototype.hasOwnProperty.call(data, selected)) {
+        el.value = selected;
+      } else {
+        const first = Object.keys(data)[0];
+        if (first) el.value = first;
+      }
     }
 
 
@@ -3562,7 +3581,7 @@
       populateSelect("skillFocus", skillFocuses, "auto");
       populateSelect("surpriseType", surpriseTypes, "softBeginner");
       populateSelect("sessionTimer", sessionTimers, "none");
-      populateSelect("emotion", emotions, "grumpy");
+      populateSelect("emotion", emotions, "grumpy-cute");
       populateSelect("level", lessonSizes, "normal");
       populateSelect("funTwist", twists, "sparkle");
       populateSelect("ideaPreset", flavors, "");
@@ -3655,6 +3674,18 @@
       if (type === "celestialObject") return '<circle class="shape" cx="260" cy="265" r="130"></circle><path class="guide" d="M140 300 C220 220 330 220 405 300"></path>';
       if (type === "plushKeychain") return '<path class="shape" d="M185 180 C185 120 245 115 260 160 C275 115 335 120 335 180 L335 350 C335 410 185 410 185 350 Z"></path><circle class="feature" cx="260" cy="105" r="28"></circle>';
       if (type === "tinyMonster") return '<path class="shape" d="M160 250 C130 170 205 115 260 150 C315 115 390 170 360 250 C395 315 335 405 260 385 C185 405 125 315 160 250 Z"></path><path class="feature" d="M220 150 L205 105 M300 150 L315 105"></path>';
+      if (type === "circleBadge") return '<circle class="shape" cx="260" cy="265" r="136"></circle>';
+      if (type === "squircleTile") return '<path class="shape" d="M175 145 C175 125 190 110 210 110 L310 110 C330 110 345 125 345 145 L345 345 C345 365 330 380 310 380 L210 380 C190 380 175 365 175 345 Z"></path>';
+      if (type === "roundedTriangle") return '<path class="shape" d="M260 118 C276 118 288 126 296 140 L378 302 C392 328 374 360 344 360 L176 360 C146 360 128 328 142 302 L224 140 C232 126 244 118 260 118 Z"></path>';
+      if (type === "diamondTile") return '<path class="shape" d="M260 108 L374 222 Q392 240 374 258 L260 372 L146 258 Q128 240 146 222 Z"></path>';
+      if (type === "heartBadge") return '<path class="shape" d="M260 395 L182 318 C126 262 134 178 198 160 C228 152 248 164 260 182 C272 164 292 152 322 160 C386 178 394 262 338 318 Z"></path>';
+      if (type === "crescentDrop") return '<path class="shape" d="M314 120 C222 136 163 220 182 306 C196 370 250 408 310 404 C250 382 212 330 212 270 C212 210 248 160 314 120 Z"></path><path class="guide" d="M312 148 C262 172 234 217 234 268 C234 316 258 354 302 378"></path>';
+      if (type === "cloverGlyph") return '<circle class="shape" cx="220" cy="210" r="62"></circle><circle class="shape" cx="300" cy="210" r="62"></circle><circle class="shape" cx="220" cy="290" r="62"></circle><circle class="shape" cx="300" cy="290" r="62"></circle>';
+      if (type === "pillCapsule") return '<rect class="shape" x="145" y="180" width="230" height="170" rx="85"></rect><line class="guide" x1="260" y1="180" x2="260" y2="350"></line>';
+      if (type === "starburstSeal") return '<path class="shape" d="M260 110 L294 148 L344 136 L352 186 L402 202 L380 248 L410 292 L366 320 L370 372 L318 370 L286 410 L246 374 L198 390 L182 342 L132 328 L148 280 L118 238 L156 208 L150 158 L202 162 L232 118 Z"></path>';
+      if (type === "archTile") return '<path class="shape" d="M170 370 L170 236 C170 162 212 118 260 118 C308 118 350 162 350 236 L350 370 Z"></path>';
+      if (type === "ribbonLoop") return '<path class="shape" d="M164 214 C164 160 220 140 260 188 C300 140 356 160 356 214 C356 258 322 286 286 290 L330 382 L260 338 L190 382 L234 290 C198 286 164 258 164 214 Z"></path>';
+      if (type === "pebbleStack") return '<ellipse class="shape" cx="224" cy="310" rx="102" ry="78"></ellipse><ellipse class="shape" cx="296" cy="244" rx="84" ry="66"></ellipse><ellipse class="shape" cx="212" cy="216" rx="62" ry="52"></ellipse>';
       if (type === "zodiac" || type === "emoji" || type === "abstractShape" || type === "logoMark") return '<path class="shape" d="M160 205 C160 130 230 100 285 125 C348 153 384 218 363 292 C345 356 288 398 218 380 C153 363 124 298 160 205 Z"></path>';
       if (type === "package") return '<path class="shape" d="M150 180 L260 120 L370 180 L370 360 L260 420 L150 360 Z"></path><path class="guide" d="M150 180 L260 240 L370 180 M260 240 L260 420"></path>';
       if (type === "furniture") return '<path class="shape" d="M175 170 L345 170 L345 300 L315 300 L315 400 L285 400 L285 300 L235 300 L235 400 L205 400 L205 300 L175 300 Z"></path>';
@@ -4093,6 +4124,78 @@
           note: "Keep the body round and let the horns or tuft be only accents."
         };
       }
+      if (["circleBadge"].includes(type)) {
+        return {
+          overlay: '<circle class="guide" cx="260" cy="265" r="138"></circle><line class="guide" x1="122" y1="265" x2="398" y2="265"></line><line class="guide" x1="260" y1="127" x2="260" y2="403"></line>',
+          note: "Start with a true circle. Keep the face centered and the details inside the safe ring."
+        };
+      }
+      if (["squircleTile"].includes(type)) {
+        return {
+          overlay: '<rect class="guide" x="168" y="112" width="184" height="268" rx="54"></rect><line class="guide" x1="168" y1="246" x2="352" y2="246"></line>',
+          note: "Build the squircle from a soft box, not from a plain circle."
+        };
+      }
+      if (["roundedTriangle"].includes(type)) {
+        return {
+          overlay: '<path class="guide" d="M260 120 L374 332 L146 332 Z"></path><circle class="guide" cx="260" cy="262" r="88"></circle>',
+          note: "Place a simple triangle first, then soften every corner so it stays cute."
+        };
+      }
+      if (["diamondTile"].includes(type)) {
+        return {
+          overlay: '<path class="guide" d="M260 110 L382 232 L260 354 L138 232 Z"></path><line class="guide" x1="138" y1="232" x2="382" y2="232"></line>',
+          note: "Use one centered diamond and keep the top and side angles balanced."
+        };
+      }
+      if (["heartBadge"].includes(type)) {
+        return {
+          overlay: '<circle class="guide" cx="220" cy="204" r="54"></circle><circle class="guide" cx="300" cy="204" r="54"></circle><path class="guide" d="M170 224 L260 364 L350 224"></path>',
+          note: "Build the heart from two top circles and one pointed lower drop."
+        };
+      }
+      if (["crescentDrop"].includes(type)) {
+        return {
+          overlay: '<circle class="guide" cx="272" cy="264" r="126"></circle><circle class="guide" cx="314" cy="250" r="108"></circle>',
+          note: "Draw the outer moon curve first, then carve the inner crescent out of it."
+        };
+      }
+      if (["cloverGlyph"].includes(type)) {
+        return {
+          overlay: '<circle class="guide" cx="220" cy="210" r="62"></circle><circle class="guide" cx="300" cy="210" r="62"></circle><circle class="guide" cx="220" cy="290" r="62"></circle><circle class="guide" cx="300" cy="290" r="62"></circle>',
+          note: "Keep the four lobes even enough to read as a clover, but still soft."
+        };
+      }
+      if (["pillCapsule"].includes(type)) {
+        return {
+          overlay: '<rect class="guide" x="144" y="180" width="232" height="170" rx="85"></rect><line class="guide" x1="260" y1="180" x2="260" y2="350"></line>',
+          note: "Use one capsule body and split it cleanly down the middle."
+        };
+      }
+      if (["starburstSeal"].includes(type)) {
+        return {
+          overlay: '<circle class="guide" cx="260" cy="260" r="128"></circle><path class="guide" d="M260 132 L286 162 L326 154 L332 194 L372 206 L354 244 L380 280 L344 304 L348 346 L306 344 L280 378 L246 348 L208 362 L194 324 L154 312 L166 274 L142 238 L172 214 L168 172 L208 176 L234 138 Z"></path>',
+          note: "Keep the burst points chunky and limited so the seal stays readable."
+        };
+      }
+      if (["archTile"].includes(type)) {
+        return {
+          overlay: '<rect class="guide" x="172" y="118" width="176" height="252" rx="18"></rect><path class="guide" d="M172 236 C172 162 214 118 260 118 C306 118 348 162 348 236"></path>',
+          note: "Think arch-top window: flat sides, rounded top, stable base."
+        };
+      }
+      if (["ribbonLoop"].includes(type)) {
+        return {
+          overlay: '<circle class="guide" cx="214" cy="222" r="52"></circle><circle class="guide" cx="306" cy="222" r="52"></circle><path class="guide" d="M238 262 L194 380 M282 262 L326 380"></path>',
+          note: "Start with two soft loops, then drop the ribbon tails underneath."
+        };
+      }
+      if (["pebbleStack"].includes(type)) {
+        return {
+          overlay: '<ellipse class="guide" cx="224" cy="310" rx="102" ry="78"></ellipse><ellipse class="guide" cx="296" cy="244" rx="84" ry="66"></ellipse><ellipse class="guide" cx="212" cy="216" rx="62" ry="52"></ellipse>',
+          note: "Stack two or three pebble shapes with overlap so it reads more specific than a blob."
+        };
+      }
       if (["logoMark", "abstractShape", "zodiac", "emoji"].includes(type)) {
         return {
           overlay: '<line class="guide" x1="260" y1="110" x2="260" y2="405"></line><line class="guide" x1="135" y1="265" x2="385" y2="265"></line>',
@@ -4475,8 +4578,7 @@
     }
 
     
-    async 
-    function downloadCurrentBlueprintPng() {
+    async function downloadCurrentBlueprintPng() {
       const svg = document.getElementById("blueprintSvg");
       if (!svg) {
         status("No blueprint found to export.", "bad");
@@ -4950,6 +5052,7 @@
       magic: "Magic Pack",
       softMonster: "Soft Monster Pack",
       logo: "Logo Pack",
+      shape: "Shape Pack",
       nature: "Nature Pack",
       tech: "Tech Pack",
       cozyHome: "Cozy Home Pack"
@@ -4961,7 +5064,8 @@
       object: ["object", "stationery", "household", "package", "device", "book", "tool", "artSupply"],
       magic: ["potion", "gem", "magicObject", "celestialObject", "star", "zodiac"],
       softMonster: ["ghost", "creature", "tinyMonster", "plushKeychain", "toy"],
-      logo: ["icon", "sticker", "badge", "logoMark", "emoji", "abstractShape"],
+      logo: ["icon", "sticker", "badge", "logoMark", "emoji", "abstractShape", "circleBadge", "squircleTile", "roundedTriangle", "diamondTile", "heartBadge", "crescentDrop", "cloverGlyph", "pillCapsule", "starburstSeal", "archTile", "ribbonLoop", "pebbleStack"],
+      shape: ["abstractShape", "circleBadge", "squircleTile", "roundedTriangle", "diamondTile", "heartBadge", "crescentDrop", "cloverGlyph", "pillCapsule", "starburstSeal", "archTile", "ribbonLoop", "pebbleStack", "logoMark", "badge", "icon", "sticker"],
       nature: ["plant", "flower", "garden", "cloud", "weatherIcon", "bug", "shell", "aquatic"],
       tech: ["robot", "device", "icon", "logoMark"],
       cozyHome: ["household", "furniture", "book", "drink", "clothing", "accessory"]
@@ -5242,8 +5346,8 @@
       box.textContent = suggestion;
     }
 
-    const APP_VERSION = "V31";
-    const APP_CACHE_NAME = "mascot-spark-v31";
+    const APP_VERSION = "V33";
+    const APP_CACHE_NAME = "mascot-spark-v33";
 
     function escapeHtml(value) {
       return String(value ?? "").replace(/[&<>"']/g, char => ({
@@ -6248,7 +6352,7 @@ ${currentBlueprint ? `<section><h2>Blueprint</h2>${currentBlueprint}</section>` 
       }
 
       return {
-        title: `Remaining Addons — ${c.shadeStyle}`,
+        title: `Emergency Runtime Fix — ${c.shadeStyle}`,
         summary,
         sections,
         note: styleNote
@@ -6259,7 +6363,7 @@ ${currentBlueprint ? `<section><h2>Blueprint</h2>${currentBlueprint}</section>` 
       const title = document.getElementById("shadeOutputTitle");
       const body = document.getElementById("shadeOutputBody");
       if (!title || !body) return;
-      title.textContent = data.title || "Remaining Addons";
+      title.textContent = data.title || "Emergency Runtime Fix";
 
       const context = getCurrentShadeContext();
       const roles = getShadeRoleColors(context);
@@ -6939,10 +7043,19 @@ function generalLessonFallback() {
       const skillFocus = getEffectiveSkillFocus(type, emotion, blueprintStyle);
 
       const subject = subjectData[type];
+      const specificShapeTypes = ["circleBadge", "squircleTile", "roundedTriangle", "diamondTile", "heartBadge", "crescentDrop", "cloverGlyph", "pillCapsule", "starburstSeal", "archTile", "ribbonLoop", "pebbleStack"];
+      const isSpecificShapeSubject = specificShapeTypes.includes(type);
       const emo = emotions[emotion];
       const lesson = lessonSizes[level];
       const tw = twists[twist];
       let phases = lesson[1].map(x => [...x]);
+
+      if (isSpecificShapeSubject) {
+        phases.unshift(
+          ["Lock the shape first", `Draw the ${subject[1]} before adding any face. The shape itself should read clearly even with no character details.`, "If the silhouette looks generic, redraw the shape once before moving on."],
+          ["Respect the shape logic", `Keep the mascot specific to its shape family: ${subject[2]}.`, "Do not turn this back into a plain blob by over-rounding everything."]
+        );
+      }
 
       if (mode === "cozyPlus") {
         phases.splice(Math.min(3, phases.length), 0,
@@ -7193,7 +7306,7 @@ function generalLessonFallback() {
 
     function updateFinalBuildBadge() {
       const badge = document.getElementById("finalBuildBadge");
-      if (badge) badge.textContent = `Mascot Spark ${APP_VERSION || "V20"} · Remaining Addons · Cache ${APP_CACHE_NAME || "mascot-spark-v31"}`;
+      if (badge) badge.textContent = `Mascot Spark ${APP_VERSION || "V20"} · Emergency Runtime Fix · Cache ${APP_CACHE_NAME || "mascot-spark-v33"}`;
     }
 
     document.addEventListener("keydown", closeOpenModalsOnEscape);

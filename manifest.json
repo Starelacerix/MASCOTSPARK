@@ -1,7 +1,7 @@
 {
-  "name": "Mascot Spark V31 \u2014 Remaining Addons",
+  "name": "Mascot Spark V33 \u2014 Emergency Runtime Fix",
   "short_name": "Mascot Spark",
-  "description": "Mascot Spark V31 adds blueprint personality variants, Blueprint Studio layer toggles, transparent shading PNG export, and practice dashboard suggestions.",
+  "description": "Mascot Spark V33 fixes a runtime-breaking async function split and adds safer select population.",
   "start_url": "./index.html",
   "scope": "./",
   "display": "standalone",

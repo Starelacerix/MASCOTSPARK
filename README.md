@@ -548,3 +548,55 @@ Service worker cache:
 ```js
 const CACHE_NAME = "mascot-spark-v31";
 ```
+
+
+## V32 specific shape subjects
+
+Added a real Shape Pack so shape-based mascot lessons are more specific.
+
+New specific shape subjects:
+
+- Circle badge
+- Squircle tile
+- Rounded triangle
+- Diamond tile
+- Heart badge
+- Crescent drop
+- Clover glyph
+- Pill capsule
+- Starburst seal
+- Arch tile
+- Ribbon loop
+- Pebble stack
+
+Each specific shape subject now has:
+
+- a clearer subject label
+- a specific shape description
+- sample mascot names
+- a dedicated body construction
+- a dedicated subject guide / blueprint note
+- extra lesson steps that force the shape to read before face details
+
+Service worker cache:
+
+```js
+const CACHE_NAME = "mascot-spark-v32";
+```
+
+
+## V33 emergency runtime fix
+
+Fixed:
+
+- A fatal JavaScript runtime issue where `async` appeared on its own line before a function declaration.
+- The browser treated `async` as an undefined variable, which stopped the app script.
+- `populateSelect()` is now defensive.
+- `populateSelect()` now explicitly sets dropdown values after filling options.
+- The default emotion now points to `grumpy-cute` instead of the nonexistent `grumpy` key.
+
+Service worker cache:
+
+```js
+const CACHE_NAME = "mascot-spark-v33";
+```
